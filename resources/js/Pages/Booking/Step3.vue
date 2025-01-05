@@ -88,7 +88,7 @@
         </div>
         <div class="col-lg-4">
           <div
-            class="w-full mx-auto bg-white px-[20px] py-[20px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
+            class="w-full mx-auto bg-white px-[20px] py-[20px] border-[1.5px] border-green-600 rounded-xl shadow-2xl lg:mt-5 mb-5"
           >
             <h3>Chi tiết thanh toán</h3>
             <hr />

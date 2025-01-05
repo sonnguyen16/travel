@@ -66,7 +66,7 @@
                     </button>
                   </div>
                   <div class="flex items-center gap-5">
-                    <p class="mb-0 text-gray-500">250.000đ/1 khách</p>
+                    <p class="mb-0 text-gray-500 lg:inline hidden">250.000đ/1 khách</p>
                     <p class="mb-0">250.000đ</p>
                   </div>
                 </div>
@@ -82,7 +82,7 @@
                     </button>
                   </div>
                   <div class="flex items-center gap-5">
-                    <p class="mb-0 text-gray-500">250.000đ/1 khách</p>
+                    <p class="mb-0 text-gray-500 lg:inline hidden">250.000đ/1 khách</p>
                     <p class="mb-0">250.000đ</p>
                   </div>
                 </div>

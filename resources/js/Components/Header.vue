@@ -28,13 +28,13 @@
               <Link href="/about">Về chúng tôi</Link>
             </li>
             <li>
-              <Link href="/service">Dịch vụ</Link>
+              <Link href="/services">Dịch vụ</Link>
             </li>
             <li>
               <Link href="/promo">Ưu đãi</Link>
             </li>
             <li>
-              <a href="#">Đặt vé</a>
+              <Link href="/booking/step1">Đặt vé</Link>
             </li>
           </ul>
         </div>

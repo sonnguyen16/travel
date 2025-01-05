@@ -39,7 +39,7 @@
           <img src="@/Assets/images/booking1.jpg" alt="about" class="w-full rounded-xl h-100 object-cover" />
         </div>
         <div class="col-lg-5">
-          <img src="@/Assets/images/booking2.jpg" alt="about" class="w-full rounded-xl h-[200px] object-cover mb-4" />
+          <img src="@/Assets/images/booking2.jpg" alt="about" class="w-full rounded-xl h-[200px] object-cover mt-4 mb-4" />
           <img src="@/Assets/images/booking3.jpg" alt="about" class="w-full rounded-xl h-[200px] object-cover" />
         </div>
       </div>
