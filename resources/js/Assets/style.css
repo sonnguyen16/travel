@@ -1,6 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
-html {
+* {
   font-size: 16px;
-  font-family: 'Roboto', sans-serif;
+  font-family: Geomanist, sans-serif;
+  font-weight: 700;
+  color: rgb(0, 71, 80);
+}
+
+p {
+  font-weight: 400;
+}
+
+a {
+  font-weight: 400;
+}
+
+/* Đặt khung chứa của ảnh */
+.img-container {
+  position: relative;
+  overflow: hidden; /* Ẩn phần ảnh bị phóng to vượt ra ngoài khung */
+  width: 100%; /* Chiều rộng của khung */
+  border-radius: 8px;
+}
+
+/* Ảnh mặc định */
+.img-container img {
+  display: block;
+  width: 100%; /* Đảm bảo ảnh bao phủ toàn bộ khung */
+  height: 100%; /* Đảm bảo ảnh bao phủ toàn bộ khung */
+  object-fit: cover; /* Ảnh được cắt để phù hợp với khung */
+  transition: transform 0.3s ease-in-out; /* Hiệu ứng mượt mà khi phóng to */
+}
+
+/* Ảnh khi hover */
+.img-container:hover img {
+  transform: scale(1.3); /* Phóng to ảnh */
 }

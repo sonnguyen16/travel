@@ -3,8 +3,12 @@
     <div class="overlay"></div>
     <div class="container pt-5 position absolute top-0 left-0 right-0 d-flex flex-column">
       <div class="d-flex align-items-center gap-3 justify-end">
-        <div class="p-2 bg-green-600 text-white rounded-xl">HOTLINE: +84 1234 5678</div>
-        <div class="p-2 text-white hover:bg-green-600 hover:rounded-[10px]">Đăng ký / Đăng nhập</div>
+        <div class="p-2 bg-green-600 rounded-xl">
+          <a class="sm:text-[16px] text-[14px] text-white text-decoration-none">HOTLINE: +84 1234 5678</a>
+        </div>
+        <div class="p-2 hover:bg-green-600 hover:rounded-[10px]">
+          <a class="sm:text-[16px] text-[14px] text-white text-decoration-none">Đăng ký / Đăng nhập</a>
+        </div>
       </div>
       <nav class="d-flex justify-between align-items-center flex-wrap pe-2 mt-3">
         <div class="d-flex align-items-center gap-3">
@@ -65,8 +69,8 @@
           <div class="row">
             <div class="col-md-3 col-6">
               <div class="flex items-center">
-                <i class="fas fa-map-marker-alt text-green-600 text-2xl"></i>
-                <select class="border-none">
+                <i class="fas fa-map-marker-alt text-green-600 text-lg md:text-2xl"></i>
+                <select class="border-0 form-control">
                   <option value="1">Chọn địa điểm</option>
                   <option value="2">Hồ Chí Minh</option>
                   <option value="3">Đà Nẵng</option>
@@ -77,14 +81,14 @@
             <div class="col-md-3 col-6">
               <!-- Chọn ngày -->
               <div class="flex items-center">
-                <i class="far fa-calendar-alt text-green-600 text-2xl"></i>
-                <input type="date" class="border-none" />
+                <i class="far fa-calendar-alt text-green-600 text-lg md:text-2xl"></i>
+                <input type="date" class="border-0 form-control" />
               </div>
             </div>
             <div class="col-md-3 col-6">
               <!-- Số lượng người -->
               <div class="flex items-center">
-                <i class="fas fa-user-friends text-green-600 text-2xl"></i>
+                <i class="fas fa-user-friends text-green-600 text-lg md:text-2xl"></i>
                 <button class="border-none">
                   <i class="fas fa-minus text-green-600"></i>
                 </button>
@@ -111,7 +115,10 @@ import { Link } from '@inertiajs/vue3'
 const showMenu = ref(false)
 
 const checkRoute = (route) => {
-  return window.location.pathname === route ? 'active' : ''
+  if (typeof window !== 'undefined') {
+    return window.location.pathname === route ? 'active' : ''
+  }
+  return ''
 }
 </script>
 <style scoped>

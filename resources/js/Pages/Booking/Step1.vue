@@ -12,7 +12,7 @@
                 <div class="w-full border-t-2 border-green-700"></div>
               </div>
               <!-- Timeline Content -->
-              <div class="grid grid-cols-3 left-0 right-0 absolute md:translate-y-[-15%] translate-y-[-6%]">
+              <div class="grid grid-cols-3 left-0 right-0 absolute translate-y-[-15%]">
                 <!-- Item 1 -->
                 <div class="">
                   <div class="w-6 h-6 bg-green-700 rounded-full text-center text-white">1</div>
@@ -36,85 +36,16 @@
 
       <div class="row">
         <div class="col-lg-7">
-          <img src="@/Assets/images/booking1.jpg" alt="about" class="w-full rounded-xl h-100 object-cover" />
+          <div class="img-container h-100">
+            <img src="@/Assets/images/booking1.jpg" alt="about" class="w-full rounded-xl h-100 object-cover" />
+          </div>
         </div>
         <div class="col-lg-5">
-          <img src="@/Assets/images/booking2.jpg" alt="about" class="w-full rounded-xl h-[200px] object-cover mt-4 mb-4" />
-          <img src="@/Assets/images/booking3.jpg" alt="about" class="w-full rounded-xl h-[200px] object-cover" />
-        </div>
-      </div>
-
-      <div
-        class="w-full mx-auto bg-white px-[20px] py-[30px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
-      >
-        <div class="flex justify-between">
-          <h2 class="font-bold">Xe trượt thác 3 - khứ hồi</h2>
-          <div>
-            <p class="text-center mb-0 text-[30px]">0Đ</p>
-            <p class="mb-0">0 người lớn - 0 trẻ em</p>
+          <div class="img-container h-[200px] mt-4 mt-lg-0 mb-4">
+            <img src="@/Assets/images/booking2.jpg" alt="about" class="w-full rounded-xl h-[200px] object-cover " />
           </div>
-        </div>
-        <hr />
-        <div>
-          <ul class="list-disc pl-5">
-            <li>Lướt qua khu rừng xanh tươi của thác Datanla trên một chiếc xe trượt hiện đại!</li>
-            <li>
-              Trải nghiệm cảm giác hồi hộp khi đi qua con đường dài 2400m trên chiếc xe trượt với đường trượt dài nhất
-              Châu Á!
-            </li>
-            <li>Đường trượt đi qua Thác Nước Datanla, một trong những thác nước đẹp nhất ở Đà Lạt</li>
-            <li>
-              Tăng tốc hoặc chậm lại tuỳ ý bạn, cần giảm tốc của xe trượt sẽ giúp bạn có thể dừng lại để chụp ảnh hay
-              ngắm cảnh tuỳ thích
-            </li>
-            <li>
-              Được thiết kế bởi Wiegand, tàu trượt kiểu mới nhất Alpine có cần gạt giảm tốc giúp bạn kiểm soát khoảng
-              cách giữa các xe
-            </li>
-          </ul>
-        </div>
-        <hr />
-        <div class="flex justify-between">
-          <div>
-            <label for="" class="text-green-600">Chọn ngày</label>
-            <div class="flex items-center">
-              <i class="far fa-calendar-alt text-green-600 text-2xl"></i>
-              <input type="date" class="border-none" />
-            </div>
-          </div>
-          <div>
-            <div class="flex items-center gap-5">
-              <label><i class="fas fa-user-friends text-green-600 text-2xl"></i> Người lớn</label>
-              <div class="flex items-center">
-                <button class="border-none">
-                  <i class="fas fa-minus text-green-600"></i>
-                </button>
-                <input type="text" class="border-none w-[40px]" value="0" />
-                <button class="border-none">
-                  <i class="fas fa-plus text-green-600"></i>
-                </button>
-              </div>
-              <div class="flex items-center gap-5">
-                <p class="mb-0 text-gray-500">250.000đ/1 khách</p>
-                <p class="mb-0">250.000đ</p>
-              </div>
-            </div>
-            <div class="flex items-center gap-5">
-              <label><i class="fas fa-user-friends text-green-600 text-2xl"></i> Người lớn</label>
-              <div class="flex items-center">
-                <button class="border-none">
-                  <i class="fas fa-minus text-green-600"></i>
-                </button>
-                <input type="text" class="border-none w-[40px]" value="0" />
-                <button class="border-none">
-                  <i class="fas fa-plus text-green-600"></i>
-                </button>
-              </div>
-              <div class="flex items-center gap-5">
-                <p class="mb-0 text-gray-500">250.000đ/1 khách</p>
-                <p class="mb-0">250.000đ</p>
-              </div>
-            </div>
+          <div class="img-container h-[200px]">
+            <img src="@/Assets/images/booking3.jpg" alt="about" class="w-full rounded-xl h-[200px] object-cover" />
           </div>
         </div>
       </div>
@@ -149,18 +80,20 @@
           </ul>
         </div>
         <hr />
-        <div class="flex justify-between">
-          <div>
+        <div class="grid md:grid-cols-3 grid-cols-1 gap-2">
+          <div class="col-span-1">
             <label for="" class="text-green-600">Chọn ngày</label>
             <div class="flex items-center">
               <i class="far fa-calendar-alt text-green-600 text-2xl"></i>
               <input type="date" class="border-none" />
             </div>
           </div>
-          <div>
-            <div class="flex items-center gap-5">
-              <label><i class="fas fa-user-friends text-green-600 text-2xl"></i> Người lớn</label>
-              <div class="flex items-center">
+          <div class="col-span-2">
+            <div class="grid md:grid-cols-5 grid-cols-3 gap-5">
+             <div class="flex items-center">
+                <label class="">Trẻ em</label>
+             </div>
+              <div class="flex items-center justify-center md:col-span-2 col-span-1">
                 <button class="border-none">
                   <i class="fas fa-minus text-green-600"></i>
                 </button>
@@ -169,14 +102,16 @@
                   <i class="fas fa-plus text-green-600"></i>
                 </button>
               </div>
-              <div class="flex items-center gap-5">
-                <p class="mb-0 text-gray-500">250.000đ/1 khách</p>
+              <div class="flex items-center justify-center gap-5 md:col-span-2 col-span-1">
+                <p class="mb-0 text-gray-500 md:inline hidden">250.000đ/1 khách</p>
                 <p class="mb-0">250.000đ</p>
               </div>
             </div>
-            <div class="flex items-center gap-5">
-              <label><i class="fas fa-user-friends text-green-600 text-2xl"></i> Người lớn</label>
-              <div class="flex items-center">
+            <div class="grid md:grid-cols-5 grid-cols-3 gap-5">
+             <div class="flex items-center">
+                <label class="">Trẻ em</label>
+             </div>
+              <div class="flex items-center justify-center md:col-span-2 col-span-1">
                 <button class="border-none">
                   <i class="fas fa-minus text-green-600"></i>
                 </button>
@@ -185,14 +120,16 @@
                   <i class="fas fa-plus text-green-600"></i>
                 </button>
               </div>
-              <div class="flex items-center gap-5">
-                <p class="mb-0 text-gray-500">250.000đ/1 khách</p>
+              <div class="flex items-center justify-center gap-5 md:col-span-2 col-span-1">
+                <p class="mb-0 text-gray-500 md:inline hidden">250.000đ/1 khách</p>
                 <p class="mb-0">250.000đ</p>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+
 
       <div class="row">
         <div class="col-lg-8">

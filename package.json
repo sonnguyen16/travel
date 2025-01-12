@@ -18,5 +18,9 @@
         "tailwindcss": "^3.2.1",
         "vite": "^6.0",
         "vue": "^3.4.0"
+    },
+    "dependencies": {
+        "scrollreveal": "^4.0.9",
+        "swiper": "^11.2.0"
     }
 }
