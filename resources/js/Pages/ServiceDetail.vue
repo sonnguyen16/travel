@@ -10,7 +10,7 @@
                   src="@/Assets/images/servicedetail1.jpg"
                   alt="home1"
                   style="box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3)"
-                  class="w-full rounded-xl object-cover position-absolute lg:top-[-50px] lg:left-[-40px]"
+                  class="w-full rounded-xl object-cover position-absolute lg:top-[-40px]"
                 />
               </div>
             </div>

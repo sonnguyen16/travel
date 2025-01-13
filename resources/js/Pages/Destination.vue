@@ -8,7 +8,10 @@
             <!-- Slide 1 -->
             <div class="swiper-slide">
               <div @click.prevent="router.visit('/services/detail')" class="rounded-xl shadow-xl bg-white">
-                <div class="img-container h-[400px]">
+                <div
+                  class="img-container h-[400px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
                   <img
                     src="@/Assets/images/service6.jpg"
                     alt="home1"
@@ -29,7 +32,10 @@
             <!-- Slide 2 -->
             <div class="swiper-slide">
               <div @click.prevent="router.visit('/services/detail')" class="rounded-xl shadow-xl bg-white">
-                <div class="img-container h-[400px]">
+                <div
+                  class="img-container h-[400px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
                   <img
                     src="@/Assets/images/service7.jpg"
                     alt="home1"
@@ -50,7 +56,10 @@
             <!-- Slide 3 -->
             <div class="swiper-slide">
               <div @click.prevent="router.visit('/services/detail')" class="rounded-xl shadow-xl bg-white">
-                <div class="img-container h-[400px]">
+                <div
+                  class="img-container h-[400px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
                   <img
                     src="@/Assets/images/service8.jpg"
                     alt="home1"
@@ -72,7 +81,10 @@
             <!-- Slide 2 -->
             <div class="swiper-slide">
               <div @click.prevent="router.visit('/services/detail')" class="rounded-xl shadow-xl bg-white">
-                <div class="img-container h-[400px]">
+                <div
+                  class="img-container h-[400px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
                   <img
                     src="@/Assets/images/service7.jpg"
                     alt="home1"

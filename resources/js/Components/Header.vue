@@ -59,6 +59,11 @@
             <li :class="[checkRoute('/booking/step1')]">
               <Link href="/booking/step1">Đặt vé</Link>
             </li>
+            <li>
+              <a href="#">
+                <i class="fas fa-shopping-cart text-white"></i>
+              </a>
+            </li>
           </ul>
         </div>
       </nav>

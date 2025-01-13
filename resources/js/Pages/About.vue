@@ -87,7 +87,7 @@
               <div class="swiper-slide">
                 <div class="slide-content-1">
                   <h2>{{ content[0].title }}</h2>
-                  <p>{{ content[0].paragraph }}</p>
+                  <p class="text-justify">{{ content[0].paragraph }}</p>
                 </div>
               </div>
               <div class="swiper-slide">
@@ -307,6 +307,7 @@ onMounted(() => {
   position: absolute;
   bottom: 10px;
   left: 10px;
+  right: 10px;
   background: rgba(0, 0, 0, 0.5);
   color: #fff;
   padding: 10px;

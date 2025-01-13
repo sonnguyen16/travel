@@ -72,18 +72,22 @@
       </div>
     </div>
     <div id="promo-3" class="w-full py-[200px] bg_promo mt-5">
-      <div class="container">
-        <h2 class="text-white text-center">Đăng ký nhận ưu đãi ngay!</h2>
+      <div class="container text-center">
+        <h2 id="promo-title" class="text-white">Đăng ký nhận ưu đãi ngay!</h2>
+        <button id="promo-btn" class="btn btn-success px-5" style="font-size: 20px">Đăng ký</button>
       </div>
     </div>
     <div class="container">
       <div id="promo-2" class="pt-[100px] pb-[50px]">
-        <div class="swiper swiper-2">
+        <div class="swiper swiper-2" style="height: 350px">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
             <div class="swiper-slide">
               <div @click.prevent="router.visit('/promo/detail')" class="rounded-xl shadow-xl bg-white">
-                <div class="img-container h-[200px]">
+                <div
+                  class="img-container h-[200px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
                   <img
                     src="@/Assets/images/promo5.jpg"
                     alt="home1"
@@ -107,7 +111,10 @@
             <!-- Slide 2 -->
             <div class="swiper-slide">
               <div @click.prevent="router.visit('/promo/detail')" class="rounded-xl shadow-xl bg-white">
-                <div class="img-container h-[200px]">
+                <div
+                  class="img-container h-[200px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
                   <img
                     src="@/Assets/images/promo6.jpg"
                     alt="home1"
@@ -131,7 +138,10 @@
             <!-- Slide 3 -->
             <div class="swiper-slide">
               <div @click.prevent="router.visit('/promo/detail')" class="rounded-xl shadow-xl bg-white">
-                <div class="img-container h-[200px]">
+                <div
+                  class="img-container h-[200px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
                   <img
                     src="@/Assets/images/promo7.jpg"
                     alt="home1"
@@ -155,7 +165,10 @@
 
             <div class="swiper-slide">
               <div @click.prevent="router.visit('/promo/detail')" class="rounded-xl shadow-xl bg-white">
-                <div class="img-container h-[200px]">
+                <div
+                  class="img-container h-[200px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
                   <img
                     src="@/Assets/images/promo6.jpg"
                     alt="home1"
@@ -251,6 +264,22 @@ onMounted(() => {
     duration: 1500,
     origin: 'top',
     distance: '50px',
+    easing: 'ease-in-out',
+    interval: 1500
+  })
+
+  ScrollReveal().reveal('#promo-title', {
+    duration: 1500,
+    origin: 'left',
+    distance: '100px',
+    easing: 'ease-in-out',
+    interval: 1500
+  })
+
+  ScrollReveal().reveal('#promo-btn', {
+    duration: 1500,
+    origin: 'right',
+    distance: '100px',
     easing: 'ease-in-out',
     interval: 1500
   })

@@ -13,25 +13,47 @@ a {
   font-weight: 400;
 }
 
-/* Đặt khung chứa của ảnh */
 .img-container {
   position: relative;
-  overflow: hidden; /* Ẩn phần ảnh bị phóng to vượt ra ngoài khung */
-  width: 100%; /* Chiều rộng của khung */
+  overflow: hidden;
+  width: 100%;
   border-radius: 8px;
 }
 
-/* Ảnh mặc định */
 .img-container img {
   display: block;
-  width: 100%; /* Đảm bảo ảnh bao phủ toàn bộ khung */
-  height: 100%; /* Đảm bảo ảnh bao phủ toàn bộ khung */
-  object-fit: cover; /* Ảnh được cắt để phù hợp với khung */
-  transition: transform 0.3s ease-in-out; /* Hiệu ứng mượt mà khi phóng to */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Ảnh khi hover */
 .img-container:hover img {
-  transform: scale(1.3); /* Phóng to ảnh */
+  transform: scale(1.3);
 }
 
+/* Ghi đè kích thước của container cho từng breakpoint */
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 1200px) {
+  /* Breakpoint xl */
+  .container {
+    max-width: 1000px; /* Giảm so với 1140px của Bootstrap */
+  }
+}
+
+@media (min-width: 1400px) {
+  /* Breakpoint xxl */
+  .container {
+    max-width: 1160px; /* Giảm so với 1320px của Bootstrap */
+  }
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  display: none;
+}

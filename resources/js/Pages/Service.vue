@@ -11,7 +11,7 @@
                   <img src="@/Assets/images/service1.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
                 </div>
                 <div class="position-absolute bottom-0 left-0 right-0 overlay pt-10 ps-3 pb-3 rounded-xl">
-                  <h1 class="text-white">Khu du lịch Datanla</h1>
+                  <h2 class="text-white">Khu du lịch Datanla</h2>
                 </div>
               </div>
             </div>
@@ -22,7 +22,7 @@
                   <img src="@/Assets/images/service2.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
                 </div>
                 <div class="position-absolute bottom-0 left-0 right-0 overlay ps-3 pb-3 pt-10 rounded-xl">
-                  <h1 class="text-white">Khu du lịch Langbiang</h1>
+                  <h2 class="text-white">Khu du lịch Langbiang</h2>
                 </div>
               </div>
             </div>
@@ -33,7 +33,7 @@
                   <img src="@/Assets/images/service3.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
                 </div>
                 <div class="position-absolute bottom-0 left-0 right-0 overlay ps-3 pb-3 pt-10 rounded-xl">
-                  <h1 class="text-white">Cáp treo Đà Lạt</h1>
+                  <h2 class="text-white">Cáp treo Đà Lạt</h2>
                 </div>
               </div>
             </div>
@@ -44,7 +44,7 @@
                   <img src="@/Assets/images/service2.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
                 </div>
                 <div class="position-absolute bottom-0 left-0 right-0 overlay ps-3 pb-3 pt-10 rounded-xl">
-                  <h1 class="text-white">Khu du lịch Langbiang</h1>
+                  <h2 class="text-white">Khu du lịch Langbiang</h2>
                 </div>
               </div>
             </div>
@@ -73,8 +73,8 @@
             <img src="@/Assets/images/service5.jpg" alt="home1" class="w-full rounded-xl object-cover h-[300px]" />
           </div>
         </div>
-        <div id="service-3" class="col-lg-6 md:ps-4 order-md-1 order-2">
-          <div class="img-container h-[300px] mb-3 mt-4">
+        <div id="service-3" class="col-lg-6 md:ps-4 md:block hidden">
+          <div class="img-container h-[300px] mb-3 mt-4 order-md-1 order-2">
             <img src="@/Assets/images/service4.jpg" alt="home1" class="w-full rounded-xl object-cover" />
           </div>
           <h4>Nhà hàng lẩu rau LéguDa</h4>
@@ -90,15 +90,35 @@
             ngắm nhìn thành phố Đà Lạt từ trên cao.
           </p>
         </div>
+        <div id="service-3" class="col-lg-6 md:ps-4 md:hidden block mt-3">
+          <h4>Nhà hàng lẩu rau LéguDa</h4>
+          <!-- LOcation -->
+          <div class="d-flex gap-2 items-center order-1 order-md-2">
+            <i class="fas fa-map text-green-600"></i>
+            <span>Đồi Robin</span>
+          </div>
+          <p class="mt-3 text-justify font-normal">
+            Buffet Rau Đà Lạt - nhà hàng Léguda tự hào là nhà hàng Buffet Rau đầu tiên tại Đà Lạt. Nhà hàng được ví như
+            “thiên đường rau củ” nằm trên đồi ROBIN – nơi cao nhất thành phố Đà Lạt. Tại đây, du khách vừa có thể ăn
+            thỏa thích rau xanh tươi ngon lấy trực tiếp từ các nhà vườn, vừa có thể tận hưởng không khí trong lành và
+            ngắm nhìn thành phố Đà Lạt từ trên cao.
+          </p>
+          <div class="img-container h-[300px] mb-3 mt-4 order-md-1 order-2">
+            <img src="@/Assets/images/service4.jpg" alt="home1" class="w-full rounded-xl object-cover" />
+          </div>
+        </div>
       </div>
 
-      <div id="service-4" class="pt-[100px] pb-[50px]">
+      <div id="service-4" class="md:pt-[100px] pt-[50px] pb-[50px]">
         <div class="swiper swiper-2">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
             <div class="swiper-slide">
               <div class="rounded-xl shadow-xl bg-white">
-                <div class="img-container h-[400px]">
+                <div
+                  class="img-container h-[400px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
                   <img
                     src="@/Assets/images/service6.jpg"
                     alt="home1"
@@ -116,7 +136,10 @@
             <!-- Slide 2 -->
             <div class="swiper-slide">
               <div class="rounded-xl shadow-xl bg-white">
-                <div class="img-container h-[400px]">
+                <div
+                  class="img-container h-[400px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
                   <img
                     src="@/Assets/images/service7.jpg"
                     alt="home1"
@@ -134,7 +157,10 @@
             <!-- Slide 3 -->
             <div class="swiper-slide">
               <div class="rounded-xl shadow-xl bg-white">
-                <div class="img-container h-[400px]">
+                <div
+                  class="img-container h-[400px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
                   <img
                     src="@/Assets/images/service8.jpg"
                     alt="home1"
@@ -153,7 +179,10 @@
             <!-- Slide 2 -->
             <div class="swiper-slide">
               <div class="rounded-xl shadow-xl bg-white">
-                <div class="img-container h-[400px]">
+                <div
+                  class="img-container h-[400px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
                   <img
                     src="@/Assets/images/service7.jpg"
                     alt="home1"

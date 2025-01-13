@@ -51,10 +51,10 @@
       </div>
 
       <div
-        class="w-full mx-auto bg-white px-[20px] py-[30px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
+        class="w-full mx-auto bg-white px-[20px] pt-[10px] pb-[20px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
       >
-        <div class="flex justify-between">
-          <h2 class="font-bold">Xe trượt thác 3 - khứ hồi</h2>
+        <div class="flex justify-between items-center">
+          <h2 class="font-bold mb-0">Xe trượt thác 3 - khứ hồi</h2>
           <div>
             <p class="text-center mb-0 text-[30px]">0Đ</p>
             <p class="mb-0">0 người lớn - 0 trẻ em</p>
@@ -85,7 +85,7 @@
             <label for="" class="text-green-600">Chọn ngày</label>
             <div class="flex items-center">
               <i class="far fa-calendar-alt text-green-600 text-2xl"></i>
-              <input type="date" class="border-none" />
+              <input type="date" class="border-none font-normal" />
             </div>
           </div>
           <div class="col-span-2">
@@ -127,6 +127,12 @@
             </div>
           </div>
         </div>
+        <div class="flex justify-end items-center gap-3 mt-3">
+            <a class="block py-2 px-[15px] rounded-xl border-1 border-green-600">
+                <i class="fas fa-shopping-cart text-green-600"></i>
+            </a>
+            <button class="py-2 px-[15px] rounded-xl bg-green-600 text-white">Mua ngay</button>
+        </div>
       </div>
 
 
@@ -149,7 +155,7 @@
           <p class="mb-0">+ Không áp dụng đồng thời các chương trình ưu đãi</p>
         </div>
       </div>
-      <iframe class="my-5" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3904.023782282466!2d108.44712497482281!3d11.903432388322374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317114a1a4b93341%3A0xf8ce8eb72915c065!2zS2h1IGR1IGzhu4tjaCBUaMOhYyBEYXRhbmxh!5e0!3m2!1svi!2s!4v1736066803856!5m2!1svi!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe class="my-5 rounded-xl w-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3904.023782282466!2d108.44712497482281!3d11.903432388322374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317114a1a4b93341%3A0xf8ce8eb72915c065!2zS2h1IGR1IGzhu4tjaCBUaMOhYyBEYXRhbmxh!5e0!3m2!1svi!2s!4v1736066803856!5m2!1svi!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
         </div>
         <div class="col-lg-4 py-[50px]">
@@ -186,4 +192,7 @@
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { router } from '@inertiajs/vue3'
 </script>
-<style scoped></style>
+<style scoped>
+
+
+</style>
