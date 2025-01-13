@@ -25,6 +25,10 @@ Route::get('/promo', function () {
     return Inertia::render('Promo');
 });
 
+Route::get('/destinations', function () {
+    return Inertia::render('Destination');
+});
+
 Route::get('/promo/detail', function () {
     return Inertia::render('PromoDetail');
 });

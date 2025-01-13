@@ -27,63 +27,54 @@
         </div>
       </div>
 
-      <div class="row pt-[100px]">
-        <h2 class="text-center mb-[100px]">Hoạt động nổi bật</h2>
-        <div class="grid lg:grid-cols-6 lg:gap-4 gap-5">
-          <!-- Image 1 -->
-          <div class="relative">
-            <img
-              src="@/Assets/images/servicedetail2.jpg"
-              alt="Tham Quan Thác"
-              class="diagonal w-full h-72 object-cover"
-            />
-            <p class="mt-[70px] font-semibold">THAM QUAN THÁC</p>
+      <div class="row pt-5">
+        <h2 class="text-center mb-5 text-2xl font-bold">Hoạt động nổi bật</h2>
+        <div class="space-y-0 divide-y divide-gray-300">
+          <!-- Collapse Item 1 -->
+          <div class="border-none">
+            <button
+              class="w-full flex justify-between items-center px-4 py-3 border-green-600 border rounded-tr-xl rounded-tl-xl bg-gray-100 hover:bg-gray-200 font-semibold"
+              data-target="collapse1"
+            >
+              <span>THAM QUAN THÁC</span>
+              <svg
+                class="w-5 h-5 transform transition-transform duration-300"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div id="collapse1" class="hidden p-4 bg-gray-50 overflow-hidden transition-all duration-500">
+              <img src="@/Assets/images/detail1.jpg" alt="Tham Quan Thác" class="w-full rounded-lg shadow-lg" />
+            </div>
           </div>
-          <!-- Image 2 -->
-          <div class="relative">
-            <img
-              src="@/Assets/images/servicedetail3.jpg"
-              alt="Xe Trượt Thác 1"
-              class="diagonal w-full h-72 object-cover"
-            />
-            <p class="mt-[70px] font-semibold">XE TRƯỢT THÁC 1</p>
+
+          <!-- Collapse Item 2 -->
+          <div class="border-none">
+            <button
+              class="w-full flex justify-between items-center px-4 py-3 border-green-600 border rounded-br-xl rounded-bl-xl bg-gray-100 hover:bg-gray-200 font-semibold"
+              data-target="collapse2"
+            >
+              <span>XE TRƯỢT THÁC 1</span>
+              <svg
+                class="w-5 h-5 transform transition-transform duration-300"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div id="collapse2" class="hidden p-4 bg-gray-50 overflow-hidden transition-all duration-500">
+              <img src="@/Assets/images/detail2.jpg" alt="Xe Trượt Thác 1" class="w-full rounded-lg shadow-lg" />
+            </div>
           </div>
-          <!-- Image 3 -->
-          <div class="relative">
-            <img
-              src="@/Assets/images/servicedetail4.jpg"
-              alt="Xe Trượt Thác 3"
-              class="diagonal w-full h-72 object-cover"
-            />
-            <p class="mt-[70px] font-semibold">XE TRƯỢT THÁC 3</p>
-          </div>
-          <!-- Image 4 -->
-          <div class="relative">
-            <img
-              src="@/Assets/images/servicedetail5.jpg"
-              alt="Hành Trình Trên Cao"
-              class="diagonal w-full h-72 object-cover"
-            />
-            <p class="mt-[70px] font-semibold">HÀNH TRÌNH TRÊN CAO</p>
-          </div>
-          <!-- Image 5 -->
-          <div class="relative">
-            <img
-              src="@/Assets/images/servicedetail6.jpg"
-              alt="Hành Trình Vượt Thác"
-              class="diagonal w-full h-72 object-cover"
-            />
-            <p class="mt-[70px] font-semibold">HÀNH TRÌNH VƯỢT THÁC</p>
-          </div>
-          <!-- Image 6 -->
-          <div class="relative">
-            <img
-              src="@/Assets/images/servicedetail7.jpg"
-              alt="Hành Trình Vượt Thác"
-              class="diagonal w-full h-72 object-cover"
-            />
-            <p class="mt-[70px] font-semibold">HÀNH TRÌNH VƯỢT THÁC</p>
-          </div>
+
+          <!-- Add more items as needed -->
         </div>
       </div>
 
@@ -142,10 +133,34 @@
 </template>
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  document.querySelectorAll('button[data-target]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-target')
+      const targetElement = document.getElementById(targetId)
+
+      // Ẩn tất cả các collapse khác
+      document.querySelectorAll('.hidden').forEach((collapse) => {
+        if (collapse !== targetElement) {
+          collapse.classList.add('hidden')
+        }
+      })
+
+      // Toggle trạng thái của collapse được click
+      if (targetElement.classList.contains('hidden')) {
+        targetElement.classList.remove('hidden')
+      } else {
+        targetElement.classList.add('hidden')
+      }
+    })
+  })
+})
 </script>
 <style scoped>
-.diagonal {
-  transform: skew(-10deg) scale(1.4);
-  object-fit: cover;
+/* Tùy chỉnh hiệu ứng nếu cần */
+img {
+  transition: transform 0.3s ease;
 }
 </style>

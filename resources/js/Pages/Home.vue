@@ -20,7 +20,7 @@
         <h1 class="mx-auto text-center mb-4">Lĩnh vực kinh doanh</h1>
         <div class="row">
           <div class="col-lg-5 mb-4">
-            <div class="position-relative h-100">
+            <div @click.prevent="router.visit('/destinations')" class="position-relative h-100">
               <div class="img-container h-100">
                 <img src="@/Assets/images/home1.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
               </div>
@@ -32,7 +32,7 @@
           </div>
           <div class="col-lg-7">
             <div class="row">
-              <div class="col-lg-6 mb-4">
+              <div @click.prevent="router.visit('/destinations')" class="col-lg-6 mb-4">
                 <div class="position-relative h-100">
                   <div class="img-container h-100">
                     <img src="@/Assets/images/home2.jpg" alt="home1" class="w-full rounded-xl h-100" />
@@ -44,7 +44,7 @@
                 </div>
               </div>
               <div class="col-lg-6 mb-4">
-                <div class="position-relative h-100">
+                <div @click.prevent="router.visit('/destinations')" class="position-relative h-100">
                   <div class="img-container h-100">
                     <img src="@/Assets/images/home3.jpg" alt="home1" class="w-full rounded-xl h-100" />
                   </div>
@@ -55,7 +55,7 @@
                 </div>
               </div>
               <div class="col-lg-6 mb-4">
-                <div class="position-relative h-100">
+                <div @click.prevent="router.visit('/destinations')" class="position-relative h-100">
                   <div class="img-container h-100">
                     <img src="@/Assets/images/home4.jpg" alt="home1" class="w-full rounded-xl h-100" />
                   </div>
@@ -66,7 +66,7 @@
                 </div>
               </div>
               <div class="col-lg-6 mb-4">
-                <div class="position-relative h-100">
+                <div @click.prevent="router.visit('/destinations')" class="position-relative h-100">
                   <div class="img-container h-100">
                     <img src="@/Assets/images/home5.jpg" alt="home1" class="w-full rounded-xl h-100" />
                   </div>
@@ -88,20 +88,21 @@
 import MainLayout from '@/Layouts/MainLayout.vue'
 import ScrollReveal from 'scrollreveal'
 import { onMounted } from 'vue'
+import { router } from '@inertiajs/vue3'
 
 onMounted(() => {
   // Hiệu ứng cho phần "49 Năm Phát triển bền vững"
   ScrollReveal().reveal('#about1', {
     duration: 2000,
-    origin: 'left',
-    distance: '200px',
+    origin: 'bottom',
+    distance: '100px',
     easing: 'ease-in-out'
   })
 
   ScrollReveal().reveal('#about2', {
     duration: 2000,
-    origin: 'right',
-    distance: '200px',
+    origin: 'top',
+    distance: '100px',
     easing: 'ease-in-out'
   })
 
@@ -116,18 +117,18 @@ onMounted(() => {
 
   // Hiệu ứng cho từng hình ảnh
   ScrollReveal().reveal('.img-container', {
-    duration: 800,
+    duration: 1200,
     origin: 'bottom',
-    distance: '30px',
+    distance: '50px',
     interval: 200, // Thời gian giữa các mục
     easing: 'ease-in-out'
   })
 
   // Hiệu ứng cho từng hình ảnh
   ScrollReveal().reveal('#img-content', {
-    duration: 800,
+    duration: 1200,
     origin: 'bottom',
-    distance: '30px',
+    distance: '50px',
     interval: 200, // Thời gian giữa các mục
     easing: 'ease-in-out'
   })
@@ -136,9 +137,9 @@ onMounted(() => {
   ScrollReveal().reveal('img.w-full.mt-5', {
     duration: 2000,
     origin: 'bottom',
-    distance: '50px',
+    distance: '100px',
     easing: 'ease-in-out',
-    interval: 4000
+    interval: 5000
   })
 })
 </script>

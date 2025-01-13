@@ -1,7 +1,7 @@
 <template>
   <MainLayout>
     <div class="container">
-      <div id="service-1" class="pt-[150px]">
+      <div id="service-1" class="md:pt-[150px] pt-[100px]">
         <div class="swiper swiper-1">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
@@ -10,8 +10,8 @@
                 <div class="img-container h-100">
                   <img src="@/Assets/images/service1.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
                 </div>
-                <div class="position-absolute bottom-0 left-0 right-0 overlay pt-10 ps-3 rounded-xl">
-                  <h2 class="text-white">Khu du lịch Datanla</h2>
+                <div class="position-absolute bottom-0 left-0 right-0 overlay pt-10 ps-3 pb-3 rounded-xl">
+                  <h1 class="text-white">Khu du lịch Datanla</h1>
                 </div>
               </div>
             </div>
@@ -21,8 +21,8 @@
                 <div class="img-container h-100">
                   <img src="@/Assets/images/service2.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
                 </div>
-                <div class="position-absolute bottom-0 left-0 right-0 overlay ps-3 pt-10 rounded-xl">
-                  <h2 class="text-white">Khu du lịch Langbiang</h2>
+                <div class="position-absolute bottom-0 left-0 right-0 overlay ps-3 pb-3 pt-10 rounded-xl">
+                  <h1 class="text-white">Khu du lịch Langbiang</h1>
                 </div>
               </div>
             </div>
@@ -32,8 +32,8 @@
                 <div class="img-container h-100">
                   <img src="@/Assets/images/service3.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
                 </div>
-                <div class="position-absolute bottom-0 left-0 right-0 overlay ps-3 pt-10 rounded-xl">
-                  <h2 class="text-white">Cáp treo Đà Lạt</h2>
+                <div class="position-absolute bottom-0 left-0 right-0 overlay ps-3 pb-3 pt-10 rounded-xl">
+                  <h1 class="text-white">Cáp treo Đà Lạt</h1>
                 </div>
               </div>
             </div>
@@ -43,8 +43,8 @@
                 <div class="img-container h-100">
                   <img src="@/Assets/images/service2.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
                 </div>
-                <div class="position-absolute bottom-0 left-0 right-0 overlay ps-3 pt-10 rounded-xl">
-                  <h2 class="text-white">Khu du lịch Langbiang</h2>
+                <div class="position-absolute bottom-0 left-0 right-0 overlay ps-3 pb-3 pt-10 rounded-xl">
+                  <h1 class="text-white">Khu du lịch Langbiang</h1>
                 </div>
               </div>
             </div>
@@ -73,13 +73,13 @@
             <img src="@/Assets/images/service5.jpg" alt="home1" class="w-full rounded-xl object-cover h-[300px]" />
           </div>
         </div>
-        <div id="service-3" class="col-lg-6 md:ps-4">
+        <div id="service-3" class="col-lg-6 md:ps-4 order-md-1 order-2">
           <div class="img-container h-[300px] mb-3 mt-4">
             <img src="@/Assets/images/service4.jpg" alt="home1" class="w-full rounded-xl object-cover" />
           </div>
           <h4>Nhà hàng lẩu rau LéguDa</h4>
           <!-- LOcation -->
-          <div class="d-flex gap-2 items-center">
+          <div class="d-flex gap-2 items-center order-1 order-md-2">
             <i class="fas fa-map text-green-600"></i>
             <span>Đồi Robin</span>
           </div>
@@ -188,6 +188,8 @@ import ScrollReveal from 'scrollreveal'
 onMounted(() => {
   new Swiper('.swiper-1', {
     loop: true,
+    fadeEffect: { crossFade: true },
+    speed: 1000,
     spaceBetween: 20, // Khoảng cách giữa các item
     navigation: {
       nextEl: '.swiper-next-1',
@@ -208,7 +210,11 @@ onMounted(() => {
 
   new Swiper('.swiper-2', {
     loop: true,
-    spaceBetween: 20, // Khoảng cách giữa các item
+    fadeEffect: { crossFade: true },
+    speed: 1000,
+    spaceBetween: 20,
+    fadeEffect: { crossFade: true },
+    speed: 1000,
     navigation: {
       nextEl: '.swiper-next-2',
       prevEl: '.swiper-prev-2'
@@ -229,16 +235,16 @@ onMounted(() => {
   // ScrollReveal - Hiệu ứng nhập từ 2 bên
   ScrollReveal().reveal('#service-2', {
     duration: 2000,
-    origin: 'left',
-    distance: '200px',
+    origin: 'top',
+    distance: '100px',
     easing: 'ease-in-out',
     interval: 2000
   })
 
   ScrollReveal().reveal('#service-3', {
     duration: 2000,
-    origin: 'right',
-    distance: '200px',
+    origin: 'bottom',
+    distance: '100px',
     easing: 'ease-in-out',
     interval: 2000
   })
@@ -247,7 +253,7 @@ onMounted(() => {
   ScrollReveal().reveal('#service-1', {
     duration: 1200,
     origin: 'top',
-    distance: '50px',
+    distance: '100px',
     easing: 'ease-in-out'
   })
 
@@ -255,7 +261,7 @@ onMounted(() => {
   ScrollReveal().reveal('#service-4', {
     duration: 2000,
     origin: 'bottom',
-    distance: '50px',
+    distance: '100px',
     easing: 'ease-in-out',
     interval: 5000
   })
@@ -275,5 +281,52 @@ onMounted(() => {
 
 .swiper-slide {
   height: 600px;
+}
+@media (max-width: 768px) {
+  .swiper-slide {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease-in-out;
+  }
+
+  .swiper-slide-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tùy chỉnh nút prev và next */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 40px; /* Kích thước nút */
+  height: 40px;
+  background-color: white; /* Nền trắng */
+  border: 2px solid green; /* Viền xanh lá cây */
+  border-radius: 50%; /* Hình tròn */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Tạo bóng nhẹ */
+  transition: all 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+/* Biểu tượng mũi tên */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  color: green; /* Mũi tên màu xanh lá cây */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Hiệu ứng hover */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: green; /* Đổi nền thành xanh lá cây */
+  color: white; /* Đổi màu mũi tên */
+}
+
+.swiper-button-prev:hover::after,
+.swiper-button-next:hover::after {
+  color: white; /* Mũi tên màu trắng khi hover */
 }
 </style>

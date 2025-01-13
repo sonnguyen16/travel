@@ -11,7 +11,7 @@
         </div>
       </div>
       <nav class="d-flex justify-between align-items-center flex-wrap pe-2 mt-3">
-        <div class="d-flex align-items-center gap-3">
+        <div class="d-flex align-items-center lg:w-auto w-full justify-between gap-3">
           <a class="" href="#">
             <img src="@/Assets/images/logo.png" width="400px" alt="logo" />
           </a>
@@ -23,7 +23,7 @@
             <i class="fas fa-bars text-white"></i>
           </button>
         </div>
-        <div v-if="showMenu" class="bg-green-600 py-3 lg:hidden flex-1 lg:mt-0 mt-4">
+        <div v-if="showMenu" class="bg-green-600 py-3 lg:hidden w-full z-10 lg:mt-0 mt-2">
           <ul class="flex mb-0 lg:flex-row flex-col gap-4 justify-end">
             <li class="">
               <Link href="/">Trang chủ</Link>
@@ -71,10 +71,9 @@
               <div class="flex items-center">
                 <i class="fas fa-map-marker-alt text-green-600 text-lg md:text-2xl"></i>
                 <select class="border-0 form-control">
-                  <option value="1">Chọn địa điểm</option>
-                  <option value="2">Hồ Chí Minh</option>
-                  <option value="3">Đà Nẵng</option>
-                  <option value="4">Hải Phòng</option>
+                  <option class="font-normal" value="1">Hồ Chí Minh</option>
+                  <option class="font-normal" value="2">Đà Nẵng</option>
+                  <option class="font-normal" value="3">Hải Phòng</option>
                 </select>
               </div>
             </div>
@@ -98,7 +97,7 @@
                 </button>
               </div>
             </div>
-            <div class="col-lg-3 col-6">
+            <div class="col-md-3 col-6">
               <button class="bg-green-600 text-white px-4 py-2 rounded-xl md:w-[200px] w-full md:float-end">
                 Tìm kiếm
               </button>

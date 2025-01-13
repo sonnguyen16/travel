@@ -71,7 +71,7 @@
         </div>
       </div>
     </div>
-    <div class="w-full py-[200px] bg_promo mt-5">
+    <div id="promo-3" class="w-full py-[200px] bg_promo mt-5">
       <div class="container">
         <h2 class="text-white text-center">Đăng ký nhận ưu đãi ngay!</h2>
       </div>
@@ -196,6 +196,8 @@ import ScrollReveal from 'scrollreveal'
 onMounted(() => {
   new Swiper('.swiper-1', {
     loop: true,
+    fadeEffect: { crossFade: true },
+    speed: 1000,
     spaceBetween: 20, // Khoảng cách giữa các item
     navigation: {
       nextEl: '.swiper-next-1',
@@ -216,6 +218,8 @@ onMounted(() => {
 
   new Swiper('.swiper-2', {
     loop: true,
+    fadeEffect: { crossFade: true },
+    speed: 1000,
     spaceBetween: 20, // Khoảng cách giữa các item
     navigation: {
       nextEl: '.swiper-next-2',
@@ -240,6 +244,15 @@ onMounted(() => {
     origin: 'top',
     distance: '50px',
     easing: 'ease-in-out'
+  })
+
+  // ScrollReveal - Hiệu ứng cho Timeline
+  ScrollReveal().reveal('#promo-3', {
+    duration: 1500,
+    origin: 'top',
+    distance: '50px',
+    easing: 'ease-in-out',
+    interval: 1500
   })
 
   // ScrollReveal - Hiệu ứng cho Swiper
@@ -269,5 +282,53 @@ onMounted(() => {
 
 .slide-1 {
   height: 600px;
+}
+
+@media (max-width: 768px) {
+  .swiper-slide {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease-in-out;
+  }
+
+  .swiper-slide-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tùy chỉnh nút prev và next */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 40px; /* Kích thước nút */
+  height: 40px;
+  background-color: white; /* Nền trắng */
+  border: 2px solid green; /* Viền xanh lá cây */
+  border-radius: 50%; /* Hình tròn */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Tạo bóng nhẹ */
+  transition: all 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+/* Biểu tượng mũi tên */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  color: green; /* Mũi tên màu xanh lá cây */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Hiệu ứng hover */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: green; /* Đổi nền thành xanh lá cây */
+  color: white; /* Đổi màu mũi tên */
+}
+
+.swiper-button-prev:hover::after,
+.swiper-button-next:hover::after {
+  color: white; /* Mũi tên màu trắng khi hover */
 }
 </style>

@@ -19,10 +19,10 @@
       </div>
 
       <div class="row pt-[50px]">
-        <div id="about-3" class="col-lg-6">
+        <div id="about-3" class="col-lg-6 order-md-1 order-2">
           <img src="@/Assets/images/about2.png" alt="about" class="w-full rounded-xl h-100 object-cover" />
         </div>
-        <div id="about-4" class="col-lg-6">
+        <div id="about-4" class="col-lg-6 order-md-2 order-1">
           <h3 class="mb-0 mt-3">Câu chuyện</h3>
           <h3 class="font-semi-bold text-[40px]">Thương hiệu</h3>
           <p class="text-justify mt-[30px] font-normal">
@@ -82,15 +82,41 @@
 
       <div id="slide" class="grid md:grid-cols-4 grid-cols-1 md:gap-4 mb-5">
         <div class="col-span-1 h-100 flex flex-col justify-end">
-          <h2>{{ currentContent.title }}</h2>
-          <p>{{ currentContent.paragraph }}</p>
+          <div class="swiper swiper-1">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="slide-content-1">
+                  <h2>{{ content[0].title }}</h2>
+                  <p>{{ content[0].paragraph }}</p>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="slide-content-1">
+                  <h2>{{ content[0].title }}</h2>
+                  <p>{{ content[0].paragraph }}</p>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="slide-content-1">
+                  <h2>{{ content[0].title }}</h2>
+                  <p>{{ content[0].paragraph }}</p>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="slide-content-1">
+                  <h2>{{ content[0].title }}</h2>
+                  <p>{{ content[0].paragraph }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col-span-3">
           <div class="position-relative">
-            <div class="swiper">
+            <div class="swiper swiper-2">
               <div class="swiper-wrapper flex items-end">
                 <!-- Slide 1 -->
-                <div class="swiper-slide">
+                <div class="swiper-slide intro-slide">
                   <img src="@/Assets/images/about3.jpg" alt="slide 1" class="w-full object-cover" />
                   <div class="slide-content">
                     <h2>Giới Thiệu</h2>
@@ -99,7 +125,7 @@
                 </div>
 
                 <!-- Slide 2 -->
-                <div class="swiper-slide">
+                <div class="swiper-slide intro-slide">
                   <img src="@/Assets/images/about4.jpg" alt="slide 2" class="w-full object-cover" />
                   <div class="slide-content">
                     <h2>Giải Thưởng</h2>
@@ -108,7 +134,7 @@
                 </div>
 
                 <!-- Slide 3 -->
-                <div class="swiper-slide">
+                <div class="swiper-slide intro-slide">
                   <img src="@/Assets/images/about5.jpg" alt="slide 3" class="w-full object-cover" />
                   <div class="slide-content">
                     <h2>Vinh Danh</h2>
@@ -117,7 +143,7 @@
                 </div>
 
                 <!-- Slide 4 -->
-                <div class="swiper-slide">
+                <div class="swiper-slide intro-slide">
                   <img src="@/Assets/images/about4.jpg" alt="slide 4" class="w-full object-cover" />
                   <div class="slide-content">
                     <h2>Giải Thưởng</h2>
@@ -152,21 +178,18 @@ const content = [
     title: 'Đạt Thương hiệu Quốc Gia 2024',
     paragraph: `DALATTOURIST TỰ HÀO LÀ THƯƠNG HIỆU QUỐC GIA VIỆT NAM 3 KỲ LIÊN TIẾP 2020 - 2024 Ngày 04/11/2024, Bà Trần
             Thanh Hương - Phó Chủ tịch Hội đồng quản trị đại diện Công ty Cổ phần Du lịch Lâm Đồng (Dalattourist), vinh
-            danh tại Lễ Công bố sản phẩm đạt Thương hiệu Quốc gia Việt Nam năm 2024. `
-  },
-  {
-    title: 'Đạt Thương hiệu Quốc Gia 2024',
-    paragraph: `Chương trình diễn ra tại Trung tâm
-            Hội nghị Quốc gia (Hà Nội) với sự tham dự của Thủ tướng Chính phủ Phạm Minh Chính, được Bộ Công Thương phối
-            hợp cùng Hội đồng Thương hiệu quốc gia tổ chức với chủ đề "Vươn mình tiến vào kỷ nguyên xanh.`
+            danh tại Lễ Công bố sản phẩm đạt Thương hiệu Quốc gia Việt Nam năm 2024.Chương trình diễn ra tại Trung tâm
+            Hội nghị Quốc gia (Hà Nội). `
   }
 ]
 
-const currentContent = ref(content[0])
+const currentIndex = ref(1)
 
 onMounted(() => {
-  const swiper = new Swiper('.swiper', {
+  const swiper = new Swiper('.swiper-2', {
     loop: true,
+    fadeEffect: { crossFade: true },
+    speed: 1000,
     spaceBetween: 20,
     navigation: {
       nextEl: '.swiper-button-next',
@@ -196,40 +219,55 @@ onMounted(() => {
     activeSlide.classList.add('active-slide')
   })
 
+  document.querySelector('.swiper-button-prev').addEventListener('click', () => {
+    swiper1.slidePrev()
+  })
+
+  document.querySelector('.swiper-button-next').addEventListener('click', () => {
+    swiper1.slideNext()
+  })
+
+  const swiper1 = new Swiper('.swiper-1', {
+    loop: true,
+    speed: 1000,
+    spaceBetween: 20,
+    slidesPerView: 1
+  })
+
   // ScrollReveal - Hiệu ứng nhập từ 2 bên
   ScrollReveal().reveal('#about-1', {
     duration: 2000,
-    origin: 'left',
-    distance: '200px',
+    origin: 'bottom',
+    distance: '100px',
     easing: 'ease-in-out'
   })
 
   ScrollReveal().reveal('#about-2', {
     duration: 2000,
-    origin: 'right',
-    distance: '200px',
+    origin: 'top',
+    distance: '100px',
     easing: 'ease-in-out'
   })
 
   ScrollReveal().reveal('#about-3', {
     duration: 2000,
-    origin: 'left',
-    distance: '200px',
+    origin: 'top',
+    distance: '100px',
     easing: 'ease-in-out',
     interval: 1000
   })
 
   ScrollReveal().reveal('#about-4', {
     duration: 2000,
-    origin: 'right',
-    distance: '200px',
+    origin: 'bottom',
+    distance: '100px',
     easing: 'ease-in-out',
     interval: 1000
   })
 
   // ScrollReveal - Hiệu ứng cho Timeline
   ScrollReveal().reveal('#timeline', {
-    duration: 1200,
+    duration: 2000,
     origin: 'bottom',
     distance: '50px',
     easing: 'ease-in-out',
@@ -251,6 +289,20 @@ onMounted(() => {
   height: 600px;
 }
 
+.swiper-1 {
+  width: 100%;
+  height: 250px; /* Điều chỉnh theo thiết kế */
+}
+.swiper-1 .swiper-wrapper {
+  height: 100%; /* Đảm bảo các slide được hiển thị */
+}
+
+.swiper-1 .swiper-wrapper p {
+  font-size: 14px;
+  color: #004750;
+  margin-bottom: 0;
+}
+
 .slide-content {
   position: absolute;
   bottom: 10px;
@@ -266,11 +318,11 @@ onMounted(() => {
   color: #fff;
 }
 
-.swiper-slide:nth-child(1) {
+.swiper-2 > .swiper-wrapper > .swiper-slide:nth-child(1) {
   height: 600px;
 }
 
-.swiper-slide {
+.swiper-2 > .swiper-wrapper > .swiper-slide {
   position: relative;
   overflow: hidden;
   height: 400px;
@@ -285,11 +337,60 @@ onMounted(() => {
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease-in-out;
+  border-radius: 10px;
 }
 
-.swiper-slide.active-slide {
+.swiper-slide.intro-slide.active-slide {
   height: 600px;
   transition: height 0.5s ease-in-out;
   object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .swiper-slide {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease-in-out;
+  }
+
+  .swiper-slide-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tùy chỉnh nút prev và next */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 40px; /* Kích thước nút */
+  height: 40px;
+  background-color: white; /* Nền trắng */
+  border: 2px solid green; /* Viền xanh lá cây */
+  border-radius: 50%; /* Hình tròn */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Tạo bóng nhẹ */
+  transition: all 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+/* Biểu tượng mũi tên */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  color: green; /* Mũi tên màu xanh lá cây */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Hiệu ứng hover */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: green; /* Đổi nền thành xanh lá cây */
+  color: white; /* Đổi màu mũi tên */
+}
+
+.swiper-button-prev:hover::after,
+.swiper-button-next:hover::after {
+  color: white; /* Mũi tên màu trắng khi hover */
 }
 </style>
