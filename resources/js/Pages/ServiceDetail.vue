@@ -1,11 +1,11 @@
 <template>
   <MainLayout>
     <div class="container">
-      <div class="pt-[150px]">
+      <div class="lg:pt-[150px] pt-[80px]">
         <div style="box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3)" class="rounded-xl p-3">
           <div class="row">
             <div class="col-lg-5">
-              <div class="position-relative w-full h-[300px]">
+              <div class="position-relative w-full md:h-[260px] h-[250px]">
                 <img
                   src="@/Assets/images/servicedetail1.jpg"
                   alt="home1"
@@ -78,54 +78,99 @@
         </div>
       </div>
 
-      <div class="pt-[80px] lg:pb-[100px] pb-[1200px]">
+      <div class="pt-[50px] lg:pb-[100px] pb-[30px]">
         <h2 class="text-center mb-4">Điểm đến hấp dẫn khác</h2>
-        <div class="row h-[600px]">
-          <div class="col-lg-4 mb-4">
-            <div class="rounded-xl shadow-xl bg-white h-100">
-              <img
-                src="@/Assets/images/service6.jpg"
-                alt="home1"
-                class="w-full rounded-tr-xl rounded-tl-xl object-cover h-[400px]"
-              />
-              <div class="p-3">
-                <p class="font-normal text-justify">
-                  Nice Dream hotel tên cũ là khách sạn Hải Sơn, tọa lạc nằm ở số 1 Nguyễn Thị Minh Khai, Phường 1, Đà
-                  Lạt, ngay trung tâm của thành phố với tầm nhìn tuyệt đẹp hướng ra Chợ Đà Lạt và hồ Xuân Hương.
-                </p>
+        <div class="swiper swiper-2">
+          <div class="swiper-wrapper">
+            <!-- Slide 1 -->
+            <div class="swiper-slide">
+              <div class="rounded-xl shadow-xl bg-white">
+                <div
+                  class="img-container h-[400px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
+                  <img
+                    src="@/Assets/images/service6.jpg"
+                    alt="home1"
+                    class="w-full rounded-tr-xl rounded-tl-xl object-cover"
+                  />
+                </div>
+                <div class="p-3">
+                  <p class="font-normal text-justify">
+                    Nice Dream hotel tên cũ là khách sạn Hải Sơn, tọa lạc nằm ở số 1 Nguyễn Thị Minh Khai, Phường 1, Đà
+                    Lạt, ngay trung tâm của thành phố với tầm nhìn tuyệt đẹp hướng ra Chợ Đà Lạt và hồ Xuân Hương.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="swiper-slide">
+              <div class="rounded-xl shadow-xl bg-white">
+                <div
+                  class="img-container h-[400px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
+                  <img
+                    src="@/Assets/images/service7.jpg"
+                    alt="home1"
+                    class="w-full rounded-tr-xl rounded-tl-xl object-cover"
+                  />
+                </div>
+                <div class="p-3">
+                  <p class="font-normal text-justify">
+                    Nice Dream hotel tên cũ là khách sạn Hải Sơn, tọa lạc nằm ở số 1 Nguyễn Thị Minh Khai, Phường 1, Đà
+                    Lạt, ngay trung tâm của thành phố với tầm nhìn tuyệt đẹp hướng ra Chợ Đà Lạt và hồ Xuân Hương.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="swiper-slide">
+              <div class="rounded-xl shadow-xl bg-white">
+                <div
+                  class="img-container h-[400px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
+                  <img
+                    src="@/Assets/images/service8.jpg"
+                    alt="home1"
+                    class="w-full rounded-tr-xl rounded-tl-xl object-cover"
+                  />
+                </div>
+                <div class="p-3">
+                  <p class="font-normal text-justify">
+                    Nice Dream hotel tên cũ là khách sạn Hải Sơn, tọa lạc nằm ở số 1 Nguyễn Thị Minh Khai, Phường 1, Đà
+                    Lạt, ngay trung tâm của thành phố với tầm nhìn tuyệt đẹp hướng ra Chợ Đà Lạt và hồ Xuân Hương.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="swiper-slide">
+              <div class="rounded-xl shadow-xl bg-white">
+                <div
+                  class="img-container h-[400px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
+                  <img
+                    src="@/Assets/images/service7.jpg"
+                    alt="home1"
+                    class="w-full rounded-tr-xl rounded-tl-xl object-cover"
+                  />
+                </div>
+                <div class="p-3">
+                  <p class="font-normal text-justify">
+                    Nice Dream hotel tên cũ là khách sạn Hải Sơn, tọa lạc nằm ở số 1 Nguyễn Thị Minh Khai, Phường 1, Đà
+                    Lạt, ngay trung tâm của thành phố với tầm nhìn tuyệt đẹp hướng ra Chợ Đà Lạt và hồ Xuân Hương.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-4 mb-4">
-            <div class="rounded-xl shadow-xl bg-white h-100">
-              <img
-                src="@/Assets/images/service7.jpg"
-                alt="home1"
-                class="w-full rounded-tr-xl rounded-tl-xl object-cover h-[400px]"
-              />
-              <div class="p-3">
-                <p class="font-normal text-justify">
-                  Nice Dream hotel tên cũ là khách sạn Hải Sơn, tọa lạc nằm ở số 1 Nguyễn Thị Minh Khai, Phường 1, Đà
-                  Lạt, ngay trung tâm của thành phố với tầm nhìn tuyệt đẹp hướng ra Chợ Đà Lạt và hồ Xuân Hương.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 mb-4">
-            <div class="rounded-xl shadow-xl bg-white h-100">
-              <img
-                src="@/Assets/images/service8.jpg"
-                alt="home1"
-                class="w-full rounded-tr-xl rounded-tl-xl object-cover h-[400px]"
-              />
-              <div class="p-3">
-                <p class="font-normal text-justify">
-                  Nice Dream hotel tên cũ là khách sạn Hải Sơn, tọa lạc nằm ở số 1 Nguyễn Thị Minh Khai, Phường 1, Đà
-                  Lạt, ngay trung tâm của thành phố với tầm nhìn tuyệt đẹp hướng ra Chợ Đà Lạt và hồ Xuân Hương.
-                </p>
-              </div>
-            </div>
-          </div>
+          <!-- Navigation -->
+          <div class="swiper-button-next swiper-next-2"></div>
+          <div class="swiper-button-prev swiper-prev-2"></div>
         </div>
       </div>
     </div>
@@ -134,6 +179,8 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { onMounted } from 'vue'
+import Swiper from 'swiper/bundle'
+import 'swiper/css/bundle'
 
 onMounted(() => {
   document.querySelectorAll('button[data-target]').forEach((button) => {
@@ -156,11 +203,74 @@ onMounted(() => {
       }
     })
   })
+
+  new Swiper('.swiper-2', {
+    loop: true,
+    fadeEffect: { crossFade: true },
+    speed: 1000,
+    spaceBetween: 20,
+    fadeEffect: { crossFade: true },
+    speed: 1000,
+    navigation: {
+      nextEl: '.swiper-next-2',
+      prevEl: '.swiper-prev-2'
+    },
+    breakpoints: {
+      1024: {
+        slidesPerView: 3
+      },
+      768: {
+        slidesPerView: 2
+      },
+      480: {
+        slidesPerView: 1
+      }
+    }
+  })
 })
 </script>
 <style scoped>
 /* Tùy chỉnh hiệu ứng nếu cần */
 img {
   transition: transform 0.3s ease;
+}
+
+.swiper-slide {
+  height: 600px;
+}
+
+/* Tùy chỉnh nút prev và next */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 40px; /* Kích thước nút */
+  height: 40px;
+  background-color: white; /* Nền trắng */
+  border: 2px solid green; /* Viền xanh lá cây */
+  border-radius: 50%; /* Hình tròn */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Tạo bóng nhẹ */
+  transition: all 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+/* Biểu tượng mũi tên */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  color: green; /* Mũi tên màu xanh lá cây */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Hiệu ứng hover */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: green; /* Đổi nền thành xanh lá cây */
+  color: white; /* Đổi màu mũi tên */
+}
+
+.swiper-button-prev:hover::after,
+.swiper-button-next:hover::after {
+  color: white; /* Mũi tên màu trắng khi hover */
 }
 </style>

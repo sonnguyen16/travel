@@ -10,10 +10,14 @@
           <a class="sm:text-[16px] text-[14px] text-white text-decoration-none">Đăng ký / Đăng nhập</a>
         </div>
       </div>
-      <nav class="d-flex justify-between align-items-center flex-wrap pe-2 mt-3">
+      <nav :class="[isFixed ? 'fixed mt-0' : 'mt-3', 'd-flex justify-between align-items-center flex-wrap pe-2']">
         <div class="d-flex align-items-center lg:w-auto w-full justify-between gap-3">
           <a class="" href="#">
-            <img src="@/Assets/images/logo.png" width="400px" alt="logo" />
+            <img
+              src="@/Assets/images/logo.png"
+              :class="[isFixed ? 'w-[200px] ms-[20px] my-3 lg:ms-[80px]' : 'w-[400px]']"
+              alt="logo"
+            />
           </a>
           <button
             @click.prevent="showMenu = !showMenu"
@@ -23,22 +27,22 @@
             <i class="fas fa-bars text-white"></i>
           </button>
         </div>
-        <div v-if="showMenu" class="bg-green-600 py-3 lg:hidden w-full z-10 lg:mt-0 mt-2">
-          <ul class="flex mb-0 lg:flex-row flex-col gap-4 justify-end">
+        <div v-if="showMenu" class="bg-green-600 h-[290px] py-3 lg:hidden w-full z-10 lg:mt-0 mt-2">
+          <ul class="flex mb-0 lg:flex-row flex-col gap-4 position-absolute justify-end">
             <li class="">
-              <Link href="/">Trang chủ</Link>
+              <Link style="color: white" href="/">Trang chủ</Link>
             </li>
             <li>
-              <Link href="/about">Về chúng tôi</Link>
+              <Link style="color: white" href="/about">Về chúng tôi</Link>
             </li>
             <li>
-              <Link href="/services">Dịch vụ</Link>
+              <Link style="color: white" href="/services">Dịch vụ</Link>
             </li>
             <li>
-              <Link href="/promo">Ưu đãi</Link>
+              <Link style="color: white" href="/promo">Ưu đãi</Link>
             </li>
             <li>
-              <Link href="/booking/step1">Đặt vé</Link>
+              <Link style="color: white" href="/booking/step1">Đặt vé</Link>
             </li>
           </ul>
         </div>
@@ -114,9 +118,20 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { Link } from '@inertiajs/vue3'
 const showMenu = ref(false)
+const isFixed = ref(false)
+
+onMounted(() => {
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+      isFixed.value = true
+    } else {
+      isFixed.value = false
+    }
+  })
+})
 
 const checkRoute = (route) => {
   if (typeof window !== 'undefined') {
@@ -137,6 +152,10 @@ const checkRoute = (route) => {
   border-radius: 12px;
 }
 
+.active > a {
+  color: white !important;
+}
+
 li {
   padding: 4px 8px;
 }
@@ -144,6 +163,10 @@ li {
 li:hover {
   background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1));
   border-radius: 12px;
+}
+
+li:hover > a {
+  color: white;
 }
 
 .overlay {
@@ -169,5 +192,31 @@ li a {
 
 li a:hover {
   color: #f1f1f1;
+}
+
+nav {
+  transition: all 0.3s ease;
+  background-color: transparent;
+  position: relative;
+  width: 100%;
+  z-index: 50;
+}
+
+nav.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+nav.fixed a {
+  color: #16a34a; /* Màu xanh lá cây */
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 </style>
