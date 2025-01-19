@@ -4,10 +4,65 @@
     <div class="container pt-5 position absolute top-0 left-0 right-0 d-flex flex-column">
       <div class="d-flex align-items-center gap-3 justify-end">
         <div class="p-2 bg-green-600 rounded-xl">
-          <a class="sm:text-[16px] text-[14px] text-white text-decoration-none">HOTLINE: +84 1234 5678</a>
+          <a class="sm:text-[16px] text-[14px] text-white text-decoration-none">{{ $t('hotline') }}</a>
         </div>
         <div class="p-2 hover:bg-green-600 hover:rounded-[10px]">
-          <a class="sm:text-[16px] text-[14px] text-white text-decoration-none">Đăng ký / Đăng nhập</a>
+          <a class="sm:text-[16px] text-[14px] text-white text-decoration-none">{{ $t('register_login') }}</a>
+        </div>
+        <div>
+          <div class="relative inline-block text-left">
+            <!-- Dropdown Button -->
+            <div
+              @click="toggleDropdown"
+              class="inline-flex justify-center w-full rounded-md py-2 font-medium text-white focus:outline-none"
+              id="menu-button"
+              aria-expanded="true"
+              aria-haspopup="true"
+            >
+              <img :src="`/images/${locale.toUpperCase()}.png`" class="mr-3 w-8" :alt="`${locale.toUpperCase()}`" />
+              <svg
+                class="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="#fff"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.293 9.707a1 1 0 011.414 0L10 13.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+
+            <!-- Dropdown Menu -->
+            <div
+              v-show="isDropdownOpen"
+              @click.away="closeDropdown"
+              class="origin-top-right z-[9999] absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+              role="menu"
+              style="pointer-events: auto"
+              aria-orientation="vertical"
+              aria-labelledby="menu-button"
+              tabindex="-1"
+            >
+              <div class="py-1" role="none">
+                <a
+                  v-for="lang in languages"
+                  :key="lang.id"
+                  href="#"
+                  @click="changeLanguage(lang.code)"
+                  class="flex items-center px-4 py-2 text-decoration-none text-sm text-gray-700 hover:bg-gray-100"
+                  role="menuitem"
+                  tabindex="-1"
+                  :aria-label="`Change to ${lang.code}`"
+                >
+                  <img :src="`/images/${lang.code}.png`" class="mr-3 w-8" :alt="`${lang.code}`" />
+                  {{ $t(lang.code) }}
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <nav :class="[isFixed ? 'fixed mt-0' : 'mt-3', 'd-flex justify-between align-items-center flex-wrap pe-2']">
@@ -15,7 +70,7 @@
           <a class="" href="#">
             <img
               src="@/Assets/images/logo.png"
-              :class="[isFixed ? 'w-[200px] ms-[20px] my-3 lg:ms-[80px]' : 'w-[400px]']"
+              :class="[isFixed ? 'w-[200px] ms-[20px] my-3' : 'w-[400px]']"
               alt="logo"
             />
           </a>
@@ -29,42 +84,42 @@
         </div>
         <div v-if="showMenu" class="bg-green-600 h-[290px] py-3 lg:hidden w-full z-10 lg:mt-0 mt-2">
           <ul class="flex mb-0 lg:flex-row flex-col gap-4 position-absolute justify-end">
-            <li class="">
-              <Link style="color: white" href="/">Trang chủ</Link>
+            <li @click="scrollToTopAndNavigate('/')">
+              <a style="color: white">{{ $t('home') }}</a>
             </li>
-            <li>
-              <Link style="color: white" href="/about">Về chúng tôi</Link>
+            <li @click="scrollToTopAndNavigate('/about')">
+              <a style="color: white">{{ $t('about') }}</a>
             </li>
-            <li>
-              <Link style="color: white" href="/services">Dịch vụ</Link>
+            <li @click="scrollToTopAndNavigate('/services')">
+              <a style="color: white">{{ $t('services') }}</a>
             </li>
-            <li>
-              <Link style="color: white" href="/promo">Ưu đãi</Link>
+            <li @click="scrollToTopAndNavigate('/promo')">
+              <a style="color: white">{{ $t('promo') }}</a>
             </li>
-            <li>
-              <Link style="color: white" href="/booking/step1">Đặt vé</Link>
+            <li @click="scrollToTopAndNavigate('/booking/step1')">
+              <a style="color: white">{{ $t('booking') }}</a>
             </li>
           </ul>
         </div>
         <div class="py-3">
           <ul class="mb-0 lg:flex hidden gap-4 justify-end">
-            <li :class="[checkRoute('/')]">
-              <Link href="/">Trang chủ</Link>
+            <li @click="scrollToTopAndNavigate('/')" :class="[checkRoute('/')]">
+              <Link href="">{{ $t('home') }}</Link>
             </li>
-            <li :class="[checkRoute('/about')]">
-              <Link :class="[checkRoute('/about')]" href="/about">Về chúng tôi</Link>
+            <li @click="scrollToTopAndNavigate('/about')" :class="[checkRoute('/about')]">
+              <Link href="">{{ $t('about') }}</Link>
             </li>
-            <li :class="[checkRoute('/services')]">
-              <Link href="/services">Dịch vụ</Link>
+            <li @click="scrollToTopAndNavigate('/services')" :class="[checkRoute('/services')]">
+              <Link href="">{{ $t('services') }}</Link>
             </li>
-            <li :class="[checkRoute('/promo')]">
-              <Link href="/promo">Ưu đãi</Link>
+            <li @click="scrollToTopAndNavigate('/promo')" :class="[checkRoute('/promo')]">
+              <Link href="">{{ $t('promo') }}</Link>
             </li>
-            <li :class="[checkRoute('/booking/step1')]">
-              <Link href="/booking/step1">Đặt vé</Link>
+            <li @click="scrollToTopAndNavigate('/booking/step1')" :class="[checkRoute('/booking/step1')]">
+              <Link href="">{{ $t('booking') }}</Link>
             </li>
             <li>
-              <a href="#">
+              <a id="cart" href="#">
                 <i class="fas fa-shopping-cart text-white"></i>
               </a>
             </li>
@@ -108,7 +163,7 @@
             </div>
             <div class="col-md-3 col-6">
               <button class="bg-green-600 text-white px-4 py-2 rounded-xl md:w-[200px] w-full md:float-end">
-                Tìm kiếm
+                {{ $t('search') }}
               </button>
             </div>
           </div>
@@ -118,10 +173,38 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref } from 'vue'
-import { Link } from '@inertiajs/vue3'
+import { computed, onMounted, ref } from 'vue'
+import { Link, usePage } from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3'
+import { useI18n } from 'vue-i18n'
+
 const showMenu = ref(false)
 const isFixed = ref(false)
+const isDropdownOpen = ref(false)
+const page = usePage()
+const languages = computed(() => page.props.languages)
+const { t, locale } = useI18n()
+
+const toggleDropdown = () => {
+  isDropdownOpen.value = !isDropdownOpen.value
+}
+
+const closeDropdown = () => {
+  isDropdownOpen.value = false
+}
+
+const changeLanguage = (code) => {
+  locale.value = code.toString().toLowerCase()
+  closeDropdown()
+}
+
+function scrollToTopAndNavigate(url, options = {}) {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+
+  setTimeout(() => {
+    router.visit(url, options)
+  }, 600)
+}
 
 onMounted(() => {
   window.addEventListener('scroll', () => {
@@ -165,10 +248,6 @@ li:hover {
   border-radius: 12px;
 }
 
-li:hover > a {
-  color: white;
-}
-
 .overlay {
   width: 100%;
   height: 130px;
@@ -190,8 +269,8 @@ li a {
   width: 100%;
 }
 
-li a:hover {
-  color: #f1f1f1;
+li:hover a {
+  color: #f1f1f1 !important;
 }
 
 nav {
@@ -214,9 +293,21 @@ nav.fixed a {
   color: #16a34a; /* Màu xanh lá cây */
 }
 
+nav.fixed a i {
+  color: #16a34a !important; /* Màu xanh lá cây */
+}
+
+#card:hover {
+  color: #fff !important;
+}
+
 nav a {
   color: white;
   text-decoration: none;
   transition: color 0.3s ease;
+}
+
+[style*='pointer-events: auto;'] {
+  pointer-events: auto;
 }
 </style>

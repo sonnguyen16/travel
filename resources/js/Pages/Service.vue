@@ -56,53 +56,43 @@
       </div>
 
       <div class="row lg:pt-[100px] pt-[50px]">
+        <!-- Desktop Section -->
         <div id="service-2" class="col-lg-6 md:pe-4">
-          <h4>Nhà hàng lẩu rau LéguDa</h4>
-          <!-- LOcation -->
+          <h4>{{ $t('restaurant_title') }}</h4>
+          <!-- Location -->
           <div class="d-flex gap-2 items-center">
             <i class="fas fa-map text-green-600"></i>
-            <span>Đồi Robin</span>
+            <span>{{ $t('restaurant_location') }}</span>
           </div>
-          <p class="mt-3 text-justify font-normal">
-            Buffet Rau Đà Lạt - nhà hàng Léguda tự hào là nhà hàng Buffet Rau đầu tiên tại Đà Lạt. Nhà hàng được ví như
-            “thiên đường rau củ” nằm trên đồi ROBIN – nơi cao nhất thành phố Đà Lạt. Tại đây, du khách vừa có thể ăn
-            thỏa thích rau xanh tươi ngon lấy trực tiếp từ các nhà vườn, vừa có thể tận hưởng không khí trong lành và
-            ngắm nhìn thành phố Đà Lạt từ trên cao.
-          </p>
+          <p class="mt-3 text-justify font-normal">{{ $t('restaurant_description') }}</p>
           <div class="img-container h-[300px]">
             <img src="@/Assets/images/service5.jpg" alt="home1" class="w-full rounded-xl object-cover h-[300px]" />
           </div>
         </div>
+
+        <!-- Desktop Image Section -->
         <div id="service-3" class="col-lg-6 md:ps-4 md:block hidden">
           <div class="img-container h-[300px] mb-3 mt-4 order-md-1 order-2">
             <img src="@/Assets/images/service4.jpg" alt="home1" class="w-full rounded-xl object-cover" />
           </div>
-          <h4>Nhà hàng lẩu rau LéguDa</h4>
-          <!-- LOcation -->
+          <h4>{{ $t('restaurant_title') }}</h4>
+          <!-- Location -->
           <div class="d-flex gap-2 items-center order-1 order-md-2">
             <i class="fas fa-map text-green-600"></i>
-            <span>Đồi Robin</span>
+            <span>{{ $t('restaurant_location') }}</span>
           </div>
-          <p class="mt-3 text-justify font-normal">
-            Buffet Rau Đà Lạt - nhà hàng Léguda tự hào là nhà hàng Buffet Rau đầu tiên tại Đà Lạt. Nhà hàng được ví như
-            “thiên đường rau củ” nằm trên đồi ROBIN – nơi cao nhất thành phố Đà Lạt. Tại đây, du khách vừa có thể ăn
-            thỏa thích rau xanh tươi ngon lấy trực tiếp từ các nhà vườn, vừa có thể tận hưởng không khí trong lành và
-            ngắm nhìn thành phố Đà Lạt từ trên cao.
-          </p>
+          <p class="mt-3 text-justify font-normal">{{ $t('restaurant_description') }}</p>
         </div>
+
+        <!-- Mobile Section -->
         <div id="service-3" class="col-lg-6 md:ps-4 md:hidden block mt-3">
-          <h4>Nhà hàng lẩu rau LéguDa</h4>
-          <!-- LOcation -->
+          <h4>{{ $t('restaurant_title') }}</h4>
+          <!-- Location -->
           <div class="d-flex gap-2 items-center order-1 order-md-2">
             <i class="fas fa-map text-green-600"></i>
-            <span>Đồi Robin</span>
+            <span>{{ $t('restaurant_location') }}</span>
           </div>
-          <p class="mt-3 text-justify font-normal">
-            Buffet Rau Đà Lạt - nhà hàng Léguda tự hào là nhà hàng Buffet Rau đầu tiên tại Đà Lạt. Nhà hàng được ví như
-            “thiên đường rau củ” nằm trên đồi ROBIN – nơi cao nhất thành phố Đà Lạt. Tại đây, du khách vừa có thể ăn
-            thỏa thích rau xanh tươi ngon lấy trực tiếp từ các nhà vườn, vừa có thể tận hưởng không khí trong lành và
-            ngắm nhìn thành phố Đà Lạt từ trên cao.
-          </p>
+          <p class="mt-3 text-justify font-normal">{{ $t('restaurant_description') }}</p>
           <div class="img-container h-[300px] mb-3 mt-4 order-md-1 order-2">
             <img src="@/Assets/images/service4.jpg" alt="home1" class="w-full rounded-xl object-cover" />
           </div>
@@ -127,8 +117,7 @@
                 </div>
                 <div class="p-3">
                   <p class="font-normal text-justify">
-                    Nice Dream hotel tên cũ là khách sạn Hải Sơn, tọa lạc nằm ở số 1 Nguyễn Thị Minh Khai, Phường 1, Đà
-                    Lạt, ngay trung tâm của thành phố với tầm nhìn tuyệt đẹp hướng ra Chợ Đà Lạt và hồ Xuân Hương.
+                    {{ $t('hotel_description') }}
                   </p>
                 </div>
               </div>
@@ -148,8 +137,7 @@
                 </div>
                 <div class="p-3">
                   <p class="font-normal text-justify">
-                    Nice Dream hotel tên cũ là khách sạn Hải Sơn, tọa lạc nằm ở số 1 Nguyễn Thị Minh Khai, Phường 1, Đà
-                    Lạt, ngay trung tâm của thành phố với tầm nhìn tuyệt đẹp hướng ra Chợ Đà Lạt và hồ Xuân Hương.
+                    {{ $t('hotel_description') }}
                   </p>
                 </div>
               </div>
@@ -169,8 +157,7 @@
                 </div>
                 <div class="p-3">
                   <p class="font-normal text-justify">
-                    Nice Dream hotel tên cũ là khách sạn Hải Sơn, tọa lạc nằm ở số 1 Nguyễn Thị Minh Khai, Phường 1, Đà
-                    Lạt, ngay trung tâm của thành phố với tầm nhìn tuyệt đẹp hướng ra Chợ Đà Lạt và hồ Xuân Hương.
+                    {{ $t('hotel_description') }}
                   </p>
                 </div>
               </div>
@@ -212,88 +199,89 @@ import { router } from '@inertiajs/vue3'
 import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
-import ScrollReveal from 'scrollreveal'
 
-onMounted(() => {
-  new Swiper('.swiper-1', {
-    loop: true,
-    fadeEffect: { crossFade: true },
-    speed: 1000,
-    spaceBetween: 20, // Khoảng cách giữa các item
-    navigation: {
-      nextEl: '.swiper-next-1',
-      prevEl: '.swiper-prev-1'
-    },
-    breakpoints: {
-      1024: {
-        slidesPerView: 3
+onMounted(async () => {
+  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    const ScrollReveal = (await import('scrollreveal')).default
+    const scrollReveal = ScrollReveal()
+
+    new Swiper('.swiper-1', {
+      loop: true,
+      fadeEffect: { crossFade: true },
+      speed: 1000,
+      spaceBetween: 20, // Khoảng cách giữa các item
+      navigation: {
+        nextEl: '.swiper-next-1',
+        prevEl: '.swiper-prev-1'
       },
-      768: {
-        slidesPerView: 2
-      },
-      480: {
-        slidesPerView: 1
+      breakpoints: {
+        1024: {
+          slidesPerView: 3
+        },
+        768: {
+          slidesPerView: 2
+        },
+        480: {
+          slidesPerView: 1
+        }
       }
-    }
-  })
+    })
 
-  new Swiper('.swiper-2', {
-    loop: true,
-    fadeEffect: { crossFade: true },
-    speed: 1000,
-    spaceBetween: 20,
-    fadeEffect: { crossFade: true },
-    speed: 1000,
-    navigation: {
-      nextEl: '.swiper-next-2',
-      prevEl: '.swiper-prev-2'
-    },
-    breakpoints: {
-      1024: {
-        slidesPerView: 3
+    new Swiper('.swiper-2', {
+      loop: true,
+      fadeEffect: { crossFade: true },
+      speed: 1000,
+      spaceBetween: 20,
+      fadeEffect: { crossFade: true },
+      speed: 1000,
+      navigation: {
+        nextEl: '.swiper-next-2',
+        prevEl: '.swiper-prev-2'
       },
-      768: {
-        slidesPerView: 2
-      },
-      480: {
-        slidesPerView: 1
+      breakpoints: {
+        1024: {
+          slidesPerView: 3
+        },
+        768: {
+          slidesPerView: 2
+        },
+        480: {
+          slidesPerView: 1
+        }
       }
-    }
-  })
+    })
 
-  // ScrollReveal - Hiệu ứng nhập từ 2 bên
-  ScrollReveal().reveal('#service-2', {
-    duration: 2000,
-    origin: 'top',
-    distance: '100px',
-    easing: 'ease-in-out',
-    interval: 2000
-  })
+    // ScrollReveal - Hiệu ứng nhập từ 2 bên
+    scrollReveal.reveal('#service-2', {
+      duration: 2000,
+      origin: 'top',
+      distance: '100px',
+      easing: 'ease-in-out'
+    })
 
-  ScrollReveal().reveal('#service-3', {
-    duration: 2000,
-    origin: 'bottom',
-    distance: '100px',
-    easing: 'ease-in-out',
-    interval: 2000
-  })
+    scrollReveal.reveal('#service-3', {
+      duration: 2000,
+      origin: 'bottom',
+      distance: '100px',
+      easing: 'ease-in-out'
+    })
 
-  // ScrollReveal - Hiệu ứng cho Timeline
-  ScrollReveal().reveal('#service-1', {
-    duration: 1200,
-    origin: 'top',
-    distance: '100px',
-    easing: 'ease-in-out'
-  })
+    // ScrollReveal - Hiệu ứng cho Timeline
+    scrollReveal.reveal('#service-1', {
+      duration: 1200,
+      origin: 'top',
+      distance: '100px',
+      easing: 'ease-in-out'
+    })
 
-  // ScrollReveal - Hiệu ứng cho Swiper
-  ScrollReveal().reveal('#service-4', {
-    duration: 2000,
-    origin: 'bottom',
-    distance: '100px',
-    easing: 'ease-in-out',
-    interval: 5000
-  })
+    // ScrollReveal - Hiệu ứng cho Swiper
+    scrollReveal.reveal('#service-4', {
+      duration: 2000,
+      origin: 'bottom',
+      distance: '100px',
+      easing: 'ease-in-out'
+    })
+  }
 })
 </script>
 <style scoped>

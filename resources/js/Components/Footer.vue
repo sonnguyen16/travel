@@ -4,10 +4,8 @@
       <div class="row">
         <div class="col-lg-3">
           <img src="@/Assets/images/logo.png" class="w-full" alt="logo" />
-          <p class="mt-3 text-lg font-bold mb-0 text-white">Công Ty Cổ Phần Du Lịch Lâm Đồng</p>
-          <p class="mt-2 text-white">
-            Lấy chất lượng phục vụ chuyên nghiệp và mức độ hài lòng của khách hàng làm tiêu chí phấn đấu.
-          </p>
+          <p class="mt-3 text-lg font-bold mb-0 text-white">{{ $t('company_name') }}</p>
+          <p class="mt-2 text-white">{{ $t('slogan') }}</p>
           <div class="flex gap-4">
             <i class="text-white fab fa-facebook-f text-2xl"></i>
             <i class="text-white fab fa-twitter text-2xl"></i>
@@ -17,76 +15,78 @@
             <i class="text-white fab fa-pinterest text-2xl"></i>
           </div>
           <div>
+            <h5 class="text-white mt-4">{{ $t('contact_info') }}</h5>
             <div class="flex gap-4 mt-4">
               <i class="text-white fas fa-phone-alt text-2xl"></i>
-              <p class="text-white">1900 1000</p>
+              <p class="text-white">{{ $t('phone') }}: 1900 1000</p>
             </div>
             <div class="flex gap-4">
               <i class="fas fa-envelope text-2xl text-white"></i>
-              <p class="text-white">contact@dalatt.com</p>
+              <p class="text-white">{{ $t('email') }}: contact@dalatt.com</p>
             </div>
             <div class="flex gap-4">
               <i class="fas fa-map text-2xl text-white"></i>
-              <p class="text-white">123 Đường 3/2, Phường 12, Quận 10, TP.HCM</p>
+              <p class="text-white">{{ $t('address') }}: 123 Đường 3/2, Phường 12, Quận 10, TP.HCM</p>
             </div>
           </div>
         </div>
         <div class="col-lg-6">
           <div class="row">
             <div class="col-lg-5">
-              <h5 class="font-bold mb-0 text-white">Về chúng tôi</h5>
+              <h5 class="font-bold mb-0 text-white">{{ $t('about_us') }}</h5>
               <hr />
               <ul class="list-unstyled flex flex-col gap-3">
                 <li>
-                  <a href="#">Giới thiệu</a>
+                  <a href="#">{{ $t('introduction') }}</a>
                 </li>
                 <li>
-                  <a href="#">Lịch sử phát triển</a>
+                  <a href="#">{{ $t('history') }}</a>
                 </li>
                 <li>
-                  <a href="#">Tầm nhìn - Sứ mệnh</a>
+                  <a href="#">{{ $t('vision_mission') }}</a>
                 </li>
                 <li>
-                  <a href="#">Giải thưởng</a>
+                  <a href="#">{{ $t('awards') }}</a>
                 </li>
                 <li>
-                  <a href="#">Đối tác</a>
+                  <a href="#">{{ $t('partners') }}</a>
                 </li>
               </ul>
             </div>
             <div class="col-lg-7">
-              <h5 class="font-bold mb-0 text-white">Điều khoản & quy định</h5>
+              <h5 class="font-bold mb-0 text-white">{{ $t('terms_conditions') }}</h5>
               <hr />
               <ul class="list-unstyled flex flex-col gap-3">
                 <li>
-                  <a href="#">Chính sách bảo mật</a>
+                  <a href="#">{{ $t('privacy_policy') }}</a>
                 </li>
                 <li>
-                  <a href="#">Chính sách đổi trả</a>
+                  <a href="#">{{ $t('return_policy') }}</a>
                 </li>
                 <li>
-                  <a href="#">Chính sách vận chuyển</a>
+                  <a href="#">{{ $t('shipping_policy') }}</a>
                 </li>
                 <li>
-                  <a href="#">Chính sách thanh toán</a>
+                  <a href="#">{{ $t('payment_policy') }}</a>
                 </li>
                 <li>
-                  <a href="#">Điều khoản sử dụng</a>
+                  <a href="#">{{ $t('terms_of_use') }}</a>
                 </li>
               </ul>
             </div>
             <div class="col-lg-12">
-              <!-- Đăng ký nhận tin -->
-              <h5 class="font-bold mb-3 text-white">Đăng ký nhận tin</h5>
+              <h5 class="font-bold mb-3 text-white">{{ $t('subscribe') }}</h5>
               <div class="input-group mb-3">
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Email của bạn"
+                  :placeholder="$t('your_email')"
                   aria-label="Recipient's username"
                   aria-describedby="button-addon2"
                 />
-                <button class="btn btn-danger" type="button" id="button-addon2">Đăng ký</button>
+                <button class="btn btn-danger" type="button" id="button-addon2">
+                  {{ $t('subscribe_button') }}
+                </button>
               </div>
             </div>
           </div>
@@ -94,22 +94,22 @@
         <div class="col-lg-3">
           <ul class="list-unstyled flex flex-col gap-3">
             <li>
-              <a href="#">Số ĐKKD: 123456789</a>
+              <a href="#">{{ $t('license_number') }}: 123456789</a>
             </li>
             <li>
-              <a href="#">Ngày cấp: 01/01/2021</a>
+              <a href="#">{{ $t('license_date') }}: 01/01/2021</a>
             </li>
             <li>
-              <a href="#">Nơi cấp: Sở kế hoạch Đà Lạt</a>
+              <a href="#">{{ $t('license_place') }}: Sở kế hoạch Đà Lạt</a>
             </li>
             <li>
-              <a href="#">Địa chỉ: 123 Đường 3/2, Phường 12, Quận 10, TP.HCM</a>
+              <a href="#">{{ $t('address') }}: 123 Đường 3/2, Phường 12, Quận 10, TP.HCM</a>
             </li>
             <li>
-              <a href="#">Điện thoại: 1900 1000</a>
+              <a href="#">{{ $t('phone') }}: 1900 1000</a>
             </li>
             <li>
-              <a href="#">© 2021 Dalattourist. All rights reserved.</a>
+              <a href="#">{{ $t('reserved') }}</a>
             </li>
           </ul>
         </div>
@@ -117,6 +117,7 @@
     </div>
   </footer>
 </template>
+
 <style>
 footer {
   background: linear-gradient(

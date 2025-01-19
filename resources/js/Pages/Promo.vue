@@ -73,8 +73,8 @@
     </div>
     <div id="promo-3" class="w-full py-[200px] bg_promo mt-5">
       <div class="container text-center">
-        <h2 id="promo-title" class="text-white">Đăng ký nhận ưu đãi ngay!</h2>
-        <button id="promo-btn" class="btn btn-success px-5" style="font-size: 20px">Đăng ký</button>
+        <h2 id="promo-title" class="text-white">{{ $t('register_now') }}</h2>
+        <button id="promo-btn" class="btn btn-success px-5" style="font-size: 20px">{{ $t('register') }}</button>
       </div>
     </div>
     <div class="container">
@@ -204,94 +204,94 @@ import { router } from '@inertiajs/vue3'
 import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
-import ScrollReveal from 'scrollreveal'
 
-onMounted(() => {
-  new Swiper('.swiper-1', {
-    loop: true,
-    fadeEffect: { crossFade: true },
-    speed: 1000,
-    spaceBetween: 20, // Khoảng cách giữa các item
-    navigation: {
-      nextEl: '.swiper-next-1',
-      prevEl: '.swiper-prev-1'
-    },
-    breakpoints: {
-      1024: {
-        slidesPerView: 3
+onMounted(async () => {
+  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    const ScrollReveal = (await import('scrollreveal')).default
+    const scrollReveal = ScrollReveal()
+
+    new Swiper('.swiper-1', {
+      loop: true,
+      fadeEffect: { crossFade: true },
+      speed: 1000,
+      spaceBetween: 20, // Khoảng cách giữa các item
+      navigation: {
+        nextEl: '.swiper-next-1',
+        prevEl: '.swiper-prev-1'
       },
-      768: {
-        slidesPerView: 2
-      },
-      480: {
-        slidesPerView: 1
+      breakpoints: {
+        1024: {
+          slidesPerView: 3
+        },
+        768: {
+          slidesPerView: 2
+        },
+        480: {
+          slidesPerView: 1
+        }
       }
-    }
-  })
+    })
 
-  new Swiper('.swiper-2', {
-    loop: true,
-    fadeEffect: { crossFade: true },
-    speed: 1000,
-    spaceBetween: 20, // Khoảng cách giữa các item
-    navigation: {
-      nextEl: '.swiper-next-2',
-      prevEl: '.swiper-prev-2'
-    },
-    breakpoints: {
-      1024: {
-        slidesPerView: 3
+    new Swiper('.swiper-2', {
+      loop: true,
+      fadeEffect: { crossFade: true },
+      speed: 1000,
+      spaceBetween: 20, // Khoảng cách giữa các item
+      navigation: {
+        nextEl: '.swiper-next-2',
+        prevEl: '.swiper-prev-2'
       },
-      768: {
-        slidesPerView: 2
-      },
-      480: {
-        slidesPerView: 1
+      breakpoints: {
+        1024: {
+          slidesPerView: 3
+        },
+        768: {
+          slidesPerView: 2
+        },
+        480: {
+          slidesPerView: 1
+        }
       }
-    }
-  })
+    })
 
-  // ScrollReveal - Hiệu ứng cho Timeline
-  ScrollReveal().reveal('#promo-1', {
-    duration: 1500,
-    origin: 'top',
-    distance: '50px',
-    easing: 'ease-in-out'
-  })
+    // ScrollReveal - Hiệu ứng cho Timeline
+    ScrollReveal().reveal('#promo-1', {
+      duration: 2000,
+      origin: 'top',
+      distance: '50px',
+      easing: 'ease-in-out'
+    })
 
-  // ScrollReveal - Hiệu ứng cho Timeline
-  ScrollReveal().reveal('#promo-3', {
-    duration: 1500,
-    origin: 'top',
-    distance: '50px',
-    easing: 'ease-in-out',
-    interval: 1500
-  })
+    // ScrollReveal - Hiệu ứng cho Timeline
+    scrollReveal.reveal('#promo-3', {
+      duration: 2000,
+      origin: 'top',
+      distance: '50px',
+      easing: 'ease-in-out'
+    })
 
-  ScrollReveal().reveal('#promo-title', {
-    duration: 1500,
-    origin: 'left',
-    distance: '100px',
-    easing: 'ease-in-out',
-    interval: 1500
-  })
+    scrollReveal.reveal('#promo-title', {
+      duration: 2000,
+      origin: 'left',
+      distance: '100px',
+      easing: 'ease-in-out'
+    })
 
-  ScrollReveal().reveal('#promo-btn', {
-    duration: 1500,
-    origin: 'right',
-    distance: '100px',
-    easing: 'ease-in-out',
-    interval: 1500
-  })
+    scrollReveal.reveal('#promo-btn', {
+      duration: 2000,
+      origin: 'right',
+      distance: '100px',
+      easing: 'ease-in-out'
+    })
 
-  // ScrollReveal - Hiệu ứng cho Swiper
-  ScrollReveal().reveal('#promo-2', {
-    duration: 1500,
-    origin: 'bottom',
-    distance: '50px',
-    easing: 'ease-in-out',
-    interval: 4000
-  })
+    // ScrollReveal - Hiệu ứng cho Swiper
+    scrollReveal.reveal('#promo-2', {
+      duration: 2000,
+      origin: 'bottom',
+      distance: '50px',
+      easing: 'ease-in-out'
+    })
+  }
 })
 </script>
 <style scoped>

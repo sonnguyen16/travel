@@ -17,11 +17,24 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    protected $table = 'users';
+    public $timestamps = false;
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
+        'birthday',
+        'sex',
+        'user_name',
+        'phone',
+        'super_user'
     ];
+
+    public function image()
+    {
+        return $this->hasOne('App\Models\Image', 'record_id', 'id')->where('record_type', 'User');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
