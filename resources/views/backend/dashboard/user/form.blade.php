@@ -5,39 +5,56 @@
     @csrf
     <div class="box-body">
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Name <span style="color: red">*</span></label>
-                    <input name="name" type="text" class="form-control" placeholder="Name..." value="{{ old('name', $user->name ?? '') }}" required>
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Name <span style="color: red">*</span></label>
+                            <input name="name" type="text" class="form-control" placeholder="Name..." value="{{ old('name', $user->name ?? '') }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Email <span style="color: red">*</span></label>
+                            <input name="email" type="email" value="{{ old('email', $user->email ?? '') }}" class="form-control" placeholder="Email..." required>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Phone <span style="color: red">*</span></label>
+                            <input name="phone" type="tel" class="form-control" placeholder="Phone..." value="{{ old('phone', $user->phone ?? '') }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Birthday <span style="color: red">*</span></label>
+                            <input name="birthday" type="date" class="form-control" value="{{ old('birthday', $user->birthday ?? '') }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Sex <span style="color: red">*</span></label>
+                            <select name="sex" class="form-control">
+                                <option value="1" {{ old('sex', $user->sex ?? '') == 1 ? 'selected' : '' }}>Male</option>
+                                <option value="0" {{ old('sex', $user->sex ?? '') == 0 ? 'selected' : '' }}>Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="form-group">
-                    <label>Phone <span style="color: red">*</span></label>
-                    <input name="phone" type="tel" class="form-control" placeholder="Phone..." value="{{ old('phone', $user->phone ?? '') }}" required>
-                </div>
-                <div class="form-group">
-                    <label>Email <span style="color: red">*</span></label>
-                    <input name="email" type="email" value="{{ old('email', $user->email ?? '') }}" class="form-control" placeholder="Email..." required>
-                </div>
-                <div class="form-group">
-                    <label>Birthday <span style="color: red">*</span></label>
-                    <input name="birthday" type="date" class="form-control" value="{{ old('birthday', $user->birthday ?? '') }}" required>
-                </div>
-                <div class="form-group">
-                    <label>Sex <span style="color: red">*</span></label>
-                    <select name="sex" class="form-control">
-                        <option value="1" {{ old('sex', $user->sex ?? '') == 1 ? 'selected' : '' }}>Male</option>
-                        <option value="0" {{ old('sex', $user->sex ?? '') == 0 ? 'selected' : '' }}>Female</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Image</label>
-                    <input type="file" name="picture" class="form-control">
+                    <label style="margin-top: 10px">
+                        <input name="active" id="active" type="checkbox" class="flat-red"> Hoạt động
+                    </label>
                 </div>
                 @if(isset($user) && $user->image)
                     <img src="{{ asset('public/uploads/users/' . $user->image->picture) }}" alt="Profile Picture" style="width: 100px; margin-bottom: 15px;">
                 @endif
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="form-group">
                     <label>User name <span style="color: red">*</span></label>
                     <input name="user_name" value="{{ old('user_name', $user->user_name ?? '' )}}" type="text" class="form-control" placeholder="Enter username..." required>

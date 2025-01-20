@@ -56,8 +56,7 @@ class UserController extends Controller
             'name' => 'required|string|max:100',
             'phone' => 'required|digits_between:9,15',
             'birthday' => 'required|date',
-            'sex' => 'required|in:1,0',
-            'password' => $request->has('password') ? 'nullable|min:6|confirmed' : 'nullable',
+            'password' => $request->has('id') ? 'require|min:6|confirmed' : 'nullable|min:6|confirmed',
             'picture' => 'nullable',
         ]);
 
@@ -73,7 +72,6 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'phone' => $request->input('phone'),
             'birthday' => $request->input('birthday'),
-            'sex' => $request->input('sex'),
             'super_user' => $request->has('super_user') ? 1 : 0,
         ];
 
@@ -112,9 +110,16 @@ class UserController extends Controller
     }
 
     public function delete(Request $request){
-        $user = User::where('id', $request->id);
-        $user->delete();
-        Image::where('record_type', 'User')->where('record_id', $request->id)->delete();
+        if($request->id == 1){
+            return redirect()->back()->withErrors("Không thể xóa mục này")->withInput();
+        }
+        $user = User::where('id', $request->id)->delete();
+        $image = Image::where('record_type', 'User')->where('record_id', $request->id)->first();
+        $path = 'public/uploads/users/' . $image->picture;
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        $image->delete();
         return redirect(route('backend.dashboard.user.index'));
     }
 }

@@ -148,11 +148,20 @@ class ProductController extends Controller
     public function delete(Request $request) {
         $product = Product::where('id', $request->id)->delete();
         Translation::where('record_type', 'Product')->where('record_id', $request->id)->delete();
-        Image::where('record_type', 'Product')->where('record_id', $request->id)->delete();
+        $image = Image::where('record_type', 'Product')->where('record_id', $request->id)->first();
+        $path = 'public/uploads/products/' . $image->picture;
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        $image->delete();
         return redirect(route('backend.dashboard.product.index'));
     }
     public function deleteImg($id){
         $img = Image::where('id',$id)->first();
+        $path = 'public/uploads/products/' . $img->picture;
+        if (file_exists($path)) {
+            unlink($path);
+        }
         $img->delete();
         return redirect()->back();
     }

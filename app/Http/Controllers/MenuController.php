@@ -123,14 +123,27 @@ class MenuController extends Controller
     }
     
     public function delete(Request $request){
+        if($request->id == 2 || $request->id == 4){
+            return redirect()->back()->withErrors("Không thể xóa mục này")->withInput();
+        }
         $menu = Menu::where('id', $request->id)->delete();
-        Image::where('record_type', 'Menu')->where('record_id', $request->id)->delete();
+        $image = Image::where('record_type', 'Menu')->where('record_id', $request->id)->first();
+        $path = 'public/uploads/menus/' . $image->picture;
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        $image->delete();
         Translation::where('record_type', 'Menu')->where('record_id', $request->id)->delete();
         return redirect(route('backend.dashboard.menu.index'));
     }
 
     public function deleteImg(Request $request){
-        Image::where('record_type', 'Menu')->where('record_id', $request->id)->delete();
+        $image = Image::where('record_type', 'Menu')->where('record_id', $request->id)->first();
+        $path = 'public/uploads/menus/' . $image->picture;
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        $image->delete();
         return redirect()->back();
     }
 }

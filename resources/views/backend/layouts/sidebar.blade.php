@@ -18,6 +18,11 @@
                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                </a>
            </li>
+           <li class="{{ Route::is('backend.dashboard.order.index') ? 'active' : '' }}">
+                <a href="{{ route('backend.dashboard.order.index') }}">
+                    <i class="fa fa-shopping-cart"></i> <span>Đơn vé</span>
+                </a>
+            </li>
            <li class="{{ Route::is('backend.dashboard.product.index') ? 'active' : '' }}">
                <a href="{{ route('backend.dashboard.product.index') }}">
                    <i class="fa fa-ticket"></i> <span>Vé</span>
@@ -61,11 +66,11 @@
                   <i class="fa fa-user"></i> <span>Users</span>
                </a>
             </li>
-            <li class="{{ $title == "Sửa Profile" ? 'active' : '' }}">
-               <a href="{{ route('backend.dashboard.user.edit', ['id' => Auth::user()->id, 'type' => 'profile']) }}">
-                  <i class="fa fa-user-circle-o"></i> <span>Profile</span>
-               </a>
-            </li>
+            <li>
+                <a data-toggle="modal" data-target="#profileModal" onclick="getProfile({{ Auth::user()->id }})" style="cursor: pointer;">
+                   <i class="fa fa-user-circle-o"></i> <span>Profile</span>
+                </a>
+             </li>
            <li>
                <a href="{{ route('backend.dashboard.logout') }}">
                    <i class="fa fa-sign-out"></i> <span>Đăng xuất</span>

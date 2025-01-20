@@ -1,7 +1,3 @@
-function clearSearch() {
-    document.getElementById('search').value = '';
-    document.getElementById('search-form').submit();
-}
 function alertDelete(id) {
   $('#myModal').data('id', id);
   $('#myModal').modal('toggle');

@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use App\Models\Language;
 use App\Models\Image;
 use App\Models\Translation;
+use App\Models\Activity;
 
 class BlogController extends Controller
 {
@@ -156,11 +157,34 @@ class BlogController extends Controller
 	public function delete(Request $request) {
         $blog = Blog::where('id', $request->id)->delete();
         Translation::where('record_type', 'Blog')->where('record_id', $request->id)->delete();
-        Image::where('record_type', 'Blog')->where('record_id', $request->id)->delete();
+        $image = Image::where('record_type', 'Blog')->where('record_id', $request->id)->first();
+        $path = 'public/uploads/blogs/' . $image->picture;
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        $image->delete();
+        
+        //xóa activity liên quan
+        $activities = Activity::where('blog_id', $request->id);
+        $activities->each(function ($activity) {
+            $img = Image::where('record_type', 'Activity')->where('record_id', $activity->id)->first();
+            $path = 'public/uploads/activities/' . $img->picture;
+            if (file_exists($path)) {
+                unlink($path);
+            }
+            $img->delete();
+            Translation::where('record_type', 'Activity')->where('record_id', $activity->id)->delete();
+        });
+        $activities->delete();
+
         return redirect(route('backend.dashboard.blog.index'));
     }
     public function deleteImg($id){
         $img = Image::where('id', $id)->first();
+        $path = 'public/uploads/blogs/' . $img->picture;
+        if (file_exists($path)) {
+            unlink($path);
+        }
         $img->delete();
         return redirect()->back();
     }

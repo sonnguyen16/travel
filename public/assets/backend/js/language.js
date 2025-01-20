@@ -6,11 +6,6 @@ function alertDelete(id) {
     e.preventDefault();
     window.location.href = "language/delete" + "?id=" + $('#myModal').data('id');
   });
-  $(function () {
-      $('input[type="checkbox"].flat-red').iCheck({
-          checkboxClass: 'icheckbox_flat-green'
-      });
-  })
   $('#languageModal').on('hidden.bs.modal', function() {
       $('#id').val('');
       $('#name').val('');

@@ -1,13 +1,3 @@
-function clearSearch() {
-    document.getElementById('search').value = '';
-    document.getElementById("search-form").submit();
-}
-$(function () {
-    $('input[type="checkbox"].flat-red').iCheck({
-        checkboxClass: 'icheckbox_flat-green'
-    });
-})
-
 function alertDelete(id) {
   $('#myModal').data('id', id);
   $('#myModal').modal('toggle');
@@ -25,10 +15,10 @@ $('#userModal').on('hidden.bs.modal', function() {
     $('#email').val('');
     $('#phone').val('');
     $('#birthday').val('');
-    $('input[name="sex"][value="1"]').prop('checked', true);
     $('#super_user').iCheck('uncheck');
     $('#image').hide();
     $('#picture').val('');
+    $('#password').prop('required', true);
 });
 
 function getUser(id){
@@ -36,13 +26,13 @@ function getUser(id){
         type: 'GET',
         url: 'user/edit' + '?id=' + id,
         success: function(data){
+            $('#password').prop('required', false);
             $('#id').val(data.user.id);
             $('#user_name').val(data.user.user_name);
             $('#name').val(data.user.name);
             $('#email').val(data.user.email);
             $('#phone').val(data.user.phone);
             $('#birthday').val(data.user.birthday);
-            $('input[name="sex"][value="' + data.user.sex + '"]').prop('checked', true);
             if (data.user.super_user == 1) {
                 $('#super_user').iCheck('check');
             } else {
@@ -58,4 +48,4 @@ function getUser(id){
             console.log(error);
         }
     })
-}
+}   
