@@ -117,7 +117,12 @@ class RecruitmentController extends Controller
     public function delete(Request $request) {
         $recruitment = Recruitment::where('id', $request->id)->delete();
         RecruitmentTranslations::where('record_id', $request->id)->delete();
-        Image::where('record_type', 'Recruitment')->where('record_id', $request->id)->delete();
+        $image = Image::where('record_type', 'Recruitment')->where('record_id', $request->id)->first();
+        $path = 'public/uploads/recruitments/' . $image->picture;
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        $image->delete();
         return redirect(route('backend.dashboard.recruitment.index'));
     }
 }

@@ -1,12 +1,12 @@
 <div id="myModal" class="modal fade" role="dialog" data-id="0">
-    <div class="modal-dialog" style="max-width: 500px;">
+    <div class="modal-dialog" id="modal-dialog-delete">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Xác nhận xóa</h4>
+                <h4 class="modal-title"><strong><i class="fa fa-exclamation-triangle" style="color: red;"></i> Xác nhận xóa</strong></h4>
             </div>
             <div class="modal-body">
-                <p>Bạn có thật sự muốn xóa menu này?</p>
+                <p>Bạn có thật sự muốn xóa danh mục này và các bản dịch liên quan (nếu có) ?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
@@ -65,7 +65,7 @@
                         <div class="col-md-6">
                             <div class="form-group " id="div-menu">
                                 <label>Loại danh mục <span style="color: red">*</span></label>
-                                <select name="menu_fk" id="menu_fk" class="form-control" tabindex="-1" aria-hidden="true" required>
+                                <select name="menu_fk" id="menu_fk" class="form-control" required>
                                     <option value="0" selected="">Danh mục cấp đầu </option>
                                     @foreach($menus as $item)
                                         <option value="{{ $item->id }}">{{ $item->translation->name }}</option>

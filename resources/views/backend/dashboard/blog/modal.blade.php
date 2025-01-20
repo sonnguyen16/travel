@@ -1,13 +1,13 @@
 <div id="myModal" class="modal fade" role="dialog" data-id="0">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="modal-dialog-delete">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Xác nhận xóa</h4>
+                <h4 class="modal-title"><strong><i class="fa fa-exclamation-triangle" style="color: red;"></i> Xác nhận xóa</strong></h4>
             </div>
             <div class="modal-body">
-                <p>Bạn có thật sự muốn xóa blog này?</p>
+                <p>Bạn có thật sự muốn xóa bài viết này và các bản dịch liên quan (bao gồm hoạt động nổi bật nếu có) ?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Không</button>

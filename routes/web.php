@@ -16,8 +16,10 @@ use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\UserHomeController;
 use App\Http\Controllers\UserBlogController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserServiceController;
 use App\Http\Controllers\UserPromoController;
+
 
 Route::get('/admin', [LoginController::class, 'login'])->name('backend.dashboard.login');
 Route::post('/check', [LoginController::class, 'check'])->name('backend.dashboard.login.check');
@@ -28,6 +30,11 @@ Route::prefix('/admin')->group(function () {
     Route::post('ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard.home.index');
     Route::get('/logout', [LoginController::class, 'logout'])->name('backend.dashboard.logout');
+
+    Route::get('/order', [OrderController::class, 'index'])->name('backend.dashboard.order.index');
+    Route::get('/order/show', [OrderController::class, 'show'])->name('backend.dashboard.order.show');
+    Route::get('/order/delete', [OrderController::class, 'delete'])->name('backend.dashboard.order.delete');
+    Route::get('/order/status', [OrderController::class, 'status'])->name('backend.dashboard.order.status');
 
     Route::get('/product', [ProductController::class, 'index'])->name('backend.dashboard.product.index');
 	Route::post('/product/store', [ProductController::class,'store'])->name('backend.dashboard.product.store');

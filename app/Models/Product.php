@@ -21,11 +21,11 @@ class Product extends Model
 	public function menu() {
 		return $this->belongsTo('App\Models\Menu', 'menu_id');
 	}
-	public function image($language_id)
+	public function image($language_id = 1)
     {
         return $this->hasOne('App\Models\Image', 'record_id', 'id')->where('record_type', 'Product')->where('name', 'Picture')->where('language_id', $language_id)->first();
     }
-	public function images($language_id) {
+	public function images($language_id = 1) {
 		return $this->hasMany('App\Models\Image', 'record_id', 'id')->where('record_type', 'Product')->where('name', 'Other')->where('language_id', $language_id)->get();
 	}
 	public function translation($languageId = 1)

@@ -30,7 +30,7 @@ class ActivityController extends Controller
         });
         return view('backend.dashboard.activity.index',[
             'activities' => $activities,
-            'title' => 'Hoạt động nổi bật'
+            'title' => 'Hoạt động nổi bật #' . $request->blog_id
         ]);
     }
     public function store(Request $request) {
@@ -97,7 +97,12 @@ class ActivityController extends Controller
 	}
     public function delete(Request $request){
         $activity= Activity::where('id', $request->id)->delete();
-        Image::where('record_type', 'Activity')->where('record_id', $request->id)->delete();
+        $image = Image::where('record_type', 'Activity')->where('record_id', $request->id)->first();
+        $path = 'public/uploads/activities/' . $image->picture;
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        $image->delete();
         Translation::where('record_type', 'Activity')->where('record_id', $request->id)->delete();
         return redirect(route('backend.dashboard.activity.index', ['blog_id' => $request->blog_id]));
     }

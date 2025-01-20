@@ -1,13 +1,12 @@
 <div id="myModal" class="modal fade" role="dialog" data-id="0">
-    <div class="modal-dialog">
-       <!-- Modal content-->
-       <div class="modal-content">
+    <div class="modal-dialog" id="modal-dialog-delete">
+        <div class="modal-content">
           <div class="modal-header">
              <button type="button" class="close" data-dismiss="modal">&times;</button>
-             <h4 class="modal-title">Xác nhận xóa</h4>
+             <h4 class="modal-title"><strong><i class="fa fa-exclamation-triangle" style="color: red;"></i> Xác nhận xóa</strong></h4>
           </div>
           <div class="modal-body">
-             <p>Bạn có thật sự muốn xóa tin tuyển dụng này?</p>
+             <p>Bạn có thật sự muốn xóa tin tuyển dụng này và các bản dịch liên quan (nếu có) ?</p>
           </div>
           <div class="modal-footer">
              <button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
@@ -78,22 +77,6 @@
                                         <input type="text" name="department" id="department" placeholder="Marketing ..." class="form-control" required>
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Khối <span style="color: red">*</span></label>
-                                        <select name="unit_id" id="unit_id" class="form-control" required>
-                                            <option value="">-- Chọn --</option>
-                                            @foreach($units as $item)
-                                                <option value="{{ $item->id }}">{{ $item->translation->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Phòng ban <span style="color: red">*</span></label>
-                                        <select name="department_id" id="department_id" class="form-control" disabled required> 
-                                        </select>
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
                     </div>

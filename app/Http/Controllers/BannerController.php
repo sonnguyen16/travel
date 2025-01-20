@@ -79,7 +79,12 @@ class BannerController extends Controller
 	}
     public function delete(Request $request){
         $banner = Banner::where('id', $request->id)->delete();
-        Image::where('record_type', 'Banner')->where('record_id', $request->id)->delete();
+        $image = Image::where('record_type', 'Banner')->where('record_id', $request->id)->first();
+        $path = 'public/uploads/banners/' . $image->picture;
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        $image->delete();
         return redirect(route('backend.dashboard.banner.index'));
     }
    

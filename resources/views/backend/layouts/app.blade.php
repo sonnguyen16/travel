@@ -2,21 +2,13 @@
 <html lang="{{ app()->getLocale() }}">
 @include('backend.layouts.head')
 <body class="hold-transition skin-blue fixed sidebar-mini">
-
     <div id="wrapper">
-        <!-- Navigation -->
-        
-            
-            @include('backend.layouts.header')
-
-            @include('backend.layouts.sidebar')
-            
-       
-         <!-- Page Content -->
-         <div class="content-wrapper">
+        @include('backend.layouts.header')
+        @include('backend.layouts.sidebar')
+        <div class="content-wrapper">
             @if ($errors->any())
-                <div class="alert alert-danger" role="alert">
-                    <strong>Oops! There were some problems with your input.</strong>
+                <div class="alert alert-danger" role="alert" style="min-width: 270px;">
+                    <button type="button" class="close" data-dismiss="alert" style="color: white; opacity: .8;">&times;</button>
                     <ul>
                         @foreach ($errors->all() as $message)
                             <li>{{ $message }}</li>
@@ -24,13 +16,10 @@
                     </ul>
                 </div>
             @endif
-            @yield('content')
-           
-            <!-- /.container-fluid -->
+            @yield('content')  
+            @include('backend.layouts.modal')
         </div>
-        <!-- /#page-wrapper -->
     </div>
-    <!-- /#wrapper -->
     @include('backend.layouts.footer')
 </body>
 </html>

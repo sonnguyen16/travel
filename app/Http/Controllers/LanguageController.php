@@ -42,7 +42,7 @@ class LanguageController extends Controller
             ]
         );
 
-        return redirect(route('backend.dashboard.language.index'))->with('success', 'Lưu thành công!');
+        return redirect(route('backend.dashboard.language.index'));
     }
 
 
@@ -53,9 +53,10 @@ class LanguageController extends Controller
     }
 
     public function delete(Request $request){
-        $id = $request->input('id');
-        $language = Language::where('id', $id);
-        $language->delete();
+        if($request->id == 1 || $request->id == 2 || $request->id == 3){
+            return redirect()->back()->withErrors("Không thể xóa mục này")->withInput();
+        }
+        Language::where('id', $request->id)->delete();
         return redirect(route('backend.dashboard.language.index'));
     }
    

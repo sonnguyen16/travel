@@ -1,5 +1,5 @@
 <div id="languageModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="languageModalLabel" aria-modal="true">
-    <div class="modal-dialog" style="max-width: 500px;">
+    <div class="modal-dialog" id="modal-dialog-delete">
         <div class="modal-content">
             <form action="{{ route('backend.dashboard.language.store') }}" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
@@ -39,10 +39,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Xác nhận xóa</h4>
+                <h4 class="modal-title"><strong><i class="fa fa-exclamation-triangle" style="color: red;"></i> Xác nhận xóa</strong></h4>
             </div>
             <div class="modal-body">
-                <p>Bạn có thật sự muốn xóa language này?</p>
+                <p>Bạn có thật sự muốn xóa ngôn ngữ này?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Không</button>

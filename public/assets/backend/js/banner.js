@@ -1,15 +1,10 @@
-$(function () {
-    $('input[type="checkbox"].flat-red').iCheck({
-        checkboxClass: 'icheckbox_flat-green'
-    });
-})
 function alertDelete(id) {
   $('#myModal').data('id', id);
   $('#myModal').modal('toggle');
 }
 $('#myModal button.delete').on('click', function(e) {
   e.preventDefault();
-  window.location.href = "{{ route('backend.dashboard.banner.delete') }}" + "?id=" + $('#myModal').data('id');
+  window.location.href = "banner/delete" + "?id=" + $('#myModal').data('id');
 });
 $('#bannerModal').on('hidden.bs.modal', function() {
     $('#id').val('');

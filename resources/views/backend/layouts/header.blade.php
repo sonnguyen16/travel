@@ -14,11 +14,6 @@
             {{ $title ?? 'Tiêu đề' }}
           </h4>
         </a>
-        {{-- <div class="form-group form-group-sm" style="margin-top: 15px; margin-right: 10px;">
-          <select name="lang" id="lang">
-            <option value="1">VI</option>
-          </select>
-        </div> --}}
       </div>
 	</nav>
   </header>

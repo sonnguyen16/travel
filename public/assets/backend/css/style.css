@@ -1,0 +1,81 @@
+.alert {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    display: none; 
+    opacity: 0; 
+    transition: opacity 0.5s ease-in-out; 
+    padding-left: 0;
+
+}
+.alert.show {
+    display: block; 
+    opacity: 1;
+}
+
+.alert ul li {
+    margin-bottom: 5px;
+}
+.td-d {
+    max-width: 150px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.table th, td{
+    text-align: center;
+    vertical-align: middle !important;
+}
+.table th {
+    background-color: #3c8dbc ; 
+    color: white;
+}
+
+.sidebar-menu .active > a {
+    background-color: #3c8dbc !important;
+    color: #ffffff !important;
+    font-weight: bold;
+}
+.picture{
+    height: 35px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #f3f3f3
+}
+.form-group > input, select{
+    height: 30px !important;
+    border-radius: 3px !important;
+    padding: 5px 10px !important;
+}
+.cke_dialog_ui_input_file{
+    height: 150px !important;
+}
+
+.cke_dialog_ui_fileButton.cke_dialog_ui_button.cke_disabled{
+    margin-top: 150px !important;
+}
+#lang_code{
+    color: red;
+}
+.modal-content{
+    border-radius: 10px !important;
+}
+@media (min-width: 768px) {
+    #modal-dialog-delete {
+       max-width: 400px !important;
+    }
+  }
+@media (max-width: 768px) {
+    .td-b {
+        max-width: 150px;
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis;
+        cursor: pointer;
+    }
+}

@@ -30,9 +30,9 @@
                                     <button type="button" class="btn btn-success btn-sm" onclick="alertLang({{ $page->id }})">
                                         <i class="fa fa-edit"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="alertDelete({{ $page->id }})">
+                                    {{-- <button type="button" class="btn btn-danger btn-sm" onclick="alertDelete({{ $page->id }})">
                                         <i class="fa fa-trash"></i>
-                                    </button>
+                                    </button> --}}
                                 </td>
                             </tr>
                             @empty

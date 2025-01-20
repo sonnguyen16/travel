@@ -1,13 +1,3 @@
-
-$(function () {
-    $('input[type="checkbox"].flat-red').iCheck({
-        checkboxClass: 'icheckbox_flat-green'
-    });
-})
-function clearSearch() {
-    document.getElementById('search').value = '';
-    document.getElementById('search-form').submit();
-}
 function alertDelete(id, blog_id) {
    $('#myModal').data('id', id);
    $('#myModal').data('blog_id', blog_id);
