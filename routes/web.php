@@ -19,12 +19,11 @@ use App\Http\Controllers\UserBlogController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserServiceController;
 use App\Http\Controllers\UserPromoController;
-
+use App\Http\Controllers\UserBookingController;
 
 Route::get('/admin', [LoginController::class, 'login'])->name('backend.dashboard.login');
 Route::post('/check', [LoginController::class, 'check'])->name('backend.dashboard.login.check');
 Route::get('/logout', [LoginController::class, 'logout'])->name('backend.dashboard.login.logout');
-
 
 Route::prefix('/admin')->group(function () {
     Route::post('ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
@@ -98,15 +97,10 @@ Route::get('/dich-vu/{title?}', [UserServiceController::class, 'show'])->name('s
 Route::get('/uu-dai', [UserPromoController::class, 'index'])->name('promo');
 Route::get('/uu-dai/{title?}', [UserPromoController::class, 'show'])->name('promo.show');
 
-Route::get('/dat-ve/buoc1', function () {
-    return Inertia::render('Booking/Step1');
-});
-Route::get('/dat-ve/buoc2', function () {
-    return Inertia::render('Booking/Step2');
-});
-Route::get('/dat-ve/buoc3', function () {
-    return Inertia::render('Booking/Step3');
-});
+Route::get('/dat-ve/buoc1', [UserBookingController::class, 'index'])->name('booking');
+Route::get('/dat-ve/buoc2', [UserBookingController::class, 'cart'])->name('cart');
+Route::get('/dat-ve/buoc3', [UserBookingController::class, 'pay'])->name('pay');
+Route::post('/dat-ve/buoc4', [UserBookingController::class, 'confirm'])->name('confirm');
 
 Route::get('/{slug?}', [UserBlogController::class, 'index'])->name('blog');
 Route::get('/{slug?}/{title?}', [UserBlogController::class, 'show'])->name('blog.show');

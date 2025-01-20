@@ -34,61 +34,90 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row pb-[50px]">
         <div class="col-lg-8">
           <div
+            v-for="c in cart"
             class="w-full mx-auto bg-white px-[20px] py-[30px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
           >
             <div class="flex justify-between">
               <div>
-                <h2 class="font-bold">Xe trượt thác 3 - khứ hồi</h2>
+                <h2 class="font-bold">
+                  {{
+                    products
+                      .find((p) => p.id === c.product_fk)
+                      .translations.find((t) => t.language.code === locale.toUpperCase())?.name ||
+                    products.find((p) => p.id === c.id).translations[0].name
+                  }}
+                </h2>
                 <div class="flex items-center">
                   <i class="far fa-calendar-alt text-green-600 text-2xl"></i>
-                  <p class="mb-0 ms-2">Thứ 7, 10/10/2021</p>
+                  <p class="mb-0 ms-2">
+                    {{ new Date(c.date).toLocaleDateString() }}
+                  </p>
                 </div>
               </div>
               <div>
-                <p class="text-center mb-0 text-[30px]">0Đ</p>
-                <p class="mb-0">0 người lớn - 0 trẻ em</p>
+                <p class="text-center mb-0 text-[30px]">
+                  {{
+                    products
+                      .find((p) => p.id === c.product_fk)
+                      .price.toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                  }}
+                  đ
+                </p>
               </div>
             </div>
             <div class="flex justify-end mt-4">
               <div>
-                <div class="flex items-center gap-5">
-                  <label><i class="fas fa-user-friends text-green-600 text-2xl"></i> Người lớn</label>
+                <div class="grid md:grid-cols-5 grid-cols-3 gap-5">
                   <div class="flex items-center">
-                    <button class="border-none">
-                      <i class="fas fa-minus text-green-600"></i>
-                    </button>
-                    <input type="text" class="border-none w-[40px]" value="0" />
-                    <button class="border-none">
-                      <i class="fas fa-plus text-green-600"></i>
-                    </button>
+                    <label class="">{{ $t('children') }}</label>
                   </div>
-                  <div class="flex items-center gap-5">
-                    <p class="mb-0 text-gray-500 lg:inline hidden">250.000đ/1 khách</p>
-                    <p class="mb-0">250.000đ</p>
+                  <div class="flex items-center justify-center md:col-span-2 col-span-1">
+                    <input type="text" class="border-none w-[40px]" :value="c.num_child" />
+                  </div>
+                  <div class="flex items-center justify-center gap-5 md:col-span-2 col-span-1">
+                    <p class="mb-0 text-gray-500 md:inline hidden">
+                      {{ c.price_child.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{
+                        $t('price_per_person')
+                      }}
+                    </p>
+                    <p class="mb-0">
+                      {{ (c.price_child * c.num_child).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') }}đ
+                    </p>
                   </div>
                 </div>
-                <div class="flex items-center gap-5">
-                  <label><i class="fas fa-user-friends text-green-600 text-2xl"></i> Người lớn</label>
+                <div class="grid md:grid-cols-5 grid-cols-3 gap-5">
                   <div class="flex items-center">
-                    <button class="border-none">
-                      <i class="fas fa-minus text-green-600"></i>
-                    </button>
-                    <input type="text" class="border-none w-[40px]" value="0" />
-                    <button class="border-none">
-                      <i class="fas fa-plus text-green-600"></i>
-                    </button>
+                    <label class="">{{ $t('adults') }}</label>
                   </div>
-                  <div class="flex items-center gap-5">
-                    <p class="mb-0 text-gray-500 lg:inline hidden">250.000đ/1 khách</p>
-                    <p class="mb-0">250.000đ</p>
+                  <div class="flex items-center justify-center md:col-span-2 col-span-1">
+                    <input type="text" class="border-none w-[40px]" v-model="c.num_adult" />
+                  </div>
+                  <div class="flex items-center justify-center gap-5 md:col-span-2 col-span-1">
+                    <p class="mb-0 text-gray-500 md:inline hidden">
+                      {{ c.price_adult.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{
+                        $t('price_per_person')
+                      }}
+                    </p>
+                    <p class="mb-0">
+                      {{ (c.price_adult * c.num_adult).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') }}đ
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <button
+            v-if="cart.length"
+            @click="router.visit('/dat-ve/buoc3')"
+            class="w-full bg-green-600 text-white text-center py-3 mt-4 rounded-xl"
+          >
+            {{ $t('continue') }}
+          </button>
+          <h4 v-else class="text-center mt-5">{{ $t('no_ticket') }}</h4>
         </div>
         <div class="col-lg-4">
           <div
@@ -96,11 +125,32 @@
           >
             <h3>Chi tiết thanh toán</h3>
             <hr />
-            <h3>Xe trượt thác 3 - khứ hồi</h3>
-            <div class="justify-between flex mt-3">
-              <p class="mb-3">2 người lớn</p>
-              <p class="mb-3">500.000đ</p>
-            </div>
+            <template v-for="c in cart">
+              <h5 class="mt-3">
+                {{
+                  products
+                    .find((p) => p.id === c.product_fk)
+                    .translations.find((t) => t.language.code === locale.toUpperCase())?.name ||
+                  products.find((p) => p.id === c.id).translations[0].name
+                }}
+              </h5>
+              <div class="justify-between flex">
+                <p class="mb-1">
+                  {{ c.num_child + ' ' + $t('children') }}
+                </p>
+                <p class="mb-1">
+                  {{ (c.price_child * c.num_child).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}
+                </p>
+              </div>
+              <div class="justify-between flex">
+                <p class="">
+                  {{ c.num_adult + ' ' + $t('adults') }}
+                </p>
+                <p class="">
+                  {{ (c.price_adult * c.num_adult).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}
+                </p>
+              </div>
+            </template>
             <hr />
             <p class="mb-0">Mã khuyễn mãi</p>
             <hr />
@@ -110,134 +160,16 @@
             </div>
             <div class="flex justify-between">
               <p class="mb-0">Tổng cộng</p>
-              <p class="mb-0">500.000đ</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row my-4">
-        <h1>Dịch vụ khác</h1>
-        <div class="col-lg-4 mb-4">
-          <div
-            @click.prevent="router.visit('/promo/detail')"
-            class="rounded-xl shadow-xl bg-white position-relative h-100"
-          >
-            <img src="@/Assets/images/promo1.jpg" alt="home1" class="w-full rounded-xl object-cover h-[500px]" />
-            <div class="p-3 position-absolute bottom-0 rounded-xl left-0 right-0 overlay1 h-[200px]">
-              <h3 class="mt-5">Dịch vụ 1</h3>
-              <div class="flex items-center justify-between">
-                <div>
-                  <i class="fas fa-user-friends text-green-600 text-2xl"></i>
-                  Người lớn
-                </div>
-                <div>
-                  <button class="border-none">
-                    <i class="fas fa-minus text-green-600"></i>
-                  </button>
-                  <input type="text" class="border-none w-[30px]" value="1" />
-                  <button class="border-none">
-                    <i class="fas fa-plus text-green-600"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="flex items-center justify-between">
-                <div>
-                  <i class="fas fa-user-friends text-green-600 text-2xl"></i>
-                  Trẻ em
-                </div>
-                <div>
-                  <button class="border-none">
-                    <i class="fas fa-minus text-green-600"></i>
-                  </button>
-                  <input type="text" class="border-none w-[30px]" value="1" />
-                  <button class="border-none">
-                    <i class="fas fa-plus text-green-600"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-          <div
-            @click.prevent="router.visit('/promo/detail')"
-            class="rounded-xl shadow-xl bg-white position-relative h-100"
-          >
-            <img src="@/Assets/images/promo2.jpg" alt="home1" class="w-full rounded-xl object-cover h-[500px]" />
-            <div class="p-3 position-absolute bottom-0 rounded-xl left-0 right-0 overlay1 h-[200px]">
-              <h3 class="mt-5">Dịch vụ 2</h3>
-              <div class="flex items-center justify-between">
-                <div>
-                  <i class="fas fa-user-friends text-green-600 text-2xl"></i>
-                  Người lớn
-                </div>
-                <div>
-                  <button class="border-none">
-                    <i class="fas fa-minus text-green-600"></i>
-                  </button>
-                  <input type="text" class="border-none w-[30px]" value="1" />
-                  <button class="border-none">
-                    <i class="fas fa-plus text-green-600"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="flex items-center justify-between">
-                <div>
-                  <i class="fas fa-user-friends text-green-600 text-2xl"></i>
-                  Trẻ em
-                </div>
-                <div>
-                  <button class="border-none">
-                    <i class="fas fa-minus text-green-600"></i>
-                  </button>
-                  <input type="text" class="border-none w-[30px]" value="1" />
-                  <button class="border-none">
-                    <i class="fas fa-plus text-green-600"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 mb-4">
-          <div
-            @click.prevent="router.visit('/promo/detail')"
-            class="rounded-xl shadow-xl bg-white position-relative h-100"
-          >
-            <img src="@/Assets/images/promo3.jpg" alt="home1" class="w-full rounded-xl object-cover h-[500px]" />
-            <div class="p-3 position-absolute bottom-0 rounded-xl left-0 right-0 overlay1 h-[200px]">
-              <h3 class="mt-5">Dịch vụ 3</h3>
-              <div class="flex items-center justify-between">
-                <div>
-                  <i class="fas fa-user-friends text-green-600 text-2xl"></i>
-                  Người lớn
-                </div>
-                <div>
-                  <button class="border-none">
-                    <i class="fas fa-minus text-green-600"></i>
-                  </button>
-                  <input type="text" class="border-none w-[30px]" value="1" />
-                  <button class="border-none">
-                    <i class="fas fa-plus text-green-600"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="flex items-center justify-between">
-                <div>
-                  <i class="fas fa-user-friends text-green-600 text-2xl"></i>
-                  Trẻ em
-                </div>
-                <div>
-                  <button class="border-none">
-                    <i class="fas fa-minus text-green-600"></i>
-                  </button>
-                  <input type="text" class="border-none w-[30px]" value="1" />
-                  <button class="border-none">
-                    <i class="fas fa-plus text-green-600"></i>
-                  </button>
-                </div>
-              </div>
+              <p class="mb-0">
+                {{
+                  cart
+                    .map((c) => c.price_child * c.num_child + c.price_adult * c.num_adult)
+                    .reduce((a, b) => a + b, 0)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                }}
+                đ
+              </p>
             </div>
           </div>
         </div>
@@ -248,6 +180,15 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { router } from '@inertiajs/vue3'
+import { defineProps } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const props = defineProps({
+  products: Object
+})
+
+const { t, locale } = useI18n()
+const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
 </script>
 <style scoped>
 .overlay1 {

@@ -96,8 +96,13 @@
             <li @click="scrollToTopAndNavigate('/uu-dai')">
               <a style="color: white">{{ $t('promo') }}</a>
             </li>
-            <li @click="scrollToTopAndNavigate('/booking/step1')">
+            <li @click="scrollToTopAndNavigate('/dat-ve/buoc1')">
               <a style="color: white">{{ $t('booking') }}</a>
+            </li>
+            <li @click="scrollToTopAndNavigate('/dat-ve/buoc2')">
+              <a style="color: white">
+                <i class="fas fa-shopping-cart text-white"></i>
+              </a>
             </li>
           </ul>
         </div>
@@ -115,10 +120,10 @@
             <li @click="scrollToTopAndNavigate('/uu-dai')" :class="[checkRoute('/uu-dai')]">
               <Link href="">{{ $t('promo') }}</Link>
             </li>
-            <li @click="scrollToTopAndNavigate('/booking/step1')" :class="[checkRoute('/booking/step1')]">
+            <li @click="scrollToTopAndNavigate('/dat-ve/buoc1')" :class="[checkRoute('/dat-ve/buoc1')]">
               <Link href="">{{ $t('booking') }}</Link>
             </li>
-            <li>
+            <li @click="scrollToTopAndNavigate('/dat-ve/buoc2')" :class="[checkRoute('/dat-ve/buoc2')]">
               <a id="cart" href="#">
                 <i class="fas fa-shopping-cart text-white"></i>
               </a>

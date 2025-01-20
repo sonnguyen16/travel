@@ -94,5 +94,9 @@
   "section_activities": "Activities",
   "section_accommodation": "Accommodations",
   "section_restaurants": "Restaurants",
-  "section_others": "Others"
+  "section_others": "Others",
+  "success": "Success",
+  "add_to_cart_success": "Successfully added to cart",
+  "continue": "Continue",
+  "no_ticket": "No tickets available"
 }

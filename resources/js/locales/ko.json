@@ -94,5 +94,9 @@
   "section_activities": "활동",
   "section_accommodation": "숙박",
   "section_restaurants": "레스토랑",
-  "section_others": "기타"
+  "section_others": "기타",
+  "success": "성공",
+  "add_to_cart_success": "장바구니에 성공적으로 추가되었습니다",
+  "continue": "계속",
+  "no_ticket": "티켓 없음"
 }

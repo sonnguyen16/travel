@@ -7,7 +7,7 @@
             <div class="col-lg-5">
               <div class="position-relative w-full md:h-[260px] h-[250px]">
                 <img
-                  :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
+                  :src="BLOG_MEDIA_ENDPOINT + blog?.image_fe?.picture"
                   alt="home1"
                   style="box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3)"
                   class="w-full rounded-xl object-cover position-absolute lg:top-[-40px] max-h-[260px]"
@@ -16,9 +16,9 @@
             </div>
             <div class="col-lg-7 lg:pe-5 lg:pt-3">
               <h4>
-                {{ blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name }}
+                {{ blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.name }}
               </h4>
-              <div v-html="blog.translations.find((t) => t.language.code == locale.toUpperCase())?.content"></div>
+              <div v-html="blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.content"></div>
             </div>
           </div>
         </div>
@@ -28,7 +28,7 @@
         <h2 class="text-center mb-5 text-2xl font-bold">Hoạt động nổi bật</h2>
         <div class="space-y-0 divide-y divide-gray-300">
           <!-- Collapse Item 1 -->
-          <div v-for="(product, index) in blog.activities" class="border-none">
+          <div v-for="(product, index) in blog?.activities" class="border-none">
             <button
               :class="[index == 0 ? 'rounded-t-xl' : '', index == blog.activities.length - 1 ? 'rounded-b-xl' : '']"
               class="w-full flex justify-between items-center px-4 py-3 border-green-600 border bg-gray-100 hover:bg-gray-200 font-semibold"
@@ -61,7 +61,7 @@
         <div class="swiper swiper-2">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
-            <template v-for="blog_related in blog.menu.blogs">
+            <template v-for="blog_related in blog?.menu?.blogs">
               <div
                 v-if="blog_related.id != blog.id"
                 @click.prevent="router.visit(`/${blog.menu.slug}/${blog_related.slug}`)"

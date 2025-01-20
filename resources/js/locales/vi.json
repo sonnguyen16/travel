@@ -94,5 +94,9 @@
   "section_activities": "Hoạt động",
   "section_accommodation": "Lưu trú",
   "section_restaurants": "Nhà hàng",
-  "section_others": "Khác"
+  "section_others": "Khác",
+  "success": "Thành công",
+  "add_to_cart_success": "Đã thêm vào giỏ hàng",
+  "continue": "Tiếp tục",
+  "no_ticket": "Không có vé"
 }
