@@ -1,58 +1,47 @@
 <template>
   <MainLayout>
     <div class="container">
-      <div id="service-1" class="md:pt-[150px] pt-[100px]">
+      <div v-if="blogs.length > 0" id="service-1" class="md:pt-[150px] pt-[100px]">
         <div class="swiper swiper-1">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
-            <div class="swiper-slide">
-              <div @click="router.visit('/services/detail')" class="position-relative h-100">
-                <div class="img-container h-100">
-                  <img src="@/Assets/images/service1.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
+            <div v-for="blog in blogs" class="swiper-slide">
+              <div @click.prevent="router.visit(`/dich-vu/${blog.slug}`)" class="rounded-xl shadow-xl bg-white">
+                <div
+                  class="img-container h-[350px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
+                  <img
+                    :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
+                    alt="home1"
+                    class="w-full rounded-tr-xl rounded-tl-xl object-cover"
+                  />
                 </div>
-                <div class="position-absolute bottom-0 left-0 right-0 overlay pt-10 ps-3 pb-3 rounded-xl">
-                  <h2 class="text-white">Khu du lịch Datanla</h2>
-                </div>
-              </div>
-            </div>
-            <!-- Slide 2 -->
-            <div class="swiper-slide">
-              <div @click="router.visit('/services/detail')" class="position-relative h-100">
-                <div class="img-container h-100">
-                  <img src="@/Assets/images/service2.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
-                </div>
-                <div class="position-absolute bottom-0 left-0 right-0 overlay ps-3 pb-3 pt-10 rounded-xl">
-                  <h2 class="text-white">Khu du lịch Langbiang</h2>
-                </div>
-              </div>
-            </div>
-            <!-- Slide 3 -->
-            <div class="swiper-slide">
-              <div @click="router.visit('/services/detail')" class="position-relative h-100">
-                <div class="img-container h-100">
-                  <img src="@/Assets/images/service3.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
-                </div>
-                <div class="position-absolute bottom-0 left-0 right-0 overlay ps-3 pb-3 pt-10 rounded-xl">
-                  <h2 class="text-white">Cáp treo Đà Lạt</h2>
-                </div>
-              </div>
-            </div>
-            <!-- Slide 2 -->
-            <div class="swiper-slide">
-              <div @click="router.visit('/services/detail')" class="position-relative h-100">
-                <div class="img-container h-100">
-                  <img src="@/Assets/images/service2.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
-                </div>
-                <div class="position-absolute bottom-0 left-0 right-0 overlay ps-3 pb-3 pt-10 rounded-xl">
-                  <h2 class="text-white">Khu du lịch Langbiang</h2>
+                <div class="p-3">
+                  <h3>
+                    {{
+                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                      blog.translations[0].name
+                    }}
+                  </h3>
+                  <div
+                    class="line-clamp-6"
+                    v-html="
+                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+                      blog.translations[0].description
+                    "
+                  ></div>
                 </div>
               </div>
             </div>
           </div>
           <!-- Navigation -->
           <div class="swiper-button-next swiper-next-1"></div>
-          <div class="swiper-button-prev swiper-prev-2"></div>
+          <div class="swiper-button-prev swiper-prev-1"></div>
         </div>
+      </div>
+      <div v-else>
+        <h5 class="text-center mb-5">{{ $t('no_data') }}</h5>
       </div>
 
       <div class="row lg:pt-[100px] pt-[50px]">
@@ -199,6 +188,14 @@ import { router } from '@inertiajs/vue3'
 import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
+import { useI18n } from 'vue-i18n'
+import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
+
+const props = defineProps({
+  blogs: Object,
+  menu: Object
+})
+const { t, locale } = useI18n()
 
 onMounted(async () => {
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
@@ -223,6 +220,14 @@ onMounted(async () => {
         },
         480: {
           slidesPerView: 1
+        }
+      },
+      on: {
+        init: function () {
+          updateNavigationButtons(this)
+        },
+        resize: function () {
+          updateNavigationButtons(this)
         }
       }
     })
@@ -283,6 +288,21 @@ onMounted(async () => {
     })
   }
 })
+
+function updateNavigationButtons(swiperInstance) {
+  const { slides, params } = swiperInstance
+  const slidesPerView = params.slidesPerView
+  const totalSlides = slides.length
+
+  // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
+  if (totalSlides <= slidesPerView) {
+    document.getElementsByClassName('swiper-prev-1')[0].style.display = 'none'
+    document.getElementsByClassName('swiper-next-1')[0].style.display = 'none'
+  } else {
+    document.getElementsByClassName('swiper-prev-1')[0].style.display = ''
+    document.getElementsByClassName('swiper-next-1')[0].style.display = ''
+  }
+}
 </script>
 <style scoped>
 .overlay {

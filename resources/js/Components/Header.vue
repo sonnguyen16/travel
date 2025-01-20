@@ -87,13 +87,13 @@
             <li @click="scrollToTopAndNavigate('/')">
               <a style="color: white">{{ $t('home') }}</a>
             </li>
-            <li @click="scrollToTopAndNavigate('/about')">
+            <li @click="scrollToTopAndNavigate('/ve-chung-toi')">
               <a style="color: white">{{ $t('about') }}</a>
             </li>
-            <li @click="scrollToTopAndNavigate('/services')">
+            <li @click="scrollToTopAndNavigate('/dich-vu')">
               <a style="color: white">{{ $t('services') }}</a>
             </li>
-            <li @click="scrollToTopAndNavigate('/promo')">
+            <li @click="scrollToTopAndNavigate('/uu-dai')">
               <a style="color: white">{{ $t('promo') }}</a>
             </li>
             <li @click="scrollToTopAndNavigate('/booking/step1')">
@@ -106,13 +106,13 @@
             <li @click="scrollToTopAndNavigate('/')" :class="[checkRoute('/')]">
               <Link href="">{{ $t('home') }}</Link>
             </li>
-            <li @click="scrollToTopAndNavigate('/about')" :class="[checkRoute('/about')]">
+            <li @click="scrollToTopAndNavigate('/ve-chung-toi')" :class="[checkRoute('/ve-chung-toi')]">
               <Link href="">{{ $t('about') }}</Link>
             </li>
-            <li @click="scrollToTopAndNavigate('/services')" :class="[checkRoute('/services')]">
+            <li @click="scrollToTopAndNavigate('/dich-vu')" :class="[checkRoute('/dich-vu')]">
               <Link href="">{{ $t('services') }}</Link>
             </li>
-            <li @click="scrollToTopAndNavigate('/promo')" :class="[checkRoute('/promo')]">
+            <li @click="scrollToTopAndNavigate('/uu-dai')" :class="[checkRoute('/uu-dai')]">
               <Link href="">{{ $t('promo') }}</Link>
             </li>
             <li @click="scrollToTopAndNavigate('/booking/step1')" :class="[checkRoute('/booking/step1')]">
