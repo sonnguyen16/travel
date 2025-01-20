@@ -10,15 +10,15 @@
                   :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
                   alt="home1"
                   style="box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3)"
-                  class="w-full rounded-xl object-cover position-absolute lg:top-[-40px]"
+                  class="w-full rounded-xl object-cover position-absolute lg:top-[-40px] max-h-[260px]"
                 />
               </div>
             </div>
             <div class="col-lg-7 lg:pe-5 lg:pt-3">
               <h4>
-                {{ blog.translations.find((t) => t.language.code == locale.toUpperCase()).name }}
+                {{ blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name }}
               </h4>
-              <div v-html="blog.translations.find((t) => t.language.code == locale.toUpperCase()).content"></div>
+              <div v-html="blog.translations.find((t) => t.language.code == locale.toUpperCase())?.content"></div>
             </div>
           </div>
         </div>
@@ -35,7 +35,7 @@
               :data-target="`collapse${index + 1}`"
             >
               <span>
-                {{ product.translations.find((t) => t.language.code == locale.toUpperCase()).name }}
+                {{ product.translations.find((t) => t.language.code == locale.toUpperCase())?.name }}
               </span>
               <svg
                 class="w-5 h-5 transform transition-transform duration-300"
@@ -48,7 +48,7 @@
               </svg>
             </button>
             <div :id="`collapse${index + 1}`" class="hidden p-4 bg-gray-50 overflow-hidden transition-all duration-500">
-              <div v-html="product.translations.find((t) => t.language.code == locale.toUpperCase()).content"></div>
+              <div v-html="product.translations.find((t) => t.language.code == locale.toUpperCase())?.content"></div>
             </div>
           </div>
 
@@ -61,32 +61,37 @@
         <div class="swiper swiper-2">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
-            <div v-for="blog_related in blog.menu.blogs" class="swiper-slide">
+            <template v-for="blog_related in blog.menu.blogs">
               <div
+                v-if="blog_related.id != blog.id"
                 @click.prevent="router.visit(`/${blog.menu.slug}/${blog_related.slug}`)"
-                class="rounded-xl shadow-xl bg-white"
+                class="swiper-slide"
               >
-                <div
-                  class="img-container h-[400px]"
-                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
-                >
-                  <img
-                    :src="BLOG_MEDIA_ENDPOINT + blog_related.image_fe?.picture"
-                    alt="home1"
-                    class="w-full rounded-tr-xl rounded-tl-xl object-cover"
-                  />
-                </div>
-                <div class="p-3">
-                  <h3 class="text-xl font-semibold">
-                    {{ blog_related.translations.find((t) => t.language.code == locale.toUpperCase()).name }}
-                  </h3>
+                <div class="rounded-xl shadow-xl bg-white">
                   <div
-                    class="line-clamp-4"
-                    v-html="blog_related.translations.find((t) => t.language.code == locale.toUpperCase()).description"
-                  ></div>
+                    class="img-container h-[400px]"
+                    style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                  >
+                    <img
+                      :src="BLOG_MEDIA_ENDPOINT + blog_related.image_fe?.picture"
+                      alt="home1"
+                      class="w-full rounded-tr-xl rounded-tl-xl object-cover"
+                    />
+                  </div>
+                  <div class="p-3">
+                    <h3 class="text-xl font-semibold">
+                      {{ blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.name }}
+                    </h3>
+                    <div
+                      class="line-clamp-4"
+                      v-html="
+                        blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.description
+                      "
+                    ></div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </template>
           </div>
           <!-- Navigation -->
           <div class="swiper-button-next swiper-next-2"></div>
@@ -154,9 +159,31 @@ onMounted(() => {
       480: {
         slidesPerView: 1
       }
+    },
+    on: {
+      init: function () {
+        updateNavigationButtons(this)
+      },
+      resize: function () {
+        updateNavigationButtons(this)
+      }
     }
   })
 })
+function updateNavigationButtons(swiperInstance) {
+  const { slides, params } = swiperInstance
+  const slidesPerView = params.slidesPerView
+  const totalSlides = slides.length
+
+  // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
+  if (totalSlides <= slidesPerView) {
+    document.getElementsByClassName('swiper-prev-2')[0].style.display = 'none'
+    document.getElementsByClassName('swiper-next-2')[0].style.display = 'none'
+  } else {
+    document.getElementsByClassName('swiper-prev-2')[0].style.display = ''
+    document.getElementsByClassName('swiper-next-2')[0].style.display = ''
+  }
+}
 </script>
 <style scoped>
 img {

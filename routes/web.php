@@ -17,6 +17,9 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\UserHomeController;
 use App\Http\Controllers\UserBlogController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserServiceController;
+use App\Http\Controllers\UserPromoController;
+
 
 Route::get('/admin', [LoginController::class, 'login'])->name('backend.dashboard.login');
 Route::post('/check', [LoginController::class, 'check'])->name('backend.dashboard.login.check');
@@ -85,38 +88,30 @@ Route::prefix('/admin')->group(function () {
 });
 
 Route::get('/', [UserHomeController::class, 'index'])->name('home');
-
-Route::get('/about', function () {
+Route::get('/ve-chung-toi', function () {
     return Inertia::render('About');
 });
 
-Route::get('/services', function () {
-    return Inertia::render('Service');
-});
+Route::get('/dich-vu', [UserServiceController::class, 'index'])->name('service');
+Route::get('/dich-vu/{title?}', [UserServiceController::class, 'show'])->name('service.show');
 
-Route::get('/services/detail', function () {
-    return Inertia::render('ServiceDetail');
-});
+Route::get('/uu-dai', [UserPromoController::class, 'index'])->name('promo');
+Route::get('/uu-dai/{title?}', [UserPromoController::class, 'show'])->name('promo.show');
 
-Route::get('/promo', function () {
-    return Inertia::render('Promo');
+Route::get('/dat-ve/buoc1', function () {
+    return Inertia::render('Booking/Step1');
+});
+Route::get('/dat-ve/buoc2', function () {
+    return Inertia::render('Booking/Step2');
+});
+Route::get('/dat-ve/buoc3', function () {
+    return Inertia::render('Booking/Step3');
 });
 
 Route::get('/{slug?}', [UserBlogController::class, 'index'])->name('blog');
 Route::get('/{slug?}/{title?}', [UserBlogController::class, 'show'])->name('blog.show');
 
-Route::get('/promo/detail', function () {
-    return Inertia::render('PromoDetail');
-});
 
-Route::get('/booking/step1', function () {
-    return Inertia::render('Booking/Step1');
-});
 
-Route::get('/booking/step2', function () {
-    return Inertia::render('Booking/Step2');
-});
 
-Route::get('/booking/step3', function () {
-    return Inertia::render('Booking/Step3');
-});
+

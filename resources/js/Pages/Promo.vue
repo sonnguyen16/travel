@@ -5,64 +5,30 @@
         <div class="swiper swiper-1">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
-            <div class="swiper-slide slide-1">
-              <div
-                @click.prevent="router.visit('/promo/detail')"
-                class="rounded-xl shadow-xl bg-white position-relative h-100"
-              >
-                <div class="img-container h-100">
-                  <img src="@/Assets/images/promo1.jpg" alt="home1" class="w-full rounded-xl object-cover h-[500px]" />
-                </div>
-                <div class="p-3 position-absolute bottom-0 rounded-xl left-0 right-0 overlay1 h-[150px]">
-                  <h3 class="text-white mt-5">HRC KHUYẾN MÃI TƯNG BỪNG</h3>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="swiper-slide slide-1">
-              <div
-                @click.prevent="router.visit('/promo/detail')"
-                class="rounded-xl shadow-xl bg-white position-relative h-100"
-              >
-                <div class="img-container h-100">
-                  <img src="@/Assets/images/promo2.jpg" alt="home1" class="w-full rounded-xl object-cover h-[500px]" />
-                </div>
-                <div class="p-3 position-absolute bottom-0 rounded-xl left-0 right-0 overlay1 h-[150px]">
-                  <h3 class="text-white mt-5">HRC KHUYẾN MÃI TƯNG BỪNG</h3>
+            <template v-for="blog in blogs">
+              <div class="swiper-slide slide-1">
+                <div
+                  @click.prevent="router.visit(`/uu-dai/${blog.slug}`)"
+                  class="rounded-xl shadow-xl bg-white position-relative h-100"
+                >
+                  <div class="img-container h-100">
+                    <img
+                      :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
+                      alt="home1"
+                      class="w-full rounded-xl object-cover h-[500px]"
+                    />
+                  </div>
+                  <div class="p-3 position-absolute bottom-0 rounded-xl left-0 right-0 overlay1 h-[150px]">
+                    <h3 class="text-white mt-5">
+                      {{
+                        blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                        blog.translations[0].name
+                      }}
+                    </h3>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="swiper-slide slide-1">
-              <div
-                @click.prevent="router.visit('/promo/detail')"
-                class="rounded-xl shadow-xl bg-white position-relative h-100"
-              >
-                <div class="img-container h-100">
-                  <img src="@/Assets/images/promo3.jpg" alt="home1" class="w-full rounded-xl object-cover h-[500px]" />
-                </div>
-                <div class="p-3 position-absolute bottom-0 rounded-xl left-0 right-0 overlay1 h-[150px]">
-                  <h3 class="text-white mt-5">HRC KHUYẾN MÃI TƯNG BỪNG</h3>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="swiper-slide slide-1">
-              <div
-                @click.prevent="router.visit('/promo/detail')"
-                class="rounded-xl shadow-xl bg-white position-relative h-100"
-              >
-                <div class="img-container h-100">
-                  <img src="@/Assets/images/promo2.jpg" alt="home1" class="w-full rounded-xl object-cover h-[500px]" />
-                </div>
-                <div class="p-3 position-absolute bottom-0 rounded-xl left-0 right-0 overlay1 h-[150px]">
-                  <h3 class="text-white mt-5">HRC KHUYẾN MÃI TƯNG BỪNG</h3>
-                </div>
-              </div>
-            </div>
+            </template>
           </div>
 
           <!-- Navigation -->
@@ -82,113 +48,41 @@
         <div class="swiper swiper-2" style="height: 350px">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
-            <div class="swiper-slide">
-              <div @click.prevent="router.visit('/promo/detail')" class="rounded-xl shadow-xl bg-white">
-                <div
-                  class="img-container h-[200px]"
-                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
-                >
-                  <img
-                    src="@/Assets/images/promo5.jpg"
-                    alt="home1"
-                    class="w-full rounded-tr-xl rounded-tl-xl object-cover h-[200px]"
-                  />
-                </div>
-                <div class="p-3 grid grid-cols-3">
-                  <div class="col-span-2">
-                    <h5>Xe trượt thác - Khứ hồi 1</h5>
-                    <p class="font-normal text-justify">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      4.5
-                    </p>
+            <template v-for="product in products">
+              <div class="swiper-slide">
+                <div @click.prevent="" class="rounded-xl shadow-xl bg-white">
+                  <div
+                    class="img-container h-[200px]"
+                    style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                  >
+                    <img
+                      :src="PRODUCT_MEDIA_ENDPOINT + product.image_fe?.picture"
+                      alt="home1"
+                      class="w-full rounded-tr-xl rounded-tl-xl object-cover h-[200px]"
+                    />
                   </div>
-                  <div class="rounded-xl bg-green-600 p-2 h-[40px] col-span-1">
-                    <p class="text-white text-center">200.000đ</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Slide 2 -->
-            <div class="swiper-slide">
-              <div @click.prevent="router.visit('/promo/detail')" class="rounded-xl shadow-xl bg-white">
-                <div
-                  class="img-container h-[200px]"
-                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
-                >
-                  <img
-                    src="@/Assets/images/promo6.jpg"
-                    alt="home1"
-                    class="w-full rounded-tr-xl rounded-tl-xl object-cover h-[200px]"
-                  />
-                </div>
-                <div class="p-3 grid grid-cols-3">
-                  <div class="col-span-2">
-                    <h5>Xe trượt thác - Khứ hồi 1</h5>
-                    <p class="font-normal text-justify">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      4.5
-                    </p>
-                  </div>
-                  <div class="rounded-xl bg-green-600 p-2 h-[40px] col-span-1">
-                    <p class="text-white text-center">200.000đ</p>
+                  <div class="p-3 grid grid-cols-3">
+                    <div class="col-span-2">
+                      <h5>
+                        {{
+                          product.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                          product.translations[0].name
+                        }}
+                      </h5>
+                      <p class="font-normal text-justify">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        4.5
+                      </p>
+                    </div>
+                    <div class="rounded-xl bg-green-600 p-2 h-[40px] col-span-1">
+                      <p class="text-white text-center">
+                        {{ product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' + 'đ' }}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- Slide 3 -->
-            <div class="swiper-slide">
-              <div @click.prevent="router.visit('/promo/detail')" class="rounded-xl shadow-xl bg-white">
-                <div
-                  class="img-container h-[200px]"
-                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
-                >
-                  <img
-                    src="@/Assets/images/promo7.jpg"
-                    alt="home1"
-                    class="w-full rounded-tr-xl rounded-tl-xl object-cover h-[200px]"
-                  />
-                </div>
-                <div class="p-3 grid grid-cols-3">
-                  <div class="col-span-2">
-                    <h5>Xe trượt thác - Khứ hồi 1</h5>
-                    <p class="font-normal text-justify">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      4.5
-                    </p>
-                  </div>
-                  <div class="rounded-xl bg-green-600 p-2 h-[40px] col-span-1">
-                    <p class="text-white text-center">200.000đ</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div @click.prevent="router.visit('/promo/detail')" class="rounded-xl shadow-xl bg-white">
-                <div
-                  class="img-container h-[200px]"
-                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
-                >
-                  <img
-                    src="@/Assets/images/promo6.jpg"
-                    alt="home1"
-                    class="w-full rounded-tr-xl rounded-tl-xl object-cover h-[200px]"
-                  />
-                </div>
-                <div class="p-3 grid grid-cols-3">
-                  <div class="col-span-2">
-                    <h5>Xe trượt thác - Khứ hồi 1</h5>
-                    <p class="font-normal text-justify">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      4.5
-                    </p>
-                  </div>
-                  <div class="rounded-xl bg-green-600 p-2 h-[40px] col-span-1">
-                    <p class="text-white text-center">200.000đ</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </template>
           </div>
           <!-- Navigation -->
           <div class="swiper-button-next swiper-next-2"></div>
@@ -204,6 +98,14 @@ import { router } from '@inertiajs/vue3'
 import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
+import { BLOG_MEDIA_ENDPOINT, PRODUCT_MEDIA_ENDPOINT } from '@/Constants/endpoint'
+import { useI18n } from 'vue-i18n'
+
+const { t, locale } = useI18n()
+const props = defineProps({
+  blogs: Object,
+  products: Object
+})
 
 onMounted(async () => {
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
@@ -229,6 +131,14 @@ onMounted(async () => {
         480: {
           slidesPerView: 1
         }
+      },
+      on: {
+        init: function () {
+          updateNavigationButtons(this)
+        },
+        resize: function () {
+          updateNavigationButtons(this)
+        }
       }
     })
 
@@ -250,6 +160,14 @@ onMounted(async () => {
         },
         480: {
           slidesPerView: 1
+        }
+      },
+      on: {
+        init: function () {
+          updateNavigationButtons1(this)
+        },
+        resize: function () {
+          updateNavigationButtons1(this)
         }
       }
     })
@@ -293,6 +211,36 @@ onMounted(async () => {
     })
   }
 })
+
+function updateNavigationButtons(swiperInstance) {
+  const { slides, params } = swiperInstance
+  const slidesPerView = params.slidesPerView
+  const totalSlides = slides.length
+
+  // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
+  if (totalSlides <= slidesPerView) {
+    document.getElementsByClassName('swiper-prev-1')[0].style.display = 'none'
+    document.getElementsByClassName('swiper-next-1')[0].style.display = 'none'
+  } else {
+    document.getElementsByClassName('swiper-prev-1')[0].style.display = ''
+    document.getElementsByClassName('swiper-next-1')[0].style.display = ''
+  }
+}
+
+function updateNavigationButtons1(swiperInstance) {
+  const { slides, params } = swiperInstance
+  const slidesPerView = params.slidesPerView
+  const totalSlides = slides.length
+
+  // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
+  if (totalSlides <= slidesPerView) {
+    document.getElementsByClassName('swiper-prev-2')[0].style.display = 'none'
+    document.getElementsByClassName('swiper-next-2')[0].style.display = 'none'
+  } else {
+    document.getElementsByClassName('swiper-prev-2')[0].style.display = ''
+    document.getElementsByClassName('swiper-next-2')[0].style.display = ''
+  }
+}
 </script>
 <style scoped>
 .bg_promo {

@@ -36,4 +36,9 @@ class Product extends Model
 	{
 		return $this->hasMany('App\Models\Translation', 'record_id', 'id')->where('record_type', 'Product');
 	}
+
+    public function image_fe()
+    {
+        return $this->hasOne('App\Models\Image', 'record_id', 'id')->where('record_type', 'Product')->where('name', 'Picture');
+    }
 }
