@@ -1,4 +1,30 @@
 <template>
+  <Head>
+    <title>
+      {{ blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name || blog.translations[0].name }}
+    </title>
+    <meta
+      name="description"
+      :content="
+        blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+        blog.translations[0].description
+      "
+    />
+    <meta
+      property="og:title"
+      :content="
+        blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name || blog.translations[0].name
+      "
+    />
+    <meta
+      property="og:description"
+      :content="
+        blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+        blog.translations[0].description
+      "
+    />
+    <meta property="og:image" :content="app_url + BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture" />
+  </Head>
   <MainLayout>
     <div class="container">
       <div class="lg:pt-[150px] pt-[80px]">
@@ -108,13 +134,15 @@ import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
 import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import { useI18n } from 'vue-i18n'
-import { router } from '@inertiajs/vue3'
+import { router, Head } from '@inertiajs/vue3'
 
 const props = defineProps({
   blog: Object
 })
 
 const { t, locale } = useI18n()
+
+const app_url = import.meta.env.VITE_APP_URL
 
 onMounted(() => {
   document.querySelectorAll('button[data-target]').forEach((button) => {
@@ -177,11 +205,15 @@ function updateNavigationButtons(swiperInstance) {
 
   // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
   if (totalSlides <= slidesPerView) {
-    document.getElementsByClassName('swiper-prev-2')[0].style.display = 'none'
-    document.getElementsByClassName('swiper-next-2')[0].style.display = 'none'
+    if (document.getElementsByClassName('swiper-prev-2')) {
+      document.getElementsByClassName('swiper-prev-2')[0].style.display = 'none'
+      document.getElementsByClassName('swiper-next-2')[0].style.display = 'none'
+    }
   } else {
-    document.getElementsByClassName('swiper-prev-2')[0].style.display = ''
-    document.getElementsByClassName('swiper-next-2')[0].style.display = ''
+    if (document.getElementsByClassName('swiper-prev-2')) {
+      document.getElementsByClassName('swiper-prev-2')[0].style.display = ''
+      document.getElementsByClassName('swiper-next-2')[0].style.display = ''
+    }
   }
 }
 </script>

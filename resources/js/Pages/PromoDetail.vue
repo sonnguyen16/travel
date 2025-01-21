@@ -1,4 +1,30 @@
 <template>
+  <Head>
+    <title>
+      {{ blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name || blog.translations[0].name }}
+    </title>
+    <meta
+      name="description"
+      :content="
+        blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+        blog.translations[0].description
+      "
+    />
+    <meta
+      property="og:title"
+      :content="
+        blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name || blog.translations[0].name
+      "
+    />
+    <meta
+      property="og:description"
+      :content="
+        blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+        blog.translations[0].description
+      "
+    />
+    <meta property="og:image" :content="app_url + BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture" />
+  </Head>
   <MainLayout>
     <div class="container">
       <div class="pt-[100px]">
@@ -57,7 +83,7 @@
 <script setup>
 import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import MainLayout from '@/Layouts/MainLayout.vue'
-import { router } from '@inertiajs/vue3'
+import { Head } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 
 const { t, locale } = useI18n()

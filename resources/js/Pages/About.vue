@@ -1,5 +1,18 @@
 <template>
   <MainLayout>
+    <Head>
+      <title>Đà Lạt Tourist</title>
+      <meta
+        name="description"
+        content="Dalattourist - Công ty du lịch - dịch vụ - lữ hành lâu đời nhất tại Đà Lạt. Được thành lập từ năm 1976, Dalattourist tiên phong cung cấp những dịch vụ du lịch gắn liền với thiên nhiên, văn hóa và bản sắc Đà Lạt."
+      />
+      <meta property="og:title" content="Đà Lạt Tourist" />
+      <meta
+        property="og:description"
+        content="Dalattourist - Công ty du lịch - dịch vụ - lữ hành lâu đời nhất tại Đà Lạt. Được thành lập từ năm 1976, Dalattourist tiên phong cung cấp những dịch vụ du lịch gắn liền với thiên nhiên, văn hóa và bản sắc Đà Lạt."
+      />
+      <meta property="og:image" content="/images/logo.png" />
+    </Head>
     <div class="container">
       <div class="row pt-[100px]">
         <div id="about-1" class="col-lg-6">
@@ -145,6 +158,7 @@ import MainLayout from '@/Layouts/MainLayout.vue'
 import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
+import { Head } from '@inertiajs/vue3'
 
 onMounted(async () => {
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {

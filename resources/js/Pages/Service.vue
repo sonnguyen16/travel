@@ -1,5 +1,18 @@
 <template>
   <MainLayout>
+    <Head>
+      <title>Dịch vụ</title>
+      <meta
+        name="description"
+        content="Dalattourist - Công ty du lịch - dịch vụ - lữ hành lâu đời nhất tại Đà Lạt. Được thành lập từ năm 1976, Dalattourist tiên phong cung cấp những dịch vụ du lịch gắn liền với thiên nhiên, văn hóa và bản sắc Đà Lạt."
+      />
+      <meta property="og:title" content="Dịch vụ" />
+      <meta
+        property="og:description"
+        content="Dalattourist - Công ty du lịch - dịch vụ - lữ hành lâu đời nhất tại Đà Lạt. Được thành lập từ năm 1976, Dalattourist tiên phong cung cấp những dịch vụ du lịch gắn liền với thiên nhiên, văn hóa và bản sắc Đà Lạt."
+      />
+      <meta property="og:image" content="/images/logo.png" />
+    </Head>
     <div class="container">
       <div v-if="blogs.length > 0" id="service-1" class="md:pt-[150px] pt-[100px]">
         <div class="swiper swiper-1">
@@ -184,7 +197,7 @@
 </template>
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
-import { router } from '@inertiajs/vue3'
+import { router, Head } from '@inertiajs/vue3'
 import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
@@ -296,11 +309,15 @@ function updateNavigationButtons(swiperInstance) {
 
   // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
   if (totalSlides <= slidesPerView) {
-    document.getElementsByClassName('swiper-prev-1')[0].style.display = 'none'
-    document.getElementsByClassName('swiper-next-1')[0].style.display = 'none'
+    if (document.getElementsByClassName('swiper-prev-1')) {
+      document.getElementsByClassName('swiper-prev-1')[0].style.display = 'none'
+      document.getElementsByClassName('swiper-next-1')[0].style.display = 'none'
+    }
   } else {
-    document.getElementsByClassName('swiper-prev-1')[0].style.display = ''
-    document.getElementsByClassName('swiper-next-1')[0].style.display = ''
+    if (document.getElementsByClassName('swiper-prev-1')) {
+      document.getElementsByClassName('swiper-prev-1')[0].style.display = ''
+      document.getElementsByClassName('swiper-next-1')[0].style.display = ''
+    }
   }
 }
 </script>

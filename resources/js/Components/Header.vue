@@ -4,10 +4,10 @@
     <div class="container pt-5 position absolute top-0 left-0 right-0 d-flex flex-column">
       <div class="d-flex align-items-center gap-3 justify-end">
         <div class="p-2 bg-green-600 rounded-xl">
-          <a class="sm:text-[16px] text-[14px] text-white text-decoration-none">{{ $t('hotline') }}</a>
+          <a class="sm:text-[16px] text-[11px] text-white text-decoration-none">{{ $t('hotline') }}</a>
         </div>
         <div class="p-2 hover:bg-green-600 hover:rounded-[10px]">
-          <a class="sm:text-[16px] text-[14px] text-white text-decoration-none">{{ $t('register_login') }}</a>
+          <a class="sm:text-[16px] text-[11px] text-white text-decoration-none">{{ $t('register_login') }}</a>
         </div>
         <div>
           <div class="relative inline-block text-left">
@@ -125,7 +125,7 @@
             </li>
             <li @click="scrollToTopAndNavigate('/dat-ve/buoc2')" :class="[checkRoute('/dat-ve/buoc2')]">
               <a id="cart" href="#">
-                <i class="fas fa-shopping-cart text-white"></i>
+                <i class="fas fa-shopping-cart"></i>
               </a>
             </li>
           </ul>
@@ -204,11 +204,15 @@ const changeLanguage = (code) => {
 }
 
 function scrollToTopAndNavigate(url, options = {}) {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  if (window.scrollY > 200) {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
 
-  setTimeout(() => {
-    router.visit(url, options)
-  }, 600)
+    setTimeout(() => {
+      router.visit(url, options)
+    }, 600)
+    return
+  }
+  router.visit(url, options)
 }
 
 onMounted(() => {
@@ -244,6 +248,10 @@ const checkRoute = (route) => {
   color: white !important;
 }
 
+.active > a i {
+  color: white !important;
+}
+
 li {
   padding: 4px 8px;
 }
@@ -274,7 +282,17 @@ li a {
   width: 100%;
 }
 
+li a i {
+  text-decoration: none;
+  color: white;
+  width: 100%;
+}
+
 li:hover a {
+  color: #f1f1f1 !important;
+}
+
+li:hover a i {
   color: #f1f1f1 !important;
 }
 
@@ -299,7 +317,11 @@ nav.fixed a {
 }
 
 nav.fixed a i {
-  color: #16a34a !important; /* Màu xanh lá cây */
+  color: #16a34a; /* Màu xanh lá cây */
+}
+
+nav.fixed li.active a i {
+  color: #f1f1f1; /* Màu xanh lá cây */
 }
 
 #card:hover {
