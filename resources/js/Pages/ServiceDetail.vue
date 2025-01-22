@@ -6,8 +6,10 @@
     <meta
       name="description"
       :content="
-        blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
-        blog.translations[0].description
+        cleanHTML(
+          blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+            blog.translations[0].description
+        )
       "
     />
     <meta
@@ -19,8 +21,10 @@
     <meta
       property="og:description"
       :content="
-        blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
-        blog.translations[0].description
+        cleanHTML(
+          blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+            blog.translations[0].description
+        )
       "
     />
     <meta property="og:image" :content="app_url + BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture" />
@@ -215,6 +219,11 @@ function updateNavigationButtons(swiperInstance) {
       document.getElementsByClassName('swiper-next-2')[0].style.display = ''
     }
   }
+}
+
+const cleanHTML = (html) => {
+  // Loại bỏ toàn bộ thẻ HTML
+  return html.replace(/<\/?[^>]+(>|$)/g, '')
 }
 </script>
 <style scoped>
