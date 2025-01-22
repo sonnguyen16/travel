@@ -174,7 +174,7 @@ onMounted(async () => {
   }
 })
 
-const app_url = import.meta.env.APP_URL
+const app_url = import.meta.env.VITE_APP_URL
 </script>
 <style scoped>
 .overlay {

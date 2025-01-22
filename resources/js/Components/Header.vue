@@ -67,9 +67,9 @@
       </div>
       <nav :class="[isFixed ? 'fixed mt-0' : 'mt-3', 'd-flex justify-between align-items-center flex-wrap pe-2']">
         <div class="d-flex align-items-center lg:w-auto w-full justify-between gap-3">
-          <a class="" href="#">
+          <a @click.prevent="router.visit('/')" class="" href="#">
             <img
-              src="@/Assets/images/logo.png"
+              :src="app_url + '/images/logo.png'"
               :class="[isFixed ? 'w-[200px] ms-[20px] my-3' : 'w-[400px]']"
               alt="logo"
             />
@@ -82,7 +82,7 @@
             <i class="fas fa-bars text-white"></i>
           </button>
         </div>
-        <div v-if="showMenu" class="bg-green-600 h-[290px] py-3 lg:hidden w-full z-10 lg:mt-0 mt-2">
+        <div v-if="showMenu" class="bg-green-600 h-[340px] py-3 lg:hidden w-full z-10 lg:mt-0 mt-2">
           <ul class="flex mb-0 lg:flex-row flex-col gap-4 position-absolute justify-end">
             <li @click="scrollToTopAndNavigate('/')">
               <a style="color: white">{{ $t('home') }}</a>
@@ -231,6 +231,8 @@ const checkRoute = (route) => {
   }
   return ''
 }
+
+const app_url = import.meta.env.VITE_APP_URL
 </script>
 <style scoped>
 .header {

@@ -49,7 +49,7 @@
               <div class="w-full border-t-2 border-green-700"></div>
             </div>
             <!-- Timeline Content -->
-            <div class="grid grid-cols-5 absolute md:translate-y-[-10%] translate-y-[-6%]">
+            <div class="grid grid-cols-5 gap-4 absolute md:translate-y-[-10%] translate-y-[-6%]">
               <!-- Item 1 -->
               <div class="text-center col-span-1">
                 <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>

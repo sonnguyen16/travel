@@ -13,17 +13,26 @@
               </div>
               <!-- Timeline Content -->
               <div class="grid grid-cols-3 left-0 right-0 absolute translate-y-[-15%]">
-                <div class="text-center">
-                  <div class="w-6 h-6 bg-green-700 rounded-full text-white mx-auto">1</div>
-                  <p class="mt-2 text-green-900 font-bold">{{ $t('timeline_step_1') }}</p>
+                <!-- Item 1 -->
+                <div class="">
+                  <div class="w-6 h-6 bg-green-700 rounded-full text-center text-white">1</div>
+                  <p class="mt-2 text-green-900 font-bold">
+                    {{ $t('timeline_step_1') }}
+                  </p>
                 </div>
+                <!-- Item 2 -->
                 <div class="text-center">
-                  <div class="w-6 h-6 bg-green-700 rounded-full text-white mx-auto">2</div>
-                  <p class="mt-2 text-green-900 font-bold">{{ $t('timeline_step_2') }}</p>
+                  <div class="w-6 h-6 bg-green-700 rounded-full text-center text-white mx-auto">2</div>
+                  <p class="mt-2 text-green-900 font-bold">
+                    {{ $t('timeline_step_2') }}
+                  </p>
                 </div>
-                <div class="text-center">
-                  <div class="w-6 h-6 bg-green-700 rounded-full text-white mx-auto">3</div>
-                  <p class="mt-2 text-green-900 font-bold">{{ $t('timeline_step_3') }}</p>
+                <!-- Item 3 -->
+                <div class="">
+                  <div class="w-6 h-6 bg-green-700 rounded-full text-center text-white ms-auto">3</div>
+                  <p class="mt-2 text-green-900 font-bold text-end">
+                    {{ $t('timeline_step_3') }}
+                  </p>
                 </div>
               </div>
             </div>

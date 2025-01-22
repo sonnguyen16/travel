@@ -232,7 +232,7 @@ function updateNavigationButtons(swiperInstance) {
 
   // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
   if (totalSlides <= slidesPerView) {
-    if (document.getElementsByClassName('swiper-prev-1')) {
+    if (document.getElementsByClassName('swiper-prev-1').length > 0) {
       document.getElementsByClassName('swiper-prev-1')[0].style.display = 'none'
       document.getElementsByClassName('swiper-next-1')[0].style.display = 'none'
     }
@@ -251,7 +251,7 @@ function updateNavigationButtons1(swiperInstance) {
 
   // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
   if (totalSlides <= slidesPerView) {
-    if (document.getElementsByClassName('swiper-prev-2')) {
+    if (document.getElementsByClassName('swiper-prev-2').length > 0) {
       document.getElementsByClassName('swiper-prev-2')[0].style.display = 'none'
       document.getElementsByClassName('swiper-next-2')[0].style.display = 'none'
     }

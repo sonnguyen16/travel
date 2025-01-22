@@ -12,21 +12,27 @@
                 <div class="w-full border-t-2 border-green-700"></div>
               </div>
               <!-- Timeline Content -->
-              <div class="grid grid-cols-3 left-0 right-0 absolute md:translate-y-[-15%] translate-y-[-6%]">
+              <div class="grid grid-cols-3 left-0 right-0 absolute translate-y-[-15%]">
                 <!-- Item 1 -->
                 <div class="">
                   <div class="w-6 h-6 bg-green-700 rounded-full text-center text-white">1</div>
-                  <p class="mt-2 text-green-900 font-bold">Chọn vé</p>
+                  <p class="mt-2 text-green-900 font-bold">
+                    {{ $t('timeline_step_1') }}
+                  </p>
                 </div>
                 <!-- Item 2 -->
                 <div class="text-center">
                   <div class="w-6 h-6 bg-green-700 rounded-full text-center text-white mx-auto">2</div>
-                  <p class="mt-2 text-green-900 font-bold">Xác nhận vé</p>
+                  <p class="mt-2 text-green-900 font-bold">
+                    {{ $t('timeline_step_2') }}
+                  </p>
                 </div>
                 <!-- Item 3 -->
                 <div class="">
                   <div class="w-6 h-6 bg-green-700 rounded-full text-center text-white ms-auto">3</div>
-                  <p class="mt-2 text-green-900 font-bold text-end">Thanh toán</p>
+                  <p class="mt-2 text-green-900 font-bold text-end">
+                    {{ $t('timeline_step_3') }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -46,8 +52,8 @@
                   {{
                     products
                       .find((p) => p.id === c.product_fk)
-                      .translations.find((t) => t.language.code === locale.toUpperCase())?.name ||
-                    products.find((p) => p.id === c.id).translations[0].name
+                      ?.translations.find((t) => t.language.code === locale.toUpperCase())?.name ||
+                    products.find((p) => p.id === c.product_fk)?.translations[0].name
                   }}
                 </h2>
                 <div class="flex items-center">
@@ -123,15 +129,15 @@
           <div
             class="w-full mx-auto bg-white px-[20px] py-[20px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
           >
-            <h3>Chi tiết thanh toán</h3>
+            <h3>{{ $t('payment_detail') }}</h3>
             <hr />
             <template v-for="c in cart">
               <h5 class="mt-3">
                 {{
                   products
                     .find((p) => p.id === c.product_fk)
-                    .translations.find((t) => t.language.code === locale.toUpperCase())?.name ||
-                  products.find((p) => p.id === c.id).translations[0].name
+                    ?.translations.find((t) => t.language.code === locale.toUpperCase())?.name ||
+                  products.find((p) => p.id === c.product_fk)?.translations[0].name
                 }}
               </h5>
               <div class="justify-between flex">
@@ -152,14 +158,20 @@
               </div>
             </template>
             <hr />
-            <p class="mb-0">Mã khuyễn mãi</p>
+            <p class="mb-0">
+              {{ $t('promo_code') }}
+            </p>
             <hr />
             <div class="flex justify-between">
-              <p class="mb-0">Giảm giá</p>
+              <p class="mb-0">
+                {{ $t('discount') }}
+              </p>
               <p class="mb-0">0đ</p>
             </div>
             <div class="flex justify-between">
-              <p class="mb-0">Tổng cộng</p>
+              <p class="mb-0">
+                {{ $t('total') }}
+              </p>
               <p class="mb-0">
                 {{
                   cart
@@ -180,7 +192,7 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { router } from '@inertiajs/vue3'
-import { defineProps } from 'vue'
+import { defineProps, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
@@ -188,7 +200,10 @@ const props = defineProps({
 })
 
 const { t, locale } = useI18n()
-const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
+let cart = ref([])
+onMounted(() => {
+  cart.value = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
+})
 </script>
 <style scoped>
 .overlay1 {

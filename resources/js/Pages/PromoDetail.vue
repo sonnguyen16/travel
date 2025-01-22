@@ -95,6 +95,8 @@ const props = defineProps({
   blog: Object
 })
 
+const app_url = import.meta.env.VITE_APP_URL
+
 const cleanHTML = (html) => {
   // Loại bỏ toàn bộ thẻ HTML
   return html.replace(/<\/?[^>]+(>|$)/g, '')

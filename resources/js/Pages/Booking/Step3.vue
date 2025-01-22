@@ -12,21 +12,27 @@
                 <div class="w-full border-t-2 border-green-700"></div>
               </div>
               <!-- Timeline Content -->
-              <div class="grid grid-cols-3 left-0 right-0 absolute md:translate-y-[-15%] translate-y-[-6%]">
+              <div class="grid grid-cols-3 left-0 right-0 absolute translate-y-[-15%]">
                 <!-- Item 1 -->
                 <div class="">
                   <div class="w-6 h-6 bg-green-700 rounded-full text-center text-white">1</div>
-                  <p class="mt-2 text-green-900 font-bold">Chọn vé</p>
+                  <p class="mt-2 text-green-900 font-bold">
+                    {{ $t('timeline_step_1') }}
+                  </p>
                 </div>
                 <!-- Item 2 -->
                 <div class="text-center">
                   <div class="w-6 h-6 bg-green-700 rounded-full text-center text-white mx-auto">2</div>
-                  <p class="mt-2 text-green-900 font-bold">Xác nhận vé</p>
+                  <p class="mt-2 text-green-900 font-bold">
+                    {{ $t('timeline_step_2') }}
+                  </p>
                 </div>
                 <!-- Item 3 -->
                 <div class="">
                   <div class="w-6 h-6 bg-green-700 rounded-full text-center text-white ms-auto">3</div>
-                  <p class="mt-2 text-green-900 font-bold text-end">Thanh toán</p>
+                  <p class="mt-2 text-green-900 font-bold text-end">
+                    {{ $t('timeline_step_3') }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -42,7 +48,10 @@
             <form>
               <div class="row">
                 <div class="col-lg-6 mt-2">
-                  <label for="name">Họ và tên <span class="text-red-500">*</span></label>
+                  <label for="name">
+                    {{ $t('name') }}
+                    <span class="text-red-500">*</span></label
+                  >
                   <input
                     v-model="form.name"
                     type="text"
@@ -50,7 +59,10 @@
                   />
                 </div>
                 <div class="col-lg-6 mt-2">
-                  <label for="name">Số điện thoại <span class="text-red-500">*</span></label>
+                  <label for="name">
+                    {{ $t('phone') }}
+                    <span class="text-red-500">*</span></label
+                  >
                   <input
                     v-model="form.phone"
                     type="text"
@@ -58,7 +70,7 @@
                   />
                 </div>
                 <div class="col-lg-6 mt-2">
-                  <label for="name">Email <span class="text-red-500">*</span></label>
+                  <label for="name">{{ $t('email') }} <span class="text-red-500">*</span></label>
                   <input
                     v-model="form.email"
                     type="text"
@@ -73,7 +85,10 @@
           >
             <!-- 4 check boxes include vnpay, momo, visa(master card), atm -->
             <form>
-              <h3>Chọn phương thức thanh toán</h3>
+              <h3>
+                {{ $t('payment_method') }}
+                <span class="text-red-500">*</span>
+              </h3>
               <div class="flex items-center mt-3">
                 <input v-model="form.payment_method" type="radio" id="vnpay" name="payment" value="vnpay" />
                 <label for="vnpay" class="ms-2">VNPAY</label>
@@ -91,11 +106,10 @@
                 <label for="atm" class="ms-2">ATM</label>
               </div>
               <p class="mt-3">
-                Khi nhấp vào thanh toán, bạn đồng ý với việc cung cấp thông tin và các
-                <a href="#">điều khoản và điều kiện</a> của chúng tôi
+                {{ $t('payment_note') }}
               </p>
               <button @click.prevent="confirmPayment" class="bg-green-600 text-white px-4 py-2 rounded-xl mt-2 mr-auto">
-                Thanh toán
+                {{ $t('confirm') }}
               </button>
             </form>
           </div>
@@ -104,15 +118,17 @@
           <div
             class="w-full mx-auto bg-white px-[20px] py-[20px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
           >
-            <h3>Chi tiết thanh toán</h3>
+            <h3>
+              {{ $t('payment_detail') }}
+            </h3>
             <hr />
             <template v-for="c in cart">
               <h5 class="mt-3">
                 {{
                   products
                     .find((p) => p.id === c.product_fk)
-                    .translations.find((t) => t.language.code === locale.toUpperCase())?.name ||
-                  products.find((p) => p.id === c.id).translations[0].name
+                    ?.translations.find((t) => t.language.code === locale.toUpperCase())?.name ||
+                  products.find((p) => p.id === c.product_fk)?.translations[0].name
                 }}
               </h5>
               <div class="justify-between flex">
@@ -133,14 +149,20 @@
               </div>
             </template>
             <hr />
-            <p class="mb-0">Mã khuyễn mãi</p>
+            <p class="mb-0">
+              {{ $t('promo_code') }}
+            </p>
             <hr />
             <div class="flex justify-between">
-              <p class="mb-0">Giảm giá</p>
+              <p class="mb-0">
+                {{ $t('discount') }}
+              </p>
               <p class="mb-0">0đ</p>
             </div>
             <div class="flex justify-between">
-              <p class="mb-0">Tổng cộng</p>
+              <p class="mb-0">
+                {{ $t('total') }}
+              </p>
               <p class="mb-0">
                 {{
                   cart
@@ -162,21 +184,28 @@
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { useForm, router } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
-import { defineProps, onMounted } from 'vue'
+import { computed, defineProps, onMounted, ref } from 'vue'
 
 const props = defineProps({
   products: Object
 })
 
 const { t, locale } = useI18n()
-const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
+let cart = ref([])
+onMounted(() => {
+  cart.value = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
+})
+
+const total = computed(() => {
+  return cart.value.map((c) => c.price_child * c.num_child + c.price_adult * c.num_adult).reduce((a, b) => a + b, 0)
+})
 
 let Swal = null
 const form = useForm({
   name: '',
   phone: '',
   email: '',
-  total: cart.map((c) => c.price_child * c.num_child + c.price_adult * c.num_adult).reduce((a, b) => a + b, 0),
+  total: total.value,
   payment_method: '',
   order_details: cart
 })
@@ -186,7 +215,7 @@ const confirmPayment = () => {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'Vui lòng điền đầy đủ thông tin và chọn phương thức thanh toán!'
+      text: t('fill_all_fields')
     })
     return
   }
@@ -197,7 +226,7 @@ const confirmPayment = () => {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'Email không hợp lệ!'
+      text: t('invalid_email')
     })
     return
   }
@@ -208,7 +237,7 @@ const confirmPayment = () => {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'Số điện thoại không hợp lệ!'
+      text: t('invalid_phone')
     })
     return
   }
@@ -217,8 +246,8 @@ const confirmPayment = () => {
     onSuccess: () => {
       Swal.fire({
         icon: 'success',
-        title: 'Thành công!',
-        text: 'Đặt vé thành công!'
+        title: 'Success',
+        text: t('order_success')
       }).then(() => {
         localStorage.removeItem('cart')
         router.visit('/')
@@ -228,7 +257,7 @@ const confirmPayment = () => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Đặt vé thất bại!'
+        text: t('order_failed')
       })
     }
   })

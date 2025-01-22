@@ -46,16 +46,26 @@
             </div>
             <div class="col-lg-7 lg:pe-5 lg:pt-3">
               <h4>
-                {{ blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.name }}
+                {{
+                  blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                  blog?.translations[0].name
+                }}
               </h4>
-              <div v-html="blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.content"></div>
+              <div
+                v-html="
+                  blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
+                  blog?.translations[0].content
+                "
+              ></div>
             </div>
           </div>
         </div>
       </div>
 
       <div class="row pt-5">
-        <h2 class="text-center mb-5 text-2xl font-bold">Hoạt động nổi bật</h2>
+        <h2 class="text-center mb-5 text-2xl font-bold">
+          {{ t('service_detail.activities') }}
+        </h2>
         <div class="space-y-0 divide-y divide-gray-300">
           <!-- Collapse Item 1 -->
           <div v-for="(product, index) in blog?.activities" class="border-none">
@@ -65,7 +75,10 @@
               :data-target="`collapse${index + 1}`"
             >
               <span>
-                {{ product.translations.find((t) => t.language.code == locale.toUpperCase())?.name }}
+                {{
+                  product.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                  product.translations[0].name
+                }}
               </span>
               <svg
                 class="w-5 h-5 transform transition-transform duration-300"
@@ -78,7 +91,12 @@
               </svg>
             </button>
             <div :id="`collapse${index + 1}`" class="hidden p-4 bg-gray-50 overflow-hidden transition-all duration-500">
-              <div v-html="product.translations.find((t) => t.language.code == locale.toUpperCase())?.content"></div>
+              <div
+                v-html="
+                  product.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
+                  product.translations[0].content
+                "
+              ></div>
             </div>
           </div>
 
@@ -87,7 +105,9 @@
       </div>
 
       <div class="pt-[50px] lg:pb-[100px] pb-[30px]">
-        <h2 class="text-center mb-4">Điểm đến hấp dẫn khác</h2>
+        <h2 class="text-center mb-4">
+          {{ t('service_detail.related_services') }}
+        </h2>
         <div class="swiper swiper-2">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
@@ -110,12 +130,16 @@
                   </div>
                   <div class="p-3">
                     <h3 class="text-xl font-semibold">
-                      {{ blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.name }}
+                      {{
+                        blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                        blog_related.translations[0].name
+                      }}
                     </h3>
                     <div
                       class="line-clamp-4"
                       v-html="
-                        blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.description
+                        blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+                        blog_related.translations[0].description
                       "
                     ></div>
                   </div>
@@ -209,12 +233,12 @@ function updateNavigationButtons(swiperInstance) {
 
   // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
   if (totalSlides <= slidesPerView) {
-    if (document.getElementsByClassName('swiper-prev-2')) {
+    if (document.getElementsByClassName('swiper-prev-2').length > 0) {
       document.getElementsByClassName('swiper-prev-2')[0].style.display = 'none'
       document.getElementsByClassName('swiper-next-2')[0].style.display = 'none'
     }
   } else {
-    if (document.getElementsByClassName('swiper-prev-2')) {
+    if (document.getElementsByClassName('swiper-prev-2').length > 0) {
       document.getElementsByClassName('swiper-prev-2')[0].style.display = ''
       document.getElementsByClassName('swiper-next-2')[0].style.display = ''
     }

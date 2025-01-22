@@ -309,17 +309,19 @@ function updateNavigationButtons(swiperInstance) {
 
   // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
   if (totalSlides <= slidesPerView) {
-    if (document.getElementsByClassName('swiper-prev-1')) {
+    if (document.getElementsByClassName('swiper-prev-1').length > 0) {
       document.getElementsByClassName('swiper-prev-1')[0].style.display = 'none'
       document.getElementsByClassName('swiper-next-1')[0].style.display = 'none'
     }
   } else {
-    if (document.getElementsByClassName('swiper-prev-1')) {
+    if (document.getElementsByClassName('swiper-prev-1').length > 0) {
       document.getElementsByClassName('swiper-prev-1')[0].style.display = ''
       document.getElementsByClassName('swiper-next-1')[0].style.display = ''
     }
   }
 }
+
+const app_url = import.meta.env.VITE_APP_URL
 </script>
 <style scoped>
 .overlay {

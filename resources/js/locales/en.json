@@ -99,5 +99,21 @@
   "success": "Success",
   "add_to_cart_success": "Successfully added to cart",
   "continue": "Continue",
-  "no_ticket": "No tickets available"
+  "no_ticket": "No tickets available",
+  "service_detail.activities": "Activities",
+  "service_detail.related_services": "Related Services",
+  "confirm": "Confirm",
+  "payment_note": "By clicking 'Confirm', you agree to the terms and conditions of the service.",
+  "payment_method": "Payment Method",
+  "name": "Name",
+  "total": "Total",
+  "promo_code": "Promo Code",
+  "discount": "Discount",
+  "payment": "Payment",
+  "payment_detail": "Payment Details",
+  "fill_all_fields": "Please fill in all fields",
+  "invalid_email": "Invalid email",
+  "invalid_phone": "Invalid phone number",
+  "order_success": "Order successfully placed",
+  "order_fail": "Order failed"
 }

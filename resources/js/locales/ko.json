@@ -99,5 +99,21 @@
   "success": "성공",
   "add_to_cart_success": "장바구니에 성공적으로 추가되었습니다",
   "continue": "계속",
-  "no_ticket": "티켓 없음"
+  "no_ticket": "티켓 없음",
+  "service_detail.activities": "활동",
+  "service_detail.related_services": "관련 서비스",
+  "confirm": "확인",
+  "payment_note": "'확인'을 클릭하면 서비스의 약관 및 정책에 동의하는 것입니다.",
+  "payment_method": "결제 방법",
+  "name": "이름",
+  "total": "합계",
+  "promo_code": "프로모션 코드",
+  "discount": "할인",
+  "payment": "결제",
+  "payment_detail": "결제 세부사항",
+  "fill_all_fields": "모든 필드를 입력해주세요",
+  "invalid_email": "유효하지 않은 이메일",
+  "invalid_phone": "유효하지 않은 전화번호",
+  "order_success": "주문이 성공적으로 완료되었습니다",
+  "order_fail": "주문이 실패했습니다"
 }
