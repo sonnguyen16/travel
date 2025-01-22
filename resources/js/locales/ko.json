@@ -115,5 +115,13 @@
   "invalid_email": "유효하지 않은 이메일",
   "invalid_phone": "유효하지 않은 전화번호",
   "order_success": "주문이 성공적으로 완료되었습니다",
-  "order_fail": "주문이 실패했습니다"
+  "order_fail": "주문이 실패했습니다",
+  "please_select_number_of_people": "인원 수를 선택해주세요",
+  "other_news": "다른 뉴스",
+  "other_promotions": "다른 프로모션",
+  "news": "뉴스",
+  "salary": "급여",
+  "working_form": "근무 형태",
+  "unit": "단위",
+  "department": "부서"
 }

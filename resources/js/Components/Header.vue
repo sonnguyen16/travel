@@ -66,10 +66,10 @@
         </div>
       </div>
       <nav :class="[isFixed ? 'fixed mt-0' : 'mt-3']">
-        <div :class="[isFixed ? 'container' : '', 'd-flex justify-between align-items-center']">
-          <div class="d-flex align-items-center lg:w-auto w-full justify-between">
+        <div :class="[isFixed ? 'container' : '', 'd-flex justify-between align-items-center flex-wrap']">
+          <div class="d-flex align-items-center lg:w-auto w-full justify-between gap-3">
             <a @click.prevent="router.visit('/')" class="" href="#">
-              <img :src="app_url + '/images/logo.png'" :class="[isFixed ? 'w-[200px] my-3' : 'w-[400px]']" alt="logo" />
+              <img :src="app_url + '/images/logo.png'" :class="[isFixed ? 'w-[200px] my-3' : 'w-[300px]']" alt="logo" />
             </a>
             <button
               @click.prevent="showMenu = !showMenu"
@@ -79,36 +79,7 @@
               <i class="fas fa-bars text-white"></i>
             </button>
           </div>
-          <div v-if="showMenu" class="bg-green-600 h-[340px] py-3 lg:hidden w-full z-10 lg:mt-0 mt-2">
-            <ul class="flex mb-0 lg:flex-row flex-col gap-4 position-absolute justify-end">
-              <li @click="scrollToTopAndNavigate('/')">
-                <a style="color: white">{{ $t('home') }}</a>
-              </li>
-              <li @click="scrollToTopAndNavigate('/ve-chung-toi')">
-                <a style="color: white">{{ $t('about') }}</a>
-              </li>
-              <li @click="scrollToTopAndNavigate('/dich-vu')">
-                <a style="color: white">{{ $t('services') }}</a>
-              </li>
-              <li @click="scrollToTopAndNavigate('/uu-dai')">
-                <a style="color: white">{{ $t('promo') }}</a>
-              </li>
-              <li @click="scrollToTopAndNavigate('/dat-ve/buoc1')">
-                <a style="color: white">{{ $t('booking') }}</a>
-              </li>
-              <li @click="scrollToTopAndNavigate('/dat-ve/buoc2')">
-                <a style="color: white" class="relative">
-                  <i class="fas fa-shopping-cart text-white"></i>
-                  <span
-                    v-if="cart.length"
-                    class="bg-red-500 text-white rounded-[50%] w-[20px] h-[20px] text-sm flex justify-center items-center absolute bottom-3 left-3"
-                  >
-                    {{ cart.reduce((acc, item) => acc + item.num_child + item.num_adult, 0) }}
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </div>
+
           <div class="py-3">
             <ul class="mb-0 lg:flex hidden gap-4 justify-end">
               <li @click="scrollToTopAndNavigate('/')" :class="[checkRoute('/')]">
@@ -122,6 +93,9 @@
               </li>
               <li @click="scrollToTopAndNavigate('/uu-dai')" :class="[checkRoute('/uu-dai')]">
                 <Link href="">{{ $t('promo') }}</Link>
+              </li>
+              <li @click="scrollToTopAndNavigate('/tin-tuc')" :class="[checkRoute('/tin-tuc')]">
+                <Link href="">{{ $t('news') }}</Link>
               </li>
               <li @click="scrollToTopAndNavigate('/dat-ve/buoc1')" :class="[checkRoute('/dat-ve/buoc1')]">
                 <Link href="">{{ $t('booking') }}</Link>
@@ -140,44 +114,104 @@
             </ul>
           </div>
         </div>
+        <div v-if="showMenu" class="bg-green-600 h-[390px] py-3 lg:hidden w-full z-10 lg:mt-0 mt-2">
+          <ul class="flex mb-0 lg:flex-row flex-col gap-4 position-absolute justify-end">
+            <li @click="scrollToTopAndNavigate('/')">
+              <a style="color: white">{{ $t('home') }}</a>
+            </li>
+            <li @click="scrollToTopAndNavigate('/ve-chung-toi')">
+              <a style="color: white">{{ $t('about') }}</a>
+            </li>
+            <li @click="scrollToTopAndNavigate('/dich-vu')">
+              <a style="color: white">{{ $t('services') }}</a>
+            </li>
+            <li @click="scrollToTopAndNavigate('/uu-dai')">
+              <a style="color: white">{{ $t('promo') }}</a>
+            </li>
+            <li @click="scrollToTopAndNavigate('/tin-tuc')">
+              <a style="color: white">{{ $t('news') }}</a>
+            </li>
+            <li @click="scrollToTopAndNavigate('/dat-ve/buoc1')">
+              <a style="color: white">{{ $t('booking') }}</a>
+            </li>
+            <li @click="scrollToTopAndNavigate('/dat-ve/buoc2')">
+              <a style="color: white" class="relative">
+                <i class="fas fa-shopping-cart text-white"></i>
+                <span
+                  v-if="cart.length"
+                  class="bg-red-500 text-white rounded-[50%] w-[20px] h-[20px] text-sm flex justify-center items-center absolute bottom-3 left-3"
+                >
+                  {{ cart.reduce((acc, item) => acc + item.num_child + item.num_adult, 0) }}
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </nav>
     </div>
     <div class="container position-absolute bottom-[-50px] start-50 translate-middle-x">
       <div class="w-full mx-auto bg-white px-[20px] py-[15px] border-[1.5px] border-green-600 rounded-xl shadow-2xl">
         <form>
           <div class="row">
-            <div class="col-md-3 col-6">
+            <div class="col-md-3 col-6 flex items-center">
               <div class="flex items-center">
                 <i class="fas fa-map-marker-alt text-green-600 text-lg md:text-2xl"></i>
-                <select class="border-0 form-control">
-                  <option class="font-normal" value="1">Hồ Chí Minh</option>
-                  <option class="font-normal" value="2">Đà Nẵng</option>
-                  <option class="font-normal" value="3">Hải Phòng</option>
+                <select v-model="form.select" class="border-0 form-control">
+                  <option class="font-normal" value="1">Khu Du Lịch Datanla</option>
+                  <option class="font-normal" value="2">Khu Du Lịch LangBiang</option>
+                  <option class="font-normal" value="3">Khu Du Lịch Cáp Treo</option>
+                  <option class="font-normal" value="4">Datanla Adventures</option>
                 </select>
               </div>
             </div>
-            <div class="col-md-3 col-6">
+            <div class="col-md-2 col-6 flex items-center">
               <!-- Chọn ngày -->
               <div class="flex items-center">
                 <i class="far fa-calendar-alt text-green-600 text-lg md:text-2xl"></i>
-                <input type="date" class="border-0 lg:w-[55%] w-[100%] font-normal" />
+                <input type="date" class="border-0 lg:w-[100%] w-[80%] font-normal" v-model="form.date" />
               </div>
             </div>
-            <div class="col-md-3 col-6">
+            <div class="col-md-2 col-6 flex items-center lg:justify-center">
               <!-- Số lượng người -->
-              <div class="flex items-center">
+              <div class="flex items-center gap-2">
                 <i class="fas fa-user-friends text-green-600 text-lg md:text-2xl"></i>
-                <button class="border-none">
-                  <i class="fas fa-minus text-green-600"></i>
-                </button>
-                <input type="text" class="border-none w-[30px]" value="1" />
-                <button class="border-none">
-                  <i class="fas fa-plus text-green-600"></i>
-                </button>
+                <div class="flex flex-col items-center">
+                  <label class="font-normal mb-0 text-sm" for="num_adult">Người lớn</label>
+                  <div>
+                    <button @click.prevent="decreaseAdult" class="border-none">
+                      <i class="fas fa-minus text-green-600"></i>
+                    </button>
+                    <input type="text" class="border-none w-[35px] py-0 font-normal" v-model="form.num_adult" />
+                    <button @click.prevent="incrementAdult" class="border-none">
+                      <i class="fas fa-plus text-green-600"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-md-3 col-6">
-              <button class="bg-green-600 text-white px-4 py-2 rounded-xl md:w-[200px] w-full md:float-end">
+            <div class="col-md-2 col-6 flex items-center lg:justify-center">
+              <!-- Số lượng người -->
+              <div v-if="form.select != 4" class="flex items-center gap-2">
+                <i class="fas fa-user-friends text-green-600 text-lg md:text-2xl"></i>
+                <div class="flex flex-col items-center">
+                  <label class="font-normal mb-0 text-sm" for="num_adult">Trẻ em</label>
+                  <div>
+                    <button @click.prevent="decreaseChild" class="border-none">
+                      <i class="fas fa-minus text-green-600"></i>
+                    </button>
+                    <input type="text" class="border-none w-[35px] py-0 font-normal" v-model="form.num_child" />
+                    <button @click.prevent="incrementChild" class="border-none">
+                      <i class="fas fa-plus text-green-600"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-12 flex lg:items-center">
+              <button
+                @click.prevent="router.visit('/dat-ve/buoc1')"
+                class="bg-green-600 text-white px-4 py-2 rounded-xl w-[100%] mt-lg-0 mt-2"
+              >
                 {{ $t('search') }}
               </button>
             </div>
@@ -189,7 +223,7 @@
 </template>
 <script setup>
 import { computed, onMounted, ref } from 'vue'
-import { Link, usePage } from '@inertiajs/vue3'
+import { Link, useForm, usePage } from '@inertiajs/vue3'
 import { router } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 
@@ -201,6 +235,41 @@ const languages = computed(() => page.props.languages)
 const { t, locale } = useI18n()
 
 let cart = ref([])
+const form = useForm({
+  select: 1,
+  num_child: 0,
+  num_adult: 0,
+  date: formatDateToYYYYMMDD()
+})
+
+function formatDateToYYYYMMDD(date = new Date()) {
+  const year = date.getFullYear() // Lấy năm đầy đủ, ví dụ: 2025
+  const month = String(date.getMonth() + 1).padStart(2, '0') // Tháng từ 0-11, thêm số 0 nếu cần
+  const day = String(date.getDate()).padStart(2, '0') // Thêm số 0 nếu cần
+
+  return `${year}-${month}-${day}`
+}
+
+const incrementAdult = () => {
+  form.num_adult++
+}
+
+const decreaseAdult = () => {
+  if (form.num_adult > 0) {
+    form.num_adult--
+  }
+}
+
+const incrementChild = () => {
+  form.num_child++
+}
+
+const decreaseChild = () => {
+  if (form.num_child > 0) {
+    form.num_child--
+  }
+}
+
 onMounted(() => {
   cart.value = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
 })

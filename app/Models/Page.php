@@ -13,4 +13,9 @@ class Page extends Model
     {
         return $this->hasOne('App\Models\Translation', 'record_id', 'id')->where('record_type', 'Page')->where('language_id', $languageId);
     }
+
+    public function translations()
+    {
+        return $this->hasMany('App\Models\Translation', 'record_id', 'id')->where('record_type', 'Page');
+    }
 }

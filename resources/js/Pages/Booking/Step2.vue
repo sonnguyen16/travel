@@ -86,7 +86,13 @@
                     <label class="">{{ $t('children') }}</label>
                   </div>
                   <div class="flex items-center justify-center md:col-span-2 col-span-1">
+                    <button @click="decrementChild(c.product_fk)" class="border-none">
+                      <i class="fas fa-minus text-green-600"></i>
+                    </button>
                     <input type="text" class="border-none w-[40px]" :value="c.num_child" />
+                    <button @click="incrementChild(c.product_fk)" class="border-none">
+                      <i class="fas fa-plus text-green-600"></i>
+                    </button>
                   </div>
                   <div class="flex items-center justify-center gap-5 md:col-span-2 col-span-1">
                     <p class="mb-0 text-gray-500 md:inline hidden">
@@ -104,7 +110,13 @@
                     <label class="">{{ $t('adults') }}</label>
                   </div>
                   <div class="flex items-center justify-center md:col-span-2 col-span-1">
+                    <button @click="decrementAdult(c.product_fk)" class="border-none">
+                      <i class="fas fa-minus text-green-600"></i>
+                    </button>
                     <input type="text" class="border-none w-[40px]" v-model="c.num_adult" />
+                    <button @click="incrementAdult(c.product_fk)" class="border-none">
+                      <i class="fas fa-plus text-green-600"></i>
+                    </button>
                   </div>
                   <div class="flex items-center justify-center gap-5 md:col-span-2 col-span-1">
                     <p class="mb-0 text-gray-500 md:inline hidden">
@@ -208,6 +220,42 @@ let cart = ref([])
 onMounted(() => {
   cart.value = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
 })
+
+const incrementChild = (id) => {
+  cart.value.find((form) => form.product_fk == id).num_child++
+  localStorage.setItem('cart', JSON.stringify(cart.value))
+}
+
+const decrementChild = (id) => {
+  const form = cart.value.find((form) => form.product_fk == id)
+  if (form.num_child > 0) {
+    form.num_child--
+  }
+  if (form.num_child == 0 && form.num_adult == 0) {
+    cart.value = cart.value.filter((item) => item.product_fk != id)
+    localStorage.setItem('cart', JSON.stringify(cart.value))
+  } else {
+    localStorage.setItem('cart', JSON.stringify(cart.value))
+  }
+}
+
+const incrementAdult = (id) => {
+  cart.value.find((form) => form.product_fk == id).num_adult++
+  localStorage.setItem('cart', JSON.stringify(cart.value))
+}
+
+const decrementAdult = (id) => {
+  const form = cart.value.find((form) => form.product_fk == id)
+  if (form.num_adult > 0) {
+    form.num_adult--
+  }
+  if (form.num_child == 0 && form.num_adult == 0) {
+    cart.value = cart.value.filter((item) => item.product_fk != id)
+    localStorage.setItem('cart', JSON.stringify(cart.value))
+  } else {
+    localStorage.setItem('cart', JSON.stringify(cart.value))
+  }
+}
 </script>
 <style scoped>
 .overlay1 {

@@ -20,6 +20,9 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserServiceController;
 use App\Http\Controllers\UserPromoController;
 use App\Http\Controllers\UserBookingController;
+use App\Http\Controllers\UserPageController;
+use App\Http\Controllers\UserNewsController;
+use App\Http\Controllers\UserRecruitmentController;
 
 Route::get('/admin', [LoginController::class, 'login'])->name('backend.dashboard.login');
 Route::post('/check', [LoginController::class, 'check'])->name('backend.dashboard.login.check');
@@ -101,6 +104,14 @@ Route::get('/dat-ve/buoc1', [UserBookingController::class, 'index'])->name('book
 Route::get('/dat-ve/buoc2', [UserBookingController::class, 'cart'])->name('cart');
 Route::get('/dat-ve/buoc3', [UserBookingController::class, 'pay'])->name('pay');
 Route::post('/dat-ve/buoc4', [UserBookingController::class, 'confirm'])->name('confirm');
+
+Route::get('/trang/{title?}', [UserPageController::class, 'show'])->name('page.show');
+
+Route::get('/tin-tuc', [UserNewsController::class, 'index'])->name('blog');
+Route::get('/tin-tuc/{title?}', [UserNewsController::class, 'show'])->name('blog.show');
+
+Route::get('/tuyen-dung', [UserRecruitmentController::class, 'index'])->name('recruitment');
+Route::get('/tuyen-dung/{title?}', [UserRecruitmentController::class, 'show'])->name('recruitment.show');
 
 Route::get('/{slug?}', [UserBlogController::class, 'index'])->name('blog');
 Route::get('/{slug?}/{title?}', [UserBlogController::class, 'show'])->name('blog.show');

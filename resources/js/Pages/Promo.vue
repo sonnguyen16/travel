@@ -15,7 +15,7 @@
     </Head>
     <div class="container">
       <div id="promo-1" class="pt-[100px]">
-        <div class="swiper swiper-1">
+        <div v-if="blogs?.length > 0 && mounted" class="swiper swiper-1">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
             <template v-for="blog in blogs">
@@ -119,14 +119,16 @@ const props = defineProps({
   blogs: Object,
   products: Object
 })
+const mounted = ref(false)
 
 onMounted(async () => {
+  mounted.value = true
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const ScrollReveal = (await import('scrollreveal')).default
     const scrollReveal = ScrollReveal()
 
     new Swiper('.swiper-1', {
-      loop: true,
+      loop: false,
       fadeEffect: { crossFade: true },
       speed: 1000,
       spaceBetween: 20, // Khoảng cách giữa các item
@@ -156,7 +158,7 @@ onMounted(async () => {
     })
 
     new Swiper('.swiper-2', {
-      loop: true,
+      loop: false,
       fadeEffect: { crossFade: true },
       speed: 1000,
       spaceBetween: 20, // Khoảng cách giữa các item

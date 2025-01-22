@@ -42,25 +42,74 @@
             </h2>
             <div
               v-html="
-                blog.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
-                blog.translations[0].content
+                blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+                blog.translations[0].description
               "
-              class="ql-editor mb-5"
+              class="ql-editor"
             ></div>
+            <div class="mb-5">
+              <ul class="list-disc">
+                <li>
+                  <span> {{ t('address') }}: </span>
+                  <span>
+                    {{
+                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address ||
+                      blog.translations[0].address
+                    }}
+                  </span>
+                </li>
+                <li>
+                  <span> {{ t('salary') }}: </span>
+                  <span>
+                    {{
+                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.salary ||
+                      blog.translations[0].salary
+                    }}
+                  </span>
+                </li>
+                <li>
+                  <span> {{ t('working_form') }}: </span>
+                  <span>
+                    {{
+                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.working_form ||
+                      blog.translations[0].working_form
+                    }}
+                  </span>
+                </li>
+                <li>
+                  <span> {{ t('unit') }}: </span>
+                  <span>
+                    {{
+                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.unit ||
+                      blog.translations[0].unit
+                    }}
+                  </span>
+                </li>
+                <li>
+                  <span> {{ t('department') }}: </span>
+                  <span>
+                    {{
+                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.department ||
+                      blog.translations[0].department
+                    }}
+                  </span>
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="col-lg-4">
             <h4 class="">
-              {{ t('other_promotions') }}
+              {{ t('other_news') }}
             </h4>
             <hr />
-            <template v-for="blog_related in blog.menu.blogs">
+            <template v-for="blog_related in blogs">
               <div
                 v-if="blog.id != blog_related.id"
-                @click.prevent="router.visit(`/uu-dai/${blog_related.slug}`)"
+                @click.prevent="router.visit(`/tuyen-dung/${blog_related.slug}`)"
                 class="flex gap-3 mb-4 hover:cursor-pointer"
               >
                 <img
-                  :src="BLOG_MEDIA_ENDPOINT + blog_related.image_fe?.picture"
+                  :src="RECRUITMENT_MEDIA_ENDPOINT + blog_related.image_fe?.picture"
                   alt="promo1"
                   class="w-[150px] h-[100px] object-cover rounded-xl"
                 />
@@ -91,14 +140,15 @@
   </MainLayout>
 </template>
 <script setup>
-import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
+import { BLOG_MEDIA_ENDPOINT, RECRUITMENT_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { Head, router } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 
 const { t, locale } = useI18n()
 const props = defineProps({
-  blog: Object
+  blog: Object,
+  blogs: Object
 })
 
 const app_url = import.meta.env.VITE_APP_URL
@@ -108,4 +158,8 @@ const cleanHTML = (html) => {
   return html?.replace(/<\/?[^>]+(>|$)/g, '')
 }
 </script>
-<style scoped></style>
+<style scoped>
+ul li span {
+  font-weight: normal;
+}
+</style>

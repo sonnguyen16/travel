@@ -63,17 +63,17 @@
       <div
         v-for="(product, index) in products"
         :key="index"
-        class="w-full mx-auto bg-white px-[20px] pt-[10px] pb-[20px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
+        class="w-full mx-auto bg-white px-[20px] pt-[20px] pb-[20px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
       >
         <div class="flex justify-between items-center">
-          <h2 class="font-bold mb-0">
+          <p class="font-bold mb-0 text-[1.2rem]">
             {{
               product.translations.find((item) => item.language.code === locale.toUpperCase())?.name ||
               product.translations[0].name
             }}
-          </h2>
+          </p>
           <div>
-            <p class="text-center mb-0 text-[30px]">
+            <p class="text-center mb-0 text-[1.2rem]">
               {{ product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}
             </p>
           </div>
@@ -256,8 +256,8 @@ const forms = ref([])
 
 props.products.forEach((product) => {
   forms.value.push({
-    num_child: 1,
-    num_adult: 1,
+    num_child: 0,
+    num_adult: 0,
     product_fk: product.id,
     price_adult: product.price,
     price_child: product.price_child,
@@ -271,7 +271,7 @@ const incrementChild = (id) => {
 
 const decrementChild = (id) => {
   const form = forms.value.find((form) => form.product_fk == id)
-  if (form.num_child > 1) {
+  if (form.num_child > 0) {
     form.num_child--
   }
 }
@@ -282,12 +282,24 @@ const incrementAdult = (id) => {
 
 const decrementAdult = (id) => {
   const form = forms.value.find((form) => form.product_fk == id)
-  if (form.num_adult > 1) {
+  if (form.num_adult > 0) {
     form.num_adult--
   }
 }
 
 const addToCart = (id) => {
+  if (
+    forms.value.find((form) => form.product_fk == id).num_child == 0 &&
+    forms.value.find((form) => form.product_fk == id).num_adult == 0
+  ) {
+    Swal.fire({
+      icon: 'error',
+      title: t('error'),
+      text: t('please_select_number_of_people')
+    })
+    return
+  }
+
   const form = forms.value.find((form) => form.product_fk == id)
   let cart = JSON.parse(localStorage.getItem('cart')) || []
   const existed = cart.find((item) => item.product_fk == id)
@@ -312,6 +324,18 @@ const addToCart = (id) => {
 }
 
 const buyNow = (id) => {
+  if (
+    forms.value.find((form) => form.product_fk == id).num_child == 0 &&
+    forms.value.find((form) => form.product_fk == id).num_adult == 0
+  ) {
+    Swal.fire({
+      icon: 'error',
+      title: t('error'),
+      text: t('please_select_number_of_people')
+    })
+    return
+  }
+
   const form = forms.value.find((form) => form.product_fk == id)
   let cart = JSON.parse(localStorage.getItem('cart')) || []
   const existed = cart.find((item) => item.product_fk == id)
@@ -329,11 +353,6 @@ const buyNow = (id) => {
   }
   localStorage.setItem('cart', JSON.stringify(cart))
   router.visit('/dat-ve/buoc2')
-}
-
-const focusInput = (event) => {
-  event.preventDefault()
-  event.target.focus()
 }
 
 function formatDateToYYYYMMDD(date = new Date()) {

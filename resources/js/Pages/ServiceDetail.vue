@@ -112,7 +112,7 @@
         <div class="swiper swiper-2">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
-            <template v-for="blog_related in blog?.menu?.blogs">
+            <template v-if="mounted" v-for="blog_related in blog?.menu?.blogs">
               <div
                 v-if="blog_related.id != blog.id"
                 @click.prevent="router.visit(`/${blog.menu.slug}/${blog_related.slug}`)"
@@ -158,7 +158,7 @@
 </template>
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
 import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
@@ -170,10 +170,11 @@ const props = defineProps({
 })
 
 const { t, locale } = useI18n()
-
 const app_url = import.meta.env.VITE_APP_URL
+const mounted = ref(false)
 
 onMounted(() => {
+  mounted.value = true
   document.querySelectorAll('button[data-target]').forEach((button) => {
     button.addEventListener('click', () => {
       const targetId = button.getAttribute('data-target')
@@ -196,7 +197,7 @@ onMounted(() => {
   })
 
   new Swiper('.swiper-2', {
-    loop: true,
+    loop: false,
     fadeEffect: { crossFade: true },
     speed: 1000,
     spaceBetween: 20,
@@ -248,7 +249,7 @@ function updateNavigationButtons(swiperInstance) {
 
 const cleanHTML = (html) => {
   // Loại bỏ toàn bộ thẻ HTML
-  return html.replace(/<\/?[^>]+(>|$)/g, '')
+  return html?.replace(/<\/?[^>]+(>|$)/g, '')
 }
 </script>
 <style scoped>

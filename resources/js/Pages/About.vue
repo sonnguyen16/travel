@@ -87,6 +87,7 @@
 
       <div id="slide" class="grid md:grid-cols-4 grid-cols-1 md:gap-4 mb-5">
         <div class="col-span-1 h-100 flex flex-col justify-end">
+          <h1 class="font-bold text-decoration-underline text-end text-[60px]">03</h1>
           <div class="swiper swiper-1">
             <div class="swiper-wrapper">
               <div v-for="(_, i) in 4" class="swiper-slide">

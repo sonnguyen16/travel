@@ -14,7 +14,7 @@
       <meta property="og:image" content="/images/logo.png" />
     </Head>
     <div class="container">
-      <div v-if="blogs.length > 0" id="service-1" class="md:pt-[150px] pt-[100px]">
+      <div v-if="blogs.length > 0 && mounted" id="service-1" class="md:pt-[150px] pt-[100px]">
         <div class="swiper swiper-1">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
@@ -209,14 +209,16 @@ const props = defineProps({
   menu: Object
 })
 const { t, locale } = useI18n()
+const mounted = ref(false)
 
 onMounted(async () => {
+  mounted.value = true
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const ScrollReveal = (await import('scrollreveal')).default
     const scrollReveal = ScrollReveal()
 
     new Swiper('.swiper-1', {
-      loop: true,
+      loop: false,
       fadeEffect: { crossFade: true },
       speed: 1000,
       spaceBetween: 20, // Khoảng cách giữa các item

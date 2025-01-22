@@ -37,19 +37,19 @@
               <hr />
               <ul class="list-unstyled flex flex-col gap-3">
                 <li>
-                  <a href="#">{{ $t('introduction') }}</a>
+                  <Link href="/ve-chung-toi">{{ $t('introduction') }}</Link>
                 </li>
                 <li>
-                  <a href="#">{{ $t('history') }}</a>
+                  <Link href="/tuyen-dung">{{ $t('recruitment') }}</Link>
                 </li>
                 <li>
-                  <a href="#">{{ $t('vision_mission') }}</a>
+                  <Link href="/trang/lien-he">{{ $t('contact') }}</Link>
                 </li>
                 <li>
-                  <a href="#">{{ $t('awards') }}</a>
+                  <Link href="/trang/cau-hoi-thuong-gap">{{ $t('faq') }}</Link>
                 </li>
                 <li>
-                  <a href="#">{{ $t('partners') }}</a>
+                  <Link href="/trang/ban-do-trang">{{ $t('site_map') }}</Link>
                 </li>
               </ul>
             </div>
@@ -58,22 +58,23 @@
               <hr />
               <ul class="list-unstyled flex flex-col gap-3">
                 <li>
-                  <a href="#">{{ $t('privacy_policy') }}</a>
+                  <Link href="/trang/quy-dinh-chung">{{ $t('general_terms') }}</Link>
                 </li>
                 <li>
-                  <a href="#">{{ $t('return_policy') }}</a>
+                  <Link href="/trang/quy-dinh-ve-thanh-toan">{{ $t('payment_policy') }}</Link>
                 </li>
                 <li>
-                  <a href="#">{{ $t('shipping_policy') }}</a>
+                  <Link href="/trang/quy-dinh-ve-xac-nhan-thong-tin-dat-phong">{{ $t('reservation_policy') }}</Link>
                 </li>
                 <li>
-                  <a href="#">{{ $t('payment_policy') }}</a>
+                  <Link href="/trang/chinh-sach-giai-quyet-tranh-chap">{{ $t('dispute_resolution') }}</Link>
                 </li>
                 <li>
-                  <a href="#">{{ $t('terms_of_use') }}</a>
+                  <Link href="/trang/chinh-sach-quyen-rieng-tu">{{ $t('privacy_policy') }}</Link>
                 </li>
               </ul>
             </div>
+
             <div class="col-lg-12">
               <h5 class="font-bold mb-3 text-white">{{ $t('subscribe') }}</h5>
               <div class="input-group mb-3">
@@ -94,19 +95,13 @@
         <div class="col-lg-3">
           <ul class="list-unstyled flex flex-col gap-3">
             <li>
-              <a href="#">{{ $t('license_number') }}: 123456789</a>
+              <a href="#">{{ $t('license_number') }}: 5800271921</a>
             </li>
             <li>
-              <a href="#">{{ $t('license_date') }}: 01/01/2021</a>
+              <a href="#">{{ $t('license_date') }}: 16/6/2000</a>
             </li>
             <li>
-              <a href="#">{{ $t('license_place') }}: Sở kế hoạch Đà Lạt</a>
-            </li>
-            <li>
-              <a href="#">{{ $t('address') }}: 123 Đường 3/2, Phường 12, Quận 10, TP.HCM</a>
-            </li>
-            <li>
-              <a href="#">{{ $t('phone') }}: 1900 1000</a>
+              <a href="#">{{ $t('license_place') }}: Sở kế hoạch đầu tư tỉnh Lâm Đồng</a>
             </li>
             <li>
               <a href="#">{{ $t('reserved') }}</a>
@@ -117,6 +112,10 @@
     </div>
   </footer>
 </template>
+
+<script setup>
+import { Link } from '@inertiajs/vue3'
+</script>
 
 <style>
 footer {

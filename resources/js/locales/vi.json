@@ -115,5 +115,20 @@
   "invalid_email": "Email không hợp lệ",
   "invalid_phone": "Số điện thoại không hợp lệ",
   "order_success": "Đặt hàng thành công",
-  "order_fail": "Đặt hàng thất bại"
+  "order_fail": "Đặt hàng thất bại",
+  "please_select_number_of_people": "Vui lòng chọn số lượng người",
+  "recruitment": "Tuyển dụng",
+  "contact": "Liên hệ",
+  "faq": "Câu hỏi thường gặp",
+  "site_map": "Bản đồ trang",
+  "general_terms": "Quy định chung",
+  "reservation_policy": "Quy định về xác nhận thông tin đặt phòng",
+  "dispute_resolution": "Chính sách giải quyết tranh chấp",
+  "other_news": "Tin tức khác",
+  "other_promotions": "Ưu đãi khác",
+  "news": "Tin tức",
+  "salary": "Lương",
+  "working_form": "Hình thức làm việc",
+  "unit": "Đơn vị",
+  "department": "Phòng ban"
 }
