@@ -19,7 +19,7 @@
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
             <template v-for="blog in blogs">
-              <div class="swiper-slide slide-1">
+              <div class="swiper-slide slide-1 hover:cursor-pointer">
                 <div
                   @click.prevent="router.visit(`/uu-dai/${blog.slug}`)"
                   class="rounded-xl shadow-xl bg-white position-relative h-100"
@@ -62,7 +62,7 @@
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
             <template v-for="product in products">
-              <div @click.prevent="router.visit('dat-ve/buoc1')" class="swiper-slide">
+              <div @click.prevent="router.visit('dat-ve/buoc1')" class="swiper-slide hover:cursor-pointer">
                 <div class="rounded-xl shadow-xl bg-white">
                   <div
                     class="img-container h-[200px]"

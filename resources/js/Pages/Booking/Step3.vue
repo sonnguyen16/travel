@@ -29,7 +29,11 @@
                 </div>
                 <!-- Item 3 -->
                 <div class="">
-                  <div class="w-6 h-6 bg-green-700 rounded-full text-center text-white ms-auto">3</div>
+                  <div
+                    class="w-6 h-6 bg-white rounded-full border-2 border-green-600 flex justify-center items-center text-green-600 ms-auto"
+                  >
+                    3
+                  </div>
                   <p class="mt-2 text-green-900 font-bold text-end">
                     {{ $t('timeline_step_3') }}
                   </p>
@@ -41,7 +45,7 @@
       </div>
 
       <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-8 order-lg-1 order-2">
           <div
             class="w-full mx-auto bg-white px-[20px] pt-[20px] pb-[30px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
           >
@@ -114,7 +118,7 @@
             </form>
           </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 order-lg-2 order-1">
           <div
             class="w-full mx-auto bg-white px-[20px] py-[20px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
           >

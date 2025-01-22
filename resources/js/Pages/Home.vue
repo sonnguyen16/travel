@@ -31,7 +31,7 @@
         <h1 class="mx-auto text-center mb-4">{{ $t('business_field') }}</h1>
         <div class="row">
           <div class="col-lg-5 mb-4">
-            <div @click.prevent="router.visit('/diem-den')" class="position-relative h-100">
+            <div @click.prevent="router.visit('/diem-den')" class="position-relative h-100 hover:cursor-pointer">
               <div class="img-container h-100">
                 <img src="@/Assets/images/home1.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
               </div>
@@ -46,7 +46,7 @@
           <div class="col-lg-7">
             <div class="row">
               <div @click.prevent="router.visit('/hoat-dong')" class="col-lg-6 mb-4">
-                <div class="position-relative h-100">
+                <div class="position-relative h-100 hover:cursor-pointer">
                   <div class="img-container h-100">
                     <img src="@/Assets/images/home2.jpg" alt="home1" class="w-full rounded-xl h-100" />
                   </div>
@@ -59,7 +59,7 @@
                 </div>
               </div>
               <div class="col-lg-6 mb-4">
-                <div @click.prevent="router.visit('/nha-hang')" class="position-relative h-100">
+                <div @click.prevent="router.visit('/nha-hang')" class="position-relative h-100 hover:cursor-pointer">
                   <div class="img-container h-100">
                     <img src="@/Assets/images/home3.jpg" alt="home1" class="w-full rounded-xl h-100" />
                   </div>
@@ -72,7 +72,7 @@
                 </div>
               </div>
               <div class="col-lg-6 mb-4">
-                <div @click.prevent="router.visit('/luu-tru')" class="position-relative h-100">
+                <div @click.prevent="router.visit('/luu-tru')" class="position-relative h-100 hover:cursor-pointer">
                   <div class="img-container h-100">
                     <img src="@/Assets/images/home4.jpg" alt="home1" class="w-full rounded-xl h-100" />
                   </div>
@@ -85,7 +85,7 @@
                 </div>
               </div>
               <div class="col-lg-6 mb-4">
-                <div @click.prevent="router.visit('/khac')" class="position-relative h-100">
+                <div @click.prevent="router.visit('/khac')" class="position-relative h-100 hover:cursor-pointer">
                   <div class="img-container h-100">
                     <img src="@/Assets/images/home5.jpg" alt="home1" class="w-full rounded-xl h-100" />
                   </div>

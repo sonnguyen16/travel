@@ -65,70 +65,80 @@
           </div>
         </div>
       </div>
-      <nav :class="[isFixed ? 'fixed mt-0' : 'mt-3', 'd-flex justify-between align-items-center flex-wrap pe-2']">
-        <div class="d-flex align-items-center lg:w-auto w-full justify-between gap-3">
-          <a @click.prevent="router.visit('/')" class="" href="#">
-            <img
-              :src="app_url + '/images/logo.png'"
-              :class="[isFixed ? 'w-[200px] ms-[20px] my-3' : 'w-[400px]']"
-              alt="logo"
-            />
-          </a>
-          <button
-            @click.prevent="showMenu = !showMenu"
-            style="background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1))"
-            class="btn d-lg-none hidden"
-          >
-            <i class="fas fa-bars text-white"></i>
-          </button>
-        </div>
-        <div v-if="showMenu" class="bg-green-600 h-[340px] py-3 lg:hidden w-full z-10 lg:mt-0 mt-2">
-          <ul class="flex mb-0 lg:flex-row flex-col gap-4 position-absolute justify-end">
-            <li @click="scrollToTopAndNavigate('/')">
-              <a style="color: white">{{ $t('home') }}</a>
-            </li>
-            <li @click="scrollToTopAndNavigate('/ve-chung-toi')">
-              <a style="color: white">{{ $t('about') }}</a>
-            </li>
-            <li @click="scrollToTopAndNavigate('/dich-vu')">
-              <a style="color: white">{{ $t('services') }}</a>
-            </li>
-            <li @click="scrollToTopAndNavigate('/uu-dai')">
-              <a style="color: white">{{ $t('promo') }}</a>
-            </li>
-            <li @click="scrollToTopAndNavigate('/dat-ve/buoc1')">
-              <a style="color: white">{{ $t('booking') }}</a>
-            </li>
-            <li @click="scrollToTopAndNavigate('/dat-ve/buoc2')">
-              <a style="color: white">
-                <i class="fas fa-shopping-cart text-white"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="py-3">
-          <ul class="mb-0 lg:flex hidden gap-4 justify-end">
-            <li @click="scrollToTopAndNavigate('/')" :class="[checkRoute('/')]">
-              <Link href="">{{ $t('home') }}</Link>
-            </li>
-            <li @click="scrollToTopAndNavigate('/ve-chung-toi')" :class="[checkRoute('/ve-chung-toi')]">
-              <Link href="">{{ $t('about') }}</Link>
-            </li>
-            <li @click="scrollToTopAndNavigate('/dich-vu')" :class="[checkRoute('/dich-vu')]">
-              <Link href="">{{ $t('services') }}</Link>
-            </li>
-            <li @click="scrollToTopAndNavigate('/uu-dai')" :class="[checkRoute('/uu-dai')]">
-              <Link href="">{{ $t('promo') }}</Link>
-            </li>
-            <li @click="scrollToTopAndNavigate('/dat-ve/buoc1')" :class="[checkRoute('/dat-ve/buoc1')]">
-              <Link href="">{{ $t('booking') }}</Link>
-            </li>
-            <li @click="scrollToTopAndNavigate('/dat-ve/buoc2')" :class="[checkRoute('/dat-ve/buoc2')]">
-              <a id="cart" href="#">
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-            </li>
-          </ul>
+      <nav :class="[isFixed ? 'fixed mt-0' : 'mt-3']">
+        <div :class="[isFixed ? 'container' : '', 'd-flex justify-between align-items-center']">
+          <div class="d-flex align-items-center lg:w-auto w-full justify-between">
+            <a @click.prevent="router.visit('/')" class="" href="#">
+              <img :src="app_url + '/images/logo.png'" :class="[isFixed ? 'w-[200px] my-3' : 'w-[400px]']" alt="logo" />
+            </a>
+            <button
+              @click.prevent="showMenu = !showMenu"
+              style="background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1))"
+              class="btn d-lg-none hidden"
+            >
+              <i class="fas fa-bars text-white"></i>
+            </button>
+          </div>
+          <div v-if="showMenu" class="bg-green-600 h-[340px] py-3 lg:hidden w-full z-10 lg:mt-0 mt-2">
+            <ul class="flex mb-0 lg:flex-row flex-col gap-4 position-absolute justify-end">
+              <li @click="scrollToTopAndNavigate('/')">
+                <a style="color: white">{{ $t('home') }}</a>
+              </li>
+              <li @click="scrollToTopAndNavigate('/ve-chung-toi')">
+                <a style="color: white">{{ $t('about') }}</a>
+              </li>
+              <li @click="scrollToTopAndNavigate('/dich-vu')">
+                <a style="color: white">{{ $t('services') }}</a>
+              </li>
+              <li @click="scrollToTopAndNavigate('/uu-dai')">
+                <a style="color: white">{{ $t('promo') }}</a>
+              </li>
+              <li @click="scrollToTopAndNavigate('/dat-ve/buoc1')">
+                <a style="color: white">{{ $t('booking') }}</a>
+              </li>
+              <li @click="scrollToTopAndNavigate('/dat-ve/buoc2')">
+                <a style="color: white" class="relative">
+                  <i class="fas fa-shopping-cart text-white"></i>
+                  <span
+                    v-if="cart.length"
+                    class="bg-red-500 text-white rounded-[50%] w-[20px] h-[20px] text-sm flex justify-center items-center absolute bottom-3 left-3"
+                  >
+                    {{ cart.reduce((acc, item) => acc + item.num_child + item.num_adult, 0) }}
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="py-3">
+            <ul class="mb-0 lg:flex hidden gap-4 justify-end">
+              <li @click="scrollToTopAndNavigate('/')" :class="[checkRoute('/')]">
+                <Link href="">{{ $t('home') }}</Link>
+              </li>
+              <li @click="scrollToTopAndNavigate('/ve-chung-toi')" :class="[checkRoute('/ve-chung-toi')]">
+                <Link href="">{{ $t('about') }}</Link>
+              </li>
+              <li @click="scrollToTopAndNavigate('/dich-vu')" :class="[checkRoute('/dich-vu')]">
+                <Link href="">{{ $t('services') }}</Link>
+              </li>
+              <li @click="scrollToTopAndNavigate('/uu-dai')" :class="[checkRoute('/uu-dai')]">
+                <Link href="">{{ $t('promo') }}</Link>
+              </li>
+              <li @click="scrollToTopAndNavigate('/dat-ve/buoc1')" :class="[checkRoute('/dat-ve/buoc1')]">
+                <Link href="">{{ $t('booking') }}</Link>
+              </li>
+              <li @click="scrollToTopAndNavigate('/dat-ve/buoc2')" :class="[checkRoute('/dat-ve/buoc2')]">
+                <a id="cart" href="#" class="relative">
+                  <i class="fas fa-shopping-cart"></i>
+                  <span
+                    v-if="cart.length"
+                    class="bg-red-500 text-white rounded-[50%] w-[20px] h-[20px] text-sm flex justify-center items-center absolute bottom-3 left-3"
+                  >
+                    {{ cart.reduce((acc, item) => acc + item.num_child + item.num_adult, 0) }}
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
     </div>
@@ -150,7 +160,7 @@
               <!-- Chọn ngày -->
               <div class="flex items-center">
                 <i class="far fa-calendar-alt text-green-600 text-lg md:text-2xl"></i>
-                <input type="date" class="border-0 form-control" />
+                <input type="date" class="border-0 lg:w-[55%] w-[100%] font-normal" />
               </div>
             </div>
             <div class="col-md-3 col-6">
@@ -189,6 +199,11 @@ const isDropdownOpen = ref(false)
 const page = usePage()
 const languages = computed(() => page.props.languages)
 const { t, locale } = useI18n()
+
+let cart = ref([])
+onMounted(() => {
+  cart.value = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
+})
 
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value

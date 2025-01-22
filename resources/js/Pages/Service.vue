@@ -18,7 +18,7 @@
         <div class="swiper swiper-1">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
-            <div v-for="blog in blogs" class="swiper-slide">
+            <div v-for="blog in blogs" class="swiper-slide hover:cursor-pointer">
               <div @click.prevent="router.visit(`/dich-vu/${blog.slug}`)" class="rounded-xl shadow-xl bg-white">
                 <div
                   class="img-container h-[350px]"

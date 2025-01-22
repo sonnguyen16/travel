@@ -15,7 +15,11 @@
               <div class="grid grid-cols-3 left-0 right-0 absolute translate-y-[-15%]">
                 <!-- Item 1 -->
                 <div class="">
-                  <div class="w-6 h-6 bg-green-700 rounded-full text-center text-white">1</div>
+                  <div
+                    class="w-6 h-6 bg-white rounded-full border-2 border-green-600 flex justify-center items-center text-green-600"
+                  >
+                    1
+                  </div>
                   <p class="mt-2 text-green-900 font-bold">
                     {{ $t('timeline_step_1') }}
                   </p>
@@ -91,7 +95,7 @@
                 v-model="forms.find((f) => f.product_fk == product.id).date"
                 type="date"
                 @mousedown="focusInput($event)"
-                class="border-none font-normal"
+                class="border-none font-normal w-[135px]"
               />
             </div>
           </div>

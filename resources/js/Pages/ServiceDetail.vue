@@ -52,6 +52,7 @@
                 }}
               </h4>
               <div
+                class="text-justify"
                 v-html="
                   blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
                   blog?.translations[0].content
@@ -115,7 +116,7 @@
               <div
                 v-if="blog_related.id != blog.id"
                 @click.prevent="router.visit(`/${blog.menu.slug}/${blog_related.slug}`)"
-                class="swiper-slide"
+                class="swiper-slide hover:cursor-pointer"
               >
                 <div class="rounded-xl shadow-xl bg-white">
                   <div

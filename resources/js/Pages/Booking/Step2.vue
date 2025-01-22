@@ -22,7 +22,11 @@
                 </div>
                 <!-- Item 2 -->
                 <div class="text-center">
-                  <div class="w-6 h-6 bg-green-700 rounded-full text-center text-white mx-auto">2</div>
+                  <div
+                    class="w-6 h-6 bg-white rounded-full border-2 border-green-600 flex justify-center items-center text-green-600 mx-auto"
+                  >
+                    2
+                  </div>
                   <p class="mt-2 text-green-900 font-bold">
                     {{ $t('timeline_step_2') }}
                   </p>
@@ -48,7 +52,7 @@
           >
             <div class="flex justify-between">
               <div>
-                <h2 class="font-bold">
+                <h2 class="font-bold text-[1.2rem]">
                   {{
                     products
                       .find((p) => p.id === c.product_fk)
@@ -64,7 +68,7 @@
                 </div>
               </div>
               <div>
-                <p class="text-center mb-0 text-[30px]">
+                <p class="text-center mb-0 text-[1.2rem]">
                   {{
                     products
                       .find((p) => p.id === c.product_fk)
@@ -75,7 +79,7 @@
                 </p>
               </div>
             </div>
-            <div class="flex justify-end mt-4">
+            <div class="flex justify-end mt-2">
               <div>
                 <div class="grid md:grid-cols-5 grid-cols-3 gap-5">
                   <div class="flex items-center">
@@ -129,17 +133,17 @@
           <div
             class="w-full mx-auto bg-white px-[20px] py-[20px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
           >
-            <h3>{{ $t('payment_detail') }}</h3>
+            <p class="font-bold">{{ $t('payment_detail') }}</p>
             <hr />
             <template v-for="c in cart">
-              <h5 class="mt-3">
+              <p class="mt-3 font-bold">
                 {{
                   products
                     .find((p) => p.id === c.product_fk)
                     ?.translations.find((t) => t.language.code === locale.toUpperCase())?.name ||
                   products.find((p) => p.id === c.product_fk)?.translations[0].name
                 }}
-              </h5>
+              </p>
               <div class="justify-between flex">
                 <p class="mb-1">
                   {{ c.num_child + ' ' + $t('children') }}
@@ -169,10 +173,10 @@
               <p class="mb-0">0đ</p>
             </div>
             <div class="flex justify-between">
-              <p class="mb-0">
+              <p class="mb-0 font-bold">
                 {{ $t('total') }}
               </p>
-              <p class="mb-0">
+              <p class="mb-0 font-bold">
                 {{
                   cart
                     .map((c) => c.price_child * c.num_child + c.price_adult * c.num_adult)

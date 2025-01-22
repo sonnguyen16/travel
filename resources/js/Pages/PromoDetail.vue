@@ -52,7 +52,11 @@
             <h4 class="">Ưu đãi khác</h4>
             <hr />
             <template v-for="blog_related in blog.menu.blogs">
-              <div v-if="blog.id != blog_related.id" class="flex gap-3 mb-4">
+              <div
+                v-if="blog.id != blog_related.id"
+                @click.prevent="router.visit(`/uu-dai/${blog_related.slug}`)"
+                class="flex gap-3 mb-4 hover:cursor-pointer"
+              >
                 <img
                   :src="BLOG_MEDIA_ENDPOINT + blog_related.image_fe?.picture"
                   alt="promo1"
