@@ -132,12 +132,12 @@ function updateNavigationButtons(swiperInstance) {
 
   // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
   if (totalSlides <= slidesPerView) {
-    if (document.getElementsByClassName('swiper-prev-2')) {
+    if (document.getElementsByClassName('swiper-prev-2').length > 0) {
       document.getElementsByClassName('swiper-prev-2')[0].style.display = 'none'
       document.getElementsByClassName('swiper-next-2')[0].style.display = 'none'
     }
   } else {
-    if (document.getElementsByClassName('swiper-prev-2')) {
+    if (document.getElementsByClassName('swiper-prev-2').length > 0) {
       document.getElementsByClassName('swiper-prev-2')[0].style.display = ''
       document.getElementsByClassName('swiper-next-2')[0].style.display = ''
     }
