@@ -87,10 +87,10 @@
 
       <div id="slide" class="grid md:grid-cols-4 grid-cols-1 md:gap-4 mb-5">
         <div class="col-span-1 h-100 flex flex-col justify-end">
-          <h1 class="font-bold text-decoration-underline text-end text-[60px]">03</h1>
-          <div class="swiper swiper-1">
+          <div v-if="mounted" class="swiper swiper-1 w-full">
             <div class="swiper-wrapper">
               <div v-for="(_, i) in 4" class="swiper-slide">
+                <div class="text-outline text-end pe-4">0{{ i + 1 }}</div>
                 <div class="slide-content-1">
                   <h2>{{ $t('content_title') }}</h2>
                   <p class="text-justify">{{ $t('content_paragraph') }}</p>
@@ -101,7 +101,7 @@
         </div>
         <div class="col-span-3">
           <div class="position-relative">
-            <div class="swiper swiper-2">
+            <div v-if="mounted" class="swiper swiper-2">
               <div class="swiper-wrapper flex items-end">
                 <!-- Slide 1 -->
                 <div class="swiper-slide intro-slide">
@@ -161,7 +161,10 @@ import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
 import { Head } from '@inertiajs/vue3'
 
+const mounted = ref(false)
+
 onMounted(async () => {
+  mounted.value = true
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const ScrollReveal = (await import('scrollreveal')).default
     const scrollReveal = ScrollReveal()
@@ -266,10 +269,6 @@ onMounted(async () => {
   height: 600px;
 }
 
-.swiper-1 {
-  width: 100%;
-  height: 250px; /* Điều chỉnh theo thiết kế */
-}
 .swiper-1 .swiper-wrapper {
   height: 100%; /* Đảm bảo các slide được hiển thị */
 }
@@ -370,5 +369,16 @@ onMounted(async () => {
 .swiper-button-prev:hover::after,
 .swiper-button-next:hover::after {
   color: white; /* Mũi tên màu trắng khi hover */
+}
+
+.text-outline {
+  font-size: 5rem; /* Kích thước chữ */
+  color: white; /* Màu chữ bên trong */
+  -webkit-text-stroke: 2px black; /* Viền chữ */
+  font-weight: bold; /* Làm chữ đậm */
+  text-decoration: underline; /* Gạch dưới */
+  text-decoration-color: brown; /* Màu viền dưới */
+  text-decoration-thickness: 4px; /* Độ dày của viền dưới */
+  text-underline-offset: 5px; /* Khoảng cách giữa chữ và viền */
 }
 </style>
