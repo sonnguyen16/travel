@@ -62,7 +62,7 @@
                 <img
                   :src="BLOG_MEDIA_ENDPOINT + blog_related.image_fe?.picture"
                   alt="promo1"
-                  class="w-[150px] object-cover rounded-xl"
+                  class="w-[150px] h-[100px] object-cover rounded-xl"
                 />
                 <div>
                   <p class="mb-0 line-clamp-3">

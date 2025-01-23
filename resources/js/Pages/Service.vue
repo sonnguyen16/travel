@@ -104,7 +104,7 @@
       <div id="service-4" class="md:pt-[100px] pt-[50px] pb-[50px]">
         <div v-if="blogs_related.length > 0 && mounted" class="swiper swiper-2">
           <div class="swiper-wrapper">
-            <div v-for="blog in blogs" class="swiper-slide hover:cursor-pointer">
+            <div v-for="blog in blogs_related" class="swiper-slide hover:cursor-pointer">
               <div @click.prevent="router.visit(`/dich-vu/${blog.slug}`)" class="rounded-xl shadow-xl bg-white">
                 <div
                   class="img-container h-[350px]"
