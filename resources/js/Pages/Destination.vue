@@ -90,6 +90,14 @@ onMounted(async () => {
         480: {
           slidesPerView: 1
         }
+      },
+      on: {
+        init: function () {
+          updateNavigationButtons(this)
+        },
+        resize: function () {
+          updateNavigationButtons(this)
+        }
       }
     })
 
@@ -103,6 +111,21 @@ onMounted(async () => {
     })
   }
 })
+
+function updateNavigationButtons(swiperInstance) {
+  const { slides, params } = swiperInstance
+  const slidesPerView = params.slidesPerView
+  const totalSlides = slides.length
+
+  // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
+  if (totalSlides <= slidesPerView) {
+    document.getElementsByClassName('swiper-prev-2')[0].style.display = 'none'
+    document.getElementsByClassName('swiper-next-2')[0].style.display = 'none'
+  } else {
+    document.getElementsByClassName('swiper-prev-2')[0].style.display = ''
+    document.getElementsByClassName('swiper-next-2')[0].style.display = ''
+  }
+}
 </script>
 <style scoped>
 .overlay {
