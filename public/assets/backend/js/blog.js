@@ -61,25 +61,47 @@ function getBlog(langId, langCode){
                 $('#active').iCheck('uncheck');
             }
 
+            // if (data.images) {
+            //     let picturesDiv = $('#pictures');
+            //     picturesDiv.empty();
+
+            //     data.images.forEach(function (item) {
+            //         let imageHtml = `
+            //             <div class="col-md-2" style="flex: 0 0 auto; position: relative; ">
+            //                 <div class="wrap-btn-delete" style="position: absolute;">
+            //                     <a href="/admin/blog/delete-img/${item.id}/${data.blog.id}">
+            //                         <span class="btn-delete-image" style="color: red; font-size: 15px; margin-left: 1px; background-color: white; padding: 0 5px"><b>x</b></span>
+            //                     </a>
+            //                 </div>
+            //                 <img style="width: 100px; height: 80px; background-size: contain; display: block;" src="/public/uploads/blogs/${item.picture}" alt="Blog Image">
+            //             </div>
+            //         `;
+
+            //         picturesDiv.append(imageHtml);
+            //     });
+            // }
             if (data.images) {
                 let picturesDiv = $('#pictures');
                 picturesDiv.empty();
-
+            
                 data.images.forEach(function (item) {
                     let imageHtml = `
-                        <div class="col-md-2" style="flex: 0 0 auto; position: relative; ">
+                        <div class="col-md-2" style="flex: 0 0 auto; position: relative; margin-bottom: 10px;">
                             <div class="wrap-btn-delete" style="position: absolute;">
-                                <a href="/admin/blog/delete-img/${item.id}">
-                                    <span class="btn-delete-image" style="color: red; font-size: 15px; margin-left: 1px; background-color: white; padding: 0 5px"><b>x</b></span>
-                                </a>
+                                <!-- Thêm thuộc tính data-id và data-blog-id -->
+                                <button class="btn-delete-image" data-id="${item.id}" data-blog-id="${data.blog.id}" data-lang-id="${langId}" style="color: red; font-size: 15px; margin-left: 1px; border-radius:2px; margin-top: 1px; background-color: white; padding: 0 5px; border: none; cursor: pointer;">
+                                    <b>x</b>
+                                </button>
                             </div>
                             <img style="width: 100px; height: 80px; background-size: contain; display: block;" src="/public/uploads/blogs/${item.picture}" alt="Blog Image">
                         </div>
                     `;
-
+            
                     picturesDiv.append(imageHtml);
                 });
             }
+            
+            
             CKEDITOR.instances['description'].setData(data.translation?.description ?? '') 
             CKEDITOR.instances['content'].setData(data.translation?.content ?? '') 
         },
@@ -88,3 +110,46 @@ function getBlog(langId, langCode){
         }
     })
 }
+
+$(document).on('click', '.btn-delete-image', function (e) {
+    e.preventDefault();
+
+    let imageId = $(this).data('id'); 
+    let blogId = $(this).data('blog-id');
+    let langId = $(this).data('lang-id');
+
+    if (confirm('Bạn có chắc muốn xóa ảnh này không?')) {
+        $.ajax({
+            url: `/admin/blog/delete-img/${imageId}/${blogId}/${langId}`,
+            type: 'DELETE',
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+            },
+            success: function (response) {
+                if (response.success) {
+                    let picturesDiv = $('#pictures');
+                    picturesDiv.empty();
+
+                    response.images.forEach(function (item) {
+                        let imageHtml = `
+                            <div class="col-md-2" style="flex: 0 0 auto; position: relative; margin-bottom: 10px;">
+                                <div class="wrap-btn-delete" style="position: absolute;">
+                                    <button class="btn-delete-image" data-id="${item.id}" data-blog-id="${blogId}" data-lang-id="${langId}" style="color: red; font-size: 15px; margin-left: 1px; border-radius:2px; margin-top: 1px; background-color: white; padding: 0 5px; border: none; cursor: pointer;">
+                                        <b>x</b>
+                                    </button>
+                                </div>
+                                <img style="width: 100px; height: 80px; background-size: contain; display: block;" src="/public/uploads/blogs/${item.picture}" alt="Blog Image">
+                            </div>
+                        `;
+                        picturesDiv.append(imageHtml);
+                    });
+                } else {
+                    alert('Xóa ảnh không thành công: ' + response.message);
+                }
+            },
+            error: function () {
+                alert('Đã xảy ra lỗi, vui lòng thử lại.');
+            },
+        });
+    }
+});

@@ -17,6 +17,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\UserHomeController;
 use App\Http\Controllers\UserBlogController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\LocationController;
 
 Route::get('/admin', [LoginController::class, 'login'])->name('backend.dashboard.login');
 Route::post('/check', [LoginController::class, 'check'])->name('backend.dashboard.login.check');
@@ -50,11 +51,16 @@ Route::prefix('/admin')->group(function () {
     Route::get('/menu/delete', [MenuController::class, 'delete'])->name('backend.dashboard.menu.delete');
     Route::get('/menu/delete-img', [MenuController::class,'deleteImg'])->name('backend.dashboard.menu.delete.img');
 
+    Route::get('/location', [LocationController::class, 'index'])->name('backend.dashboard.location.index');
+    Route::post('/location/store', [LocationController::class, 'store'])->name('backend.dashboard.location.store');
+    Route::get('/location/edit', [LocationController::class, 'edit'])->name('backend.dashboard.location.edit');
+    Route::get('/location/delete', [LocationController::class, 'delete'])->name('backend.dashboard.location.delete');
+
     Route::get('/blog', [BlogController::class,'index'])->name('backend.dashboard.blog.index');
 	Route::post('/blog/store', [BlogController::class,'store'])->name('backend.dashboard.blog.store');
 	Route::get('/blog/edit', [BlogController::class,'edit'])->name('backend.dashboard.blog.edit');
 	Route::get('/blog/delete', [BlogController::class,'delete'])->name('backend.dashboard.blog.delete');
-    Route::get('/product/delete-img/{id}', [BlogController::class,'deleteImg'])->name('backend.dashboard.blog.delete.img');
+    Route::delete('/blog/delete-img/{idImg}/{id}/{lang}', [BlogController::class, 'deleteImg'])->name('backend.dashboard.blog.delete.img');
 
     Route::prefix('/blog')->group(function () {
         Route::get('/activity', [ActivityController::class,'index'])->name('backend.dashboard.activity.index');

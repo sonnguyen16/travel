@@ -8,7 +8,7 @@ class Product extends Model
 {
     protected $table = 'products';
 	public $timestamps = true;
-	protected $fillable = ['id', 'slug', 'active', 'menu_id', 'price', 'price_child'];
+	protected $fillable = ['id', 'slug', 'active', 'location_id', 'price', 'price_child'];
 
 	public function user() {
 		return $this->belongsTo('App\Models\User', 'user_id');
@@ -18,8 +18,8 @@ class Product extends Model
 		if (!empty($this->user)) return $this->user->user_name;
 		return 'empty';
 	}
-	public function menu() {
-		return $this->belongsTo('App\Models\Menu', 'menu_id');
+	public function location() {
+		return $this->belongsTo('App\Models\Location', 'location_id');
 	}
 	public function image($language_id = 1)
     {

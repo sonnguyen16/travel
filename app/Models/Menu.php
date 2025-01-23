@@ -12,9 +12,7 @@ class Menu extends Model
 	public function user() {
 		return $this->belongsTo('App\Models\User', 'user_id');
 	}
-	public function Products() {
-		return $this->hasmany('App\Models\Product', 'menu_id');
-	}
+	
 	public function Projects() {
 		return $this->hasmany('App\Models\Project', 'menu_fk');
 	}

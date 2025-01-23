@@ -1,5 +1,5 @@
 <div id="myModal" class="modal fade" role="dialog" data-id="0">
-    <div class="modal-dialog" id="modal-dialog-delete">
+    <div class="modal-dialog" style="max-width: 500px;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -63,10 +63,10 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group " id="div-menu">
-                                    <label>Loại danh mục <span style="color: red">*</span></label>
-                                    <select name="menu_id" id="menu_id" class="form-control" required>
-                                        @foreach($menus as $item)
-                                            <option value="{{ $item->id }}" {{ $item->id == 4 ? 'selected' : '' }}>{{ $item->translation->name }}</option>
+                                    <label>Thuộc địa điểm <span style="color: red">*</span></label>
+                                    <select name="location_id" id="location_id" class="form-control" required>
+                                        @foreach($locations as $item)
+                                            <option value="{{ $item->id }}">{{ $item->translation->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -78,12 +78,12 @@
                         <input name="picture" id="picture" type="file" class="form-control" required>
                     </div>
                     <img src="" alt="Picture" style="width: 150px; margin-bottom: 15px;" id="image" hidden>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>Hình ảnh khác</label>
                         <input type="file" name="pictures[]" multiple class="form-control"></input>
                     </div>
                     <div class="row" style="display: flex; flex-wrap: wrap; gap: 10px;" id="pictures">
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label style="margin-top: 15px">
                             <input name="active" id="active" type="checkbox" class="flat-red"> Hoạt động

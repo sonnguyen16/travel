@@ -37,8 +37,10 @@
                             <tr>
                                 <td>{{$banner->item}}</td>
                                 <td>
-                                    <div class="picture" style="background-image: url('{{ asset('public/uploads/banners/'. $banner->image->picture) }}')">
+                                    @if($banner->image)
+                                    <div class="picture" style="background-image: url('{{ asset('public/uploads/banners/'. $banner->image?->picture ?? '') }}')">
                                     </div>
+                                    @endif
                                 </td>
                                 <td style="text-align: left; padding-left: 20px;">{{ $banner->name }} </td>
                                 <td>{{ $banner->link }} </td>

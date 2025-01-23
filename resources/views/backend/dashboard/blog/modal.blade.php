@@ -75,7 +75,7 @@
                             <label>Hình ảnh khác</label>
                             <input type="file" name="pictures[]" multiple class="form-control"></input>
                         </div>
-                        <div class="row" style="display: flex; flex-wrap: wrap; gap: 10px;" id="pictures">
+                        <div class="row" style="display: flex; flex-wrap: wrap;" id="pictures">
                         </div>
                         <div class="form-group">
                             <label style="margin-top: 15px">

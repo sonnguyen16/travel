@@ -4,6 +4,7 @@
   <title>ADMIN</title>
   <link rel="shortcut icon" type="image/jpg" href="/favicon.ico" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{ asset('assets/backend/themes/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/backend/themes/bower_components/font-awesome/css/font-awesome.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/backend/themes/bower_components/Ionicons/css/ionicons.min.css') }}">

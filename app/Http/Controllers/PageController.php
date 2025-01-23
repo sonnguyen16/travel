@@ -74,7 +74,6 @@ class PageController extends Controller
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
                 'content' => $request->input('content'),
-                'slug' => Str::slug($request->input('name'), '-', strtolower(Language::where('id', $request->language_id)->value('code')))
             ]
         );
 

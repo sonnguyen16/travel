@@ -19,7 +19,7 @@ $('#productModal').on('hidden.bs.modal', function () {
     $('#name').val('');
     $('#price').val('');
     $('#price_child').val('');
-    $('#menu_id').val('4');
+    $('#location_id').val('4');
     $('#active').iCheck('uncheck');
     $('#image').hide();
     $('#div-toggle').show();
@@ -57,10 +57,10 @@ function getProduct(langId, langCode) {
             $('#price').val(data.product.price ?? '');
             $('#price_child').val(data.product.price_child ?? '');
 
-            if (data.product.menu_id) {
-                $('#menu_id').val(data.product.menu_id);
+            if (data.product.location_id) {
+                $('#location_id').val(data.product.location_id);
             } else {
-                $('#menu_id').val('0');
+                $('#location_id').val('0');
             }
             if (data.image) {
                 $('#image').attr('src', '/public/uploads/products/' + data.image.picture).show();
@@ -72,25 +72,25 @@ function getProduct(langId, langCode) {
                 $('#active').iCheck('uncheck');
             }
 
-            if (data.images) {
-                let picturesDiv = $('#pictures');
-                picturesDiv.empty();
+            // if (data.images) {
+            //     let picturesDiv = $('#pictures');
+            //     picturesDiv.empty();
 
-                data.images.forEach(function (item) {
-                    let imageHtml = `
-                        <div class="col-md-2" style="flex: 0 0 auto; position: relative; ">
-                            <div class="wrap-btn-delete" style="position: absolute;">
-                                <a href="/admin/product/delete-img/${item.id}">
-                                    <span class="btn-delete-image" style="color: red; font-size: 15px; margin-left: 1px; background-color: white; padding: 0 5px"><b>x</b></span>
-                                </a>
-                            </div>
-                            <img style="width: 100px; height: 80px; background-size: contain; display: block;" src="/public/uploads/products/${item.picture}" alt="Product Image">
-                        </div>
-                    `;
+            //     data.images.forEach(function (item) {
+            //         let imageHtml = `
+            //             <div class="col-md-2" style="flex: 0 0 auto; position: relative; ">
+            //                 <div class="wrap-btn-delete" style="position: absolute;">
+            //                     <a href="/admin/product/delete-img/${item.id}">
+            //                         <span class="btn-delete-image" style="color: red; font-size: 15px; margin-left: 1px; background-color: white; padding: 0 5px"><b>x</b></span>
+            //                     </a>
+            //                 </div>
+            //                 <img style="width: 100px; height: 80px; background-size: contain; display: block;" src="/public/uploads/products/${item.picture}" alt="Product Image">
+            //             </div>
+            //         `;
 
-                    picturesDiv.append(imageHtml);
-                });
-            }
+            //         picturesDiv.append(imageHtml);
+            //     });
+            // }
             CKEDITOR.instances['description'].setData(data.translation?.description ?? '')
             CKEDITOR.instances['content'].setData(data.translation?.content ?? '')
         },

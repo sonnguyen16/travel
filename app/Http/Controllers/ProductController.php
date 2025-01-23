@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Menu;
+use App\Models\Location;
 use App\Models\Product;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
@@ -39,8 +40,8 @@ class ProductController extends Controller
             $query->where('active', $status);
         }
 
-        $products = $query->orderby('id', 'desc')->with('translation')->with('menu')->paginate(10);
-        $menus = Menu::where('menu_fk', 0)->orwhereNull('menu_fk')->get();
+        $products = $query->orderby('id', 'desc')->with('translation')->with('location')->paginate(10);
+        $locations = Location::all();
         $products->each(function ($product) {
             $languageIds = Translation::where('record_id', $product->id)->where('record_type', 'Product')->pluck('language_id');
     
@@ -52,7 +53,7 @@ class ProductController extends Controller
             'products'=>$products, 
             'status' => $status, 
             'title' => 'Danh sách vé',
-            'menus' => $menus,
+            'locations' => $locations,
         ]);
     }
 
@@ -60,7 +61,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'price' => 'required|numeric',
-            'menu_id' => 'required',
+            'location_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -70,7 +71,7 @@ class ProductController extends Controller
         $productData = [
             'price' => $request->price,
             'price_child' => $request->price_child,
-            'menu_id' => $request->menu_id,
+            'location_id' => $request->location_id,
             'active' => $request->active ? 1 : 0
         ];
 
@@ -163,6 +164,6 @@ class ProductController extends Controller
             unlink($path);
         }
         $img->delete();
-        return redirect()->back();
+        return redirect(route('backend.dashboard.product.index'));
     }
 }

@@ -11,32 +11,32 @@
                     <input type="text" id="id_p" name="id" value="" hidden>
                     <input name="super_user" id="super_user_p" type="text" hidden>
 
+                    <div class="form-group">
+                        <label>Tài khoản <span style="color: red">*</span></label>
+                        <input name="user_name" id="user_name_p" type="text" class="form-control" placeholder="Tên tài khoản..." required>
+                    </div> 
+                    @if (Auth::user()->super_user == 1)
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Tài khoản <span style="color: red">*</span></label>
-                                <input name="user_name" id="user_name_p" type="text" class="form-control" placeholder="Enter username..." required>
-                            </div>  
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Mật khẩu</label>
                                 <input name="password" id="password_p" type="password" class="form-control" placeholder="New Password...">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Xác nhận mật khẩu</label>
                                 <input name="password_confirmation" id="password_confirmation_p" type="password" class="form-control" placeholder="Retype New Password...">
                             </div>
                         </div>
                     </div>
+                    @endif
                     <hr>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Họ tên <span style="color: red">*</span></label>
-                                <input name="name" id="name_p" type="text" class="form-control" placeholder="Name..." required>
+                                <input name="name" id="name_p" type="text" class="form-control" placeholder="Họ tên..." required>
                             </div>
                             <div class="form-group">
                                 <label>Email <span style="color: red">*</span></label>
@@ -51,7 +51,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Số điện thoại <span style="color: red">*</span></label>
-                                <input name="phone" id="phone_p" type="tel" class="form-control" placeholder="Phone..." required>
+                                <input name="phone" id="phone_p" type="tel" class="form-control" placeholder="Số điện thoại..." required>
                             </div>
                             <div class="form-group">
                                 <label>Ngày sinh <span style="color: red">*</span></label>

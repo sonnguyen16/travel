@@ -38,7 +38,7 @@
                                 <th>Tiêu đề</th>
                                 <th>Giá người lớn</th>
                                 <th>Giá trẻ em</th>
-                                <th>Danh mục</th>
+                                <th>Địa điểm</th>
                                 <th style="width: 150px;">Bản dịch</th>
                                 <th style="width: 100px;">Trạng thái</th>
                                 <th style="width: 100px;">Thực hiện</th>
@@ -59,7 +59,7 @@
                                 </td>
                                 <td>{{$product->price}}</td>
                                 <td>{{$product->price_child}}</td>
-                                <td>{{ $product->menu->translation->name }}</td>
+                                <td>{{ $product->location?->translation?->name ?? ''}}</td>
                                 <td>{{ implode(', ', $product->language_codes->toArray()) }}</td>
                                 <td>
                                     @if ($product->active == 1)
