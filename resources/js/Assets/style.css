@@ -50,7 +50,7 @@ a {
 @media (min-width: 1400px) {
   /* Breakpoint xxl */
   .container {
-    max-width: 1160px; /* Giảm so với 1320px của Bootstrap */
+    max-width: 1160px;
   }
 }
 
@@ -59,4 +59,12 @@ select:focus,
 textarea:focus,
 button:focus {
   box-shadow: none !important;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none; /* Loại bỏ mũi tên trên Firefox */
+  appearance: none; /* Loại bỏ mũi tên trên trình duyệt hiện đại */
+  background: transparent; /* Loại bỏ nền */
+  padding-right: 20px; /* Đảm bảo không bị cắt nội dung */
 }

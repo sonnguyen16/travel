@@ -123,5 +123,6 @@
   "salary": "급여",
   "working_form": "근무 형태",
   "unit": "단위",
-  "department": "부서"
+  "department": "부서",
+  "notify": "알림"
 }

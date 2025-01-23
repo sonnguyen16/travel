@@ -217,9 +217,12 @@ const form = useForm({
 const confirmPayment = () => {
   if (!form.name || !form.phone || !form.email || !form.payment_method) {
     Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: t('fill_all_fields')
+      icon: 'warning',
+      title: t('notify'),
+      text: t('fill_all_fields'),
+      customClass: {
+        confirmButton: 'bg-green-600 text-white'
+      }
     })
     return
   }
@@ -228,9 +231,12 @@ const confirmPayment = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!emailRegex.test(form.email)) {
     Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: t('invalid_email')
+      icon: 'warning',
+      title: t('notify'),
+      text: t('invalid_email'),
+      customClass: {
+        confirmButton: 'bg-green-600 text-white'
+      }
     })
     return
   }
@@ -239,9 +245,12 @@ const confirmPayment = () => {
   const phoneRegex = /([0-9]{8})\b/
   if (!phoneRegex.test(form.phone)) {
     Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: t('invalid_phone')
+      icon: 'warning',
+      title: t('notify'),
+      text: t('invalid_phone'),
+      customClass: {
+        confirmButton: 'bg-green-600 text-white'
+      }
     })
     return
   }
@@ -251,7 +260,10 @@ const confirmPayment = () => {
       Swal.fire({
         icon: 'success',
         title: 'Success',
-        text: t('order_success')
+        text: t('order_success'),
+        customClass: {
+          confirmButton: 'bg-green-600 text-white'
+        }
       }).then(() => {
         localStorage.removeItem('cart')
         router.visit('/')
@@ -259,9 +271,12 @@ const confirmPayment = () => {
     },
     onError: () => {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: t('order_failed')
+        icon: 'warning',
+        title: t('notify'),
+        text: t('order_failed'),
+        customClass: {
+          confirmButton: 'bg-green-600 text-white'
+        }
       })
     }
   })

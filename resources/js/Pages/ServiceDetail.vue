@@ -54,16 +54,23 @@
               <div
                 class="text-justify"
                 v-html="
-                  blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
-                  blog?.translations[0].content
+                  blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+                  blog?.translations[0].description
                 "
               ></div>
             </div>
           </div>
         </div>
+        <div
+          class="text-justify mt-4"
+          v-html="
+            blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+            blog?.translations[0].description
+          "
+        ></div>
       </div>
 
-      <div class="row pt-5">
+      <div v-if="blog?.activities.length > 0" class="row pt-5">
         <h2 class="text-center mb-5 text-2xl font-bold">
           {{ t('service_detail.activities') }}
         </h2>

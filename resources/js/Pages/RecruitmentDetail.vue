@@ -144,11 +144,20 @@ import { BLOG_MEDIA_ENDPOINT, RECRUITMENT_MEDIA_ENDPOINT } from '@/Constants/end
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { Head, router } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
+import { defineProps, onMounted } from 'vue'
 
 const { t, locale } = useI18n()
 const props = defineProps({
   blog: Object,
   blogs: Object
+})
+
+onMounted(() => {
+  const img = document.querySelectorAll('.ql-editor img')
+  img.forEach((el) => {
+    el.classList.add('img-fluid')
+    el.style.height = 'auto'
+  })
 })
 
 const app_url = import.meta.env.VITE_APP_URL

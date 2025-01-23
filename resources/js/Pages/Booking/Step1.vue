@@ -65,7 +65,7 @@
         :key="index"
         class="w-full mx-auto bg-white px-[20px] pt-[20px] pb-[20px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
       >
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between items-center flex-wrap">
           <p class="font-bold mb-0 text-[1.2rem]">
             {{
               product.translations.find((item) => item.language.code === locale.toUpperCase())?.name ||
@@ -100,7 +100,7 @@
             </div>
           </div>
           <div class="col-span-2">
-            <div class="grid md:grid-cols-5 grid-cols-3 gap-5">
+            <div class="grid md:grid-cols-5 grid-cols-3 gap-3">
               <div class="flex items-center">
                 <label class="">{{ $t('children') }}</label>
               </div>
@@ -117,7 +117,7 @@
                   <i class="fas fa-plus text-green-600"></i>
                 </button>
               </div>
-              <div class="flex items-center justify-center gap-5 md:col-span-2 col-span-1">
+              <div class="flex items-center md:justify-between justify-center gap-5 md:col-span-2 col-span-1">
                 <p class="mb-0 text-gray-500 md:inline hidden">
                   {{ product.price_child.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{
                     $t('price_per_person')
@@ -132,7 +132,7 @@
                 </p>
               </div>
             </div>
-            <div class="grid md:grid-cols-5 grid-cols-3 gap-5">
+            <div class="grid md:grid-cols-5 grid-cols-3 gap-3">
               <div class="flex items-center">
                 <label class="">{{ $t('adults') }}</label>
               </div>
@@ -149,7 +149,7 @@
                   <i class="fas fa-plus text-green-600"></i>
                 </button>
               </div>
-              <div class="flex items-center justify-center gap-5 md:col-span-2 col-span-1">
+              <div class="flex items-center md:justify-between justify-center gap-5 md:col-span-2 col-span-1">
                 <p class="mb-0 text-gray-500 md:inline hidden">
                   {{ product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{
                     $t('price_per_person')
@@ -203,7 +203,7 @@
           <h4 class="">{{ $t(`other_promos_title`) }}</h4>
           <hr />
           <template v-for="blog_related in promo">
-            <div class="flex gap-3 mb-4">
+            <div class="flex gap-3 mb-4 hover:cursor-pointer">
               <img
                 :src="BLOG_MEDIA_ENDPOINT + blog_related.image_fe?.picture"
                 alt="promo1"
@@ -293,9 +293,12 @@ const addToCart = (id) => {
     forms.value.find((form) => form.product_fk == id).num_adult == 0
   ) {
     Swal.fire({
-      icon: 'error',
-      title: t('error'),
-      text: t('please_select_number_of_people')
+      icon: 'warning',
+      title: t('notify'),
+      text: t('please_select_number_of_people'),
+      customClass: {
+        confirmButton: 'bg-green-600 text-white'
+      }
     })
     return
   }
@@ -319,7 +322,10 @@ const addToCart = (id) => {
   Swal.fire({
     icon: 'success',
     title: t('success'),
-    text: t('add_to_cart_success')
+    text: t('add_to_cart_success'),
+    customClass: {
+      confirmButton: 'bg-green-600 text-white'
+    }
   })
 }
 
@@ -329,9 +335,12 @@ const buyNow = (id) => {
     forms.value.find((form) => form.product_fk == id).num_adult == 0
   ) {
     Swal.fire({
-      icon: 'error',
-      title: t('error'),
-      text: t('please_select_number_of_people')
+      icon: 'warning',
+      title: t('notify'),
+      text: t('please_select_number_of_people'),
+      customClass: {
+        confirmButton: 'bg-green-600 text-white'
+      }
     })
     return
   }

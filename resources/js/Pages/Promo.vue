@@ -74,23 +74,25 @@
                       class="w-full rounded-tr-xl rounded-tl-xl object-cover h-[200px]"
                     />
                   </div>
-                  <div class="p-3 grid grid-cols-3">
-                    <div class="col-span-2">
+                  <div class="p-3">
+                    <div class="">
                       <h5>
                         {{
                           product.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                           product.translations[0].name
                         }}
                       </h5>
-                      <p class="font-normal text-justify">
-                        <i class="fas fa-star text-yellow-400"></i>
-                        4.5
-                      </p>
-                    </div>
-                    <div class="rounded-xl bg-green-600 p-2 h-[40px] col-span-1">
-                      <p class="text-white text-center">
-                        {{ product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' + 'đ' }}
-                      </p>
+                      <div class="flex justify-between items-center">
+                        <p class="font-normal text-justify mb-0">
+                          <i class="fas fa-star text-yellow-400"></i>
+                          4.5
+                        </p>
+                        <div class="rounded-xl bg-green-600 px-3 py-1">
+                          <p class="text-white text-center mb-0">
+                            {{ product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' + 'đ' }}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

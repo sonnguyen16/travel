@@ -90,7 +90,7 @@
           <div v-if="mounted" class="swiper swiper-1 w-full">
             <div class="swiper-wrapper">
               <div v-for="(_, i) in 4" class="swiper-slide">
-                <div class="text-outline text-end pe-4">0{{ i + 1 }}</div>
+                <span _ngcontent-uxt-c152="" class="count"> 0{{ i + 1 }} </span>
                 <div class="slide-content-1">
                   <h2>{{ $t('content_title') }}</h2>
                   <p class="text-justify">{{ $t('content_paragraph') }}</p>
@@ -219,6 +219,7 @@ onMounted(async () => {
     })
 
     const swiper1 = new Swiper('.swiper-1', {
+      allowTouchMove: false,
       loop: true,
       speed: 1000,
       spaceBetween: 20,
@@ -388,5 +389,21 @@ onMounted(async () => {
   text-decoration-color: brown; /* Màu viền dưới */
   text-decoration-thickness: 4px; /* Độ dày của viền dưới */
   text-underline-offset: 5px; /* Khoảng cách giữa chữ và viền */
+}
+
+.count[_ngcontent-uxt-c152] {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: #003b05;
+  font-size: 120px;
+  line-height: 140px;
+  border-bottom: 4px solid #003b05;
+  margin-left: 120px;
+}
+
+@media (max-width: 768px) {
+  .count[_ngcontent-uxt-c152] {
+    margin-left: 200px;
+  }
 }
 </style>

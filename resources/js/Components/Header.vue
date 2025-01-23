@@ -4,10 +4,12 @@
     <div class="container pt-5 position absolute top-0 left-0 right-0 d-flex flex-column">
       <div class="d-flex align-items-center gap-3 justify-end">
         <div class="p-2 bg-green-600 rounded-xl">
-          <a class="sm:text-[16px] text-[11px] text-white text-decoration-none">{{ $t('hotline') }}</a>
+          <a href="tel:0123456789" class="sm:text-[16px] text-[10px] text-white text-decoration-none">{{
+            $t('hotline')
+          }}</a>
         </div>
         <div class="p-2 hover:bg-green-600 hover:rounded-[10px]">
-          <a class="sm:text-[16px] text-[11px] text-white text-decoration-none">{{ $t('register_login') }}</a>
+          <a href="/" class="sm:text-[16px] text-[10px] text-white text-decoration-none">{{ $t('register_login') }}</a>
         </div>
         <div>
           <div class="relative inline-block text-left">
@@ -174,7 +176,7 @@
             <div class="col-md-2 col-6 flex items-center lg:justify-center">
               <!-- Số lượng người -->
               <div class="flex items-center gap-2">
-                <i class="fas fa-user-friends text-green-600 text-lg md:text-2xl"></i>
+                <i class="fas fa-person text-green-600 text-lg md:text-2xl"></i>
                 <div class="flex flex-col items-center">
                   <label class="font-normal mb-0 text-sm" for="num_adult">Người lớn</label>
                   <div>
@@ -192,7 +194,7 @@
             <div class="col-md-2 col-6 flex items-center lg:justify-center">
               <!-- Số lượng người -->
               <div v-if="form.select != 4" class="flex items-center gap-2">
-                <i class="fas fa-user-friends text-green-600 text-lg md:text-2xl"></i>
+                <i class="fas fa-child text-green-600 text-lg md:text-2xl"></i>
                 <div class="flex flex-col items-center">
                   <label class="font-normal mb-0 text-sm" for="num_adult">Trẻ em</label>
                   <div>

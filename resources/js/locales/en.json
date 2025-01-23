@@ -130,5 +130,6 @@
   "salary": "Salary",
   "working_form": "Working Form",
   "unit": "Unit",
-  "department": "Department"
+  "department": "Department",
+  "notify": "Notify"
 }
