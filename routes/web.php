@@ -17,6 +17,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\UserHomeController;
 use App\Http\Controllers\UserBlogController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\LocationController;
 
 Route::get('/admin', [LoginController::class, 'login'])->name('backend.dashboard.login');
 Route::post('/check', [LoginController::class, 'check'])->name('backend.dashboard.login.check');
