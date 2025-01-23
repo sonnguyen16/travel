@@ -131,5 +131,8 @@
   "working_form": "Working Form",
   "unit": "Unit",
   "department": "Department",
-  "notify": "Notify"
+  "notify": "Notify",
+  "hot_news": "Hot News",
+  "newest_news": "Newest News",
+  "promotion": "Promotion"
 }

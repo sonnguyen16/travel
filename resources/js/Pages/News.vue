@@ -13,57 +13,183 @@
       />
       <meta property="og:image" content="/images/logo.png" />
     </Head>
-    <div class="container">
-      <h1 class="text-center mb-3 pt-[100px]">
-        {{ menu.translations.find((t) => t.language.code == locale.toUpperCase())?.name || menu.translations[0].name }}
-      </h1>
-      <div v-if="blogs.length > 0 && mounted" id="service-4" class="pb-[50px]">
-        <div class="swiper swiper-2">
-          <div class="swiper-wrapper">
-            <!-- Slide 1 -->
-            <div v-for="blog in blogs" class="swiper-slide hover:cursor-pointer">
-              <div @click.prevent="router.visit(`/${menu.slug}/${blog.slug}`)" class="rounded-xl shadow-xl bg-white">
-                <div
-                  class="img-container h-[350px]"
-                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
-                >
+    <div class="container pt-[100px]">
+      <h2 class="mb-3">{{ $t('hot_news') }}</h2>
+      <div class="row">
+        <div class="col-md-8 h-full mb-3">
+          <div
+            @click.prevent="router.visit(`/tin-tuc/${hot_blogs[0].slug}`)"
+            class="img-container w-full h-full hover:cursor-pointer"
+          >
+            <img
+              :src="BLOG_MEDIA_ENDPOINT + hot_blogs[0].image_fe?.picture"
+              alt="home1"
+              class="w-full object-cover rounded-lg h-full hover:cursor-pointer"
+            />
+            <div class="slide-content">
+              <h3 class="line-clamp-4">
+                {{
+                  hot_blogs[0].translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                  hot_blogs[0].translations[0].name
+                }}
+              </h3>
+              <div
+                class="text-description md:block hidden line-clamp-3"
+                v-html="
+                  hot_blogs[0].translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+                  hot_blogs[0].translations[0].description
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div @click.prevent="router.visit(`/tin-tuc/${hot_blogs[1].slug}`)" class="img-container w-full mb-3">
+            <img
+              :src="BLOG_MEDIA_ENDPOINT + hot_blogs[1].image_fe?.picture"
+              alt="home1"
+              class="w-full object-cover rounded-lg hover:cursor-pointer"
+            />
+            <div class="slide-content">
+              <h5 class="line-clamp-4">
+                {{
+                  hot_blogs[1].translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                  hot_blogs[1].translations[0].name
+                }}
+              </h5>
+            </div>
+          </div>
+          <div @click.prevent="router.visit(`/tin-tuc/${hot_blogs[2].slug}`)" class="img-container w-full">
+            <img
+              :src="BLOG_MEDIA_ENDPOINT + hot_blogs[2].image_fe?.picture"
+              alt="home1"
+              class="w-full object-cover rounded-lg hover:cursor-pointer"
+            />
+            <div class="slide-content">
+              <h5 class="line-clamp-4">
+                {{
+                  hot_blogs[2].translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                  hot_blogs[2].translations[0].name
+                }}
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="mb-3">{{ $t('newest_news') }}</h2>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row">
+            <template v-for="blog in blogs.data">
+              <div @click.prevent="router.visit(`/tin-tuc/${blog.slug}`)" class="col-md-6 mb-4 hover:cursor-pointer">
+                <div class="img-container w-full">
                   <img
                     :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
                     alt="home1"
-                    class="w-full rounded-tr-xl rounded-tl-xl object-cover"
+                    class="w-full object-cover rounded-lg hover:cursor-pointer"
                   />
                 </div>
-                <div class="p-3">
-                  <h3 class="line-clamp-4">
-                    {{
-                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
-                      blog.translations[0].name
-                    }}
-                  </h3>
-                  <div
-                    class="line-clamp-3"
-                    v-html="
-                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
-                      blog.translations[0].description
-                    "
-                  ></div>
-                </div>
+                <h5 class="line-clamp-2 mt-2">
+                  {{
+                    blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                    blog.translations[0].name
+                  }}
+                </h5>
+                <span>
+                  <i class="far fa-calendar-alt"></i>
+                  {{
+                    new Date(blog.created_at).toLocaleDateString(locale, {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })
+                  }}
+                </span>
+                <div
+                  class="line-clamp-3 mt-2"
+                  v-html="
+                    blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+                    blog.translations[0].description
+                  "
+                ></div>
+              </div>
+            </template>
+          </div>
+          <Pagination :all-data="blogs" @changePage="changePage" />
+        </div>
+        <div class="col-md-4">
+          <h4 class="">
+            {{ t('other_promotions') }}
+          </h4>
+          <hr />
+          <template v-for="blog_related in promo">
+            <div
+              @click.prevent="router.visit(`/uu-dai/${blog_related.slug}`)"
+              class="flex gap-3 mb-4 hover:cursor-pointer"
+            >
+              <img
+                :src="BLOG_MEDIA_ENDPOINT + blog_related.image_fe?.picture"
+                alt="promo1"
+                class="w-[150px] h-[100px] object-cover rounded-xl"
+              />
+              <div style="width: calc(100% - 150px)">
+                <p class="mb-0 line-clamp-3">
+                  {{
+                    blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                    blog_related.translations[0].name
+                  }}
+                </p>
+                <p class="text-sm mt-2">
+                  <i class="far fa-calendar"></i>
+                  {{
+                    new Date(blog_related.created_at).toLocaleDateString(locale, {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })
+                  }}
+                </p>
               </div>
             </div>
-          </div>
-          <!-- Navigation -->
-          <div class="swiper-button-next swiper-next-2"></div>
-          <div class="swiper-button-prev swiper-prev-2"></div>
+          </template>
+          <h4 class="">
+            {{ t('recruitment') }}
+          </h4>
+          <hr />
+          <template v-for="r in recruitment">
+            <div @click.prevent="router.visit(`/tuyen-dung/${r.slug}`)" class="flex gap-3 mb-4 hover:cursor-pointer">
+              <img
+                :src="RECRUITMENT_MEDIA_ENDPOINT + r.image_fe?.picture"
+                alt="promo1"
+                class="w-[150px] object-cover rounded-xl"
+              />
+              <div>
+                <p class="mb-0 line-clamp-3">
+                  {{
+                    r.translations.find((t) => t.language.code == locale.toUpperCase())?.name || r.translations[0].name
+                  }}
+                </p>
+                <p class="text-sm mt-2">
+                  <i class="far fa-calendar"></i>
+                  {{
+                    new Date(r.created_at).toLocaleDateString(locale, {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })
+                  }}
+                </p>
+              </div>
+            </div>
+          </template>
         </div>
-      </div>
-      <div v-else>
-        <h5 class="text-center mb-5">{{ $t('no_data') }}</h5>
       </div>
     </div>
   </MainLayout>
 </template>
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
+import Pagination from '@/Components/Pagination.vue'
 import { router, Head } from '@inertiajs/vue3'
 import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
@@ -73,12 +199,20 @@ import { BLOG_MEDIA_ENDPOINT, MEDIA_ENDPOINT } from '@/Constants/endpoint'
 
 const props = defineProps({
   blogs: Object,
-  menu: Object
+  menu: Object,
+  hot_blogs: Object,
+  promo: Object,
+  recruitment: Object
 })
 const { t, locale } = useI18n()
 const mounted = ref(false)
 
 onMounted(async () => {
+  const paragraphs = document.querySelectorAll('.text-description p')
+
+  paragraphs.forEach((p) => {
+    p.style.color = 'white'
+  })
   mounted.value = true
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const ScrollReveal = (await import('scrollreveal')).default
@@ -145,6 +279,12 @@ function updateNavigationButtons(swiperInstance) {
     }
   }
 }
+
+const changePage = (page) => {
+  router.visit(route('news', { page: page }), {
+    preserveState: true
+  })
+}
 </script>
 <style scoped>
 .overlay {
@@ -207,5 +347,16 @@ function updateNavigationButtons(swiperInstance) {
 .swiper-button-prev:hover::after,
 .swiper-button-next:hover::after {
   color: white; /* Mũi tên màu trắng khi hover */
+}
+
+.slide-content {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
 }
 </style>

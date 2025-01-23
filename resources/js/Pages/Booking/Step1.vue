@@ -203,7 +203,10 @@
           <h4 class="">{{ $t(`other_promos_title`) }}</h4>
           <hr />
           <template v-for="blog_related in promo">
-            <div class="flex gap-3 mb-4 hover:cursor-pointer">
+            <div
+              @click.prevent="router.visit(`/uu-dai/${blog_related.slug}`)"
+              class="flex gap-3 mb-4 hover:cursor-pointer"
+            >
               <img
                 :src="BLOG_MEDIA_ENDPOINT + blog_related.image_fe?.picture"
                 alt="promo1"

@@ -53,7 +53,7 @@
               {{ t('other_promotions') }}
             </h4>
             <hr />
-            <template v-for="blog_related in blog.menu.blogs">
+            <template v-for="blog_related in blog.menu.blogs.slice(0, 11)">
               <div
                 v-if="blog.id != blog_related.id"
                 @click.prevent="router.visit(`/uu-dai/${blog_related.slug}`)"

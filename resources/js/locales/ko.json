@@ -124,5 +124,8 @@
   "working_form": "근무 형태",
   "unit": "단위",
   "department": "부서",
-  "notify": "알림"
+  "notify": "알림",
+  "hot_news": "핫 뉴스",
+  "newest_news": "최신 뉴스",
+  "promotion": "프로모션"
 }
