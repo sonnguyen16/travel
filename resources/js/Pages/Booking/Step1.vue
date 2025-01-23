@@ -65,7 +65,7 @@
         :key="index"
         class="w-full mx-auto bg-white px-[20px] pt-[20px] pb-[20px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
       >
-        <div class="flex justify-between items-center flex-wrap">
+        <div class="md:flex justify-between items-center">
           <p class="font-bold mb-0 text-[1.2rem]">
             {{
               product.translations.find((item) => item.language.code === locale.toUpperCase())?.name ||
@@ -73,7 +73,7 @@
             }}
           </p>
           <div>
-            <p class="text-center mb-0 text-[1.2rem]">
+            <p class="text-end mb-0 text-[1.2rem]">
               {{ product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}
             </p>
           </div>

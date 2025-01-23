@@ -62,9 +62,5 @@ button:focus {
 }
 
 select {
-  -webkit-appearance: none;
-  -moz-appearance: none; /* Loại bỏ mũi tên trên Firefox */
-  appearance: none; /* Loại bỏ mũi tên trên trình duyệt hiện đại */
-  background: transparent; /* Loại bỏ nền */
-  padding-right: 20px; /* Đảm bảo không bị cắt nội dung */
+  padding-right: 35px !important; /* Đảm bảo không bị cắt nội dung */
 }
