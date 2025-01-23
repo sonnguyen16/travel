@@ -64,7 +64,7 @@
                   alt="promo1"
                   class="w-[150px] h-[100px] object-cover rounded-xl"
                 />
-                <div style="width: calc(100% -150px)">
+                <div style="width: calc(100% - 150px)">
                   <p class="mb-0 line-clamp-3">
                     {{
                       blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
