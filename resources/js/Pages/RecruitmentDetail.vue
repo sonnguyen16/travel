@@ -34,7 +34,7 @@
       <div class="pt-[100px]">
         <div class="row">
           <div class="col-lg-8">
-            <h2 class="text-center mb-5">
+            <h2 class="text-start mb-5">
               {{
                 blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                 blog.translations[0].name
