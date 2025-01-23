@@ -56,6 +56,11 @@
                     <i class="fa fa-bars"></i> <span>Danh mục</span>
                 </a>
             </li>
+            <li class="{{ Route::is('backend.dashboard.location.index') ? 'active' : '' }}">
+                <a href="{{ route('backend.dashboard.location.index') }}">
+                    <i class="fa fa-map-marker"></i> <span>Địa điểm</span>
+                </a>
+            </li>
            <li class="{{ Route::is('backend.dashboard.language.index') ? 'active' : '' }}">
                <a href="{{ route('backend.dashboard.language.index') }}">
                    <i class="fa fa-language"></i> <span>Ngôn ngữ</span>

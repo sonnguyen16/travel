@@ -97,6 +97,7 @@ class RecruitmentController extends Controller
                 'salary' => $request->salary,
                 'unit' => $request->unit,
                 'department' => $request->department,
+                'slug' => ''
             ]
         );
 

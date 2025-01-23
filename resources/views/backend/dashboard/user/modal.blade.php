@@ -22,23 +22,21 @@
                 <div class="modal-body">
                     @csrf
                     <input type="text" id="id" name="id" value="" hidden>
+                    <div class="form-group">
+                        <label>Tài khoản <span style="color: red">*</span></label>
+                        <input name="user_name" id="user_name" type="text" class="form-control" placeholder="Tên tài khoản..." required>
+                    </div> 
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Tài khoản <span style="color: red">*</span></label>
-                                <input name="user_name" id="user_name" type="text" class="form-control" placeholder="Enter username..." required>
-                            </div>  
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Mật khẩu</label>
-                                <input name="password" id="password" type="password" class="form-control" placeholder="New Password..." required>
+                                <input name="password" id="password" type="password" class="form-control" placeholder="Mật khẩu..." required>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Xác nhận mật khẩu</label>
-                                <input name="password_confirmation" id="password_confirmation" type="password" class="form-control" placeholder="Retype New Password...">
+                                <input name="password_confirmation" id="password_confirmation" type="password" class="form-control" placeholder="Xác nhận lại mật khẩu...">
                             </div>
                         </div>
                     </div>
@@ -47,7 +45,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Họ tên <span style="color: red">*</span></label>
-                                <input name="name" id="name" type="text" class="form-control" placeholder="Name..." required>
+                                <input name="name" id="name" type="text" class="form-control" placeholder="Họ tên..." required>
                             </div>
                             <div class="form-group">
                                 <label>Email <span style="color: red">*</span></label>
@@ -62,7 +60,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Số điện thoại <span style="color: red">*</span></label>
-                                <input name="phone" id="phone" type="tel" class="form-control" placeholder="Phone..." required>
+                                <input name="phone" id="phone" type="tel" class="form-control" placeholder="Số điện thoại..." required>
                             </div>
                             <div class="form-group">
                                 <label>Ngày sinh <span style="color: red">*</span></label>

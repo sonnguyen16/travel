@@ -51,8 +51,10 @@
                             <tr>
                                 <td><?php echo $i++ ?></td>
                                 <td>
-                                    <div class="picture" style="background-image: url('{{ asset('public/uploads/recruitments/'. $recruitment->image(1)->picture) }}')">
+                                    @if ($recruitment->image(1))
+                                    <div class="picture" style="background-image: url('{{ asset('public/uploads/recruitments/'. $recruitment->image(1)?->picture ?? '') }}')">
                                     </div>
+                                    @endif
                                 </td>
                                 <td>{{ $recruitment->translation->name }}</td>
                                 <td>{{ $recruitment->translation->address }}</td>

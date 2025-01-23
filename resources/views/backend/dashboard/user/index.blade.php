@@ -52,9 +52,9 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>
                                 @if ($user->super_user == 1)
-                                    <td><span class="label label-success">Super User</span></td>
+                                    <td><span class="label label-success">Admin</span></td>
                                 @else
-                                    <td><span class="label label-warning">Normal User</span></td>
+                                    <td><span class="label label-warning">Manager</span></td>
                                 @endif
                             
                                 @if (Auth::user()->super_user == 1)

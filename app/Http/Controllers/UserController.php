@@ -56,7 +56,7 @@ class UserController extends Controller
             'name' => 'required|string|max:100',
             'phone' => 'required|digits_between:9,15',
             'birthday' => 'required|date',
-            'password' => $request->has('id') ? 'require|min:6|confirmed' : 'nullable|min:6|confirmed',
+            'password' => $request->has('id') ? 'nullable|min:6|confirmed' : 'required|min:6|confirmed',
             'picture' => 'nullable',
         ]);
 
@@ -72,8 +72,11 @@ class UserController extends Controller
             'name' => $request->input('name'),
             'phone' => $request->input('phone'),
             'birthday' => $request->input('birthday'),
-            'super_user' => $request->has('super_user') ? 1 : 0,
         ];
+
+        if($request->has('id') && $request->id != Auth::user()->id){
+            $userData['super_user'] = $request->super_user ? 1 : 0;
+        }
 
         if ($request->filled('password')) {
             $userData['password'] = bcrypt($request->input('password'));

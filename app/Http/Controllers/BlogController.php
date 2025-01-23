@@ -179,13 +179,34 @@ class BlogController extends Controller
 
         return redirect(route('backend.dashboard.blog.index'));
     }
-    public function deleteImg($id){
-        $img = Image::where('id', $id)->first();
-        $path = 'public/uploads/blogs/' . $img->picture;
-        if (file_exists($path)) {
-            unlink($path);
+    // public function deleteImg($id){
+    //     $img = Image::where('id', $id)->first();
+    //     $path = 'public/uploads/blogs/' . $img->picture;
+    //     if (file_exists($path)) {
+    //         unlink($path);
+    //     }
+    //     $img->delete();
+    //     return redirect(route('backend.dashboard.blog.index'));
+    // }
+    public function deleteImg($idImg, $id, $lang)
+    {
+        $img = Image::find($idImg);
+
+        if ($img) {
+            $path = 'public/uploads/blogs/' . $img->picture;
+
+            if (file_exists($path)) {
+                unlink($path);
+            }
+
+            $img->delete();
+
+            $blog = Blog::find($id);
+            $images = $blog->images($lang);
+            return response()->json(['success' => true, 'images' => $images]);
         }
-        $img->delete();
-        return redirect()->back();
+
+        return response()->json(['success' => false, 'message' => 'Image not found']);
     }
+
 }

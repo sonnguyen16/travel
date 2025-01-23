@@ -46,7 +46,7 @@
                             <label>Tiêu đề <span style="color: red">*</span></label>
                             <label id="lang_code">VI</label>
                         </div>
-                        <input name="name" id="name" type="text" class="form-control" placeholder="Nhập tên vé ..." required>
+                        <input name="name" id="name" type="text" class="form-control" placeholder="Nhập tên hoạt động ..." required>
                     </div>
                     <div id="div-toggle">
                         <div class="form-group">

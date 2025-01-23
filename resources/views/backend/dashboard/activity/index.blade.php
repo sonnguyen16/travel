@@ -29,8 +29,10 @@
                             <tr>
                                 <td><?php echo $i++; ?></td>
                                 <td>
-                                    <div class="picture" style="background-image: url('{{ asset('public/uploads/activities/'. $activity->image->picture) }}')">
+                                    @if ($activity->image)
+                                    <div class="picture" style="background-image: url('{{ asset('public/uploads/activities/'. $activity->image?->picture ?? '') }}')">
                                     </div>
+                                    @endif
                                 </td>
                                 <td style="text-align: left; padding-left: 20px;">
                                     {{ $activity->translation->name }}
