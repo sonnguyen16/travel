@@ -307,7 +307,7 @@ onMounted(async () => {
   height: 600px;
 }
 
-.swiper-2 > .swiper-wrapper > .swiper-slide {
+.swiper-2 > .swiper-wrapper > .swiper-slide:not(.swiper-slide-active) {
   position: relative;
   overflow: hidden;
   height: 400px;
