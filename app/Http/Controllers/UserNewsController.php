@@ -4,28 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Models\Menu;
 use App\Models\Blog;
+use App\Models\Menu;
 
-class UserServiceController extends Controller
+class UserNewsController extends Controller
 {
     public function index(Request $request)
     {
+        $menu = Menu::query()
+            ->with('translations.language')
+            ->where('slug', 'tin-tuc')
+            ->first();
+
         $blogs = Blog::query()
-            ->whereHas('menu', function ($query) {
-                $query->where('slug', 'diem-den');
-            })
+            ->where('menu_id', $menu->id)
             ->with('translations.language', 'image_fe')
             ->get();
 
-        $blogs_related = Blog::query()
-        ->whereHas('menu', function ($query) {
-            $query->where('slug', 'nha-hang');
-        })
-        ->with('translations.language', 'image_fe')
-        ->get();
-
-        return Inertia::render('Service', compact('blogs', 'blogs_related'));
+        return Inertia::render('News', compact('blogs', 'menu'));
     }
 
     public function show(Request $request)
@@ -35,7 +31,7 @@ class UserServiceController extends Controller
         $blog = Blog::query()
             ->where('slug', $slug_blog)
             ->whereHas('menu', function ($query) {
-                $query->where('slug', 'diem-den');
+                $query->where('slug', 'tin-tuc');
             })
             ->with('translations.language','image_fe',
             'menu.blogs.translations.language',
@@ -43,6 +39,6 @@ class UserServiceController extends Controller
             'activities.translations.language')
             ->first();
 
-        return Inertia::render('ServiceDetail', compact('blog'));
+        return Inertia::render('NewsDetail', compact('blog'));
     }
 }

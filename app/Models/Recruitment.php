@@ -25,4 +25,9 @@ class Recruitment extends Model
 		return $this->hasMany('App\Models\RecruitmentTranslations', 'record_id', 'id');
 	}
 
+    public function image_fe()
+    {
+        return $this->hasOne('App\Models\Image', 'record_id', 'id')->where('record_type', 'Recruitment')->where('name', 'Picture');
+    }
+
 }

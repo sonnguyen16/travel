@@ -7,6 +7,7 @@ import ko from './locales/ko.json';
 
 // Tạo cấu hình i18n
 const i18n = createI18n({
+    legacy: false, // Sử dụng Composition API
     locale: 'vi', // Ngôn ngữ mặc định
     fallbackLocale: 'en', // Sử dụng tiếng Anh nếu không có bản dịch
     messages: {

@@ -1,4 +1,34 @@
 <template>
+  <Head>
+    <title>
+      {{ blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name || blog.translations[0].name }}
+    </title>
+    <meta
+      name="description"
+      :content="
+        cleanHTML(
+          blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+            blog.translations[0].description
+        )
+      "
+    />
+    <meta
+      property="og:title"
+      :content="
+        blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name || blog.translations[0].name
+      "
+    />
+    <meta
+      property="og:description"
+      :content="
+        cleanHTML(
+          blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+            blog.translations[0].description
+        )
+      "
+    />
+    <meta property="og:image" :content="app_url + BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture" />
+  </Head>
   <MainLayout>
     <div class="container">
       <div class="lg:pt-[150px] pt-[80px]">
@@ -7,7 +37,7 @@
             <div class="col-lg-5">
               <div class="position-relative w-full md:h-[260px] h-[250px]">
                 <img
-                  :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
+                  :src="BLOG_MEDIA_ENDPOINT + blog?.image_fe?.picture"
                   alt="home1"
                   style="box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3)"
                   class="w-full rounded-xl object-cover position-absolute lg:top-[-40px] max-h-[260px]"
@@ -16,26 +46,40 @@
             </div>
             <div class="col-lg-7 lg:pe-5 lg:pt-3">
               <h4>
-                {{ blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name }}
+                {{
+                  blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                  blog?.translations[0].name
+                }}
               </h4>
-              <div v-html="blog.translations.find((t) => t.language.code == locale.toUpperCase())?.content"></div>
+              <div
+                class="text-justify"
+                v-html="
+                  blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
+                  blog?.translations[0].content
+                "
+              ></div>
             </div>
           </div>
         </div>
       </div>
 
       <div class="row pt-5">
-        <h2 class="text-center mb-5 text-2xl font-bold">Hoạt động nổi bật</h2>
+        <h2 class="text-center mb-5 text-2xl font-bold">
+          {{ t('service_detail.activities') }}
+        </h2>
         <div class="space-y-0 divide-y divide-gray-300">
           <!-- Collapse Item 1 -->
-          <div v-for="(product, index) in blog.activities" class="border-none">
+          <div v-for="(product, index) in blog?.activities" class="border-none">
             <button
               :class="[index == 0 ? 'rounded-t-xl' : '', index == blog.activities.length - 1 ? 'rounded-b-xl' : '']"
               class="w-full flex justify-between items-center px-4 py-3 border-green-600 border bg-gray-100 hover:bg-gray-200 font-semibold"
               :data-target="`collapse${index + 1}`"
             >
               <span>
-                {{ product.translations.find((t) => t.language.code == locale.toUpperCase())?.name }}
+                {{
+                  product.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                  product.translations[0].name
+                }}
               </span>
               <svg
                 class="w-5 h-5 transform transition-transform duration-300"
@@ -48,7 +92,12 @@
               </svg>
             </button>
             <div :id="`collapse${index + 1}`" class="hidden p-4 bg-gray-50 overflow-hidden transition-all duration-500">
-              <div v-html="product.translations.find((t) => t.language.code == locale.toUpperCase())?.content"></div>
+              <div
+                v-html="
+                  product.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
+                  product.translations[0].content
+                "
+              ></div>
             </div>
           </div>
 
@@ -57,15 +106,17 @@
       </div>
 
       <div class="pt-[50px] lg:pb-[100px] pb-[30px]">
-        <h2 class="text-center mb-4">Điểm đến hấp dẫn khác</h2>
+        <h2 class="text-center mb-4">
+          {{ t('service_detail.related_services') }}
+        </h2>
         <div class="swiper swiper-2">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
-            <template v-for="blog_related in blog.menu.blogs">
+            <template v-if="mounted" v-for="blog_related in blog?.menu?.blogs">
               <div
                 v-if="blog_related.id != blog.id"
                 @click.prevent="router.visit(`/${blog.menu.slug}/${blog_related.slug}`)"
-                class="swiper-slide"
+                class="swiper-slide hover:cursor-pointer"
               >
                 <div class="rounded-xl shadow-xl bg-white">
                   <div
@@ -79,13 +130,17 @@
                     />
                   </div>
                   <div class="p-3">
-                    <h3 class="text-xl font-semibold">
-                      {{ blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.name }}
+                    <h3 class="text-xl font-semibold line-clamp-1">
+                      {{
+                        blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                        blog_related.translations[0].name
+                      }}
                     </h3>
                     <div
                       class="line-clamp-4"
                       v-html="
-                        blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.description
+                        blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+                        blog_related.translations[0].description
                       "
                     ></div>
                   </div>
@@ -103,20 +158,23 @@
 </template>
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
 import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import { useI18n } from 'vue-i18n'
-import { router } from '@inertiajs/vue3'
+import { router, Head } from '@inertiajs/vue3'
 
 const props = defineProps({
   blog: Object
 })
 
 const { t, locale } = useI18n()
+const app_url = import.meta.env.VITE_APP_URL
+const mounted = ref(false)
 
 onMounted(() => {
+  mounted.value = true
   document.querySelectorAll('button[data-target]').forEach((button) => {
     button.addEventListener('click', () => {
       const targetId = button.getAttribute('data-target')
@@ -139,7 +197,7 @@ onMounted(() => {
   })
 
   new Swiper('.swiper-2', {
-    loop: true,
+    loop: false,
     fadeEffect: { crossFade: true },
     speed: 1000,
     spaceBetween: 20,
@@ -177,12 +235,21 @@ function updateNavigationButtons(swiperInstance) {
 
   // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
   if (totalSlides <= slidesPerView) {
-    document.getElementsByClassName('swiper-prev-2')[0].style.display = 'none'
-    document.getElementsByClassName('swiper-next-2')[0].style.display = 'none'
+    if (document.getElementsByClassName('swiper-prev-2').length > 0) {
+      document.getElementsByClassName('swiper-prev-2')[0].style.display = 'none'
+      document.getElementsByClassName('swiper-next-2')[0].style.display = 'none'
+    }
   } else {
-    document.getElementsByClassName('swiper-prev-2')[0].style.display = ''
-    document.getElementsByClassName('swiper-next-2')[0].style.display = ''
+    if (document.getElementsByClassName('swiper-prev-2').length > 0) {
+      document.getElementsByClassName('swiper-prev-2')[0].style.display = ''
+      document.getElementsByClassName('swiper-next-2')[0].style.display = ''
+    }
   }
+}
+
+const cleanHTML = (html) => {
+  // Loại bỏ toàn bộ thẻ HTML
+  return html?.replace(/<\/?[^>]+(>|$)/g, '')
 }
 </script>
 <style scoped>

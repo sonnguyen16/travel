@@ -1,5 +1,18 @@
 <template>
   <MainLayout>
+    <Head>
+      <title>Đà Lạt Tourist</title>
+      <meta
+        name="description"
+        content="Dalattourist - Công ty du lịch - dịch vụ - lữ hành lâu đời nhất tại Đà Lạt. Được thành lập từ năm 1976, Dalattourist tiên phong cung cấp những dịch vụ du lịch gắn liền với thiên nhiên, văn hóa và bản sắc Đà Lạt."
+      />
+      <meta property="og:title" content="Đà Lạt Tourist" />
+      <meta
+        property="og:description"
+        content="Dalattourist - Công ty du lịch - dịch vụ - lữ hành lâu đời nhất tại Đà Lạt. Được thành lập từ năm 1976, Dalattourist tiên phong cung cấp những dịch vụ du lịch gắn liền với thiên nhiên, văn hóa và bản sắc Đà Lạt."
+      />
+      <meta property="og:image" content="/images/logo.png" />
+    </Head>
     <div class="container">
       <div class="row pt-[100px]">
         <div id="about-1" class="col-lg-6">
@@ -36,7 +49,7 @@
               <div class="w-full border-t-2 border-green-700"></div>
             </div>
             <!-- Timeline Content -->
-            <div class="grid grid-cols-5 absolute md:translate-y-[-10%] translate-y-[-6%]">
+            <div class="grid grid-cols-5 gap-4 absolute md:translate-y-[-10%] translate-y-[-6%]">
               <!-- Item 1 -->
               <div class="text-center col-span-1">
                 <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
@@ -74,9 +87,10 @@
 
       <div id="slide" class="grid md:grid-cols-4 grid-cols-1 md:gap-4 mb-5">
         <div class="col-span-1 h-100 flex flex-col justify-end">
-          <div class="swiper swiper-1">
+          <div v-if="mounted" class="swiper swiper-1 w-full">
             <div class="swiper-wrapper">
               <div v-for="(_, i) in 4" class="swiper-slide">
+                <div class="text-outline text-end pe-4">0{{ i + 1 }}</div>
                 <div class="slide-content-1">
                   <h2>{{ $t('content_title') }}</h2>
                   <p class="text-justify">{{ $t('content_paragraph') }}</p>
@@ -87,11 +101,16 @@
         </div>
         <div class="col-span-3">
           <div class="position-relative">
-            <div class="swiper swiper-2">
+            <div v-if="mounted" class="swiper swiper-2">
               <div class="swiper-wrapper flex items-end">
                 <!-- Slide 1 -->
-                <div class="swiper-slide intro-slide">
-                  <img src="@/Assets/images/about3.jpg" alt="slide 1" class="w-full object-cover" />
+                <div class="swiper-slide intro-slide" :class="[moved == false ? 'h-[600px]' : '']">
+                  <img
+                    src="@/Assets/images/about3.jpg"
+                    alt="slide 1"
+                    :class="[moved == false ? 'h-[600px]' : '']"
+                    class="w-full object-cover"
+                  />
                   <div class="slide-content">
                     <h2>{{ $t('slide_1_title') }}</h2>
                     <p>{{ $t('slide_1_desc') }}</p>
@@ -145,13 +164,19 @@ import MainLayout from '@/Layouts/MainLayout.vue'
 import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
+import { Head } from '@inertiajs/vue3'
+
+const mounted = ref(false)
+const moved = ref(false)
 
 onMounted(async () => {
+  mounted.value = true
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const ScrollReveal = (await import('scrollreveal')).default
     const scrollReveal = ScrollReveal()
 
     const swiper = new Swiper('.swiper-2', {
+      allowTouchMove: false,
       loop: true,
       fadeEffect: { crossFade: true },
       speed: 1000,
@@ -175,6 +200,7 @@ onMounted(async () => {
 
     // Gắn sự kiện slideChange
     swiper.on('slideChange', () => {
+      moved.value = true
       // Xóa lớp active-slide khỏi tất cả các slide
       const slides = document.querySelectorAll('.swiper-slide')
       slides.forEach((slide) => slide.classList.remove('active-slide'))
@@ -251,10 +277,6 @@ onMounted(async () => {
   height: 600px;
 }
 
-.swiper-1 {
-  width: 100%;
-  height: 250px; /* Điều chỉnh theo thiết kế */
-}
 .swiper-1 .swiper-wrapper {
   height: 100%; /* Đảm bảo các slide được hiển thị */
 }
@@ -285,7 +307,7 @@ onMounted(async () => {
   height: 600px;
 }
 
-.swiper-2 > .swiper-wrapper > .swiper-slide {
+.swiper-2 > .swiper-wrapper > .swiper-slide:not(.swiper-slide-active) {
   position: relative;
   overflow: hidden;
   height: 400px;
@@ -355,5 +377,16 @@ onMounted(async () => {
 .swiper-button-prev:hover::after,
 .swiper-button-next:hover::after {
   color: white; /* Mũi tên màu trắng khi hover */
+}
+
+.text-outline {
+  font-size: 5rem; /* Kích thước chữ */
+  color: white; /* Màu chữ bên trong */
+  -webkit-text-stroke: 2px black; /* Viền chữ */
+  font-weight: bold; /* Làm chữ đậm */
+  text-decoration: underline; /* Gạch dưới */
+  text-decoration-color: brown; /* Màu viền dưới */
+  text-decoration-thickness: 4px; /* Độ dày của viền dưới */
+  text-underline-offset: 5px; /* Khoảng cách giữa chữ và viền */
 }
 </style>

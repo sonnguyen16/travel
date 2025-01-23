@@ -1,12 +1,25 @@
 <template>
   <MainLayout>
+    <Head>
+      <title>Ưu đãi</title>
+      <meta
+        name="description"
+        content="Dalattourist - Công ty du lịch - dịch vụ - lữ hành lâu đời nhất tại Đà Lạt. Được thành lập từ năm 1976, Dalattourist tiên phong cung cấp những dịch vụ du lịch gắn liền với thiên nhiên, văn hóa và bản sắc Đà Lạt."
+      />
+      <meta property="og:title" content="Ưu đãi" />
+      <meta
+        property="og:description"
+        content="Dalattourist - Công ty du lịch - dịch vụ - lữ hành lâu đời nhất tại Đà Lạt. Được thành lập từ năm 1976, Dalattourist tiên phong cung cấp những dịch vụ du lịch gắn liền với thiên nhiên, văn hóa và bản sắc Đà Lạt."
+      />
+      <meta property="og:image" content="/images/logo.png" />
+    </Head>
     <div class="container">
       <div id="promo-1" class="pt-[100px]">
-        <div class="swiper swiper-1">
+        <div v-if="blogs?.length > 0 && mounted" class="swiper swiper-1">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
             <template v-for="blog in blogs">
-              <div class="swiper-slide slide-1">
+              <div class="swiper-slide slide-1 hover:cursor-pointer">
                 <div
                   @click.prevent="router.visit(`/uu-dai/${blog.slug}`)"
                   class="rounded-xl shadow-xl bg-white position-relative h-100"
@@ -19,7 +32,7 @@
                     />
                   </div>
                   <div class="p-3 position-absolute bottom-0 rounded-xl left-0 right-0 overlay1 h-[150px]">
-                    <h3 class="text-white mt-5">
+                    <h3 class="text-white mt-5 line-clamp-2">
                       {{
                         blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                         blog.translations[0].name
@@ -48,9 +61,9 @@
         <div class="swiper swiper-2" style="height: 350px">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
-            <template v-for="product in products">
-              <div class="swiper-slide">
-                <div @click.prevent="" class="rounded-xl shadow-xl bg-white">
+            <template v-if="mounted" v-for="product in products">
+              <div @click.prevent="router.visit('dat-ve/buoc1')" class="swiper-slide hover:cursor-pointer">
+                <div class="rounded-xl shadow-xl bg-white">
                   <div
                     class="img-container h-[200px]"
                     style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
@@ -94,7 +107,7 @@
 </template>
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
-import { router } from '@inertiajs/vue3'
+import { router, Head } from '@inertiajs/vue3'
 import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
@@ -106,14 +119,16 @@ const props = defineProps({
   blogs: Object,
   products: Object
 })
+const mounted = ref(false)
 
 onMounted(async () => {
+  mounted.value = true
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const ScrollReveal = (await import('scrollreveal')).default
     const scrollReveal = ScrollReveal()
 
     new Swiper('.swiper-1', {
-      loop: true,
+      loop: false,
       fadeEffect: { crossFade: true },
       speed: 1000,
       spaceBetween: 20, // Khoảng cách giữa các item
@@ -143,7 +158,7 @@ onMounted(async () => {
     })
 
     new Swiper('.swiper-2', {
-      loop: true,
+      loop: false,
       fadeEffect: { crossFade: true },
       speed: 1000,
       spaceBetween: 20, // Khoảng cách giữa các item
@@ -219,11 +234,15 @@ function updateNavigationButtons(swiperInstance) {
 
   // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
   if (totalSlides <= slidesPerView) {
-    document.getElementsByClassName('swiper-prev-1')[0].style.display = 'none'
-    document.getElementsByClassName('swiper-next-1')[0].style.display = 'none'
+    if (document.getElementsByClassName('swiper-prev-1').length > 0) {
+      document.getElementsByClassName('swiper-prev-1')[0].style.display = 'none'
+      document.getElementsByClassName('swiper-next-1')[0].style.display = 'none'
+    }
   } else {
-    document.getElementsByClassName('swiper-prev-1')[0].style.display = ''
-    document.getElementsByClassName('swiper-next-1')[0].style.display = ''
+    if (document.getElementsByClassName('swiper-prev-1').length > 0) {
+      document.getElementsByClassName('swiper-prev-1')[0].style.display = ''
+      document.getElementsByClassName('swiper-next-1')[0].style.display = ''
+    }
   }
 }
 
@@ -234,11 +253,15 @@ function updateNavigationButtons1(swiperInstance) {
 
   // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
   if (totalSlides <= slidesPerView) {
-    document.getElementsByClassName('swiper-prev-2')[0].style.display = 'none'
-    document.getElementsByClassName('swiper-next-2')[0].style.display = 'none'
+    if (document.getElementsByClassName('swiper-prev-2').length > 0) {
+      document.getElementsByClassName('swiper-prev-2')[0].style.display = 'none'
+      document.getElementsByClassName('swiper-next-2')[0].style.display = 'none'
+    }
   } else {
-    document.getElementsByClassName('swiper-prev-2')[0].style.display = ''
-    document.getElementsByClassName('swiper-next-2')[0].style.display = ''
+    if (document.getElementsByClassName('swiper-prev-2').length > 0) {
+      document.getElementsByClassName('swiper-prev-2')[0].style.display = ''
+      document.getElementsByClassName('swiper-next-2')[0].style.display = ''
+    }
   }
 }
 </script>

@@ -34,14 +34,14 @@
                   />
                 </div>
                 <div class="p-3">
-                  <h3 class="line-clamp-1">
+                  <h3 class="line-clamp-4">
                     {{
                       blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                       blog.translations[0].name
                     }}
                   </h3>
                   <div
-                    class="line-clamp-6"
+                    class="line-clamp-3"
                     v-html="
                       blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
                       blog.translations[0].description

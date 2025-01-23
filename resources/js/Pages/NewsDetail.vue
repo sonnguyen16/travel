@@ -50,13 +50,13 @@
           </div>
           <div class="col-lg-4">
             <h4 class="">
-              {{ t('other_promotions') }}
+              {{ t('other_news') }}
             </h4>
             <hr />
             <template v-for="blog_related in blog.menu.blogs">
               <div
                 v-if="blog.id != blog_related.id"
-                @click.prevent="router.visit(`/uu-dai/${blog_related.slug}`)"
+                @click.prevent="router.visit(`/tin-tuc/${blog_related.slug}`)"
                 class="flex gap-3 mb-4 hover:cursor-pointer"
               >
                 <img

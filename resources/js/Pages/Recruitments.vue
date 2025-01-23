@@ -15,33 +15,33 @@
     </Head>
     <div class="container">
       <h1 class="text-center mb-3 pt-[100px]">
-        {{ menu.translations.find((t) => t.language.code == locale.toUpperCase())?.name || menu.translations[0].name }}
+        {{ $t('recruitment') }}
       </h1>
       <div v-if="blogs.length > 0 && mounted" id="service-4" class="pb-[50px]">
         <div class="swiper swiper-2">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
             <div v-for="blog in blogs" class="swiper-slide hover:cursor-pointer">
-              <div @click.prevent="router.visit(`/${menu.slug}/${blog.slug}`)" class="rounded-xl shadow-xl bg-white">
+              <div @click.prevent="router.visit(`/tuyen-dung/${blog.slug}`)" class="rounded-xl shadow-xl bg-white">
                 <div
                   class="img-container h-[350px]"
                   style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
                 >
                   <img
-                    :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
+                    :src="RECRUITMENT_MEDIA_ENDPOINT + blog.image_fe?.picture"
                     alt="home1"
                     class="w-full rounded-tr-xl rounded-tl-xl object-cover"
                   />
                 </div>
                 <div class="p-3">
-                  <h3 class="line-clamp-1">
+                  <h3 class="line-clamp-4">
                     {{
                       blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                       blog.translations[0].name
                     }}
                   </h3>
                   <div
-                    class="line-clamp-6"
+                    class="line-clamp-3"
                     v-html="
                       blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
                       blog.translations[0].description
@@ -69,7 +69,7 @@ import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
 import { useI18n } from 'vue-i18n'
-import { BLOG_MEDIA_ENDPOINT, MEDIA_ENDPOINT } from '@/Constants/endpoint'
+import { BLOG_MEDIA_ENDPOINT, MEDIA_ENDPOINT, RECRUITMENT_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 
 const props = defineProps({
   blogs: Object,

@@ -4,10 +4,10 @@
     <div class="container pt-5 position absolute top-0 left-0 right-0 d-flex flex-column">
       <div class="d-flex align-items-center gap-3 justify-end">
         <div class="p-2 bg-green-600 rounded-xl">
-          <a class="sm:text-[16px] text-[14px] text-white text-decoration-none">{{ $t('hotline') }}</a>
+          <a class="sm:text-[16px] text-[11px] text-white text-decoration-none">{{ $t('hotline') }}</a>
         </div>
         <div class="p-2 hover:bg-green-600 hover:rounded-[10px]">
-          <a class="sm:text-[16px] text-[14px] text-white text-decoration-none">{{ $t('register_login') }}</a>
+          <a class="sm:text-[16px] text-[11px] text-white text-decoration-none">{{ $t('register_login') }}</a>
         </div>
         <div>
           <div class="relative inline-block text-left">
@@ -65,24 +65,56 @@
           </div>
         </div>
       </div>
-      <nav :class="[isFixed ? 'fixed mt-0' : 'mt-3', 'd-flex justify-between align-items-center flex-wrap pe-2']">
-        <div class="d-flex align-items-center lg:w-auto w-full justify-between gap-3">
-          <a class="" href="#">
-            <img
-              src="@/Assets/images/logo.png"
-              :class="[isFixed ? 'w-[200px] ms-[20px] my-3' : 'w-[400px]']"
-              alt="logo"
-            />
-          </a>
-          <button
-            @click.prevent="showMenu = !showMenu"
-            style="background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1))"
-            class="btn d-lg-none hidden"
-          >
-            <i class="fas fa-bars text-white"></i>
-          </button>
+      <nav :class="[isFixed ? 'fixed mt-0' : 'mt-3']">
+        <div :class="[isFixed ? 'container' : '', 'd-flex justify-between align-items-center flex-wrap']">
+          <div class="d-flex align-items-center lg:w-auto w-full justify-between gap-3">
+            <a @click.prevent="router.visit('/')" class="" href="#">
+              <img :src="app_url + '/images/logo.png'" :class="[isFixed ? 'w-[200px] my-3' : 'w-[300px]']" alt="logo" />
+            </a>
+            <button
+              @click.prevent="showMenu = !showMenu"
+              style="background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1))"
+              class="btn d-lg-none hidden"
+            >
+              <i class="fas fa-bars text-white"></i>
+            </button>
+          </div>
+
+          <div class="py-3">
+            <ul class="mb-0 lg:flex hidden gap-4 justify-end">
+              <li @click="scrollToTopAndNavigate('/')" :class="[checkRoute('/')]">
+                <Link href="">{{ $t('home') }}</Link>
+              </li>
+              <li @click="scrollToTopAndNavigate('/ve-chung-toi')" :class="[checkRoute('/ve-chung-toi')]">
+                <Link href="">{{ $t('about') }}</Link>
+              </li>
+              <li @click="scrollToTopAndNavigate('/dich-vu')" :class="[checkRoute('/dich-vu')]">
+                <Link href="">{{ $t('services') }}</Link>
+              </li>
+              <li @click="scrollToTopAndNavigate('/uu-dai')" :class="[checkRoute('/uu-dai')]">
+                <Link href="">{{ $t('promo') }}</Link>
+              </li>
+              <li @click="scrollToTopAndNavigate('/tin-tuc')" :class="[checkRoute('/tin-tuc')]">
+                <Link href="">{{ $t('news') }}</Link>
+              </li>
+              <li @click="scrollToTopAndNavigate('/dat-ve/buoc1')" :class="[checkRoute('/dat-ve/buoc1')]">
+                <Link href="">{{ $t('booking') }}</Link>
+              </li>
+              <li @click="scrollToTopAndNavigate('/dat-ve/buoc2')" :class="[checkRoute('/dat-ve/buoc2')]">
+                <a id="cart" href="#" class="relative">
+                  <i class="fas fa-shopping-cart"></i>
+                  <span
+                    v-if="cart.length"
+                    class="bg-red-500 text-white rounded-[50%] w-[20px] h-[20px] text-sm flex justify-center items-center absolute bottom-3 left-3"
+                  >
+                    {{ cart.reduce((acc, item) => acc + item.num_child + item.num_adult, 0) }}
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div v-if="showMenu" class="bg-green-600 h-[290px] py-3 lg:hidden w-full z-10 lg:mt-0 mt-2">
+        <div v-if="showMenu" class="bg-green-600 h-[390px] py-3 lg:hidden w-full z-10 lg:mt-0 mt-2">
           <ul class="flex mb-0 lg:flex-row flex-col gap-4 position-absolute justify-end">
             <li @click="scrollToTopAndNavigate('/')">
               <a style="color: white">{{ $t('home') }}</a>
@@ -96,31 +128,21 @@
             <li @click="scrollToTopAndNavigate('/uu-dai')">
               <a style="color: white">{{ $t('promo') }}</a>
             </li>
-            <li @click="scrollToTopAndNavigate('/booking/step1')">
+            <li @click="scrollToTopAndNavigate('/tin-tuc')">
+              <a style="color: white">{{ $t('news') }}</a>
+            </li>
+            <li @click="scrollToTopAndNavigate('/dat-ve/buoc1')">
               <a style="color: white">{{ $t('booking') }}</a>
             </li>
-          </ul>
-        </div>
-        <div class="py-3">
-          <ul class="mb-0 lg:flex hidden gap-4 justify-end">
-            <li @click="scrollToTopAndNavigate('/')" :class="[checkRoute('/')]">
-              <Link href="">{{ $t('home') }}</Link>
-            </li>
-            <li @click="scrollToTopAndNavigate('/ve-chung-toi')" :class="[checkRoute('/ve-chung-toi')]">
-              <Link href="">{{ $t('about') }}</Link>
-            </li>
-            <li @click="scrollToTopAndNavigate('/dich-vu')" :class="[checkRoute('/dich-vu')]">
-              <Link href="">{{ $t('services') }}</Link>
-            </li>
-            <li @click="scrollToTopAndNavigate('/uu-dai')" :class="[checkRoute('/uu-dai')]">
-              <Link href="">{{ $t('promo') }}</Link>
-            </li>
-            <li @click="scrollToTopAndNavigate('/booking/step1')" :class="[checkRoute('/booking/step1')]">
-              <Link href="">{{ $t('booking') }}</Link>
-            </li>
-            <li>
-              <a id="cart" href="#">
+            <li @click="scrollToTopAndNavigate('/dat-ve/buoc2')">
+              <a style="color: white" class="relative">
                 <i class="fas fa-shopping-cart text-white"></i>
+                <span
+                  v-if="cart.length"
+                  class="bg-red-500 text-white rounded-[50%] w-[20px] h-[20px] text-sm flex justify-center items-center absolute bottom-3 left-3"
+                >
+                  {{ cart.reduce((acc, item) => acc + item.num_child + item.num_adult, 0) }}
+                </span>
               </a>
             </li>
           </ul>
@@ -131,38 +153,65 @@
       <div class="w-full mx-auto bg-white px-[20px] py-[15px] border-[1.5px] border-green-600 rounded-xl shadow-2xl">
         <form>
           <div class="row">
-            <div class="col-md-3 col-6">
+            <div class="col-md-3 col-6 flex items-center">
               <div class="flex items-center">
                 <i class="fas fa-map-marker-alt text-green-600 text-lg md:text-2xl"></i>
-                <select class="border-0 form-control">
-                  <option class="font-normal" value="1">Hồ Chí Minh</option>
-                  <option class="font-normal" value="2">Đà Nẵng</option>
-                  <option class="font-normal" value="3">Hải Phòng</option>
+                <select v-model="form.select" class="border-0 form-control">
+                  <option class="font-normal" value="1">Khu Du Lịch Datanla</option>
+                  <option class="font-normal" value="2">Khu Du Lịch LangBiang</option>
+                  <option class="font-normal" value="3">Khu Du Lịch Cáp Treo</option>
+                  <option class="font-normal" value="4">Datanla Adventures</option>
                 </select>
               </div>
             </div>
-            <div class="col-md-3 col-6">
+            <div class="col-md-2 col-6 flex items-center">
               <!-- Chọn ngày -->
               <div class="flex items-center">
                 <i class="far fa-calendar-alt text-green-600 text-lg md:text-2xl"></i>
-                <input type="date" class="border-0 form-control" />
+                <input type="date" class="border-0 lg:w-[100%] w-[80%] font-normal" v-model="form.date" />
               </div>
             </div>
-            <div class="col-md-3 col-6">
+            <div class="col-md-2 col-6 flex items-center lg:justify-center">
               <!-- Số lượng người -->
-              <div class="flex items-center">
+              <div class="flex items-center gap-2">
                 <i class="fas fa-user-friends text-green-600 text-lg md:text-2xl"></i>
-                <button class="border-none">
-                  <i class="fas fa-minus text-green-600"></i>
-                </button>
-                <input type="text" class="border-none w-[30px]" value="1" />
-                <button class="border-none">
-                  <i class="fas fa-plus text-green-600"></i>
-                </button>
+                <div class="flex flex-col items-center">
+                  <label class="font-normal mb-0 text-sm" for="num_adult">Người lớn</label>
+                  <div>
+                    <button @click.prevent="decreaseAdult" class="border-none">
+                      <i class="fas fa-minus text-green-600"></i>
+                    </button>
+                    <input type="text" class="border-none w-[35px] py-0 font-normal" v-model="form.num_adult" />
+                    <button @click.prevent="incrementAdult" class="border-none">
+                      <i class="fas fa-plus text-green-600"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-md-3 col-6">
-              <button class="bg-green-600 text-white px-4 py-2 rounded-xl md:w-[200px] w-full md:float-end">
+            <div class="col-md-2 col-6 flex items-center lg:justify-center">
+              <!-- Số lượng người -->
+              <div v-if="form.select != 4" class="flex items-center gap-2">
+                <i class="fas fa-user-friends text-green-600 text-lg md:text-2xl"></i>
+                <div class="flex flex-col items-center">
+                  <label class="font-normal mb-0 text-sm" for="num_adult">Trẻ em</label>
+                  <div>
+                    <button @click.prevent="decreaseChild" class="border-none">
+                      <i class="fas fa-minus text-green-600"></i>
+                    </button>
+                    <input type="text" class="border-none w-[35px] py-0 font-normal" v-model="form.num_child" />
+                    <button @click.prevent="incrementChild" class="border-none">
+                      <i class="fas fa-plus text-green-600"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-12 flex lg:items-center">
+              <button
+                @click.prevent="router.visit('/dat-ve/buoc1')"
+                class="bg-green-600 text-white px-4 py-2 rounded-xl w-[100%] mt-lg-0 mt-2"
+              >
                 {{ $t('search') }}
               </button>
             </div>
@@ -174,7 +223,7 @@
 </template>
 <script setup>
 import { computed, onMounted, ref } from 'vue'
-import { Link, usePage } from '@inertiajs/vue3'
+import { Link, useForm, usePage } from '@inertiajs/vue3'
 import { router } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 
@@ -184,6 +233,46 @@ const isDropdownOpen = ref(false)
 const page = usePage()
 const languages = computed(() => page.props.languages)
 const { t, locale } = useI18n()
+
+let cart = ref([])
+const form = useForm({
+  select: 1,
+  num_child: 0,
+  num_adult: 0,
+  date: formatDateToYYYYMMDD()
+})
+
+function formatDateToYYYYMMDD(date = new Date()) {
+  const year = date.getFullYear() // Lấy năm đầy đủ, ví dụ: 2025
+  const month = String(date.getMonth() + 1).padStart(2, '0') // Tháng từ 0-11, thêm số 0 nếu cần
+  const day = String(date.getDate()).padStart(2, '0') // Thêm số 0 nếu cần
+
+  return `${year}-${month}-${day}`
+}
+
+const incrementAdult = () => {
+  form.num_adult++
+}
+
+const decreaseAdult = () => {
+  if (form.num_adult > 0) {
+    form.num_adult--
+  }
+}
+
+const incrementChild = () => {
+  form.num_child++
+}
+
+const decreaseChild = () => {
+  if (form.num_child > 0) {
+    form.num_child--
+  }
+}
+
+onMounted(() => {
+  cart.value = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
+})
 
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value
@@ -199,11 +288,15 @@ const changeLanguage = (code) => {
 }
 
 function scrollToTopAndNavigate(url, options = {}) {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  if (window.scrollY > 200) {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
 
-  setTimeout(() => {
-    router.visit(url, options)
-  }, 600)
+    setTimeout(() => {
+      router.visit(url, options)
+    }, 600)
+    return
+  }
+  router.visit(url, options)
 }
 
 onMounted(() => {
@@ -222,6 +315,8 @@ const checkRoute = (route) => {
   }
   return ''
 }
+
+const app_url = import.meta.env.VITE_APP_URL
 </script>
 <style scoped>
 .header {
@@ -236,6 +331,10 @@ const checkRoute = (route) => {
 }
 
 .active > a {
+  color: white !important;
+}
+
+.active > a i {
   color: white !important;
 }
 
@@ -269,7 +368,17 @@ li a {
   width: 100%;
 }
 
+li a i {
+  text-decoration: none;
+  color: white;
+  width: 100%;
+}
+
 li:hover a {
+  color: #f1f1f1 !important;
+}
+
+li:hover a i {
   color: #f1f1f1 !important;
 }
 
@@ -294,7 +403,11 @@ nav.fixed a {
 }
 
 nav.fixed a i {
-  color: #16a34a !important; /* Màu xanh lá cây */
+  color: #16a34a; /* Màu xanh lá cây */
+}
+
+nav.fixed li.active a i {
+  color: #f1f1f1; /* Màu xanh lá cây */
 }
 
 #card:hover {

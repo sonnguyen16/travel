@@ -1,5 +1,18 @@
 <template>
   <MainLayout>
+    <Head>
+      <title>Đà Lạt Tourist</title>
+      <meta
+        name="description"
+        content="Dalattourist - Công ty du lịch - dịch vụ - lữ hành lâu đời nhất tại Đà Lạt. Được thành lập từ năm 1976, Dalattourist tiên phong cung cấp những dịch vụ du lịch gắn liền với thiên nhiên, văn hóa và bản sắc Đà Lạt."
+      />
+      <meta property="og:title" content="Đà Lạt Tourist" />
+      <meta
+        property="og:description"
+        content="Dalattourist - Công ty du lịch - dịch vụ - lữ hành lâu đời nhất tại Đà Lạt. Được thành lập từ năm 1976, Dalattourist tiên phong cung cấp những dịch vụ du lịch gắn liền với thiên nhiên, văn hóa và bản sắc Đà Lạt."
+      />
+      <meta property="og:image" content="/images/logo.png" />
+    </Head>
     <div class="container">
       <div class="row pt-[100px]">
         <div id="about1" class="col-lg-6 flex items-center flex-col">
@@ -18,7 +31,7 @@
         <h1 class="mx-auto text-center mb-4">{{ $t('business_field') }}</h1>
         <div class="row">
           <div class="col-lg-5 mb-4">
-            <div @click.prevent="router.visit('/diem-den')" class="position-relative h-100">
+            <div @click.prevent="router.visit('/diem-den')" class="position-relative h-100 hover:cursor-pointer">
               <div class="img-container h-100">
                 <img src="@/Assets/images/home1.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
               </div>
@@ -33,7 +46,7 @@
           <div class="col-lg-7">
             <div class="row">
               <div @click.prevent="router.visit('/hoat-dong')" class="col-lg-6 mb-4">
-                <div class="position-relative h-100">
+                <div class="position-relative h-100 hover:cursor-pointer">
                   <div class="img-container h-100">
                     <img src="@/Assets/images/home2.jpg" alt="home1" class="w-full rounded-xl h-100" />
                   </div>
@@ -46,7 +59,7 @@
                 </div>
               </div>
               <div class="col-lg-6 mb-4">
-                <div @click.prevent="router.visit('/nha-hang')" class="position-relative h-100">
+                <div @click.prevent="router.visit('/nha-hang')" class="position-relative h-100 hover:cursor-pointer">
                   <div class="img-container h-100">
                     <img src="@/Assets/images/home3.jpg" alt="home1" class="w-full rounded-xl h-100" />
                   </div>
@@ -59,7 +72,7 @@
                 </div>
               </div>
               <div class="col-lg-6 mb-4">
-                <div @click.prevent="router.visit('/luu-tru')" class="position-relative h-100">
+                <div @click.prevent="router.visit('/luu-tru')" class="position-relative h-100 hover:cursor-pointer">
                   <div class="img-container h-100">
                     <img src="@/Assets/images/home4.jpg" alt="home1" class="w-full rounded-xl h-100" />
                   </div>
@@ -72,7 +85,7 @@
                 </div>
               </div>
               <div class="col-lg-6 mb-4">
-                <div @click.prevent="router.visit('/khac')" class="position-relative h-100">
+                <div @click.prevent="router.visit('/khac')" class="position-relative h-100 hover:cursor-pointer">
                   <div class="img-container h-100">
                     <img src="@/Assets/images/home5.jpg" alt="home1" class="w-full rounded-xl h-100" />
                   </div>
@@ -96,7 +109,7 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { onMounted } from 'vue'
-import { router } from '@inertiajs/vue3'
+import { router, Head } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
@@ -160,6 +173,8 @@ onMounted(async () => {
     })
   }
 })
+
+const app_url = import.meta.env.VITE_APP_URL
 </script>
 <style scoped>
 .overlay {
