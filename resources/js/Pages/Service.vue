@@ -116,8 +116,8 @@
                     class="w-full rounded-tr-xl rounded-tl-xl object-cover"
                   />
                 </div>
-                <div class="p-3 line-clamp-1">
-                  <h3>
+                <div class="p-3">
+                  <h3 class="line-clamp-1">
                     {{
                       blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                       blog.translations[0].name
