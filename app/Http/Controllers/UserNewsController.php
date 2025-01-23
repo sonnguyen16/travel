@@ -44,7 +44,7 @@ class UserNewsController extends Controller
         ->where('menu_id', $menu->id)
         ->whereNotIn('id', $hot_blogs->pluck('id')) // Loại bỏ các hot blogs
         ->with('translations.language', 'image_fe')
-        ->paginate(3);
+        ->paginate(6);
 
 
         return Inertia::render('News', compact('blogs', 'menu', 'hot_blogs', 'promo', 'recruitment'));

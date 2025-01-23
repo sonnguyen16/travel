@@ -76,7 +76,7 @@
           </div>
         </div>
       </div>
-      <h2 class="mb-3">{{ $t('newest_news') }}</h2>
+      <h2 class="mb-3 mt-3">{{ $t('newest_news') }}</h2>
       <div class="row">
         <div class="col-md-8">
           <div class="row">
@@ -161,7 +161,7 @@
               <img
                 :src="RECRUITMENT_MEDIA_ENDPOINT + r.image_fe?.picture"
                 alt="promo1"
-                class="w-[150px] object-cover rounded-xl"
+                class="w-[150px] h-[100px] object-cover rounded-xl"
               />
               <div>
                 <p class="mb-0 line-clamp-3">
@@ -195,7 +195,7 @@ import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
 import { useI18n } from 'vue-i18n'
-import { BLOG_MEDIA_ENDPOINT, MEDIA_ENDPOINT } from '@/Constants/endpoint'
+import { BLOG_MEDIA_ENDPOINT, MEDIA_ENDPOINT, RECRUITMENT_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 
 const props = defineProps({
   blogs: Object,
