@@ -105,7 +105,7 @@
         <div v-if="blogs_related.length > 0 && mounted" class="swiper swiper-2">
           <div class="swiper-wrapper">
             <div v-for="blog in blogs_related" class="swiper-slide hover:cursor-pointer">
-              <div @click.prevent="router.visit(`/dich-vu/${blog.slug}`)" class="rounded-xl shadow-xl bg-white">
+              <div @click.prevent="router.visit(`/nha-hang/${blog.slug}`)" class="rounded-xl shadow-xl bg-white">
                 <div
                   class="img-container h-[350px]"
                   style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
@@ -116,7 +116,7 @@
                     class="w-full rounded-tr-xl rounded-tl-xl object-cover"
                   />
                 </div>
-                <div class="p-3">
+                <div class="p-3 line-clamp-1">
                   <h3>
                     {{
                       blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
