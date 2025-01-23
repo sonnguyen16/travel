@@ -102,87 +102,34 @@
       </div>
 
       <div id="service-4" class="md:pt-[100px] pt-[50px] pb-[50px]">
-        <div class="swiper swiper-2">
+        <div v-if="blogs_related.length > 0 && mounted" class="swiper swiper-2">
           <div class="swiper-wrapper">
-            <!-- Slide 1 -->
-            <div class="swiper-slide">
-              <div class="rounded-xl shadow-xl bg-white">
+            <div v-for="blog in blogs" class="swiper-slide hover:cursor-pointer">
+              <div @click.prevent="router.visit(`/dich-vu/${blog.slug}`)" class="rounded-xl shadow-xl bg-white">
                 <div
-                  class="img-container h-[400px]"
+                  class="img-container h-[350px]"
                   style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
                 >
                   <img
-                    src="@/Assets/images/service6.jpg"
+                    :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
                     alt="home1"
                     class="w-full rounded-tr-xl rounded-tl-xl object-cover"
                   />
                 </div>
                 <div class="p-3">
-                  <p class="font-normal text-justify">
-                    {{ $t('hotel_description') }}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- Slide 2 -->
-            <div class="swiper-slide">
-              <div class="rounded-xl shadow-xl bg-white">
-                <div
-                  class="img-container h-[400px]"
-                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
-                >
-                  <img
-                    src="@/Assets/images/service7.jpg"
-                    alt="home1"
-                    class="w-full rounded-tr-xl rounded-tl-xl object-cover"
-                  />
-                </div>
-                <div class="p-3">
-                  <p class="font-normal text-justify">
-                    {{ $t('hotel_description') }}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <!-- Slide 3 -->
-            <div class="swiper-slide">
-              <div class="rounded-xl shadow-xl bg-white">
-                <div
-                  class="img-container h-[400px]"
-                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
-                >
-                  <img
-                    src="@/Assets/images/service8.jpg"
-                    alt="home1"
-                    class="w-full rounded-tr-xl rounded-tl-xl object-cover"
-                  />
-                </div>
-                <div class="p-3">
-                  <p class="font-normal text-justify">
-                    {{ $t('hotel_description') }}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="swiper-slide">
-              <div class="rounded-xl shadow-xl bg-white">
-                <div
-                  class="img-container h-[400px]"
-                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
-                >
-                  <img
-                    src="@/Assets/images/service7.jpg"
-                    alt="home1"
-                    class="w-full rounded-tr-xl rounded-tl-xl object-cover"
-                  />
-                </div>
-                <div class="p-3">
-                  <p class="font-normal text-justify">
-                    Nice Dream hotel tên cũ là khách sạn Hải Sơn, tọa lạc nằm ở số 1 Nguyễn Thị Minh Khai, Phường 1, Đà
-                    Lạt, ngay trung tâm của thành phố với tầm nhìn tuyệt đẹp hướng ra Chợ Đà Lạt và hồ Xuân Hương.
-                  </p>
+                  <h3>
+                    {{
+                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                      blog.translations[0].name
+                    }}
+                  </h3>
+                  <div
+                    class="line-clamp-6"
+                    v-html="
+                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+                      blog.translations[0].description
+                    "
+                  ></div>
                 </div>
               </div>
             </div>
@@ -206,7 +153,7 @@ import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 
 const props = defineProps({
   blogs: Object,
-  menu: Object
+  blogs_related: Object
 })
 const { t, locale } = useI18n()
 const mounted = ref(false)

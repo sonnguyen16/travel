@@ -130,7 +130,7 @@
                     />
                   </div>
                   <div class="p-3">
-                    <h3 class="text-xl font-semibold">
+                    <h3 class="text-xl font-semibold line-clamp-1">
                       {{
                         blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                         blog_related.translations[0].name

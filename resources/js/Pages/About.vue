@@ -104,8 +104,13 @@
             <div v-if="mounted" class="swiper swiper-2">
               <div class="swiper-wrapper flex items-end">
                 <!-- Slide 1 -->
-                <div class="swiper-slide intro-slide">
-                  <img src="@/Assets/images/about3.jpg" alt="slide 1" class="w-full object-cover" />
+                <div class="swiper-slide intro-slide" :class="[moved == false ? 'h-[600px]' : '']">
+                  <img
+                    src="@/Assets/images/about3.jpg"
+                    alt="slide 1"
+                    :class="[moved == false ? 'h-[600px]' : '']"
+                    class="w-full object-cover"
+                  />
                   <div class="slide-content">
                     <h2>{{ $t('slide_1_title') }}</h2>
                     <p>{{ $t('slide_1_desc') }}</p>
@@ -162,6 +167,7 @@ import 'swiper/css/bundle'
 import { Head } from '@inertiajs/vue3'
 
 const mounted = ref(false)
+const moved = ref(false)
 
 onMounted(async () => {
   mounted.value = true
@@ -170,6 +176,7 @@ onMounted(async () => {
     const scrollReveal = ScrollReveal()
 
     const swiper = new Swiper('.swiper-2', {
+      allowTouchMove: false,
       loop: true,
       fadeEffect: { crossFade: true },
       speed: 1000,
@@ -193,6 +200,7 @@ onMounted(async () => {
 
     // Gắn sự kiện slideChange
     swiper.on('slideChange', () => {
+      moved.value = true
       // Xóa lớp active-slide khỏi tất cả các slide
       const slides = document.querySelectorAll('.swiper-slide')
       slides.forEach((slide) => slide.classList.remove('active-slide'))

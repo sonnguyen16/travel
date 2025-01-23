@@ -18,7 +18,14 @@ class UserServiceController extends Controller
             ->with('translations.language', 'image_fe')
             ->get();
 
-        return Inertia::render('Service', compact('blogs'));
+        $blogs_related = Blog::query()
+        ->whereHas('menu', function ($query) {
+            $query->where('slug', 'nha-hang');
+        })
+        ->with('translations.language', 'image_fe')
+        ->get();
+
+        return Inertia::render('Service', compact('blogs', 'blogs_related'));
     }
 
     public function show(Request $request)

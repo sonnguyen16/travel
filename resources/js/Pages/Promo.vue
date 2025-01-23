@@ -32,7 +32,7 @@
                     />
                   </div>
                   <div class="p-3 position-absolute bottom-0 rounded-xl left-0 right-0 overlay1 h-[150px]">
-                    <h3 class="text-white mt-5">
+                    <h3 class="text-white mt-5 line-clamp-2">
                       {{
                         blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                         blog.translations[0].name
@@ -61,7 +61,7 @@
         <div class="swiper swiper-2" style="height: 350px">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
-            <template v-for="product in products">
+            <template v-if="mounted" v-for="product in products">
               <div @click.prevent="router.visit('dat-ve/buoc1')" class="swiper-slide hover:cursor-pointer">
                 <div class="rounded-xl shadow-xl bg-white">
                   <div
