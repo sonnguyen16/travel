@@ -1,10 +1,8 @@
 <template>
   <MainLayout>
     <div class="container">
-      <div class="pt-[100px]">
-        <div
-          class="w-full mx-auto bg-white px-[20px] pt-[30px] pb-[50px] border-[1.5px] border-green-600 rounded-xl shadow-2xl"
-        >
+      <div class="pt-[80px]">
+        <div class="w-full mx-auto bg-white px-[20px] pt-[30px] pb-[50px] border-[1.5px] border-green-600 rounded-xl">
           <div class="w-full">
             <div class="relative">
               <!-- Horizontal Line -->
@@ -44,11 +42,11 @@
         </div>
       </div>
 
-      <div class="row pb-[50px]">
+      <div class="row pb-[30px]">
         <div class="col-lg-8">
           <div
             v-for="c in cart"
-            class="w-full mx-auto bg-white px-[20px] py-[30px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
+            class="w-full mx-auto bg-white px-[20px] py-[30px] border-[1.5px] border-green-600 rounded-xl mt-4"
           >
             <div class="flex justify-between">
               <div>
@@ -142,9 +140,7 @@
           <h4 v-else class="text-center mt-5">{{ $t('no_ticket') }}</h4>
         </div>
         <div class="col-lg-4">
-          <div
-            class="w-full mx-auto bg-white px-[20px] py-[20px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
-          >
+          <div class="w-full mx-auto bg-white px-[20px] py-[20px] border-[1.5px] border-green-600 rounded-xl mt-4">
             <p class="font-bold">{{ $t('payment_detail') }}</p>
             <hr />
             <template v-for="c in cart">
@@ -202,12 +198,61 @@
           </div>
         </div>
       </div>
+
+      <div class="pb-[30px]">
+        <h2 class="text-center">
+          {{ t('service_detail.related_services') }}
+        </h2>
+        <div class="row g-3">
+          <template
+            v-for="(product, index) in products
+              .filter((item) => !cart.some((c) => c.product_fk === item.id))
+              .slice(0, 3)"
+          >
+            <div :id="product.location_id" class="col-md-4">
+              <div class="bg-white px-[20px] pt-[20px] pb-[20px] border-[1.5px] border-green-600 rounded-xl mt-4">
+                <div class="">
+                  <p class="font-bold mb-0 text-[1.2rem]">
+                    {{
+                      product.translations?.find((item) => item.language.code === locale.toUpperCase())?.name ||
+                      product.translations?.[0]?.name
+                    }}
+                  </p>
+                  <div>
+                    <p class="text-end mb-0 text-[1.2rem]">
+                      {{ product.price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}
+                    </p>
+                  </div>
+                </div>
+                <hr />
+                <div
+                  class="line-clamp-4"
+                  v-html="
+                    product.translations?.find((item) => item.language.code === locale.toUpperCase())?.content ||
+                    product.translations?.[0]?.content
+                  "
+                ></div>
+                <hr />
+                <div class="flex justify-between">
+                  <a
+                    @click="addToCart(product.id)"
+                    class="block py-2 w-full text-center rounded-xl border-1 border-green-600 hover:cursor-pointer"
+                  >
+                    <i class="fas fa-shopping-cart text-green-600"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
     </div>
   </MainLayout>
 </template>
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { router } from '@inertiajs/vue3'
+import Swal from 'sweetalert2'
 import { defineProps, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -255,6 +300,38 @@ const decrementAdult = (id) => {
   } else {
     localStorage.setItem('cart', JSON.stringify(cart.value))
   }
+}
+
+const addToCart = (id) => {
+  const product = props.products.find((p) => p.id === id)
+  if (cart.value.some((c) => c.product_fk === id)) {
+    cart.value.find((c) => c.product_fk === id).num_child++
+    cart.value.find((c) => c.product_fk === id).num_adult++
+  } else {
+    cart.value.push({
+      product_fk: id,
+      num_child: 1,
+      num_adult: 1,
+      price_child: product.price_child,
+      price_adult: product.price,
+      date: formatDateToYYYYMMDD()
+    })
+  }
+
+  localStorage.setItem('cart', JSON.stringify(cart.value))
+
+  Swal.fire({
+    icon: 'success',
+    title: t('success'),
+    text: t('add_to_cart_success')
+  })
+}
+function formatDateToYYYYMMDD(date = new Date()) {
+  const year = date.getFullYear() // Lấy năm đầy đủ, ví dụ: 2025
+  const month = String(date.getMonth() + 1).padStart(2, '0') // Tháng từ 0-11, thêm số 0 nếu cần
+  const day = String(date.getDate()).padStart(2, '0') // Thêm số 0 nếu cần
+
+  return `${year}-${month}-${day}`
 }
 </script>
 <style scoped>

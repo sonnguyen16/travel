@@ -26,7 +26,10 @@
   "about_us": "Về chúng tôi",
   "introduction": "Giới thiệu",
   "history": "Lịch sử phát triển",
-  "vision_mission": "Tầm nhìn - Sứ mệnh",
+  "vision": "Tầm nhìn",
+  "vision_text": "Tạo ra những trải nghiệm du lịch độc đáo và đẳng cấp gắn liền với thiên nhiên và văn hóa Tây Nguyên đặc trưng. Phát triển chuỗi dịch vụ khép kín kết hợp tham quan, vui chơi, lưu trú và ẩm thực. Tăng cường hợp tác quốc tế và khẳng định giá trị thương hiệu Việt Nam trên bản đồ du lịch toàn cầu.",
+  "mission": "Sứ mệnh",
+  "mission_text": "Phát triển ngành du lịch thành phố Đà Lạt, tỉnh Lâm Đồng ngày một hoàn thiện và chuyên nghiệp. Mang lại cho khách hàng nhiều trải nghiệm tuyệt vời thông qua các sản phẩm, dịch vụ gắn liền với thiên nhiên, đồng thời cảm nhận rõ hơn về tinh hoa và bản sắc Đà Lạt.",
   "awards": "Giải thưởng",
   "partners": "Đối tác",
   "terms_conditions": "Điều khoản & quy định",
@@ -42,13 +45,13 @@
   "license_date": "Ngày cấp",
   "license_place": "Nơi cấp",
   "reserved": "© 2021 Dalattourist. Tất cả các quyền được bảo lưu.",
-  "company_description": "Công Ty Cổ phần du lịch Lâm Đồng – Dalattourist® là công ty du lịch – dịch vụ – lữ hành lâu đời nhất tại Đà Lạt, được thành lập từ năm 1976, Dalattourist® tiên phong cung cấp những dịch vụ du lịch gắn liền với thiên nhiên, văn hóa và bản sắc Đà Lạt.",
+  "company_description": "Công ty Cổ phần Du lịch Lâm Đồng - Dalattourist là công ty Du lịch - Dịch vụ - Lữ hành hàng đầu tại Đà Lạt, đơn vị chủ quản các điểm đến, nhà hàng & khách sạn nổi tiếng: Khu du lịch Thác Datanla, Khu du lịch Langbiang, Khu du lịch Cáp Treo, Nhà hàng Buffet Rau Léguda, Nhà hàng Thủy Tạ, Khách sạn & villas Nice Dream.",
   "business_field": "Lĩnh vực kinh doanh",
   "sustainable_development": "Phát triển bền vững",
   "year": "Năm",
   "story": "Câu chuyện",
   "brand": "Thương hiệu",
-  "about_text": "Công Ty Cổ Phần Du Lịch Lâm Đồng có tiền thân là Công ty Du lịch Lâm Đồng, được thành lập từ năm 1976 với chức năng là 'Ban Giao tế' của tỉnh Lâm Đồng. Năm 1993, Công ty Dịch vụ Du lịch Đà Lạt trực thuộc UBND thành phố Đà Lạt được sáp nhập vào Công ty Du lịch Lâm Đồng, kinh doanh các ngành nghề chủ yếu là: Lữ hành, vận chuyển, ăn uống, hướng dẫn du lịch và các dịch vụ khác. Năm 2013, Công ty chính thức cổ phần hóa và lấy tên là Công Ty Cổ Phần Du Lịch Lâm Đồng - Dalattourist.",
+  "about_text": "\"Thiên nhiên là nền tảng và con người tạo nên giá trị\". Là đơn vị tiên phong phát triển du lịch xanh, Dalattourist luôn đầu tư có chiều sâu các sản phẩm, dịch vụ du lịch kết hợp bảo tồn và khai thác bền vững giá trị di sản thiên nhiên. Từ đó mang đến cho du khách những trải nghiệm phong phú, kết hợp giữa khám phá thiên nhiên với du lịch mạo hiểm và tìm hiểu nét đẹp văn hóa người Đà Lạt.",
   "history_title": "Lịch sử hình thành & phát triển",
   "timeline_1976": "Thành lập Công Ty",
   "timeline_2006": "Kỷ Niệm 30 Năm thành lập Công ty",
@@ -134,5 +137,24 @@
   "notify": "Thông báo",
   "hot_news": "Tin nổi bật",
   "newest_news": "Tin mới nhất",
-  "promotion": "Khuyến mãi"
+  "promotion": "Khuyến mãi",
+  "add_to_cart": "Thêm vào giỏ hàng",
+  "achievements": [
+    {
+      "title": "THƯƠNG HIỆU QUỐC GIA VIỆT NAM - Vinh danh 3 kỳ liên tiếp",
+      "event_details": "Chương trình diễn ra vào ngày 04/11/2024, tại Trung tâm Hội nghị Quốc gia (Hà Nội) với sự tham dự của Thủ tướng Chính phủ Phạm Minh Chính, được Bộ Công Thương phối hợp cùng Hội đồng Thương hiệu quốc gia tổ chức với chủ đề 'Vươn mình tiến vào kỷ nguyên xanh'."
+    },
+    {
+      "title": "SAO VÀNG ĐẤT VIỆT",
+      "event_details": "Lễ trao giải thưởng Sao Vàng đất Việt 2021, diễn ra vào ngày 30/3/2022 tại Hà Nội nhằm tôn vinh Thương hiệu tiêu biểu Việt Nam, được Trung ương Hội Liên hiệp Thanh niên Việt Nam và Trung ương Hội Doanh nhân trẻ Việt Nam tổ chức với chủ đề 'Ánh sáng của tương lai'."
+    },
+    {
+      "title": "TOP 10 ASIAN STRONG BRAND",
+      "event_details": "Chương trình diễn ra vào ngày 22/04/2023 tại Kuala Lumpur – Malaysia, được Trung tâm Kinh tế châu Á - Thái Bình Dương tổ chức nhằm tôn vinh các thương hiệu Việt đã có những đóng góp tích cực cho nền kinh tế đất nước, đồng thời quảng bá thương hiệu, sản phẩm, dịch vụ của doanh nghiệp đến người tiêu dùng."
+    },
+    {
+      "title": "GOLDEN BRAND VIET NAM 2023",
+      "event_details": "Chương trình diễn ra vào ngày 16/04/2023 tại Hà Nội, được Viện Kinh tế và Văn hóa kết hợp với Trung tâm Bảo vệ Người tiêu dùng Việt Nam tổ chức, nhằm trao chứng nhận cho các thương hiệu, sản phẩm, dịch vụ đạt chất lượng uy tín."
+    }
+  ]
 }

@@ -43,9 +43,18 @@ class UserNewsController extends Controller
         $blogs = Blog::query()
         ->where('menu_id', $menu->id)
         ->whereNotIn('id', $hot_blogs->pluck('id')) // Loại bỏ các hot blogs
-        ->with('translations.language', 'image_fe')
-        ->paginate(6);
+        ->with('translations.language', 'image_fe');
 
+        if($request->has('search')) {
+            $blogs = $blogs->whereHas('translations', function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->search . '%')
+                ->orWhere('content', 'like', '%' . $request->search . '%')
+                ->orWhere('description', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        $blogs = $blogs->orderBy('created_at', 'desc')
+                       ->paginate(6);
 
         return Inertia::render('News', compact('blogs', 'menu', 'hot_blogs', 'promo', 'recruitment'));
     }

@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use App\Models\Language;
+use App\Models\Location;
+use App\Models\Translation;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
@@ -41,6 +43,7 @@ class HandleInertiaRequests extends Middleware
                 'location' => $request->url(),
             ],
             'languages' => Language::where('active', 1)->get(),
+            'locations' => Location::with('translations.language')->get(),
         ];
     }
 }

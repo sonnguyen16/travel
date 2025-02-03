@@ -1,10 +1,8 @@
 <template>
   <MainLayout>
     <div class="container">
-      <div class="pt-[100px] pb-[50px]">
-        <div
-          class="w-full mx-auto bg-white px-[20px] pt-[30px] pb-[50px] border-[1.5px] border-green-600 rounded-xl shadow-2xl"
-        >
+      <div class="pt-[80px] pb-[30px]">
+        <div class="w-full mx-auto bg-white px-[20px] pt-[30px] pb-[50px] border-[1.5px] border-green-600 rounded-xl">
           <div class="w-full">
             <div class="relative">
               <!-- Horizontal Line -->
@@ -44,14 +42,14 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row g-3">
         <div class="col-lg-7">
           <div class="img-container h-100">
             <img src="@/Assets/images/booking1.jpg" alt="about" class="w-full rounded-xl h-100 object-cover" />
           </div>
         </div>
         <div class="col-lg-5">
-          <div class="img-container h-[200px] mt-4 mt-lg-0 mb-4">
+          <div class="img-container h-[200px] mt-lg-0 mb-3">
             <img src="@/Assets/images/booking2.jpg" alt="about" class="w-full rounded-xl h-[200px] object-cover" />
           </div>
           <div class="img-container h-[200px]">
@@ -63,7 +61,8 @@
       <div
         v-for="(product, index) in products"
         :key="index"
-        class="w-full mx-auto bg-white px-[20px] pt-[20px] pb-[20px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
+        :id="product.location_id"
+        class="w-full mx-auto bg-white px-[20px] pt-[20px] pb-[20px] border-[1.5px] border-green-600 rounded-xl mt-4"
       >
         <div class="md:flex justify-between items-center">
           <p class="font-bold mb-0 text-[1.2rem]">
@@ -86,7 +85,7 @@
           "
         ></div>
         <hr />
-        <div class="grid md:grid-cols-3 grid-cols-1 gap-2">
+        <div class="grid md:grid-cols-4 grid-cols-1 gap-2">
           <div class="col-span-1">
             <label for="" class="text-green-600">{{ $t('select_date') }}</label>
             <div class="flex items-center">
@@ -165,22 +164,23 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="flex justify-end items-center gap-3 mt-3">
-          <a @click="addToCart(product.id)" class="block py-2 px-[15px] rounded-xl border-1 border-green-600">
-            <i class="fas fa-shopping-cart text-green-600"></i>
-          </a>
-          <button @click="buyNow(product.id)" class="py-2 px-[15px] rounded-xl bg-green-600 text-white">
-            {{ $t('buy_now') }}
-          </button>
+          <div class="flex flex-col justify-end items-center gap-2 lg:ps-3">
+            <a
+              @click="addToCart(product.id)"
+              class="block py-2 w-full text-center rounded-xl border-1 border-green-600 hover:cursor-pointer"
+            >
+              <i class="fas fa-shopping-cart text-green-600"></i>
+            </a>
+            <button @click="buyNow(product.id)" class="py-2 w-full rounded-xl bg-green-600 text-white">
+              {{ $t('buy_now') }}
+            </button>
+          </div>
         </div>
       </div>
 
       <div class="row">
         <div class="col-lg-8">
-          <div
-            class="w-full mx-auto bg-gray-100 px-[20px] py-[30px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
-          >
+          <div class="w-full mx-auto bg-gray-100 px-[20px] py-[30px] border-[1.5px] border-green-600 rounded-xl mt-5">
             <h3 class="font-bold">{{ $t(`notes_title`) }}</h3>
             <div>
               <p v-for="(_, index) in 6" :key="index" class="mb-0">
@@ -253,6 +253,17 @@ let Swal = null
 
 onMounted(async () => {
   Swal = (await import('sweetalert2')).default
+
+  const urlParams = new URLSearchParams(window.location.search)
+  const select = urlParams.get('select')
+  if (select) {
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.getElementById(select).offsetTop - 80,
+        behavior: 'smooth'
+      })
+    }, 200)
+  }
 })
 
 const forms = ref([])

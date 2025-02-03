@@ -1,5 +1,5 @@
 <template>
-  <div class="header position-relative">
+  <div id="header" class="header position-relative">
     <div class="overlay"></div>
     <div class="container pt-5 position absolute top-0 left-0 right-0 d-flex flex-column">
       <div class="d-flex align-items-center gap-3 justify-end">
@@ -152,17 +152,16 @@
       </nav>
     </div>
     <div class="container position-absolute bottom-[-50px] start-50 translate-middle-x">
-      <div class="w-full mx-auto bg-white px-[20px] py-[15px] border-[1.5px] border-green-600 rounded-xl shadow-2xl">
+      <div class="w-full mx-auto bg-white px-[20px] py-[15px] border-[1.5px] border-green-600 rounded-xl">
         <form>
           <div class="row">
             <div class="col-md-3 col-6 flex items-center">
               <div class="flex items-center">
                 <i class="fas fa-map-marker-alt text-green-600 text-lg md:text-2xl"></i>
                 <select v-model="form.select" class="border-0 form-control">
-                  <option class="font-normal" value="1">Khu Du Lịch Datanla</option>
-                  <option class="font-normal" value="2">Khu Du Lịch LangBiang</option>
-                  <option class="font-normal" value="3">Khu Du Lịch Cáp Treo</option>
-                  <option class="font-normal" value="4">Datanla Adventures</option>
+                  <option class="font-normal" v-for="location in locations" :key="location.id" :value="location.id">
+                    {{ location.translations.find((t) => t.language.code === locale.toUpperCase())?.name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -176,9 +175,9 @@
             <div class="col-md-2 col-6 flex items-center lg:justify-center">
               <!-- Số lượng người -->
               <div class="flex items-center gap-2">
-                <i class="fas fa-person text-green-600 text-lg md:text-2xl"></i>
+                <i class="fas fa-person text-green-600 text-lg md:text-[30px]"></i>
                 <div class="flex flex-col items-center">
-                  <label class="font-normal mb-0 text-sm" for="num_adult">Người lớn</label>
+                  <label class="font-normal mb-0 text-[20px]" for="num_adult">Người lớn</label>
                   <div>
                     <button @click.prevent="decreaseAdult" class="border-none">
                       <i class="fas fa-minus text-green-600"></i>
@@ -196,7 +195,7 @@
               <div v-if="form.select != 4" class="flex items-center gap-2">
                 <i class="fas fa-child text-green-600 text-lg md:text-2xl"></i>
                 <div class="flex flex-col items-center">
-                  <label class="font-normal mb-0 text-sm" for="num_adult">Trẻ em</label>
+                  <label class="font-normal mb-0 text-[20px]" for="num_adult">Trẻ em</label>
                   <div>
                     <button @click.prevent="decreaseChild" class="border-none">
                       <i class="fas fa-minus text-green-600"></i>
@@ -211,7 +210,7 @@
             </div>
             <div class="col-md-3 col-12 flex lg:items-center">
               <button
-                @click.prevent="router.visit('/dat-ve/buoc1')"
+                @click.prevent="router.visit(`/dat-ve/buoc1?select=${form.select}`)"
                 class="bg-green-600 text-white px-4 py-2 rounded-xl w-[100%] mt-lg-0 mt-2"
               >
                 {{ $t('search') }}
@@ -234,6 +233,7 @@ const isFixed = ref(false)
 const isDropdownOpen = ref(false)
 const page = usePage()
 const languages = computed(() => page.props.languages)
+const locations = computed(() => page.props.locations)
 const { t, locale } = useI18n()
 
 let cart = ref([])
@@ -274,6 +274,24 @@ const decreaseChild = () => {
 
 onMounted(() => {
   cart.value = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
+
+  if (location.pathname == '/') {
+    document.getElementById('header').style.height = `85vh`
+  } else {
+    if (window.innerWidth > 1024) {
+      document.getElementById('header').style.height = `30vh`
+    } else {
+      document.getElementById('header').style.height = `50vh`
+    }
+  }
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+      isFixed.value = true
+    } else {
+      isFixed.value = false
+    }
+  })
 })
 
 const toggleDropdown = () => {
@@ -295,21 +313,11 @@ function scrollToTopAndNavigate(url, options = {}) {
 
     setTimeout(() => {
       router.visit(url, options)
-    }, 600)
+    }, 500)
     return
   }
   router.visit(url, options)
 }
-
-onMounted(() => {
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-      isFixed.value = true
-    } else {
-      isFixed.value = false
-    }
-  })
-})
 
 const checkRoute = (route) => {
   if (typeof window !== 'undefined') {
@@ -324,7 +332,6 @@ const app_url = import.meta.env.VITE_APP_URL
 .header {
   background: url('@/Assets/images/bg_home.jpg') no-repeat center center;
   background-size: cover;
-  min-height: 85vh;
 }
 
 .active {
@@ -351,12 +358,12 @@ li:hover {
 
 .overlay {
   width: 100%;
-  height: 130px;
+  height: 200px;
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.9),
     rgba(0, 0, 0, 0.5),
-    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.3),
     rgba(255, 255, 255, 0)
   );
   pointer-events: none;

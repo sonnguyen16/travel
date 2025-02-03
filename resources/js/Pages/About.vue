@@ -29,13 +29,17 @@
 
       <div class="row pt-[50px]">
         <div id="about-3" class="col-lg-6 order-md-1 order-2">
-          <img src="@/Assets/images/about2.png" alt="about" class="w-full rounded-xl h-100 object-cover" />
+          <img src="@/Assets/images/about2.png" alt="about" class="w-full rounded-xl h-100 object-contain" />
         </div>
         <div id="about-4" class="col-lg-6 order-md-2 order-1">
-          <h3 class="mb-0 mt-3">{{ $t('story') }}</h3>
-          <h3 class="font-semi-bold text-[40px]">{{ $t('brand') }}</h3>
-          <p class="text-justify mt-[30px] font-normal">
-            {{ $t('about_text') }}
+          <h3 class="mb-0 mt-3">{{ $t('vision') }}</h3>
+          <p class="text-justify mt-[10px] font-normal">
+            {{ $t('vision_text') }}
+          </p>
+
+          <h3 class="mb-0 mt-3">{{ $t('mission') }}</h3>
+          <p class="text-justify mt-[10px] font-normal">
+            {{ $t('mission_text') }}
           </p>
         </div>
       </div>
@@ -90,10 +94,12 @@
           <div v-if="mounted" class="swiper swiper-1 w-full">
             <div class="swiper-wrapper">
               <div v-for="(_, i) in 4" class="swiper-slide">
-                <span _ngcontent-uxt-c152="" class="count"> 0{{ i + 1 }} </span>
-                <div class="slide-content-1">
-                  <h2>{{ $t('content_title') }}</h2>
-                  <p class="text-justify">{{ $t('content_paragraph') }}</p>
+                <span class="count"> 0{{ i + 1 }} </span>
+                <div class="slide-content-1 mt-3">
+                  <h2>{{ $t(`achievements[${i}].title`) }}</h2>
+                  <p class="text-justify">
+                    {{ $t(`achievements[${i}].event_details`) }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -104,16 +110,17 @@
             <div v-if="mounted" class="swiper swiper-2">
               <div class="swiper-wrapper flex items-end">
                 <!-- Slide 1 -->
-                <div class="swiper-slide intro-slide" :class="[moved == false ? 'h-[600px]' : '']">
+                <div class="swiper-slide intro-slide" :class="[moved == false ? 'h-[500px]' : '']">
                   <img
                     src="@/Assets/images/about3.jpg"
                     alt="slide 1"
-                    :class="[moved == false ? 'h-[600px]' : '']"
+                    :class="[moved == false ? 'h-[500px]' : '']"
                     class="w-full object-cover"
                   />
                   <div class="slide-content">
-                    <h2>{{ $t('slide_1_title') }}</h2>
-                    <p>{{ $t('slide_1_desc') }}</p>
+                    <h4>
+                      {{ $t(`achievements[0].title`) }}
+                    </h4>
                   </div>
                 </div>
 
@@ -121,8 +128,9 @@
                 <div class="swiper-slide intro-slide">
                   <img src="@/Assets/images/about4.jpg" alt="slide 2" class="w-full object-cover" />
                   <div class="slide-content">
-                    <h2>{{ $t('slide_2_title') }}</h2>
-                    <p>{{ $t('slide_2_desc') }}</p>
+                    <h4>
+                      {{ $t(`achievements[1].title`) }}
+                    </h4>
                   </div>
                 </div>
 
@@ -130,8 +138,9 @@
                 <div class="swiper-slide intro-slide">
                   <img src="@/Assets/images/about5.jpg" alt="slide 3" class="w-full object-cover" />
                   <div class="slide-content">
-                    <h2>{{ $t('slide_3_title') }}</h2>
-                    <p>{{ $t('slide_3_desc') }}</p>
+                    <h4>
+                      {{ $t(`achievements[2].title`) }}
+                    </h4>
                   </div>
                 </div>
 
@@ -139,19 +148,21 @@
                 <div class="swiper-slide intro-slide">
                   <img src="@/Assets/images/about4.jpg" alt="slide 4" class="w-full object-cover" />
                   <div class="slide-content">
-                    <h2>{{ $t('slide_2_title') }}</h2>
-                    <p>{{ $t('slide_2_desc') }}</p>
+                    <h4>
+                      {{ $t(`achievements[3].title`) }}
+                    </h4>
                   </div>
                 </div>
               </div>
-
-              <!-- Navigation -->
-              <div class="swiper-button-prev"></div>
-              <div class="swiper-button-next"></div>
             </div>
             <div class="position-absolute left-1/3 top-0 ms-3 md:block hidden">
               <h3>{{ $t('slide_1_title') }}</h3>
               <h2 class="font-bold">{{ $t('slide_2_title') }}</h2>
+              <!-- Navigation -->
+              <div class="mt-[150px]">
+                <div class="swiper-button-prev" style="left: auto"></div>
+                <div class="swiper-button-next" style="margin-right: 80px"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -176,7 +187,6 @@ onMounted(async () => {
     const scrollReveal = ScrollReveal()
 
     const swiper = new Swiper('.swiper-2', {
-      allowTouchMove: false,
       loop: true,
       fadeEffect: { crossFade: true },
       speed: 1000,
@@ -208,14 +218,8 @@ onMounted(async () => {
       // Thêm lớp active-slide vào slide hiện tại
       const activeSlide = swiper.slides[swiper.activeIndex]
       activeSlide.classList.add('active-slide')
-    })
 
-    document.querySelector('.swiper-button-prev').addEventListener('click', () => {
-      swiper1.slidePrev()
-    })
-
-    document.querySelector('.swiper-button-next').addEventListener('click', () => {
-      swiper1.slideNext()
+      swiper1.slideTo(swiper.realIndex)
     })
 
     const swiper1 = new Swiper('.swiper-1', {
@@ -275,7 +279,7 @@ onMounted(async () => {
 </script>
 <style scoped>
 .swiper-wrapper {
-  height: 600px;
+  height: 500px;
 }
 
 .swiper-1 .swiper-wrapper {
@@ -305,13 +309,13 @@ onMounted(async () => {
 }
 
 .swiper-2 > .swiper-wrapper > .swiper-slide:nth-child(1) {
-  height: 600px;
+  height: 500px;
 }
 
 .swiper-2 > .swiper-wrapper > .swiper-slide:not(.swiper-slide-active) {
   position: relative;
   overflow: hidden;
-  height: 400px;
+  height: 300px;
   transition: height 0.5s ease-in-out;
 }
 
@@ -327,7 +331,7 @@ onMounted(async () => {
 }
 
 .swiper-slide.intro-slide.active-slide {
-  height: 600px;
+  height: 500px;
   transition: height 0.5s ease-in-out;
   object-fit: cover;
 }
@@ -391,7 +395,7 @@ onMounted(async () => {
   text-underline-offset: 5px; /* Khoảng cách giữa chữ và viền */
 }
 
-.count[_ngcontent-uxt-c152] {
+.count {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke-width: 0.5px;
   -webkit-text-stroke-color: #003b05;
@@ -402,7 +406,7 @@ onMounted(async () => {
 }
 
 @media (max-width: 768px) {
-  .count[_ngcontent-uxt-c152] {
+  .count {
     margin-left: 200px;
   }
 }

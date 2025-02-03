@@ -1,10 +1,8 @@
 <template>
   <MainLayout>
     <div class="container">
-      <div class="pt-[100px]">
-        <div
-          class="w-full mx-auto bg-white px-[20px] pt-[30px] pb-[50px] border-[1.5px] border-green-600 rounded-xl shadow-2xl"
-        >
+      <div class="pt-[80px]">
+        <div class="w-full mx-auto bg-white px-[20px] pt-[30px] pb-[50px] border-[1.5px] border-green-600 rounded-xl">
           <div class="w-full">
             <div class="relative">
               <!-- Horizontal Line -->
@@ -47,7 +45,7 @@
       <div class="row">
         <div class="col-lg-8 order-lg-1 order-2">
           <div
-            class="w-full mx-auto bg-white px-[20px] pt-[20px] pb-[30px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
+            class="w-full mx-auto bg-white px-[20px] pt-[20px] pb-[30px] border-[1.5px] border-green-600 rounded-xl mt-4"
           >
             <form>
               <div class="row">
@@ -85,7 +83,7 @@
             </form>
           </div>
           <div
-            class="w-full mb-5 mx-auto mt-4 bg-white px-[20px] pt-[20px] pb-[30px] border-[1.5px] border-green-600 rounded-xl shadow-2xl"
+            class="w-full mb-5 mx-auto mt-4 bg-white px-[20px] pt-[20px] pb-[30px] border-[1.5px] border-green-600 rounded-xl"
           >
             <!-- 4 check boxes include vnpay, momo, visa(master card), atm -->
             <form>
@@ -119,9 +117,7 @@
           </div>
         </div>
         <div class="col-lg-4 order-lg-2 order-1">
-          <div
-            class="w-full mx-auto bg-white px-[20px] py-[20px] border-[1.5px] border-green-600 rounded-xl shadow-2xl mt-5"
-          >
+          <div class="w-full mx-auto bg-white px-[20px] py-[20px] border-[1.5px] border-green-600 rounded-xl mt-4">
             <h3>
               {{ $t('payment_detail') }}
             </h3>

@@ -31,26 +31,25 @@
   </Head>
   <MainLayout>
     <div class="container">
-      <div class="lg:pt-[150px] pt-[80px]">
-        <div style="box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3)" class="rounded-xl p-3">
+      <div class="pt-[100px]">
+        <div class="rounded-xl bg-white">
           <div class="row">
             <div class="col-lg-5">
               <div class="position-relative w-full md:h-[260px] h-[250px]">
                 <img
                   :src="BLOG_MEDIA_ENDPOINT + blog?.image_fe?.picture"
                   alt="home1"
-                  style="box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3)"
-                  class="w-full rounded-xl object-cover position-absolute lg:top-[-40px] max-h-[260px]"
+                  class="w-full rounded-xl object-cover max-h-[260px]"
                 />
               </div>
             </div>
             <div class="col-lg-7 lg:pe-5 lg:pt-3">
-              <h4>
+              <h3 class="font-semibold mt-md-0 mt-3">
                 {{
                   blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                   blog?.translations[0].name
                 }}
-              </h4>
+              </h3>
               <div
                 class="text-justify"
                 v-html="
@@ -70,13 +69,12 @@
         ></div>
       </div>
 
-      <div v-if="blog?.activities.length > 0" class="row pt-5">
-        <h2 class="text-center mb-5 text-2xl font-bold">
+      <div v-if="blog?.activities.length > 0" class="row pt-3">
+        <h2 class="text-center mb-4 text-2xl font-bold">
           {{ t('service_detail.activities') }}
         </h2>
         <div class="space-y-0 divide-y divide-gray-300">
-          <!-- Collapse Item 1 -->
-          <div v-for="(product, index) in blog?.activities" class="border-none">
+          <div v-for="(product, index) in blog?.activities" :key="index" class="border-none">
             <button
               :class="[index == 0 ? 'rounded-t-xl' : '', index == blog.activities.length - 1 ? 'rounded-b-xl' : '']"
               class="w-full flex justify-between items-center px-4 py-3 border-green-600 border bg-gray-100 hover:bg-gray-200 font-semibold"
@@ -98,7 +96,10 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            <div :id="`collapse${index + 1}`" class="hidden p-4 bg-gray-50 overflow-hidden transition-all duration-500">
+            <div
+              :id="`collapse${index + 1}`"
+              class="hidden p-4 bg-gray-50 overflow-hidden transition-all duration-500 collapse-content"
+            >
               <div
                 v-html="
                   product.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
@@ -107,12 +108,10 @@
               ></div>
             </div>
           </div>
-
-          <!-- Add more items as needed -->
         </div>
       </div>
 
-      <div class="pt-[50px] lg:pb-[100px] pb-[30px]">
+      <div class="pt-[30px] pb-[30px]">
         <h2 class="text-center mb-4">
           {{ t('service_detail.related_services') }}
         </h2>
@@ -125,7 +124,7 @@
                 @click.prevent="router.visit(`/${blog.menu.slug}/${blog_related.slug}`)"
                 class="swiper-slide hover:cursor-pointer"
               >
-                <div class="rounded-xl shadow-xl bg-white">
+                <div class="rounded-xl bg-white shadow-md">
                   <div
                     class="img-container h-[400px]"
                     style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
@@ -188,7 +187,7 @@ onMounted(() => {
       const targetElement = document.getElementById(targetId)
 
       // Ẩn tất cả các collapse khác
-      document.querySelectorAll('.hidden').forEach((collapse) => {
+      document.querySelectorAll('.collapse-content').forEach((collapse) => {
         if (collapse !== targetElement) {
           collapse.classList.add('hidden')
         }
@@ -197,6 +196,14 @@ onMounted(() => {
       // Toggle trạng thái của collapse được click
       if (targetElement.classList.contains('hidden')) {
         targetElement.classList.remove('hidden')
+
+        // Cuộn lên button sau khi mở collapse
+        setTimeout(() => {
+          window.scrollTo({
+            top: button.offsetTop - 80,
+            behavior: 'smooth'
+          })
+        }, 200) // Thêm delay để tránh lỗi cuộn quá nhanh trước khi collapse mở
       } else {
         targetElement.classList.add('hidden')
       }
@@ -222,15 +229,22 @@ onMounted(() => {
         slidesPerView: 2
       },
       480: {
-        slidesPerView: 1
+        slidesPerView: 1.2, // Hiển thị 1 slide và một phần của slide tiếp theo
+        centeredSlides: false, // Đảm bảo không căn giữa slide
+        slidesPerGroup: 1 // Trượt từng slide một
       }
     },
     on: {
       init: function () {
         updateNavigationButtons(this)
+        updateSlideWidth(this)
       },
       resize: function () {
         updateNavigationButtons(this)
+        updateSlideWidth(this)
+      },
+      slideChange: function () {
+        updateSlideWidth(this)
       }
     }
   })
@@ -251,6 +265,28 @@ function updateNavigationButtons(swiperInstance) {
       document.getElementsByClassName('swiper-prev-2')[0].style.display = ''
       document.getElementsByClassName('swiper-next-2')[0].style.display = ''
     }
+  }
+}
+
+function updateSlideWidth(swiperInstance) {
+  const slides = document.querySelectorAll('.swiper-2 .swiper-slide')
+  // if mobile
+  if (window.innerWidth < 768) {
+    slides.forEach((slide, index) => {
+      if (index < swiperInstance.activeIndex) {
+        // Các slide trước slide hiện tại sẽ full width
+        slide.style.width = '100%'
+      } else if (
+        index === swiperInstance.activeIndex &&
+        swiperInstance.activeIndex !== swiperInstance.slides.length - 1
+      ) {
+        // Slide hiện tại có width nhỏ hơn để hiển thị 1 phần slide sau
+        slide.style.width = 'calc(100% - 60px)'
+      } else {
+        // Slide phía sau giữ nguyên width mặc định
+        slide.style.width = ''
+      }
+    })
   }
 }
 

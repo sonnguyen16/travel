@@ -13,7 +13,7 @@
       />
       <meta property="og:image" content="/images/logo.png" />
     </Head>
-    <div class="container pt-[100px]">
+    <div class="container pt-[80px]">
       <h2 class="mb-3">{{ $t('hot_news') }}</h2>
       <div class="row">
         <div class="col-md-8 h-full mb-3">
@@ -118,6 +118,21 @@
           <Pagination :all-data="blogs" @changePage="changePage" />
         </div>
         <div class="col-md-4">
+          <form>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                :placeholder="$t('search')"
+                v-model="search"
+                aria-label="Recipient's username"
+                aria-describedby="button-addon2"
+              />
+              <button @click.prevent="searchNews" class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </form>
           <h4 class="">
             {{ t('other_promotions') }}
           </h4>
@@ -206,6 +221,13 @@ const props = defineProps({
 })
 const { t, locale } = useI18n()
 const mounted = ref(false)
+const search = ref('')
+
+const searchNews = () => {
+  router.visit(route('news', { search: search.value }), {
+    preserveState: true
+  })
+}
 
 onMounted(async () => {
   const paragraphs = document.querySelectorAll('.text-description p')

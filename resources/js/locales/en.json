@@ -26,7 +26,10 @@
   "about_us": "About Us",
   "introduction": "Introduction",
   "history": "Development History",
-  "vision_mission": "Vision - Mission",
+  "vision": "Vision",
+  "vision_text": "Create unique and high-quality tourism experiences that are closely associated with the distinctive nature and culture of the Central Highlands. Develop a comprehensive service chain that integrates sightseeing, leisure, accommodation, and dining. Strengthen international cooperation and firmly establish the value of the Vietnamese brand on the global tourism map.",
+  "mission": "Mission",
+  "mission_text": "Professionalize and develop the tourism industry of Da Lat city and Lam Dong province. Provide customers with various nature-related products and services and help them better understand the essence and beauty of Da Lat.",
   "awards": "Awards",
   "partners": "Partners",
   "terms_conditions": "Terms & Policies",
@@ -42,13 +45,13 @@
   "license_date": "License Date",
   "license_place": "Issued by",
   "reserved": "© 2021 Dalattourist. All rights reserved.",
-  "company_description": "Lam Dong Tourism Joint Stock Company – Dalattourist® is the oldest tourism – service – travel company in Da Lat. Established in 1976, Dalattourist® pioneers in providing tourism services associated with nature, culture, and the identity of Da Lat.",
+  "company_description": "Lam Dong Tourism Joint Stock Company - Dalattourist is a leading Travel - Service - Tour Operator in Da Lat, managing famous destinations, restaurants, and hotels such as Datanla Waterfall Tourist Area, Langbiang Tourist Area, Cable Car Tourist Area, Léguda Vegetable Buffet Restaurant, Thuy Ta Restaurant, and Nice Dream Hotel & Villas.",
   "business_field": "Business Fields",
   "sustainable_development": "Sustainable Development",
   "year": "Year",
   "story": "Story",
   "brand": "Brand",
-  "about_text": "Lam Dong Tourism Joint Stock Company has its predecessor as Lam Dong Tourism Company, established in 1976 with the function of 'Diplomatic Board' of Lam Dong Province. In 1993, Da Lat Tourism Service Company under the People's Committee of Da Lat City was merged into Lam Dong Tourism Company, mainly operating in the fields of travel, transportation, dining, tour guiding, and other services. In 2013, the company was officially equitized and named Lam Dong Tourism Joint Stock Company - Dalattourist.",
+  "about_text": "\"Nature is the foundation, and people create value.\" As a pioneer in developing green tourism, Dalattourist consistently invests in in-depth tourism products and services that integrate conservation with sustainable exploitation of natural heritage. This approach provides visitors with rich experiences that combine nature exploration, adventure tourism, and discovering the cultural beauty of Da Lat.",
   "history_title": "History of Formation & Development",
   "timeline_1976": "Company Established",
   "timeline_2006": "30th Anniversary Celebration",
@@ -134,5 +137,24 @@
   "notify": "Notify",
   "hot_news": "Hot News",
   "newest_news": "Newest News",
-  "promotion": "Promotion"
+  "promotion": "Promotion",
+  "add_to_cart": "Add to Cart",
+  "achievements": [
+    {
+      "title": "VIETNAM NATIONAL BRAND - Honored for 3 consecutive terms",
+      "event_details": "The event took place on November 4, 2024, at the National Convention Center (Hanoi) with the presence of Prime Minister Pham Minh Chinh. It was organized by the Ministry of Industry and Trade in collaboration with the National Brand Council under the theme 'Reaching into the Green Era'."
+    },
+    {
+      "title": "VIETNAM GOLDEN STAR AWARD",
+      "event_details": "The Vietnam Golden Star Award ceremony 2021 took place on March 30, 2022, in Hanoi to honor outstanding Vietnamese brands. It was organized by the Central Vietnam Youth Union and the Vietnam Young Entrepreneurs Association under the theme 'Light of the Future'."
+    },
+    {
+      "title": "TOP 10 ASIAN STRONG BRAND",
+      "event_details": "The event took place on April 22, 2023, in Kuala Lumpur, Malaysia. It was organized by the Asia-Pacific Economic Center to honor Vietnamese brands that have made significant contributions to the national economy and to promote brands, products, and services to consumers."
+    },
+    {
+      "title": "GOLDEN BRAND VIETNAM 2023",
+      "event_details": "The event took place on April 16, 2023, in Hanoi. It was organized by the Institute of Economics and Culture in collaboration with the Vietnam Consumer Protection Center to certify reputable brands, products, and high-quality services."
+    }
+  ]
 }

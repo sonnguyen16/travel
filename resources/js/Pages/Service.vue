@@ -14,7 +14,7 @@
       <meta property="og:image" content="/images/logo.png" />
     </Head>
     <div class="container">
-      <div v-if="blogs.length > 0 && mounted" id="service-1" class="md:pt-[150px] pt-[100px]">
+      <div v-if="blogs.length > 0 && mounted" id="service-1" class="pt-[100px]">
         <div class="swiper swiper-1">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
@@ -57,7 +57,7 @@
         <h5 class="text-center mb-5">{{ $t('no_data') }}</h5>
       </div>
 
-      <div class="row lg:pt-[100px] pt-[50px]">
+      <div class="row">
         <!-- Desktop Section -->
         <div id="service-2" class="col-lg-6 md:pe-4">
           <h4>{{ $t('restaurant_title') }}</h4>
@@ -101,7 +101,7 @@
         </div>
       </div>
 
-      <div id="service-4" class="md:pt-[100px] pt-[50px] pb-[50px]">
+      <div id="service-4" class="pt-[50px]">
         <div v-if="blogs_related.length > 0 && mounted" class="swiper swiper-2">
           <div class="swiper-wrapper">
             <div v-for="blog in blogs_related" class="swiper-slide hover:cursor-pointer">
@@ -181,7 +181,8 @@ onMounted(async () => {
           slidesPerView: 2
         },
         480: {
-          slidesPerView: 1
+          slidesPerView: 1.5,
+          slidesPerGroup: 1
         }
       },
       on: {
@@ -199,7 +200,6 @@ onMounted(async () => {
       fadeEffect: { crossFade: true },
       speed: 1000,
       spaceBetween: 20,
-      fadeEffect: { crossFade: true },
       speed: 1000,
       navigation: {
         nextEl: '.swiper-next-2',
@@ -282,6 +282,10 @@ const app_url = import.meta.env.VITE_APP_URL
     rgba(0, 0, 0, 0.3),
     rgba(255, 255, 255, 0)
   );
+}
+
+.swiper-wrapper {
+  padding-bottom: 50px;
 }
 
 .swiper-slide {

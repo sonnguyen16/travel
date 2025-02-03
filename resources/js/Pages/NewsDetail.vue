@@ -31,10 +31,10 @@
   </Head>
   <MainLayout>
     <div class="container">
-      <div class="pt-[100px]">
+      <div class="pt-[70px]">
         <div class="row">
           <div class="col-lg-8">
-            <h2 class="text-start mb-5">
+            <h2 class="text-start mb-3">
               {{
                 blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                 blog.translations[0].name

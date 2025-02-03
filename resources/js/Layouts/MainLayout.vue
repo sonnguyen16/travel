@@ -24,5 +24,6 @@ import Footer from '@/Components/Footer.vue'
 <style lang="css" scoped>
 .main {
   background: url('@/Assets/images/background.jpg') no-repeat center center;
+  background-size: cover;
 }
 </style>

@@ -16,9 +16,14 @@
     <div class="container">
       <div class="row pt-[100px]">
         <div id="about1" class="col-lg-6 flex items-center flex-col">
-          <h3 class="mb-0" style="line-height: 1"><span class="text-bold text-[150px]">49</span> {{ $t('year') }}</h3>
+          <h1 class="mb-0" style="line-height: 1">
+            <span class="text-bold text-[150px]">
+              {{ new Date().getFullYear() - 1976 }}
+            </span>
+            {{ $t('year') }}
+          </h1>
           <h3>{{ $t('sustainable_development') }}</h3>
-          <p class="font-bold">1976-2025</p>
+          <p class="font-bold">1976-{{ new Date().getFullYear() }}</p>
         </div>
         <div id="about2" class="col-lg-6">
           <p class="text-justify mt-[60px] font-normal">
@@ -29,8 +34,8 @@
 
       <div id="business" class="pt-5">
         <h1 class="mx-auto text-center mb-4">{{ $t('business_field') }}</h1>
-        <div class="row">
-          <div class="col-lg-5 mb-4">
+        <div class="row g-3">
+          <div class="col-lg-5 mb-md-4">
             <div @click.prevent="router.visit('/diem-den')" class="position-relative h-100 hover:cursor-pointer">
               <div class="img-container h-100">
                 <img src="@/Assets/images/home1.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
@@ -44,8 +49,8 @@
             </div>
           </div>
           <div class="col-lg-7">
-            <div class="row">
-              <div @click.prevent="router.visit('/hoat-dong')" class="col-lg-6 mb-4">
+            <div class="row g-3">
+              <div @click.prevent="router.visit('/hoat-dong')" class="col-lg-6">
                 <div class="position-relative h-100 hover:cursor-pointer">
                   <div class="img-container h-100">
                     <img src="@/Assets/images/home2.jpg" alt="home1" class="w-full rounded-xl h-100" />
@@ -58,7 +63,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 mb-4">
+              <div class="col-lg-6">
                 <div @click.prevent="router.visit('/nha-hang')" class="position-relative h-100 hover:cursor-pointer">
                   <div class="img-container h-100">
                     <img src="@/Assets/images/home3.jpg" alt="home1" class="w-full rounded-xl h-100" />
@@ -71,7 +76,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 mb-4">
+              <div class="col-lg-6 mb-md-4">
                 <div @click.prevent="router.visit('/luu-tru')" class="position-relative h-100 hover:cursor-pointer">
                   <div class="img-container h-100">
                     <img src="@/Assets/images/home4.jpg" alt="home1" class="w-full rounded-xl h-100" />

@@ -40,17 +40,11 @@ a {
   margin-right: auto;
   margin-left: auto;
 }
-@media (min-width: 1200px) {
-  /* Breakpoint xl */
-  .container {
-    max-width: 1000px; /* Giảm so với 1140px của Bootstrap */
-  }
-}
 
 @media (min-width: 1400px) {
   /* Breakpoint xxl */
   .container {
-    max-width: 1160px;
+    max-width: 1200px;
   }
 }
 
@@ -62,5 +56,5 @@ button:focus {
 }
 
 select {
-  padding-right: 35px !important; /* Đảm bảo không bị cắt nội dung */
+  padding-right: 35px !important;
 }

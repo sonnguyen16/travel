@@ -28,7 +28,7 @@
                     <img
                       :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
                       alt="home1"
-                      class="w-full rounded-xl object-cover h-[500px]"
+                      class="w-full rounded-xl object-cover h-[300px]"
                     />
                   </div>
                   <div class="p-3 position-absolute bottom-0 rounded-xl left-0 right-0 overlay1 h-[150px]">
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="container">
-      <div id="promo-2" class="pt-[100px] pb-[50px]">
+      <div id="promo-2" class="pt-[50px]">
         <div class="swiper swiper-2" style="height: 350px">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
@@ -283,7 +283,7 @@ function updateNavigationButtons1(swiperInstance) {
 }
 
 .slide-1 {
-  height: 600px;
+  height: 400px;
 }
 
 @media (max-width: 768px) {
