@@ -70,6 +70,7 @@ import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
 import { useI18n } from 'vue-i18n'
 import { BLOG_MEDIA_ENDPOINT, MEDIA_ENDPOINT } from '@/Constants/endpoint'
+import { updateNavigationButtons, updateSlideWidth, cleanHTML } from '@/Assets/common.js'
 
 const props = defineProps({
   blogs: Object,
@@ -87,9 +88,7 @@ onMounted(async () => {
     new Swiper('.swiper-2', {
       loop: false,
       fadeEffect: { crossFade: true },
-      speed: 1000,
       spaceBetween: 20,
-      fadeEffect: { crossFade: true },
       speed: 1000,
       navigation: {
         nextEl: '.swiper-next-2',
@@ -108,10 +107,15 @@ onMounted(async () => {
       },
       on: {
         init: function () {
-          updateNavigationButtons(this)
+          updateNavigationButtons(this, 2)
+          updateSlideWidth(this, 2)
         },
         resize: function () {
-          updateNavigationButtons(this)
+          updateNavigationButtons(this, 2)
+          updateSlideWidth(this, 2)
+        },
+        slideChange: function () {
+          updateSlideWidth(this, 2)
         }
       }
     })
@@ -126,25 +130,6 @@ onMounted(async () => {
     })
   }
 })
-
-function updateNavigationButtons(swiperInstance) {
-  const { slides, params } = swiperInstance
-  const slidesPerView = params.slidesPerView
-  const totalSlides = slides.length
-
-  // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
-  if (totalSlides <= slidesPerView) {
-    if (document.getElementsByClassName('swiper-prev-2').length > 0) {
-      document.getElementsByClassName('swiper-prev-2')[0].style.display = 'none'
-      document.getElementsByClassName('swiper-next-2')[0].style.display = 'none'
-    }
-  } else {
-    if (document.getElementsByClassName('swiper-prev-2').length > 0) {
-      document.getElementsByClassName('swiper-prev-2')[0].style.display = ''
-      document.getElementsByClassName('swiper-next-2')[0].style.display = ''
-    }
-  }
-}
 </script>
 <style scoped>
 .overlay {
@@ -161,19 +146,6 @@ function updateNavigationButtons(swiperInstance) {
 .swiper-slide {
   height: 620px;
 }
-@media (max-width: 768px) {
-  .swiper-slide {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 1s ease-in-out;
-  }
-
-  .swiper-slide-active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Tùy chỉnh nút prev và next */
 .swiper-button-prev,
 .swiper-button-next {

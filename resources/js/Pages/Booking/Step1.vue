@@ -61,7 +61,7 @@
       <div
         v-for="(product, index) in products"
         :key="index"
-        :id="product.location_id"
+        :id="product.id"
         class="w-full mx-auto bg-white px-[20px] pt-[20px] pb-[20px] border-[1.5px] border-green-600 rounded-xl mt-4"
       >
         <div class="md:flex justify-between items-center">
@@ -256,13 +256,23 @@ onMounted(async () => {
 
   const urlParams = new URLSearchParams(window.location.search)
   const select = urlParams.get('select')
+  const ticket_id = urlParams.get('ticket_id')
   if (select) {
     setTimeout(() => {
       window.scrollTo({
-        top: document.getElementById(select).offsetTop - 80,
+        top: document.getElementById(props.products.find((p) => p.location_id == select)?.id).offsetTop - 80,
         behavior: 'smooth'
       })
-    }, 200)
+    }, 500)
+  }
+
+  if (ticket_id) {
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.getElementById(ticket_id).offsetTop - 80,
+        behavior: 'smooth'
+      })
+    }, 500)
   }
 })
 

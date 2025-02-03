@@ -62,7 +62,10 @@
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
             <template v-if="mounted" v-for="product in products">
-              <div @click.prevent="router.visit('dat-ve/buoc1')" class="swiper-slide hover:cursor-pointer">
+              <div
+                @click.prevent="router.visit(`dat-ve/buoc1?ticket_id=${product.id}`)"
+                class="swiper-slide hover:cursor-pointer"
+              >
                 <div class="rounded-xl shadow-xl bg-white">
                   <div
                     class="img-container h-[200px]"
@@ -115,6 +118,7 @@ import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
 import { BLOG_MEDIA_ENDPOINT, PRODUCT_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import { useI18n } from 'vue-i18n'
+import { updateNavigationButtons, updateSlideWidth, cleanHTML } from '@/Assets/common.js'
 
 const { t, locale } = useI18n()
 const props = defineProps({
@@ -151,10 +155,15 @@ onMounted(async () => {
       },
       on: {
         init: function () {
-          updateNavigationButtons(this)
+          updateNavigationButtons(this, 1)
+          updateSlideWidth(this, 1)
         },
         resize: function () {
-          updateNavigationButtons(this)
+          updateNavigationButtons(this, 1)
+          updateSlideWidth(this, 1)
+        },
+        slideChange: function () {
+          updateSlideWidth(this, 1)
         }
       }
     })
@@ -181,10 +190,15 @@ onMounted(async () => {
       },
       on: {
         init: function () {
-          updateNavigationButtons1(this)
+          updateNavigationButtons(this, 2)
+          updateSlideWidth(this, 2)
         },
         resize: function () {
-          updateNavigationButtons1(this)
+          updateNavigationButtons(this, 2)
+          updateSlideWidth(this, 2)
+        },
+        slideChange: function () {
+          updateSlideWidth(this, 2)
         }
       }
     })
@@ -228,44 +242,6 @@ onMounted(async () => {
     })
   }
 })
-
-function updateNavigationButtons(swiperInstance) {
-  const { slides, params } = swiperInstance
-  const slidesPerView = params.slidesPerView
-  const totalSlides = slides.length
-
-  // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
-  if (totalSlides <= slidesPerView) {
-    if (document.getElementsByClassName('swiper-prev-1').length > 0) {
-      document.getElementsByClassName('swiper-prev-1')[0].style.display = 'none'
-      document.getElementsByClassName('swiper-next-1')[0].style.display = 'none'
-    }
-  } else {
-    if (document.getElementsByClassName('swiper-prev-1').length > 0) {
-      document.getElementsByClassName('swiper-prev-1')[0].style.display = ''
-      document.getElementsByClassName('swiper-next-1')[0].style.display = ''
-    }
-  }
-}
-
-function updateNavigationButtons1(swiperInstance) {
-  const { slides, params } = swiperInstance
-  const slidesPerView = params.slidesPerView
-  const totalSlides = slides.length
-
-  // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
-  if (totalSlides <= slidesPerView) {
-    if (document.getElementsByClassName('swiper-prev-2').length > 0) {
-      document.getElementsByClassName('swiper-prev-2')[0].style.display = 'none'
-      document.getElementsByClassName('swiper-next-2')[0].style.display = 'none'
-    }
-  } else {
-    if (document.getElementsByClassName('swiper-prev-2').length > 0) {
-      document.getElementsByClassName('swiper-prev-2')[0].style.display = ''
-      document.getElementsByClassName('swiper-next-2')[0].style.display = ''
-    }
-  }
-}
 </script>
 <style scoped>
 .bg_promo {
@@ -285,20 +261,6 @@ function updateNavigationButtons1(swiperInstance) {
 .slide-1 {
   height: 400px;
 }
-
-@media (max-width: 768px) {
-  .swiper-slide {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 1s ease-in-out;
-  }
-
-  .swiper-slide-active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Tùy chỉnh nút prev và next */
 .swiper-button-prev,
 .swiper-button-next {

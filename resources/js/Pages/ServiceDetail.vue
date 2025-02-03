@@ -170,6 +170,7 @@ import 'swiper/css/bundle'
 import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import { useI18n } from 'vue-i18n'
 import { router, Head } from '@inertiajs/vue3'
+import { updateNavigationButtons, updateSlideWidth, cleanHTML } from '@/Assets/common.js'
 
 const props = defineProps({
   blog: Object
@@ -203,7 +204,7 @@ onMounted(() => {
             top: button.offsetTop - 80,
             behavior: 'smooth'
           })
-        }, 200) // Thêm delay để tránh lỗi cuộn quá nhanh trước khi collapse mở
+        }, 200)
       } else {
         targetElement.classList.add('hidden')
       }
@@ -229,71 +230,24 @@ onMounted(() => {
         slidesPerView: 2
       },
       480: {
-        slidesPerView: 1.2, // Hiển thị 1 slide và một phần của slide tiếp theo
-        centeredSlides: false, // Đảm bảo không căn giữa slide
-        slidesPerGroup: 1 // Trượt từng slide một
+        slidesPerView: 1
       }
     },
     on: {
       init: function () {
-        updateNavigationButtons(this)
-        updateSlideWidth(this)
+        updateNavigationButtons(this, 2)
+        updateSlideWidth(this, 2)
       },
       resize: function () {
-        updateNavigationButtons(this)
-        updateSlideWidth(this)
+        updateNavigationButtons(this, 2)
+        updateSlideWidth(this, 2)
       },
       slideChange: function () {
-        updateSlideWidth(this)
+        updateSlideWidth(this, 2)
       }
     }
   })
 })
-function updateNavigationButtons(swiperInstance) {
-  const { slides, params } = swiperInstance
-  const slidesPerView = params.slidesPerView
-  const totalSlides = slides.length
-
-  // Nếu số lượng slide nhỏ hơn hoặc bằng số slide hiển thị, ẩn nút
-  if (totalSlides <= slidesPerView) {
-    if (document.getElementsByClassName('swiper-prev-2').length > 0) {
-      document.getElementsByClassName('swiper-prev-2')[0].style.display = 'none'
-      document.getElementsByClassName('swiper-next-2')[0].style.display = 'none'
-    }
-  } else {
-    if (document.getElementsByClassName('swiper-prev-2').length > 0) {
-      document.getElementsByClassName('swiper-prev-2')[0].style.display = ''
-      document.getElementsByClassName('swiper-next-2')[0].style.display = ''
-    }
-  }
-}
-
-function updateSlideWidth(swiperInstance) {
-  const slides = document.querySelectorAll('.swiper-2 .swiper-slide')
-  // if mobile
-  if (window.innerWidth < 768) {
-    slides.forEach((slide, index) => {
-      if (index < swiperInstance.activeIndex) {
-        // Các slide trước slide hiện tại sẽ full width
-        slide.style.width = '100%'
-      } else if (
-        index === swiperInstance.activeIndex &&
-        swiperInstance.activeIndex !== swiperInstance.slides.length - 1
-      ) {
-        // Slide hiện tại có width nhỏ hơn để hiển thị 1 phần slide sau
-        slide.style.width = 'calc(100% - 60px)'
-      } else {
-        // Slide phía sau giữ nguyên width mặc định
-        slide.style.width = ''
-      }
-    })
-  }
-}
-
-const cleanHTML = (html) => {
-  // Loại bỏ toàn bộ thẻ HTML
-  return html?.replace(/<\/?[^>]+(>|$)/g, '')
-}
 </script>
 <style scoped>
 img {
