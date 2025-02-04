@@ -58,9 +58,3 @@ button:focus {
 select {
   padding-right: 35px !important;
 }
-
-@media (max-width: 480px) {
-  .swiper-slide {
-    width: calc(100% - 60px);
-  }
-}

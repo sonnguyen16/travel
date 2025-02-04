@@ -21,7 +21,7 @@ export function updateNavigationButtons(swiperInstance, swiperIndex) {
 
 export function updateSlideWidth(swiperInstance, swiperIndex) {
     const slides = document.querySelectorAll(`.swiper-${swiperIndex} .swiper-slide`)
-    // if mobile
+    slides[0].style.width = 'calc(100% - 60px)'
     if (window.innerWidth < 768) {
         slides.forEach((slide, index) => {
             if (index < swiperInstance.activeIndex) {

@@ -155,9 +155,9 @@
       <div class="w-full mx-auto bg-white px-[20px] py-[15px] border-[1.5px] border-green-600 rounded-xl">
         <form>
           <div class="row">
-            <div class="col-md-3 col-6 flex items-center">
+            <div class="col-md-3 col-12 flex items-center">
               <div class="flex items-center">
-                <i class="fas fa-map-marker-alt text-green-600 text-lg md:text-2xl"></i>
+                <i class="fas fa-map-marker-alt text-green-600 text-lg"></i>
                 <select v-model="form.select" class="border-0 form-control">
                   <option class="font-normal" v-for="location in locations" :key="location.id" :value="location.id">
                     {{ location.translations.find((t) => t.language.code === locale.toUpperCase())?.name }}
@@ -165,26 +165,26 @@
                 </select>
               </div>
             </div>
-            <div class="col-md-2 col-6 flex items-center">
+            <div class="col-md-2 col-12 flex items-center">
               <!-- Chọn ngày -->
               <div class="flex items-center">
-                <i class="far fa-calendar-alt text-green-600 text-lg md:text-2xl"></i>
+                <i class="far fa-calendar-alt text-green-600 text-lg"></i>
                 <input type="date" class="border-0 lg:w-[100%] w-[80%] font-normal" v-model="form.date" />
               </div>
             </div>
             <div class="col-md-2 col-6 flex items-center lg:justify-center">
               <!-- Số lượng người -->
               <div class="flex items-center gap-2">
-                <i class="fas fa-person text-green-600 text-lg md:text-[30px]"></i>
+                <i class="fas fa-person text-green-600 text-2xl"></i>
                 <div class="flex flex-col items-center">
-                  <label class="font-normal mb-0 text-[20px]" for="num_adult">Người lớn</label>
+                  <label class="font-normal mb-0" for="num_adult">Người lớn</label>
                   <div>
                     <button @click.prevent="decreaseAdult" class="border-none">
-                      <i class="fas fa-minus text-green-600"></i>
+                      <i class="fas fa-minus text-green-600 text-[12px]"></i>
                     </button>
-                    <input type="text" class="border-none w-[35px] py-0 font-normal" v-model="form.num_adult" />
+                    <input type="text" class="border-none w-[35px] py-0 font-normal text-sm" v-model="form.num_adult" />
                     <button @click.prevent="incrementAdult" class="border-none">
-                      <i class="fas fa-plus text-green-600"></i>
+                      <i class="fas fa-plus text-green-600 text-[12px]"></i>
                     </button>
                   </div>
                 </div>
@@ -193,16 +193,16 @@
             <div class="col-md-2 col-6 flex items-center lg:justify-center">
               <!-- Số lượng người -->
               <div v-if="form.select != 4" class="flex items-center gap-2">
-                <i class="fas fa-child text-green-600 text-lg md:text-2xl"></i>
+                <i class="fas fa-child text-green-600 text-xl"></i>
                 <div class="flex flex-col items-center">
-                  <label class="font-normal mb-0 text-[20px]" for="num_adult">Trẻ em</label>
+                  <label class="font-normal mb-0" for="num_adult">Trẻ em</label>
                   <div>
                     <button @click.prevent="decreaseChild" class="border-none">
-                      <i class="fas fa-minus text-green-600"></i>
+                      <i class="fas fa-minus text-green-600 text-[12px]"></i>
                     </button>
-                    <input type="text" class="border-none w-[35px] py-0 font-normal" v-model="form.num_child" />
+                    <input type="text" class="border-none w-[35px] py-0 font-normal text-sm" v-model="form.num_child" />
                     <button @click.prevent="incrementChild" class="border-none">
-                      <i class="fas fa-plus text-green-600"></i>
+                      <i class="fas fa-plus text-green-600 text-[12px]"></i>
                     </button>
                   </div>
                 </div>
@@ -280,8 +280,6 @@ onMounted(() => {
   } else {
     if (window.innerWidth > 1024) {
       document.getElementById('header').style.height = `30vh`
-    } else {
-      document.getElementById('header').style.height = `45vh`
     }
   }
 
@@ -431,5 +429,11 @@ nav a {
 
 [style*='pointer-events: auto;'] {
   pointer-events: auto;
+}
+
+@media screen and (max-width: 768px) {
+  #header {
+    height: 50vh !important;
+  }
 }
 </style>
