@@ -21,8 +21,8 @@ export function updateNavigationButtons(swiperInstance, swiperIndex) {
 
 export function updateSlideWidth(swiperInstance, swiperIndex) {
     const slides = document.querySelectorAll(`.swiper-${swiperIndex} .swiper-slide`)
-    slides[0].style.width = 'calc(100% - 60px)'
     if (window.innerWidth < 768) {
+        slides[0].style.width = 'calc(100% - 60px)'
         slides.forEach((slide, index) => {
             if (index < swiperInstance.activeIndex) {
                 // Các slide trước slide hiện tại sẽ full width
