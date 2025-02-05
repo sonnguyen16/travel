@@ -208,6 +208,14 @@ onMounted(async () => {
       }
     })
 
+    const swiper1 = new Swiper('.swiper-1', {
+      allowTouchMove: false,
+      loop: true,
+      speed: 1000,
+      spaceBetween: 20,
+      slidesPerView: 1
+    })
+
     // Gắn sự kiện slideChange
     swiper.on('slideChange', () => {
       moved.value = true
@@ -220,14 +228,7 @@ onMounted(async () => {
       activeSlide.classList.add('active-slide')
 
       swiper1.slideTo(swiper.realIndex)
-    })
-
-    const swiper1 = new Swiper('.swiper-1', {
-      allowTouchMove: false,
-      loop: true,
-      speed: 1000,
-      spaceBetween: 20,
-      slidesPerView: 1
+      console.log(swiper.realIndex)
     })
 
     // ScrollReveal - Hiệu ứng nhập từ 2 bên
