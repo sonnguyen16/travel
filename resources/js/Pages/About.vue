@@ -219,7 +219,7 @@ onMounted(async () => {
       const activeSlide = swiper.slides[swiper.activeIndex]
       activeSlide.classList.add('active-slide')
 
-      swiper1.slideTo(swiper.activeIndex)
+      swiper1.slideTo(swiper.realIndex)
     })
 
     const swiper1 = new Swiper('.swiper-1', {
@@ -336,19 +336,6 @@ onMounted(async () => {
   object-fit: cover;
 }
 
-@media (max-width: 768px) {
-  .swiper-slide {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 1s ease-in-out;
-  }
-
-  .swiper-slide-active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Tùy chỉnh nút prev và next */
 .swiper-button-prev,
 .swiper-button-next {
@@ -408,6 +395,10 @@ onMounted(async () => {
 @media (max-width: 768px) {
   .count {
     margin-left: 200px;
+  }
+
+  .swiper-slide {
+    width: 100% !important;
   }
 }
 </style>
