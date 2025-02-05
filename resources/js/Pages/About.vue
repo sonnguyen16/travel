@@ -219,7 +219,7 @@ onMounted(async () => {
       const activeSlide = swiper.slides[swiper.activeIndex]
       activeSlide.classList.add('active-slide')
 
-      swiper1.slideTo(swiper.realIndex)
+      swiper1.slideTo(swiper.activeIndex)
     })
 
     const swiper1 = new Swiper('.swiper-1', {

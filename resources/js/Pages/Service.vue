@@ -150,7 +150,7 @@ import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
 import { useI18n } from 'vue-i18n'
 import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
-import { updateNavigationButtons, updateSlideWidth, cleanHTML } from '@/Assets/common.js'
+import { updateNavigationButtons } from '@/Assets/common.js'
 
 const props = defineProps({
   blogs: Object,
@@ -169,6 +169,7 @@ onMounted(async () => {
       loop: false,
       fadeEffect: { crossFade: true },
       speed: 1000,
+      slidesPerView: 'auto',
       spaceBetween: 20, // Khoảng cách giữa các item
       navigation: {
         nextEl: '.swiper-next-1',
@@ -188,14 +189,9 @@ onMounted(async () => {
       on: {
         init: function () {
           updateNavigationButtons(this, 1)
-          updateSlideWidth(this, 1)
         },
         resize: function () {
           updateNavigationButtons(this, 1)
-          updateSlideWidth(this, 1)
-        },
-        slideChange: function () {
-          updateSlideWidth(this, 1)
         }
       }
     })
@@ -204,7 +200,7 @@ onMounted(async () => {
       fadeEffect: { crossFade: true },
       speed: 1000,
       spaceBetween: 20,
-      speed: 1000,
+      slidesPerView: 'auto',
       navigation: {
         nextEl: '.swiper-next-2',
         prevEl: '.swiper-prev-2'
@@ -223,14 +219,9 @@ onMounted(async () => {
       on: {
         init: function () {
           updateNavigationButtons(this, 2)
-          updateSlideWidth(this, 2)
         },
         resize: function () {
           updateNavigationButtons(this, 2)
-          updateSlideWidth(this, 2)
-        },
-        slideChange: function () {
-          updateSlideWidth(this, 2)
         }
       }
     })

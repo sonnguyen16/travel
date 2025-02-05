@@ -216,8 +216,7 @@ onMounted(() => {
     fadeEffect: { crossFade: true },
     speed: 1000,
     spaceBetween: 20,
-    fadeEffect: { crossFade: true },
-    speed: 1000,
+    slidesPerView: 'auto',
     navigation: {
       nextEl: '.swiper-next-2',
       prevEl: '.swiper-prev-2'
@@ -236,14 +235,9 @@ onMounted(() => {
     on: {
       init: function () {
         updateNavigationButtons(this, 2)
-        updateSlideWidth(this, 2)
       },
       resize: function () {
         updateNavigationButtons(this, 2)
-        updateSlideWidth(this, 2)
-      },
-      slideChange: function () {
-        updateSlideWidth(this, 2)
       }
     }
   })
