@@ -1,3 +1,4 @@
+import { nextTick } from 'vue'
 export function updateNavigationButtons(swiperInstance, swiperIndex) {
     const { slides, params } = swiperInstance
     const slidesPerView = params.slidesPerView
