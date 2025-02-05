@@ -20,22 +20,21 @@ export function updateNavigationButtons(swiperInstance, swiperIndex) {
 }
 
 export function updateSlideWidth(swiperInstance, swiperIndex) {
-    const slides = document.querySelectorAll(`.swiper-${swiperIndex} .swiper-slide`)
-    if (window.innerWidth < 768) {
-        slides[0].style.width = 'calc(100% - 60px)'
-        slides.forEach((slide, index) => {
-            if (index < swiperInstance.activeIndex) {
-                // Các slide trước slide hiện tại sẽ full width
-                slide.style.width = '100%'
-            } else if (index === swiperInstance.activeIndex) {
-                // Slide hiện tại có width nhỏ hơn để hiển thị 1 phần slide sau
-                slide.style.width = 'calc(100% - 60px)'
-            } else {
-                // Slide phía sau giữ nguyên width mặc định
-                slide.style.width = ''
-            }
-        })
-    }
+    setTimeout(() => {
+        const slides = document.querySelectorAll(`.swiper-${swiperIndex} .swiper-slide`)
+        if (window.innerWidth < 768) {
+            slides[0].style.width = 'calc(100% - 60px)'
+            slides.forEach((slide, index) => {
+                if (index < swiperInstance.activeIndex) {
+                    slide.style.width = '100%'
+                } else if (index === swiperInstance.activeIndex) {
+                    slide.style.width = 'calc(100% - 60px)'
+                } else {
+                    slide.style.width = ''
+                }
+            })
+        }
+    }, 200)
 }
 
 export const cleanHTML = (html) => {
