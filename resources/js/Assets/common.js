@@ -20,7 +20,7 @@ export function updateNavigationButtons(swiperInstance, swiperIndex) {
 }
 
 export function updateSlideWidth(swiperInstance, swiperIndex) {
-    setTimeout(() => {
+    nextTick(() => {
         const slides = document.querySelectorAll(`.swiper-${swiperIndex} .swiper-slide`)
         if (window.innerWidth < 768) {
             slides[0].style.width = 'calc(100% - 60px)'
@@ -34,7 +34,7 @@ export function updateSlideWidth(swiperInstance, swiperIndex) {
                 }
             })
         }
-    }, 200)
+    })
 }
 
 export const cleanHTML = (html) => {
