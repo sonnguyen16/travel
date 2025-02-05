@@ -93,7 +93,7 @@
         <div class="col-span-1 h-100 flex flex-col justify-end">
           <div v-if="mounted" class="swiper swiper-1 w-full">
             <div class="swiper-wrapper">
-              <div v-for="(_, i) in 3" class="swiper-slide">
+              <div v-for="(_, i) in 4" class="swiper-slide">
                 <span class="count"> 0{{ i + 1 }} </span>
                 <div class="slide-content-1 mt-3">
                   <h2>{{ $t(`achievements[${i}].title`) }}</h2>
