@@ -46,6 +46,11 @@
                    <i class="fa fa-newspaper-o"></i> <span>Trang</span>
                </a>
            </li>
+           <li class="{{ Route::is('backend.dashboard.faq.index') || Route::is('backend.dashboard.faq_cate.index') ? 'active' : '' }}">
+            <a href="{{ route('backend.dashboard.faq.index') }}">
+                <i class="fa fa-question-circle"></i> <span>FAQ</span>
+            </a>
+        </li>
            <li class="{{ Route::is('backend.dashboard.banner.index') ? 'active' : '' }}">
                 <a href="{{ route('backend.dashboard.banner.index') }}">
                     <i class="fa fa-picture-o"></i> <span>Banner</span>
