@@ -32,6 +32,37 @@
   <MainLayout>
     <div class="container">
       <div class="pt-[70px]">
+        <!-- breadcum -->
+        <div class="flex gap-2 mb-3">
+          <a @click.prevent="router.visit('/')" class="text-gray-500 hover:text-gray-700 hover:cursor-pointer">
+            <i class="fas fa-home"></i>
+          </a>
+          <span class="text-gray-500">
+            <i class="fas fa-chevron-right"></i>
+          </span>
+          <a @click.prevent="router.visit('/tin-tuc')" class="text-gray-500 hover:text-gray-700 hover:cursor-pointer">{{
+            t('news')
+          }}</a>
+          <span class="text-gray-500">
+            <i class="fas fa-chevron-right"></i>
+          </span>
+          <a
+            @click.prevent="router.visit('/tin-tuc/' + blog.news_category?.slug)"
+            class="text-gray-500 hover:text-gray-700 hover:cursor-pointer"
+            >{{
+              blog.news_category?.translations?.find((t) => t.language.code == locale.toUpperCase())?.name ||
+              blog.news_category?.translations?.[0].name
+            }}</a
+          >
+          <span class="text-gray-500">
+            <i class="fas fa-chevron-right"></i>
+          </span>
+          <span class="text-gray-500">
+            {{
+              blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name || blog.translations[0].name
+            }}
+          </span>
+        </div>
         <div class="row">
           <div class="col-lg-8">
             <h2 class="text-start mb-3">
@@ -56,7 +87,7 @@
             <template v-for="blog_related in blog.menu.blogs.slice(0, 11)">
               <div
                 v-if="blog.id != blog_related.id"
-                @click.prevent="router.visit(`/tin-tuc/${blog_related.slug}`)"
+                @click.prevent="router.visit(`/tin-tuc/${blog.news_category?.slug}/${blog_related.slug}`)"
                 class="flex gap-3 mb-4 hover:cursor-pointer"
               >
                 <img

@@ -14,81 +14,33 @@
       <meta property="og:image" content="/images/logo.png" />
     </Head>
     <div class="container pt-[80px]">
-      <h2 class="mb-3">{{ $t('hot_news') }}</h2>
-      <div class="row">
-        <div class="col-md-8 h-full mb-3">
-          <div
-            @click.prevent="router.visit(`/tin-tuc/${hot_blogs[0].news_category?.slug}/${hot_blogs[0].slug}`)"
-            class="img-container w-full h-full hover:cursor-pointer"
-          >
-            <img
-              :src="BLOG_MEDIA_ENDPOINT + hot_blogs[0].image_fe?.picture"
-              alt="home1"
-              class="w-full object-cover rounded-lg h-full hover:cursor-pointer"
-            />
-            <div class="slide-content">
-              <h3 class="line-clamp-4">
-                {{
-                  hot_blogs[0].translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
-                  hot_blogs[0].translations[0].name
-                }}
-              </h3>
-              <div
-                class="text-description md:block hidden line-clamp-3"
-                v-html="
-                  hot_blogs[0].translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
-                  hot_blogs[0].translations[0].description
-                "
-              ></div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div
-            @click.prevent="router.visit(`/tin-tuc/${hot_blogs[1].news_category?.slug}/${hot_blogs[1].slug}`)"
-            class="img-container w-full mb-3"
-          >
-            <img
-              :src="BLOG_MEDIA_ENDPOINT + hot_blogs[1].image_fe?.picture"
-              alt="home1"
-              class="w-full object-cover rounded-lg hover:cursor-pointer"
-            />
-            <div class="slide-content">
-              <h5 class="line-clamp-4">
-                {{
-                  hot_blogs[1].translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
-                  hot_blogs[1].translations[0].name
-                }}
-              </h5>
-            </div>
-          </div>
-          <div
-            @click.prevent="router.visit(`/tin-tuc/${hot_blogs[2].news_category?.slug}/${hot_blogs[2].slug}`)"
-            class="img-container w-full"
-          >
-            <img
-              :src="BLOG_MEDIA_ENDPOINT + hot_blogs[2].image_fe?.picture"
-              alt="home1"
-              class="w-full object-cover rounded-lg hover:cursor-pointer"
-            />
-            <div class="slide-content">
-              <h5 class="line-clamp-4">
-                {{
-                  hot_blogs[2].translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
-                  hot_blogs[2].translations[0].name
-                }}
-              </h5>
-            </div>
-          </div>
-        </div>
+      <div class="flex gap-2 mb-3">
+        <a @click.prevent="router.visit('/')" class="text-gray-500 hover:text-gray-700 hover:cursor-pointer">
+          <i class="fas fa-home"></i>
+        </a>
+        <span class="text-gray-500">
+          <i class="fas fa-chevron-right"></i>
+        </span>
+        <a @click.prevent="router.visit('/tin-tuc')" class="text-gray-500 hover:text-gray-700 hover:cursor-pointer">{{
+          t('news')
+        }}</a>
+        <span class="text-gray-500">
+          <i class="fas fa-chevron-right"></i>
+        </span>
+        <a
+          @click.prevent="router.visit('/tin-tuc/' + menu.slug)"
+          class="text-gray-500 hover:text-gray-700 hover:cursor-pointer"
+          >{{
+            menu.translations?.find((t) => t.language.code == locale.toUpperCase())?.name || menu.translations?.[0].name
+          }}</a
+        >
       </div>
-      <h2 class="mb-3 mt-3">{{ $t('newest_news') }}</h2>
       <div class="row">
         <div class="col-md-8">
           <div class="row">
             <template v-if="blogs.data.length > 0" v-for="blog in blogs.data">
               <div
-                @click.prevent="router.visit(`/tin-tuc/${blog.news_category?.slug}/${blog.slug}`)"
+                @click.prevent="router.visit(`/tin-tuc/${blog.menu.menu[0]?.slug}/${blog.slug}`)"
                 class="col-md-6 mb-4 hover:cursor-pointer"
               >
                 <div class="img-container w-full">
@@ -125,7 +77,7 @@
             </template>
             <template v-else>
               <div class="col-md-12">
-                <p>{{ $t('no_data') }}</p>
+                <p>{{ t('no_data') }}</p>
               </div>
             </template>
           </div>
@@ -147,24 +99,6 @@
               </button>
             </div>
           </form>
-          <h4 class="">
-            {{ t('category') }}
-          </h4>
-          <hr />
-          <template v-for="m in menu">
-            <div @click.prevent="router.visit(`/tin-tuc/${m.slug}`)" class="flex gap-3 mb-4 hover:cursor-pointer">
-              <div>
-                <p class="mb-0 line-clamp-3">
-                  {{
-                    m.translations.find((t) => t.language.code == locale.toUpperCase())?.name || m.translations[0].name
-                  }}
-                </p>
-              </div>
-              <span class="text-gray-500">
-                <i class="fas fa-chevron-right"></i>
-              </span>
-            </div>
-          </template>
           <h4 class="">
             {{ t('other_promotions') }}
           </h4>
@@ -245,7 +179,7 @@ import { BLOG_MEDIA_ENDPOINT, RECRUITMENT_MEDIA_ENDPOINT } from '@/Constants/end
 const props = defineProps({
   blogs: Object,
   menu: Object,
-  hot_blogs: Object,
+  category: Object,
   promo: Object,
   recruitment: Object
 })
@@ -254,7 +188,7 @@ const mounted = ref(false)
 const search = ref('')
 
 const searchNews = () => {
-  router.visit(route('news', { search: search.value }), {
+  router.visit(`/tin-tuc/${props.menu.slug}?search=${search.value}`, {
     preserveState: true
   })
 }
@@ -269,7 +203,6 @@ onMounted(async () => {
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const ScrollReveal = (await import('scrollreveal')).default
     const scrollReveal = ScrollReveal()
-
     // ScrollReveal - Hiệu ứng cho Swiper
     scrollReveal.reveal('#service-4', {
       duration: 2000,
@@ -282,7 +215,7 @@ onMounted(async () => {
 })
 
 const changePage = (page) => {
-  router.visit(route('news', { page: page }), {
+  router.visit(route('news.category', { page: page }), {
     preserveState: true
   })
 }

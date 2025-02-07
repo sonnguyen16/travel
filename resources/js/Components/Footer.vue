@@ -46,7 +46,7 @@
                   <Link href="/trang/lien-he">{{ $t('contact') }}</Link>
                 </li>
                 <li>
-                  <Link href="/trang/cau-hoi-thuong-gap">{{ $t('faq') }}</Link>
+                  <Link href="/faq">{{ $t('faq') }}</Link>
                 </li>
                 <li>
                   <Link href="/trang/ban-do-trang">{{ $t('site_map') }}</Link>

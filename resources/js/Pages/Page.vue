@@ -31,7 +31,7 @@
   </Head>
   <MainLayout>
     <div class="container">
-      <div class="pt-[100px]">
+      <div class="pt-[80px]">
         <div class="row">
           <div class="col-lg-12">
             <h2 class="text-center mb-5">

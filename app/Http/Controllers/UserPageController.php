@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Page;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Faq;
 
 class UserPageController extends Controller
 {
@@ -18,5 +19,14 @@ class UserPageController extends Controller
             ->first();
 
         return Inertia::render('Page', compact('page'));
+    }
+
+    public function faq()
+    {
+        $faq = Faq::query()
+            ->with('translations.language')
+            ->get();
+
+        return Inertia::render('FAQ', compact('faq'));
     }
 }

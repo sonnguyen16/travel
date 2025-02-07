@@ -12,7 +12,7 @@ class Menu extends Model
 	public function user() {
 		return $this->belongsTo('App\Models\User', 'user_id');
 	}
-	
+
 	public function Projects() {
 		return $this->hasmany('App\Models\Project', 'menu_fk');
 	}
@@ -24,6 +24,12 @@ class Menu extends Model
 	public function Menu() {
 		return $this->hasmany('App\Models\Menu', 'menu_fk', 'id');
 	}
+
+    public function parent()
+    {
+        return $this->belongsTo('App\Models\Menu', 'menu_fk');
+    }
+
 	public function Blogs() {
 		return $this->hasmany('App\Models\Blog', 'menu_id');
 	}
@@ -39,5 +45,5 @@ class Menu extends Model
 	{
 		return $this->hasMany('App\Models\Translation', 'record_id', 'id')->where('record_type', 'Menu');
 	}
-	
+
 }

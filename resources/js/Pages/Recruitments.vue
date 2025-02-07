@@ -1,12 +1,12 @@
 <template>
   <MainLayout>
     <Head>
-      <title>Đà Lạt Tourist</title>
+      <title>Tuyển dụng - Đà Lạt Tourist</title>
       <meta
         name="description"
         content="Dalattourist - Công ty du lịch - dịch vụ - lữ hành lâu đời nhất tại Đà Lạt. Được thành lập từ năm 1976, Dalattourist tiên phong cung cấp những dịch vụ du lịch gắn liền với thiên nhiên, văn hóa và bản sắc Đà Lạt."
       />
-      <meta property="og:title" content="Đà Lạt Tourist" />
+      <meta property="og:title" content="Tuyển dụng - Đà Lạt Tourist" />
       <meta
         property="og:description"
         content="Dalattourist - Công ty du lịch - dịch vụ - lữ hành lâu đời nhất tại Đà Lạt. Được thành lập từ năm 1976, Dalattourist tiên phong cung cấp những dịch vụ du lịch gắn liền với thiên nhiên, văn hóa và bản sắc Đà Lạt."

@@ -124,9 +124,11 @@ Route::get('/dat-ve/buoc3', [UserBookingController::class, 'pay'])->name('pay');
 Route::post('/dat-ve/buoc4', [UserBookingController::class, 'confirm'])->name('confirm');
 
 Route::get('/trang/{title?}', [UserPageController::class, 'show'])->name('page.show');
+Route::get('/faq', [UserPageController::class, 'faq'])->name('page.show');
 
 Route::get('/tin-tuc', [UserNewsController::class, 'index'])->name('news');
-Route::get('/tin-tuc/{title?}', [UserNewsController::class, 'show'])->name('news.show');
+Route::get('/tin-tuc/{category_slug?}', [UserNewsController::class, 'category'])->name('news.category');
+Route::get('/tin-tuc/{category_slug?}/{title?}', [UserNewsController::class, 'show'])->name('news.show');
 
 Route::get('/tuyen-dung', [UserRecruitmentController::class, 'index'])->name('recruitment');
 Route::get('/tuyen-dung/{title?}', [UserRecruitmentController::class, 'show'])->name('recruitment.show');

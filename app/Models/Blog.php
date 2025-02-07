@@ -38,6 +38,11 @@ class Blog extends Model
 		return $this->hasMany('App\Models\Translation', 'record_id', 'id')->where('record_type', 'Blog');
 	}
 
+    public function news_category()
+    {
+        return $this->belongsTo('App\Models\Menu', 'news_id');
+    }
+
     public function image_fe()
     {
         return $this->hasOne('App\Models\Image', 'record_id', 'id')->where('record_type', 'Blog')->where('name', 'Picture');
