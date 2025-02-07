@@ -24,6 +24,8 @@ use App\Http\Controllers\UserBookingController;
 use App\Http\Controllers\UserPageController;
 use App\Http\Controllers\UserNewsController;
 use App\Http\Controllers\UserRecruitmentController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\FaqCateController;
 
 Route::get('/admin', [LoginController::class, 'login'])->name('backend.dashboard.login');
 Route::post('/check', [LoginController::class, 'check'])->name('backend.dashboard.login.check');
@@ -83,6 +85,16 @@ Route::prefix('/admin')->group(function () {
 	Route::post('/recruitment/store', [RecruitmentController::class,'store'])->name('backend.dashboard.recruitment.store');
 	Route::get('/recruitment/edit', [RecruitmentController::class,'edit'])->name('backend.dashboard.recruitment.edit');
 	Route::get('/recruitment/delete', [RecruitmentController::class,'delete'])->name('backend.dashboard.recruitment.delete');
+
+    Route::get('/faq', [FaqController::class,'index'])->name('backend.dashboard.faq.index');
+	Route::post('/faq/store', [FaqController::class,'store'])->name('backend.dashboard.faq.store');
+	Route::get('/faq/edit', [FaqController::class,'edit'])->name('backend.dashboard.faq.edit');
+	Route::get('/faq/delete', [FaqController::class,'delete'])->name('backend.dashboard.faq.delete');
+
+    Route::get('/faq_cate', [FaqCateController::class,'index'])->name('backend.dashboard.faq_cate.index');
+	Route::post('/faq_cate/store', [FaqCateController::class,'store'])->name('backend.dashboard.faq_cate.store');
+	Route::get('/faq_cate/edit', [FaqCateController::class,'edit'])->name('backend.dashboard.faq_cate.edit');
+	Route::get('/faq_cate/delete', [FaqCateController::class,'delete'])->name('backend.dashboard.faq_cate.delete');
 
     Route::get('/banner', [BannerController::class,'index'])->name('backend.dashboard.banner.index');
     Route::post('/banner/store', [BannerController::class,'store'])->name('backend.dashboard.banner.store');

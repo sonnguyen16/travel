@@ -1,4 +1,18 @@
 
+function checkMenuSelection() {
+    var selectedValue = $("#menu_id").val();
+
+    if (selectedValue != 2) {
+        $("#type_news").hide();
+        $("#type_menu").removeClass("col-md-3").addClass("col-md-6");
+    } else {
+        $("#type_news").show();
+        $("#type_menu").removeClass("col-md-6").addClass("col-md-3");
+    }
+}
+
+$("#menu_id").change(checkMenuSelection);
+
 function alertDelete(id) {
    $('#myModal').data('id', id);
    $('#myModal').modal('toggle');
@@ -38,6 +52,7 @@ $('#blogModal').on('hidden.bs.modal', function() {
 });
 function getBlog(langId, langCode){
     $('#langModal').on('hidden.bs.modal', function () {
+        checkMenuSelection();
         $('#blogModal').modal('show');
         $(this).off('hidden.bs.modal');
     });

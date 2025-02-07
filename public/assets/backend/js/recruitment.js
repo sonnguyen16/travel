@@ -61,7 +61,7 @@ function getRecruitment(langId, langCode){
                 $('#active').iCheck('uncheck');
             }
 
-            CKEDITOR.instances['description'].setData(data.translation?.description ?? '') 
+            CKEDITOR.instances['description'].setData(data.translation?.description ?? ''); 
         },
         error: function(error){
             console.log(error);
