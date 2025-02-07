@@ -92,11 +92,16 @@ class BlogController extends Controller
 
         $blogData = [
             'menu_id' => $request->menu_id,
+            'news_id' => null,
             'active' => $request->active ? 1 : 0,
         ];
 
         if($request->language_id == 1){
             $blogData['slug'] = Str::slug($request->input('name'));
+        }
+
+        if($request->menu_id == 2){
+            $blogData['news_id'] = $request->news_id;
         }
 
         $blog = Blog::updateOrCreate(

@@ -60,11 +60,21 @@
                                 </div>
                                 <img src="" alt="Picture" style="width: 100px; margin-bottom: 15px;" id="image" hidden>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3" id="type_menu">
                                 <div class="form-group">
                                     <label>Loại danh mục <span style="color: red">*</span></label>
                                     <select name="menu_id" id="menu_id" class="form-control" required>
                                         @foreach($menus as $item)
+                                            <option value="{{ $item->id }}">{{ $item->translation->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>  
+                            </div>
+                            <div class="col-md-3" id="type_news">
+                                <div class="form-group">
+                                    <label>Loại tin tức <span style="color: red">*</span></label>
+                                    <select name="news_id" id="news_id" class="form-control" required>
+                                        @foreach(\App\Models\Menu::where('menu_fk', 2)->get() as $item)
                                             <option value="{{ $item->id }}">{{ $item->translation->name }}</option>
                                         @endforeach
                                     </select>
