@@ -51,7 +51,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Danh mục câu hỏi</label>
-                                <select name="faq_cate_id" id="faq_cate_id" class="form-control">
+                                <select name="faq_cate_id" id="faq_cate_id" class="form-control" required>
                                     <option value="">Chọn danh mục câu hỏi</option>
                                     @foreach (\App\Models\FaqCate::all() as $faq_cate)
                                         <option value="{{ $faq_cate->id }}">{{ $faq_cate->translation->name }}</option>

@@ -18,9 +18,6 @@
                     <option value="" {{ $s_menu == '' ? 'selected' : '' }}>Tất cả</option>
                     @foreach($menus as $menu) 
                         <option value="{{ $menu->id }}" @if($s_menu == $menu->id) selected @endif>{{ $menu->translation->name . ' (' . $menu->Blogs()->count() .')' }} </option>
-                            @foreach($menu->Menu as $child)
-                            <option value="{{ $child->id }}" @if($s_menu == $child->id) selected @endif> -- {{ $child->translation->name . ' (' . $child->Blogs()->count() .')' }} </option>
-                            @endforeach
                     @endforeach
                 </select>
             </div>

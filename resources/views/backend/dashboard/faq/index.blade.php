@@ -32,7 +32,7 @@
                             <tr>
                                 <th style="width: 50px;">#</th>
                                 <th>Câu hỏi</th>
-                                <th>Câu trả lời</th>
+                                <th style="width: 150px;">Danh mục</th>
                                 <th style="width: 150px;">Bản dịch</th>
                                 <th style="width: 100px;">Trạng thái</th>
                                 <th style="width: 100px;">Thực hiện</th>
@@ -43,10 +43,13 @@
                             @forelse($faqs as $faq)
                             <tr>
                                 <td><?php echo $i++; ?></td>
-                                <td style="text-align: left; padding-left: 20px;">
-                                    {{ $faq->translation->question }}
+                                <td class="text-left td-b" style="max-width: 350px" title="{!! $faq->translation->answer !!}">
+                                    <b>{{ $faq->translation->question }}</b><br>
+                                    {!! $faq->translation->answer !!}  
                                 </td>
-                                <td style="text-align: left; padding-left: 20px;">{!! $faq->translation->answer !!}  </td>
+                                <td>
+                                    {{ $faq->faq_cate->translation->name }}
+                                </td>
                                 <td>{{ implode(', ', $faq->language_codes->toArray()) }}</td>
                                 <td>
                                     @if ($faq->active == 1)
@@ -73,7 +76,9 @@
                     </table>
                 </div>
             </div>
-            {{ $faqs->appends(request()->except('page'))->links('vendor.pagination.bootstrap-4') }}
+            <div class="text-center">
+                {{ $faqs->appends(request()->except('page'))->links('vendor.pagination.bootstrap-4') }}
+            </div>
         </div>
     </div>
 </section>
