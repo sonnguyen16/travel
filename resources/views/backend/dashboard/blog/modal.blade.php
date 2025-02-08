@@ -74,6 +74,7 @@
                                 <div class="form-group">
                                     <label>Loại tin tức <span style="color: red">*</span></label>
                                     <select name="news_id" id="news_id" class="form-control" required>
+                                        <option value="">Chọn loại</option>
                                         @foreach(\App\Models\Menu::where('menu_fk', 2)->get() as $item)
                                             <option value="{{ $item->id }}">{{ $item->translation->name }}</option>
                                         @endforeach

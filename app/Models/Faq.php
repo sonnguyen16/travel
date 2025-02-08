@@ -17,4 +17,8 @@ class Faq extends Model
 	{
 		return $this->hasMany('App\Models\FaqTranslations', 'record_id', 'id');
 	}
+	public function faq_cate()
+	{
+		return $this->belongsTo('App\Models\FaqCate', 'faq_cate_id');
+	}
 }

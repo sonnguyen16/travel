@@ -47,7 +47,9 @@
                     </table>
                 </div>
             </div>
-            {{ $locations->appends(request()->except('page'))->links('vendor.pagination.bootstrap-4') }}
+            <div class="text-center">
+                {{ $locations->appends(request()->except('page'))->links('vendor.pagination.bootstrap-4') }}
+            </div>
         </div>
     </div>
 </section>
