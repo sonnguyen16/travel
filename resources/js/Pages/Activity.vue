@@ -22,7 +22,7 @@
           <div @click.prevent="router.visit(`/${menu.slug}/${blog.slug}`)" class="rounded-xl shadow-xl bg-white">
             <div class="img-container h-[350px]" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0">
               <img
-                :src="ACTIVITY_MEDIA_ENDPOINT + blog.image?.picture"
+                :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
                 alt="home1"
                 class="w-full rounded-tr-xl rounded-tl-xl object-cover"
               />

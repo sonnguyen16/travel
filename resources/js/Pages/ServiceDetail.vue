@@ -312,7 +312,6 @@ onMounted(() => {
   .swiper-3 .swiper-slide {
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
     transform: scale(0.8);
-    opacity: 0.8;
   }
 
   .swiper-3 .active-slide {
