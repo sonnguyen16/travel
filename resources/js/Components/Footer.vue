@@ -7,26 +7,36 @@
           <p class="mt-3 text-lg font-bold mb-0 text-white">{{ $t('company_name') }}</p>
           <p class="mt-2 text-white">{{ $t('slogan') }}</p>
           <div class="flex gap-4">
-            <i class="text-white fab fa-facebook-f text-2xl"></i>
-            <i class="text-white fab fa-twitter text-2xl"></i>
-            <i class="text-white fab fa-instagram text-2xl"></i>
-            <i class="text-white fab fa-youtube text-2xl"></i>
-            <i class="text-white fab fa-linkedin-in text-2xl"></i>
-            <i class="text-white fab fa-pinterest text-2xl"></i>
+            <a target="_blank" href="https://www.facebook.com/dalattourism"
+              ><i class="text-white fab fa-facebook-f text-2xl"></i
+            ></a>
+            <a target="_blank" href="https://www.instagram.com/datanlawaterfalls/"
+              ><i class="text-white fab fa-instagram text-2xl"></i
+            ></a>
+            <a target="_blank" href="https://www.youtube.com/@dalattourist4922"
+              ><i class="text-white fab fa-youtube text-2xl"></i
+            ></a>
+            <a target="_blank" href="https://www.tiktok.com/@dalattourist?is_from_webapp=1&amp;sender_device=pc"
+              ><i class="text-white fab fa-tiktok text-2xl"></i
+            ></a>
           </div>
           <div>
             <h5 class="text-white mt-4">{{ $t('contact_info') }}</h5>
             <div class="flex gap-4 mt-4">
               <i class="text-white fas fa-phone-alt text-2xl"></i>
-              <p class="text-white">{{ $t('phone') }}: 1900 1000</p>
+              <a href="tel:84 98 1166 088" class="text-white text-decoration-none"
+                >{{ $t('phone') }}: +84 98 1166 088</a
+              >
             </div>
-            <div class="flex gap-4">
+            <div class="flex gap-4 mt-3">
               <i class="fas fa-envelope text-2xl text-white"></i>
-              <p class="text-white">{{ $t('email') }}: contact@dalatt.com</p>
+              <a href="mailto:info@dalattourist.com.vn" class="text-white text-decoration-none"
+                >{{ $t('email') }}: info@dalattourist.com.vn</a
+              >
             </div>
-            <div class="flex gap-4">
+            <div class="flex gap-4 mt-3">
               <i class="fas fa-map text-2xl text-white"></i>
-              <p class="text-white">{{ $t('address') }}: 123 Đường 3/2, Phường 12, Quận 10, TP.HCM</p>
+              <p class="text-white">{{ $t('address') }}: 1 Lê Đại Hành, Phường 1, Thành phố Đà Lạt, Lâm Đồng</p>
             </div>
           </div>
         </div>
@@ -104,7 +114,7 @@
               <a href="#">{{ $t('license_place') }}: Sở kế hoạch đầu tư tỉnh Lâm Đồng</a>
             </li>
             <li>
-              <a href="#">{{ $t('reserved') }}</a>
+              <a href="#">{{ new Date().getFullYear() + ' ' + $t('reserved') }}</a>
             </li>
           </ul>
         </div>

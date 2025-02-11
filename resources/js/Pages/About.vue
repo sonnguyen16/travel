@@ -117,41 +117,21 @@
                     :class="[moved == false ? 'h-[500px]' : '']"
                     class="w-full object-cover"
                   />
-                  <div class="slide-content">
-                    <h4>
-                      {{ $t(`achievements[0].title`) }}
-                    </h4>
-                  </div>
                 </div>
 
                 <!-- Slide 2 -->
                 <div class="swiper-slide intro-slide">
                   <img src="@/Assets/images/about4.jpg" alt="slide 2" class="w-full object-cover" />
-                  <div class="slide-content">
-                    <h4>
-                      {{ $t(`achievements[1].title`) }}
-                    </h4>
-                  </div>
                 </div>
 
                 <!-- Slide 3 -->
                 <div class="swiper-slide intro-slide">
                   <img src="@/Assets/images/about5.jpg" alt="slide 3" class="w-full object-cover" />
-                  <div class="slide-content">
-                    <h4>
-                      {{ $t(`achievements[2].title`) }}
-                    </h4>
-                  </div>
                 </div>
 
                 <!-- Slide 4 -->
                 <div class="swiper-slide intro-slide">
                   <img src="@/Assets/images/about4.jpg" alt="slide 4" class="w-full object-cover" />
-                  <div class="slide-content">
-                    <h4>
-                      {{ $t(`achievements[3].title`) }}
-                    </h4>
-                  </div>
                 </div>
               </div>
             </div>

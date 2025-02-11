@@ -4,8 +4,8 @@
     <div class="container pt-5 position absolute top-0 left-0 right-0 d-flex flex-column">
       <div class="d-flex align-items-center gap-3 justify-end">
         <div class="p-2 bg-green-600 rounded-xl">
-          <a href="tel:0123456789" class="sm:text-[16px] text-[10px] text-white text-decoration-none">{{
-            $t('hotline')
+          <a href="tel:84 98 1166 088" class="sm:text-[16px] text-[10px] text-white text-decoration-none">{{
+            $t('hotline') + ' +84 98 1166 088'
           }}</a>
         </div>
         <div class="p-2 hover:bg-green-600 hover:rounded-[10px]">
