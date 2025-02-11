@@ -19,7 +19,7 @@ class CKEditorController extends Controller
                 'uploaded' => 1,
                 'fileName' => $fileName,
                 'url' => $url
-            ]);
+            ], 200, ['Content-Type' => 'application/json']);
         }
 
         return response()->json(['uploaded' => 0, 'error' => ['message' => 'File upload failed']]);

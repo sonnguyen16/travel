@@ -1,18 +1,51 @@
-
 function checkMenuSelection() {
     var selectedValue = $("#menu_id").val();
 
-    if (selectedValue != 2) {
-        $("#type_news").hide();
-        $('#news_id').prop('required', false);
-        $("#type_menu").removeClass("col-md-3").addClass("col-md-6");
-    } else {
-        $("#type_news").show();
-        $('#news_id').prop('required', true);
+    // Ẩn tất cả trước
+    $("#type_child").hide();
+    $("#type_child select").prop('required', false).val(""); // Xóa required & reset value
+    $("#type_menu").removeClass("col-md-3").addClass("col-md-6");
+
+    // Kiểm tra giá trị được chọn
+    if (selectedValue == 2) {
+        $("#type_child").show();
         $("#type_menu").removeClass("col-md-6").addClass("col-md-3");
+
+        // Chỉ hiển thị "Loại tin tức"
+        $("#news_id").closest('.form-group').show();
+        $("#news_id").prop('required', true);
+
+        // Ẩn "Thuộc địa điểm"
+        $("#news_id").closest('.form-group').next().hide();
+        $("#news_id").closest('.form-group').next().find("select").prop('required', false).val("");
+    } else if (selectedValue == 7) {
+        $("#type_child").show();
+        $("#type_menu").removeClass("col-md-6").addClass("col-md-3");
+
+        // Ẩn "Loại tin tức"
+        $("#news_id").closest('.form-group').hide();
+        $("#news_id").prop('required', false).val("");
+
+        // Hiển thị "Thuộc địa điểm"
+        var locationSelect = $("#news_id").closest('.form-group').next();
+        locationSelect.show();
+        locationSelect.find("select").prop('required', true);
     }
 }
 
+// function checkMenuSelection() {
+//     var selectedValue = $("#menu_id").val();
+
+//     if (selectedValue != 2) {
+//         $("#type_child").hide();
+//         $('#news_id').prop('required', false);
+//         $("#type_menu").removeClass("col-md-3").addClass("col-md-6");
+//     } else {
+//         $("#type_child").show();
+//         $('#news_id').prop('required', true);
+//         $("#type_menu").removeClass("col-md-6").addClass("col-md-3");
+//     }
+// }
 $("#menu_id").change(checkMenuSelection);
 
 function alertDelete(id) {
@@ -25,15 +58,18 @@ $('#myModal button.delete').on('click', function(e) {
 });
 function alertLang(id, isDiemDen) {
     $('#langModal').data('id', id);
-    if (isDiemDen) {
-        $("#gotoActivity").show();
+    $("#gotoActivity").on("click", function () {
+        window.location.href = "/admin/blog/activity" + "?blog_id=" + id;
+    });
+    // if (isDiemDen) {
+    //     $("#gotoActivity").show();
 
-        $("#gotoActivity").on("click", function () {
-            window.location.href = "/admin/blog/activity" + "?blog_id=" + id;
-        });
-    } else {
-        $("#gotoActivity").hide();
-    }
+    //     $("#gotoActivity").on("click", function () {
+    //         window.location.href = "/admin/blog/activity" + "?blog_id=" + id;
+    //     });
+    // } else {
+    //     $("#gotoActivity").hide();
+    // }
     $('#langModal').modal('toggle');
 }
 $('#blogModal').on('show.bs.modal', function() {
@@ -44,6 +80,7 @@ $('#blogModal').on('hidden.bs.modal', function() {
     $('#name').val('');
     $('#menu_id').val('2'); 
     $('#news_id').val('');
+    $('#location_id').val('');
     $('#active').iCheck('uncheck');
     $('#image').hide();
     $('#div-toggle').show();
@@ -58,7 +95,6 @@ $('#blogModal').on('hidden.bs.modal', function() {
 });
 function getBlog(langId, langCode){
     $('#langModal').on('hidden.bs.modal', function () {
-        checkMenuSelection();
         $('#blogModal').modal('show');
         $(this).off('hidden.bs.modal');
     });
@@ -72,8 +108,11 @@ function getBlog(langId, langCode){
             $('#language_id').val(langId);
             $('#name').val(data.translation?.name ?? '');
             $('#menu_id').val(data.blog.menu_id); 
-            $('#news_id').val(data.blog.news_id);
-            checkMenuSelection();
+            setTimeout(() => {
+                $("#news_id").val(data.blog.news_id).trigger("change");
+                $("#location_id").val(data.blog.location_id).trigger("change");
+            }, 300);
+
             if (data.image) {
                 $('#image').attr('src', '/public/uploads/blogs/' + data.image.picture).show();
                 $('#picture').prop('required', false); 

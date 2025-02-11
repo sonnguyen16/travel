@@ -3,7 +3,7 @@
   <div class="pull-right hidden-xs">
     <b>Version</b> 2.4.0
   </div>
-  <strong>Copyright &copy; 2022 <a>banatgt.baria-vungtau.gov.vn</a>.</strong> All rights reserved.
+  <strong>Copyright &copy; 2025 <a>travel.vn</a>.</strong> All rights reserved.
 </footer>
 
 <script src="{{ asset('assets/backend/themes/bower_components/jquery/dist/jquery.min.js') }}"></script>
