@@ -118,13 +118,18 @@
 <script>
     CKEDITOR.replace('description', {
         height: 100,
-        filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
+        extraPlugins: 'uploadimage,image2',
+        filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
         filebrowserUploadMethod: 'form'
     });
+
     CKEDITOR.replace('content', {
         height: 100,
-        filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
+        extraPlugins: 'uploadimage',
+        filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
         filebrowserUploadMethod: 'form'
+        // filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
+        // filebrowserUploadMethod: 'form'
     });
 </script>
 <script src="{{ asset('/assets/backend/js/blog.js') }}"></script>

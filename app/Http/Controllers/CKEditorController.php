@@ -15,13 +15,15 @@ class CKEditorController extends Controller
             $file->move(public_path($filePath), $fileName);
 
             $url = asset($filePath . $fileName);
+
             return response()->json([
-                'uploaded' => 1,
                 'fileName' => $fileName,
+                'uploaded' => 1,
                 'url' => $url
-            ], 200, ['Content-Type' => 'application/json']);
+            ]);
         }
 
         return response()->json(['uploaded' => 0, 'error' => ['message' => 'File upload failed']]);
     }
 }
+
