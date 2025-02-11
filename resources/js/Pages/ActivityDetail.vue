@@ -72,7 +72,7 @@
             <template v-if="mounted" v-for="blog_related in blog?.blog?.activities">
               <div
                 v-if="blog_related.id != blog.id"
-                @click.prevent="router.visit(`/${blog.menu.slug}/${blog_related.slug}`)"
+                @click.prevent="router.visit(`/hoat-dong/${blog_related.slug}`)"
                 class="swiper-slide hover:cursor-pointer"
               >
                 <div class="rounded-xl bg-white shadow-md">
