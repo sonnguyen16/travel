@@ -81,7 +81,7 @@
                     style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
                   >
                     <img
-                      :src="BLOG_MEDIA_ENDPOINT + blog_related.image_fe?.picture"
+                      :src="ACTIVITY_MEDIA_ENDPOINT + blog_related.image?.picture"
                       alt="home1"
                       class="w-full rounded-tr-xl rounded-tl-xl object-cover"
                     />
