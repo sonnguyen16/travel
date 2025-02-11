@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Vite::prefetch(concurrency: 3);
         $languages = Language::where('active', 1)->get();
+        if (str_contains(Config::get('app.url'), 'https://')) {
+            URL::forceScheme('https');
+        }
         view()->share('langs', $languages);
     }
 }
