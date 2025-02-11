@@ -70,6 +70,7 @@ class BlogController extends Controller
 
 	public function edit(Request $request) {
 		$blog = Blog::find($request->input('id'));
+        // dd($blog);
         $image = $blog->image($request->lang);
         $images = $blog->images($request->lang);
 		$translation = $blog->translation($request->lang)->first();
@@ -93,6 +94,7 @@ class BlogController extends Controller
         $blogData = [
             'menu_id' => $request->menu_id,
             'news_id' => null,
+            'location_id' => null,
             'active' => $request->active ? 1 : 0,
         ];
 
@@ -102,6 +104,10 @@ class BlogController extends Controller
 
         if($request->menu_id == 2){
             $blogData['news_id'] = $request->news_id;
+        }
+
+        if($request->menu_id == 7){
+            $blogData['location_id'] = $request->location_id;
         }
 
         $blog = Blog::updateOrCreate(

@@ -24,7 +24,7 @@
                 <h4 class="modal-title">Tùy chọn</h4>
             </div>
             <div class="modal-body">
-                <button id="gotoActivity" class="btn btn-success btn-sm" style="margin-right: 5px; margin-bottom: 10px; display: none;">
+                <button id="gotoActivity" class="btn btn-success btn-sm" style="margin-right: 5px; margin-bottom: 10px;">
                     Hoạt động nổi bật
                 </button>
                 @foreach ($langs as $lang)
@@ -70,12 +70,22 @@
                                     </select>
                                 </div>  
                             </div>
-                            <div class="col-md-3" id="type_news">
+                            <div class="col-md-3" id="type_child">
                                 <div class="form-group">
                                     <label>Loại tin tức <span style="color: red">*</span></label>
                                     <select name="news_id" id="news_id" class="form-control" required>
                                         <option value="">Chọn loại</option>
                                         @foreach(\App\Models\Menu::where('menu_fk', 2)->get() as $item)
+                                            <option value="{{ $item->id }}">{{ $item->translation->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Thuộc địa điểm <span style="color: red">*</span></label>
+                                    <select name="location_id" id="location_id" class="form-control" required>
+                                        <option value="">Chọn địa điểm</option>
+                                        @foreach(\App\Models\Location::all() as $item)
                                             <option value="{{ $item->id }}">{{ $item->translation->name }}</option>
                                         @endforeach
                                     </select>
