@@ -4,9 +4,11 @@ function checkMenuSelection() {
 
     if (selectedValue != 2) {
         $("#type_news").hide();
+        $('#news_id').prop('required', false);
         $("#type_menu").removeClass("col-md-3").addClass("col-md-6");
     } else {
         $("#type_news").show();
+        $('#news_id').prop('required', true);
         $("#type_menu").removeClass("col-md-6").addClass("col-md-3");
     }
 }
@@ -34,10 +36,14 @@ function alertLang(id, isDiemDen) {
     }
     $('#langModal').modal('toggle');
 }
+$('#blogModal').on('show.bs.modal', function() {
+    checkMenuSelection();
+});
 $('#blogModal').on('hidden.bs.modal', function() {
     $('#id').val('');
     $('#name').val('');
     $('#menu_id').val('2'); 
+    $('#news_id').val('');
     $('#active').iCheck('uncheck');
     $('#image').hide();
     $('#div-toggle').show();
@@ -66,6 +72,8 @@ function getBlog(langId, langCode){
             $('#language_id').val(langId);
             $('#name').val(data.translation?.name ?? '');
             $('#menu_id').val(data.blog.menu_id); 
+            $('#news_id').val(data.blog.news_id);
+            checkMenuSelection();
             if (data.image) {
                 $('#image').attr('src', '/public/uploads/blogs/' + data.image.picture).show();
                 $('#picture').prop('required', false); 

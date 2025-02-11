@@ -69,7 +69,9 @@
                     </table>
                 </div>
             </div>
-            {{ $banners->appends(request()->except('page'))->links('vendor.pagination.bootstrap-4') }}
+            <div class="text-center">
+                {{ $banners->appends(request()->except('page'))->links('vendor.pagination.bootstrap-4') }}
+            </div>
         </div>
     </div>
 </section>

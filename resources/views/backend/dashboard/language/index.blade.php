@@ -53,7 +53,9 @@
                     </table>
                 </div>
             </div>
-            {{ $languages->appends(request()->except('page'))->links('vendor.pagination.bootstrap-4') }}
+            <div class="text-center">
+                {{ $languages->appends(request()->except('page'))->links('vendor.pagination.bootstrap-4') }}
+            </div>
         </div>
     </div>
 </section>

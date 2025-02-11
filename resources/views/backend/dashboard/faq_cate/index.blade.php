@@ -46,7 +46,9 @@
                     </table>
                 </div>
             </div>
-            {{ $faqs->appends(request()->except('page'))->links('vendor.pagination.bootstrap-4') }}
+            <div class="text-center">
+                {{ $faqs->appends(request()->except('page'))->links('vendor.pagination.bootstrap-4') }}
+            </div>
             <a class="btn btn-default btn-sm" href="{{ route('backend.dashboard.faq.index') }}">
                 Quay lại
             </a>
