@@ -43,20 +43,31 @@
       </div>
 
       <div class="row pb-[30px]">
-        <div class="col-lg-8">
+        <div class="col-lg-8 order-md-1 order-2">
           <div
             v-for="c in cart"
-            class="w-full mx-auto bg-white px-[20px] py-[30px] border-[1.5px] border-green-600 rounded-xl mt-4"
+            class="w-full mx-auto bg-white px-[20px] pb-[20px] pt-[20px] border-[1.5px] border-green-600 rounded-xl mt-4"
           >
-            <div class="flex justify-between">
+            <div>
+              <!-- icon delete -->
+            </div>
+            <div class="flex justify-between gap-2">
               <div>
                 <h2 class="font-bold text-[1.2rem]">
                   {{
-                    products
+                    (products
                       .find((p) => p.id === c.product_fk)
                       ?.translations.find((t) => t.language.code === locale.toUpperCase())?.name ||
-                    products.find((p) => p.id === c.product_fk)?.translations[0].name
+                      products.find((p) => p.id === c.product_fk)?.translations[0].name) + ' - '
                   }}
+                  <span class="font-normal text-lg">
+                    {{
+                      products
+                        .find((p) => p.id === c.product_fk)
+                        ?.price.toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ'
+                    }}
+                  </span>
                 </h2>
                 <div class="flex items-center">
                   <i class="far fa-calendar-alt text-green-600 text-2xl"></i>
@@ -66,20 +77,19 @@
                 </div>
               </div>
               <div>
-                <p class="text-center mb-0 text-[1.2rem]">
-                  {{
-                    products
-                      .find((p) => p.id === c.product_fk)
-                      .price.toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                  }}
-                  đ
-                </p>
+                <div class="flex justify-end">
+                  <button @click="deleteCartItem(c.product_fk)" class="border-none">
+                    <i class="fas fa-trash text-red-600"></i>
+                  </button>
+                </div>
               </div>
             </div>
-            <div class="flex justify-end mt-2">
-              <div>
-                <div class="grid md:grid-cols-5 grid-cols-3 gap-5">
+            <div class="mt-2">
+              <div class="">
+                <div
+                  v-if="products.find((p) => p.id == c.product_fk)?.location.slug != 'datanla-adventures'"
+                  class="grid md:grid-cols-6 grid-cols-3"
+                >
                   <div class="flex items-center">
                     <label class="">{{ $t('children') }}</label>
                   </div>
@@ -87,23 +97,23 @@
                     <button @click="decrementChild(c.product_fk)" class="border-none">
                       <i class="fas fa-minus text-green-600"></i>
                     </button>
-                    <input type="text" class="border-none w-[40px]" :value="c.num_child" />
+                    <input type="text" class="border-none w-[50px] text-center" :value="c.num_child" />
                     <button @click="incrementChild(c.product_fk)" class="border-none">
                       <i class="fas fa-plus text-green-600"></i>
                     </button>
                   </div>
-                  <div class="flex items-center justify-center gap-5 md:col-span-2 col-span-1">
-                    <p class="mb-0 text-gray-500 md:inline hidden">
+                  <div class="flex items-center md:justify-around justify-center md:col-span-3 col-span-1">
+                    <p class="mb-0 text-gray-500 md:inline hidden w-1/2 text-end">
                       {{ c.price_child.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{
                         $t('price_per_person')
                       }}
                     </p>
-                    <p class="mb-0">
+                    <p class="mb-0 w-1/2 text-end">
                       {{ (c.price_child * c.num_child).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') }}đ
                     </p>
                   </div>
                 </div>
-                <div class="grid md:grid-cols-5 grid-cols-3 gap-5">
+                <div class="grid md:grid-cols-6 grid-cols-3">
                   <div class="flex items-center">
                     <label class="">{{ $t('adults') }}</label>
                   </div>
@@ -111,18 +121,18 @@
                     <button @click="decrementAdult(c.product_fk)" class="border-none">
                       <i class="fas fa-minus text-green-600"></i>
                     </button>
-                    <input type="text" class="border-none w-[40px]" v-model="c.num_adult" />
+                    <input type="text" class="border-none w-[50px] text-center" v-model="c.num_adult" />
                     <button @click="incrementAdult(c.product_fk)" class="border-none">
                       <i class="fas fa-plus text-green-600"></i>
                     </button>
                   </div>
-                  <div class="flex items-center justify-center gap-5 md:col-span-2 col-span-1">
-                    <p class="mb-0 text-gray-500 md:inline hidden">
+                  <div class="flex items-center md:justify-around justify-center md:col-span-3 col-span-1">
+                    <p class="mb-0 text-gray-500 md:inline hidden w-1/2 text-end">
                       {{ c.price_adult.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{
                         $t('price_per_person')
                       }}
                     </p>
-                    <p class="mb-0">
+                    <p class="mb-0 w-1/2 text-end">
                       {{ (c.price_adult * c.num_adult).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') }}đ
                     </p>
                   </div>
@@ -139,7 +149,7 @@
           </button>
           <h4 v-else class="text-center mt-5">{{ $t('no_ticket') }}</h4>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 order-md-2 order-1">
           <div class="w-full mx-auto bg-white px-[20px] py-[20px] border-[1.5px] border-green-600 rounded-xl mt-4">
             <p class="font-bold">{{ $t('payment_detail') }}</p>
             <hr />
@@ -210,8 +220,18 @@
               .slice(0, 3)"
           >
             <div :id="product.location_id" class="col-md-4">
-              <div class="bg-white px-[20px] pt-[20px] pb-[20px] border-[1.5px] border-green-600 rounded-xl mt-4">
-                <div class="">
+              <div class="bg-white border-[1.5px] border-green-600 rounded-xl mt-4">
+                <div
+                  class="img-container h-[200px]"
+                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                >
+                  <img
+                    :src="PRODUCT_MEDIA_ENDPOINT + product.image_fe?.picture"
+                    alt="home1"
+                    class="w-full rounded-tr-xl rounded-tl-xl object-cover h-[200px]"
+                  />
+                </div>
+                <div class="px-[20px] pt-[20px]">
                   <p class="font-bold mb-0 text-[1.2rem]">
                     {{
                       product.translations?.find((item) => item.language.code === locale.toUpperCase())?.name ||
@@ -226,14 +246,14 @@
                 </div>
                 <hr />
                 <div
-                  class="line-clamp-4"
+                  class="line-clamp-4 px-[20px]"
                   v-html="
                     product.translations?.find((item) => item.language.code === locale.toUpperCase())?.content ||
                     product.translations?.[0]?.content
                   "
                 ></div>
                 <hr />
-                <div class="flex justify-between">
+                <div class="flex justify-between px-[20px] pb-[20px]">
                   <a
                     @click="addToCart(product.id)"
                     class="block py-2 w-full text-center rounded-xl border-1 border-green-600 hover:cursor-pointer"
@@ -250,6 +270,7 @@
   </MainLayout>
 </template>
 <script setup>
+import { PRODUCT_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { router } from '@inertiajs/vue3'
 import Swal from 'sweetalert2'
@@ -326,6 +347,12 @@ const addToCart = (id) => {
     text: t('add_to_cart_success')
   })
 }
+
+const deleteCartItem = (id) => {
+  cart.value = cart.value.filter((item) => item.product_fk != id)
+  localStorage.setItem('cart', JSON.stringify(cart.value))
+}
+
 function formatDateToYYYYMMDD(date = new Date()) {
   const year = date.getFullYear() // Lấy năm đầy đủ, ví dụ: 2025
   const month = String(date.getMonth() + 1).padStart(2, '0') // Tháng từ 0-11, thêm số 0 nếu cần

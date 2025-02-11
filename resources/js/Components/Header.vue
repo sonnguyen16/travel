@@ -210,7 +210,11 @@
             </div>
             <div class="col-md-3 col-12 flex lg:items-center">
               <button
-                @click.prevent="router.visit(`/dat-ve/buoc1?select=${form.select}`)"
+                @click.prevent="
+                  router.visit(
+                    `/dat-ve/buoc1?select=${form.select}&num_adult=${form.num_adult}&num_child=${form.num_child}&date=${form.date}`
+                  )
+                "
                 class="bg-green-600 text-white px-4 py-2 rounded-xl w-[100%] mt-lg-0 mt-2"
               >
                 {{ $t('search') }}

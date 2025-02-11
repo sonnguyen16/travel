@@ -14,7 +14,7 @@ class UserBookingController extends Controller
     {
         $products = Product::query()
             ->where('active', 1)
-            ->with('translations.language', 'image_fe')
+            ->with('translations.language', 'image_fe', 'location')
             ->get();
 
         $promo = Blog::query()
@@ -32,7 +32,7 @@ class UserBookingController extends Controller
     {
         $products = Product::query()
             ->where('active', 1)
-            ->with('translations.language', 'image_fe')
+            ->with('translations.language', 'image_fe', 'location')
             ->get();
 
         return Inertia::render('Booking/Step2', compact('products'));

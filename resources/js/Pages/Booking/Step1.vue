@@ -85,7 +85,7 @@
           "
         ></div>
         <hr />
-        <div class="grid md:grid-cols-4 grid-cols-1 gap-2">
+        <div class="grid md:grid-cols-5 grid-cols-1 gap-2">
           <div class="col-span-1">
             <label for="" class="text-green-600">{{ $t('select_date') }}</label>
             <div class="flex items-center">
@@ -94,12 +94,12 @@
                 v-model="forms.find((f) => f.product_fk == product.id).date"
                 type="date"
                 @mousedown="focusInput($event)"
-                class="border-none font-normal w-[135px]"
+                class="border-none font-normal"
               />
             </div>
           </div>
-          <div class="col-span-2">
-            <div class="grid md:grid-cols-6 grid-cols-3">
+          <div class="col-span-3 flex flex-col justify-center">
+            <div v-if="product.location.slug != 'datanla-adventures'" class="grid md:grid-cols-6 grid-cols-3">
               <div class="flex items-center">
                 <label class="">{{ $t('children') }}</label>
               </div>
@@ -117,7 +117,7 @@
                 </button>
               </div>
               <div class="flex items-center md:justify-around justify-center md:col-span-3 col-span-1">
-                <p class="mb-0 text-gray-500 md:inline hidden w-1/2 text-center">
+                <p class="mb-0 text-gray-500 md:inline hidden w-1/2">
                   {{ product.price_child.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{
                     $t('price_per_person')
                   }}
@@ -149,7 +149,7 @@
                 </button>
               </div>
               <div class="flex items-center md:justify-around justify-center md:col-span-3 col-span-1">
-                <p class="mb-0 text-gray-500 md:inline hidden w-1/2 text-center">
+                <p class="mb-0 text-gray-500 md:inline hidden w-1/2">
                   {{ product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{
                     $t('price_per_person')
                   }}
@@ -251,13 +251,40 @@ const props = defineProps({
 
 let Swal = null
 
+const forms = ref([])
+
+props.products.forEach((product) => {
+  forms.value.push({
+    num_child: 0,
+    num_adult: 0,
+    product_fk: product.id,
+    price_adult: product.price,
+    price_child: product.price_child,
+    location_id: product.location_id,
+    date: formatDateToYYYYMMDD()
+  })
+})
+
 onMounted(async () => {
   Swal = (await import('sweetalert2')).default
 
   const urlParams = new URLSearchParams(window.location.search)
   const select = urlParams.get('select')
+  const date = urlParams.get('date')
+  const num_adult = urlParams.get('num_adult')
+  const num_child = urlParams.get('num_child')
+
   const ticket_id = urlParams.get('ticket_id')
   if (select) {
+    forms.value = forms.value.map((f) => {
+      if (f.location_id == select) {
+        f.date = date
+        f.num_adult = num_adult
+        f.num_child = num_child
+      }
+      return f
+    })
+
     setTimeout(() => {
       window.scrollTo({
         top: document.getElementById(props.products.find((p) => p.location_id == select)?.id).offsetTop - 80,
@@ -274,19 +301,6 @@ onMounted(async () => {
       })
     }, 500)
   }
-})
-
-const forms = ref([])
-
-props.products.forEach((product) => {
-  forms.value.push({
-    num_child: 0,
-    num_adult: 0,
-    product_fk: product.id,
-    price_adult: product.price,
-    price_child: product.price_child,
-    date: formatDateToYYYYMMDD()
-  })
 })
 
 const incrementChild = (id) => {
@@ -320,6 +334,18 @@ const addToCart = (id) => {
       icon: 'warning',
       title: t('notify'),
       text: t('please_select_number_of_people'),
+      customClass: {
+        confirmButton: 'bg-green-600 text-white'
+      }
+    })
+    return
+  }
+
+  if (forms.value.find((form) => form.product_fk == id).date < formatDateToYYYYMMDD()) {
+    Swal.fire({
+      icon: 'warning',
+      title: t('notify'),
+      text: t('please_select_future_date'),
       customClass: {
         confirmButton: 'bg-green-600 text-white'
       }

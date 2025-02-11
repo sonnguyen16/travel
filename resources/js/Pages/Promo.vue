@@ -14,39 +14,32 @@
       <meta property="og:image" content="/images/logo.png" />
     </Head>
     <div class="container">
-      <div id="promo-1" class="pt-[100px]">
-        <div v-if="blogs?.length > 0 && mounted" class="swiper swiper-1">
-          <div class="swiper-wrapper">
-            <!-- Slide 1 -->
-            <template v-for="blog in blogs">
-              <div class="swiper-slide slide-1 hover:cursor-pointer">
-                <div
-                  @click.prevent="router.visit(`/uu-dai/${blog.slug}`)"
-                  class="rounded-xl shadow-xl bg-white position-relative h-100"
-                >
-                  <div class="img-container h-100">
-                    <img
-                      :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
-                      alt="home1"
-                      class="w-full rounded-xl object-cover h-[300px]"
-                    />
-                  </div>
-                  <div class="p-3 position-absolute bottom-0 rounded-xl left-0 right-0 overlay1 h-[150px]">
-                    <h3 class="text-white mt-5 line-clamp-2">
-                      {{
-                        blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
-                        blog.translations[0].name
-                      }}
-                    </h3>
-                  </div>
+      <div id="promo-1" class="mt-[100px]">
+        <div v-if="blogs?.length > 0 && mounted" class="row g-3">
+          <template v-for="blog in blogs">
+            <div class="col-md-4 hover:cursor-pointer promo-item">
+              <div
+                @click.prevent="router.visit(`/uu-dai/${blog.slug}`)"
+                class="rounded-xl shadow-xl bg-white position-relative h-100"
+              >
+                <div class="img-container h-100">
+                  <img
+                    :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
+                    alt="home1"
+                    class="w-full rounded-xl object-cover h-[300px]"
+                  />
+                </div>
+                <div class="p-3 position-absolute bottom-0 rounded-xl left-0 right-0 overlay1 h-[150px]">
+                  <h3 class="text-white mt-5 line-clamp-2">
+                    {{
+                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                      blog.translations[0].name
+                    }}
+                  </h3>
                 </div>
               </div>
-            </template>
-          </div>
-
-          <!-- Navigation -->
-          <div class="swiper-button-next swiper-next-1"></div>
-          <div class="swiper-button-prev swiper-prev-1"></div>
+            </div>
+          </template>
         </div>
       </div>
     </div>
@@ -250,7 +243,7 @@ onMounted(async () => {
   );
 }
 
-.slide-1 {
+.promo-item {
   height: 400px;
 }
 /* Tùy chỉnh nút prev và next */

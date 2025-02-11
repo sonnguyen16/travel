@@ -14,7 +14,7 @@
       <meta property="og:image" content="/images/logo.png" />
     </Head>
     <div class="container">
-      <div v-if="blogs.length > 0 && mounted" id="service-1" class="pt-[100px]">
+      <div v-if="blogs.length > 0 && mounted" id="service-1" class="mt-[100px]">
         <div class="swiper swiper-1">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
@@ -59,11 +59,15 @@
 
       <div class="row">
         <!-- Desktop Section -->
-        <div id="service-2" class="col-lg-6 md:pe-4">
+        <div
+          id="service-2"
+          class="col-lg-6 md:pe-4 hover:cursor-pointer"
+          @click.prevent="router.visit('/nha-hang/nha-hang-lau-rau-leguda')"
+        >
           <h4>{{ $t('restaurant_title') }}</h4>
           <!-- Location -->
           <div class="d-flex gap-2 items-center">
-            <i class="fas fa-map text-green-600"></i>
+            <i class="fas fa-location-dot text-green-600"></i>
             <span>{{ $t('restaurant_location') }}</span>
           </div>
           <p class="mt-3 text-justify font-normal">{{ $t('restaurant_description') }}</p>
@@ -73,17 +77,21 @@
         </div>
 
         <!-- Desktop Image Section -->
-        <div id="service-3" class="col-lg-6 md:ps-4 md:block hidden">
+        <div
+          id="service-3"
+          class="col-lg-6 md:ps-4 md:block hidden hover:cursor-pointer"
+          @click.prevent="router.visit('/nha-hang/nha-hang-ca-phe-thuy-ta')"
+        >
           <div class="img-container h-[300px] mb-3 mt-4 order-md-1 order-2">
             <img src="@/Assets/images/service4.jpg" alt="home1" class="w-full rounded-xl object-cover" />
           </div>
-          <h4>{{ $t('restaurant_title') }}</h4>
+          <h4>{{ $t('restaurant_title_1') }}</h4>
           <!-- Location -->
           <div class="d-flex gap-2 items-center order-1 order-md-2">
-            <i class="fas fa-map text-green-600"></i>
-            <span>{{ $t('restaurant_location') }}</span>
+            <i class="fas fa-location-dot text-green-600"></i>
+            <span>{{ $t('restaurant_location_1') }}</span>
           </div>
-          <p class="mt-3 text-justify font-normal">{{ $t('restaurant_description') }}</p>
+          <p class="mt-3 text-justify font-normal">{{ $t('restaurant_description_1') }}</p>
         </div>
 
         <!-- Mobile Section -->

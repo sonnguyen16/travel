@@ -124,7 +124,11 @@
               >
                 <div class="rounded-xl bg-white">
                   <div class="img-container h-[400px]">
-                    <img :src="BLOG_MEDIA_ENDPOINT + image.picture" alt="home1" class="w-full rounded-xl" />
+                    <img
+                      :src="BLOG_MEDIA_ENDPOINT + image.picture"
+                      alt="home1"
+                      class="w-full rounded-xl object-cover"
+                    />
                   </div>
                 </div>
               </div>
@@ -276,7 +280,7 @@ onMounted(() => {
     loop: false,
     fadeEffect: { crossFade: true },
     speed: 1000,
-    spaceBetween: 5,
+    spaceBetween: 10,
     slidesPerView: 'auto',
     navigation: {
       nextEl: '.swiper-next-3',
@@ -310,13 +314,12 @@ onMounted(() => {
 <style scoped>
 @media screen and (min-width: 768px) {
   .swiper-3 .swiper-slide {
-    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    transform: scale(0.8);
+    transition: all 0.5s ease-in-out;
+    transform: scaleY(0.7) scaleX(0.8);
   }
 
   .swiper-3 .active-slide {
-    transform: scale(1);
-    opacity: 1;
+    transform: scaleY(1) scaleX(1.2);
   }
 }
 
