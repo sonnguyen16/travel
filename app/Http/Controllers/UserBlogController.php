@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Blog;
 use App\Models\Menu;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ class UserBlogController extends Controller
 
         $blogs = Blog::query()
             ->where('menu_id', $menu->id)
+            ->where('active', 1)
             ->with('translations.language', 'image_fe')
             ->get();
 
@@ -35,7 +37,7 @@ class UserBlogController extends Controller
             ->whereHas('menu', function ($query) use ($slug_menu) {
                 $query->where('slug', $slug_menu);
             })
-            ->with('translations.language','image_fe',
+            ->with('translations.language','image_fe', 'images_fe',
             'menu.blogs.translations.language',
             'menu.blogs.image_fe',
             'activities.translations.language')
@@ -43,4 +45,35 @@ class UserBlogController extends Controller
 
         return Inertia::render('ServiceDetail', compact('blog'));
     }
+
+    public function activity(Request $request)
+    {
+        $menu = Menu::query()
+            ->with('translations.language')
+            ->where('slug', 'hoat-dong')
+            ->first();
+
+        $blogs = Activity::query()
+            ->where('active', 1)
+            ->with('translations.language', 'image')
+            ->get();
+
+        return Inertia::render('Activity', compact('blogs', 'menu'));
+    }
+
+    public function show_activity(Request $request)
+    {
+        $slug_blog = $request->title;
+
+        $blog = Activity::query()
+            ->where('slug', $slug_blog)
+            ->with('translations.language','image',
+            'blog.activities.translations.language',
+            'blog.activities.image'
+            )
+            ->first();
+
+        return Inertia::render('ActivityDetail', compact('blog'));
+    }
+
 }

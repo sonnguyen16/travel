@@ -23,6 +23,7 @@ class UserRecruitmentController extends Controller
         $slug_blog = $request->title;
 
         $blogs = Recruitment::query()
+            ->where('active', 1)
             ->with('translations.language', 'image_fe')
             ->get();
 

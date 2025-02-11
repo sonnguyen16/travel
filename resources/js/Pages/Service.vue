@@ -229,7 +229,7 @@ onMounted(async () => {
     // ScrollReveal - Hiệu ứng nhập từ 2 bên
     scrollReveal.reveal('#service-2', {
       duration: 2000,
-      origin: 'top',
+      origin: 'bottom',
       distance: '100px',
       easing: 'ease-in-out'
     })
@@ -244,7 +244,7 @@ onMounted(async () => {
     // ScrollReveal - Hiệu ứng cho Timeline
     scrollReveal.reveal('#service-1', {
       duration: 1200,
-      origin: 'top',
+      origin: 'bottom',
       distance: '100px',
       easing: 'ease-in-out'
     })

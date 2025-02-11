@@ -27,7 +27,7 @@
         )
       "
     />
-    <meta property="og:image" :content="app_url + BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture" />
+    <meta property="og:image" :content="app_url + ACTIVITY_MEDIA_ENDPOINT + blog.image?.picture" />
   </Head>
   <MainLayout>
     <div class="container">
@@ -37,7 +37,7 @@
             <div class="col-lg-5">
               <div class="position-relative w-full md:h-[260px] h-[250px]">
                 <img
-                  :src="BLOG_MEDIA_ENDPOINT + blog?.image_fe?.picture"
+                  :src="ACTIVITY_MEDIA_ENDPOINT + blog?.image?.picture"
                   alt="home1"
                   class="w-full rounded-xl object-cover max-h-[260px]"
                 />
@@ -53,84 +53,12 @@
               <div
                 class="text-justify"
                 v-html="
-                  blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
-                  blog?.translations[0].description
+                  blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
+                  blog?.translations[0].content
                 "
               ></div>
             </div>
           </div>
-        </div>
-        <!-- <div
-          class="text-justify mt-4"
-          v-html="
-            blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
-            blog?.translations[0].content
-          "
-        ></div> -->
-      </div>
-
-      <div v-if="blog?.activities.length > 0" class="row pt-5">
-        <h2 class="text-center mb-4 text-2xl font-bold">
-          {{ t('service_detail.activities') }}
-        </h2>
-        <div class="space-y-0 divide-y divide-gray-300">
-          <div v-for="(product, index) in blog?.activities" :key="index" class="border-none">
-            <button
-              :class="[index == 0 ? 'rounded-t-xl' : '', index == blog.activities.length - 1 ? 'rounded-b-xl' : '']"
-              class="w-full flex justify-between items-center px-4 py-3 border-green-600 border bg-gray-100 hover:bg-gray-200 font-semibold"
-              :data-target="`collapse${index + 1}`"
-            >
-              <span>
-                {{
-                  product.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
-                  product.translations[0].name
-                }}
-              </span>
-              <svg
-                class="w-5 h-5 transform transition-transform duration-300"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div
-              :id="`collapse${index + 1}`"
-              class="hidden p-4 bg-gray-50 overflow-hidden transition-all duration-500 collapse-content"
-            >
-              <div
-                v-html="
-                  product.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
-                  product.translations[0].content
-                "
-              ></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div v-if="blog.images_fe?.length > 0" class="pt-[30px] pb-[30px]">
-        <h2 class="text-center mb-4">
-          {{ t('images') }}
-        </h2>
-        <div class="swiper swiper-3">
-          <div class="swiper-wrapper">
-            <!-- Slide 1 -->
-            <template v-if="mounted" v-for="image in blog.images_fe">
-              <div class="swiper-slide hover:cursor-pointer shadow-md">
-                <div class="rounded-xl bg-white">
-                  <div class="img-container h-[400px]">
-                    <img :src="BLOG_MEDIA_ENDPOINT + image.picture" alt="home1" class="w-full rounded-xl" />
-                  </div>
-                </div>
-              </div>
-            </template>
-          </div>
-          <!-- Navigation -->
-          <div class="swiper-button-next swiper-next-3"></div>
-          <div class="swiper-button-prev swiper-prev-3"></div>
         </div>
       </div>
 
@@ -141,7 +69,7 @@
         <div class="swiper swiper-2">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
-            <template v-if="mounted" v-for="blog_related in blog?.menu?.blogs">
+            <template v-if="mounted" v-for="blog_related in blog?.blog?.activities">
               <div
                 v-if="blog_related.id != blog.id"
                 @click.prevent="router.visit(`/${blog.menu.slug}/${blog_related.slug}`)"
@@ -168,8 +96,8 @@
                     <div
                       class="line-clamp-4"
                       v-html="
-                        blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
-                        blog_related.translations[0].description
+                        blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
+                        blog_related.translations[0].content
                       "
                     ></div>
                   </div>
@@ -190,7 +118,7 @@ import MainLayout from '@/Layouts/MainLayout.vue'
 import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
-import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
+import { ACTIVITY_MEDIA_ENDPOINT, BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import { useI18n } from 'vue-i18n'
 import { router, Head } from '@inertiajs/vue3'
 import { updateNavigationButtons, updateSlideWidth, cleanHTML } from '@/Assets/common.js'
@@ -264,37 +192,6 @@ onMounted(() => {
       }
     }
   })
-
-  new Swiper('.swiper-3', {
-    loop: false,
-    fadeEffect: { crossFade: true },
-    speed: 1000,
-    spaceBetween: 20,
-    slidesPerView: 'auto',
-    navigation: {
-      nextEl: '.swiper-next-3',
-      prevEl: '.swiper-prev-3'
-    },
-    breakpoints: {
-      1024: {
-        slidesPerView: 3
-      },
-      768: {
-        slidesPerView: 2
-      },
-      480: {
-        slidesPerView: 1
-      }
-    },
-    on: {
-      init: function () {
-        updateNavigationButtons(this, 3)
-      },
-      resize: function () {
-        updateNavigationButtons(this, 3)
-      }
-    }
-  })
 })
 </script>
 <style scoped>
@@ -302,7 +199,7 @@ img {
   transition: transform 0.3s ease;
 }
 
-.swiper-2 .swiper-slide {
+.swiper-slide {
   height: 600px;
 }
 

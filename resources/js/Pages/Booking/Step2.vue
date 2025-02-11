@@ -152,7 +152,7 @@
                   products.find((p) => p.id === c.product_fk)?.translations[0].name
                 }}
               </p>
-              <div class="justify-between flex">
+              <div v-if="c.num_child > 0" class="justify-between flex">
                 <p class="mb-1">
                   {{ c.num_child + ' ' + $t('children') }}
                 </p>
@@ -160,7 +160,7 @@
                   {{ (c.price_child * c.num_child).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}
                 </p>
               </div>
-              <div class="justify-between flex">
+              <div v-if="c.num_adult > 0" class="justify-between flex">
                 <p class="">
                   {{ c.num_adult + ' ' + $t('adults') }}
                 </p>

@@ -143,7 +143,7 @@
                   v-if="cart.length"
                   class="bg-red-500 text-white rounded-[50%] w-[20px] h-[20px] text-sm flex justify-center items-center absolute bottom-3 left-3"
                 >
-                  {{ cart.reduce((acc, item) => acc + item.num_child + item.num_adult, 0) }}
+                  {{ cart.reduce((acc, item) => acc + parseInt(item.num_child) + parseInt(item.num_adult), 0) }}
                 </span>
               </a>
             </li>

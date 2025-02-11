@@ -14,6 +14,12 @@ class Activity extends Model
     {
         return $this->hasOne('App\Models\Image', 'record_id', 'id')->where('record_type', 'Activity');
     }
+
+    public function blog()
+    {
+        return $this->belongsTo('App\Models\Blog', 'blog_id', 'id');
+    }
+
 	public function translation($languageId = 1)
     {
         return $this->hasOne('App\Models\Translation', 'record_id', 'id')->where('record_type', 'Activity')->where('language_id', $languageId);

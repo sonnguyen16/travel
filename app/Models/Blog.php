@@ -47,4 +47,9 @@ class Blog extends Model
     {
         return $this->hasOne('App\Models\Image', 'record_id', 'id')->where('record_type', 'Blog')->where('name', 'Picture');
     }
+
+    public function images_fe()
+    {
+        return $this->hasMany('App\Models\Image', 'record_id', 'id')->where('record_type', 'Blog')->where('name', 'Other');
+    }
 }

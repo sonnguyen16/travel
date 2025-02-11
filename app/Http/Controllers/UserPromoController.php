@@ -15,6 +15,7 @@ class UserPromoController extends Controller
             ->whereHas('menu', function ($query) {
                 $query->where('slug', 'uu-dai');
             })
+            ->where('active', 1)
             ->with('translations.language', 'image_fe')
             ->get();
 
@@ -35,6 +36,7 @@ class UserPromoController extends Controller
             ->whereHas('menu', function ($query) {
                 $query->where('slug', 'uu-dai');
             })
+            ->where('active', 1)
             ->with('translations.language','image_fe',
             'menu.blogs.translations.language',
             'menu.blogs.image_fe',

@@ -23,6 +23,7 @@ class UserNewsController extends Controller
             ->whereHas('menu', function ($query) {
                 $query->where('slug', 'uu-dai');
             })
+            ->where('active', 1)
             ->with('translations.language', 'image_fe')
             ->orderBy('created_at', 'desc')
             ->limit(3)
@@ -36,6 +37,7 @@ class UserNewsController extends Controller
         ->get();
 
         $hot_blogs = Blog::query()
+        ->where('active', 1)
         ->whereHas('menu', function ($query) {
             $query->where('slug', 'tin-tuc');
         })
@@ -48,7 +50,8 @@ class UserNewsController extends Controller
         ->whereHas('menu', function ($query) {
             $query->where('slug', 'tin-tuc');
         })
-        ->whereNotIn('id', $hot_blogs->pluck('id')) // Loại bỏ các hot blogs
+        ->whereNotIn('id', $hot_blogs->pluck('id'))
+        ->where('active', 1)
         ->with('translations.language', 'image_fe', 'news_category');
 
         $category = Menu::query()
@@ -84,6 +87,7 @@ class UserNewsController extends Controller
         ->whereHas('menu', function ($query) {
             $query->where('slug', 'uu-dai');
         })
+        ->where('active', 1)
         ->with('translations.language', 'image_fe')
         ->orderBy('created_at', 'desc')
         ->limit(3)
@@ -98,6 +102,7 @@ class UserNewsController extends Controller
 
         $blogs = Blog::query()
         ->where('news_id', $menu->id)
+        ->where('active', 1)
         ->with('translations.language', 'image_fe', 'menu.menu');
 
         if($request->has('search')) {

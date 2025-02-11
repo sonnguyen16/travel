@@ -57,9 +57,7 @@
                   </div>
                   <div id="img-content" class="position-absolute bottom-0 left-0 right-0 overlay ps-3 rounded-xl">
                     <h2 class="text-white mb-0">{{ $t('section_activities') }}</h2>
-                    <p class="text-white">
-                      {{ props.menus.find((m) => m.slug == 'hoat-dong').blogs.length }} {{ $t('section_activities') }}
-                    </p>
+                    <p class="text-white">{{ props.activities?.length }} {{ $t('section_activities') }}</p>
                   </div>
                 </div>
               </div>
@@ -118,7 +116,8 @@ import { router, Head } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
-  menus: Object
+  menus: Object,
+  activities: Object
 })
 
 const { t, locale } = useI18n()

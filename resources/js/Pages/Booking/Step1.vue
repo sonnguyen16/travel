@@ -99,7 +99,7 @@
             </div>
           </div>
           <div class="col-span-2">
-            <div class="grid md:grid-cols-5 grid-cols-3 gap-3">
+            <div class="grid md:grid-cols-6 grid-cols-3">
               <div class="flex items-center">
                 <label class="">{{ $t('children') }}</label>
               </div>
@@ -109,20 +109,20 @@
                 </button>
                 <input
                   type="text"
-                  class="border-none w-[40px]"
+                  class="border-none w-[50px] text-center"
                   v-model="forms.find((f) => f.product_fk == product.id).num_child"
                 />
                 <button @click="incrementChild(product.id)" class="border-none">
                   <i class="fas fa-plus text-green-600"></i>
                 </button>
               </div>
-              <div class="flex items-center md:justify-between justify-center gap-5 md:col-span-2 col-span-1">
-                <p class="mb-0 text-gray-500 md:inline hidden">
+              <div class="flex items-center md:justify-around justify-center md:col-span-3 col-span-1">
+                <p class="mb-0 text-gray-500 md:inline hidden w-1/2 text-center">
                   {{ product.price_child.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{
                     $t('price_per_person')
                   }}
                 </p>
-                <p class="mb-0">
+                <p class="mb-0 w-1/2 text-center">
                   {{
                     (product.price_child * forms.find((f) => f.product_fk == product.id).num_child)
                       .toString()
@@ -131,7 +131,7 @@
                 </p>
               </div>
             </div>
-            <div class="grid md:grid-cols-5 grid-cols-3 gap-3">
+            <div class="grid md:grid-cols-6 grid-cols-3">
               <div class="flex items-center">
                 <label class="">{{ $t('adults') }}</label>
               </div>
@@ -141,20 +141,20 @@
                 </button>
                 <input
                   type="text"
-                  class="border-none w-[40px]"
+                  class="border-none w-[50px] text-center"
                   v-model="forms.find((f) => f.product_fk == product.id).num_adult"
                 />
                 <button @click="incrementAdult(product.id)" class="border-none">
                   <i class="fas fa-plus text-green-600"></i>
                 </button>
               </div>
-              <div class="flex items-center md:justify-between justify-center gap-5 md:col-span-2 col-span-1">
-                <p class="mb-0 text-gray-500 md:inline hidden">
+              <div class="flex items-center md:justify-around justify-center md:col-span-3 col-span-1">
+                <p class="mb-0 text-gray-500 md:inline hidden w-1/2 text-center">
                   {{ product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{
                     $t('price_per_person')
                   }}
                 </p>
-                <p class="mb-0">
+                <p class="mb-0 w-1/2 text-center">
                   {{
                     (product.price * forms.find((f) => f.product_fk == product.id).num_adult)
                       .toString()

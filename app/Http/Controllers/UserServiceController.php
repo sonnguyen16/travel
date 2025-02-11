@@ -12,6 +12,7 @@ class UserServiceController extends Controller
     public function index(Request $request)
     {
         $blogs = Blog::query()
+            ->where('active', 1)
             ->whereHas('menu', function ($query) {
                 $query->where('slug', 'diem-den');
             })
@@ -19,11 +20,12 @@ class UserServiceController extends Controller
             ->get();
 
         $blogs_related = Blog::query()
-        ->whereHas('menu', function ($query) {
-            $query->where('slug', 'nha-hang');
-        })
-        ->with('translations.language', 'image_fe')
-        ->get();
+            ->where('active', 1)
+            ->whereHas('menu', function ($query) {
+                $query->where('slug', 'nha-hang');
+            })
+            ->with('translations.language', 'image_fe')
+            ->get();
 
         return Inertia::render('Service', compact('blogs', 'blogs_related'));
     }
@@ -34,6 +36,7 @@ class UserServiceController extends Controller
 
         $blog = Blog::query()
             ->where('slug', $slug_blog)
+            ->where('active', 1)
             ->whereHas('menu', function ($query) {
                 $query->where('slug', 'diem-den');
             })

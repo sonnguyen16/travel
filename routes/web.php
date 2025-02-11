@@ -133,6 +133,9 @@ Route::get('/tin-tuc/{category_slug?}/{title?}', [UserNewsController::class, 'sh
 Route::get('/tuyen-dung', [UserRecruitmentController::class, 'index'])->name('recruitment');
 Route::get('/tuyen-dung/{title?}', [UserRecruitmentController::class, 'show'])->name('recruitment.show');
 
+Route::get('/hoat-dong', [UserBlogController::class, 'activity'])->name('activity');
+Route::get('/hoat-dong/{title?}', [UserBlogController::class, 'show_activity'])->name('activity.show');
+
 Route::get('/{slug?}', [UserBlogController::class, 'index'])->name('blog');
 Route::get('/{slug?}/{title?}', [UserBlogController::class, 'show'])->name('blog.show');
 
