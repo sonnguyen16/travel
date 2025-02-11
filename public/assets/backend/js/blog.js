@@ -49,12 +49,12 @@ function checkMenuSelection() {
 $("#menu_id").change(checkMenuSelection);
 
 function alertDelete(id) {
-   $('#myModal').data('id', id);
-   $('#myModal').modal('toggle');
+    $('#myModal').data('id', id);
+    $('#myModal').modal('toggle');
 }
-$('#myModal button.delete').on('click', function(e) {
-   e.preventDefault(); 
-   window.location.href = "blog/delete" + "?id=" + $('#myModal').data('id');
+$('#myModal button.delete').on('click', function (e) {
+    e.preventDefault();
+    window.location.href = "blog/delete" + "?id=" + $('#myModal').data('id');
 });
 function alertLang(id, isDiemDen) {
     $('#langModal').data('id', id);
@@ -72,20 +72,20 @@ function alertLang(id, isDiemDen) {
     // }
     $('#langModal').modal('toggle');
 }
-$('#blogModal').on('show.bs.modal', function() {
+$('#blogModal').on('show.bs.modal', function () {
     checkMenuSelection();
 });
-$('#blogModal').on('hidden.bs.modal', function() {
+$('#blogModal').on('hidden.bs.modal', function () {
     $('#id').val('');
     $('#name').val('');
-    $('#menu_id').val('2'); 
+    $('#menu_id').val('2');
     $('#news_id').val('');
     $('#location_id').val('');
     $('#active').iCheck('uncheck');
     $('#image').hide();
     $('#div-toggle').show();
-    CKEDITOR.instances['description'].setData('') 
-    CKEDITOR.instances['content'].setData('') 
+    CKEDITOR.instances['description'].setData('')
+    CKEDITOR.instances['content'].setData('')
     $('#lang_code').text('VI');
     $('body').css('padding-right', '');
     $('#picture').prop('required', true);
@@ -93,29 +93,30 @@ $('#blogModal').on('hidden.bs.modal', function() {
     $('#pictures').empty();
     $('#language_id').val('1')
 });
-function getBlog(langId, langCode){
+function getBlog(langId, langCode) {
     $('#langModal').on('hidden.bs.modal', function () {
         $('#blogModal').modal('show');
+        checkMenuSelection();
         $(this).off('hidden.bs.modal');
     });
-    $('#langModal').modal('hide'); 
-    $('#lang_code').text(langCode); 
+    $('#langModal').modal('hide');
+    $('#lang_code').text(langCode);
     $.ajax({
         type: 'GET',
         url: 'blog/edit' + '?id=' + $('#langModal').data('id') + '&lang=' + langId,
-        success: function(data){
+        success: function (data) {
             $('#id').val(data.blog.id);
             $('#language_id').val(langId);
             $('#name').val(data.translation?.name ?? '');
-            $('#menu_id').val(data.blog.menu_id); 
+            $('#menu_id').val(data.blog.menu_id);
             setTimeout(() => {
                 $("#news_id").val(data.blog.news_id).trigger("change");
                 $("#location_id").val(data.blog.location_id).trigger("change");
             }, 300);
-
+            checkMenuSelection();
             if (data.image) {
                 $('#image').attr('src', '/public/uploads/blogs/' + data.image.picture).show();
-                $('#picture').prop('required', false); 
+                $('#picture').prop('required', false);
             }
             if (data.blog.active == 1) {
                 $('#active').iCheck('check');
@@ -145,7 +146,7 @@ function getBlog(langId, langCode){
             if (data.images) {
                 let picturesDiv = $('#pictures');
                 picturesDiv.empty();
-            
+
                 data.images.forEach(function (item) {
                     let imageHtml = `
                         <div class="col-md-2" style="flex: 0 0 auto; position: relative; margin-bottom: 10px;">
@@ -158,16 +159,16 @@ function getBlog(langId, langCode){
                             <img style="width: 100px; height: 80px; background-size: contain; display: block;" src="/public/uploads/blogs/${item.picture}" alt="Blog Image">
                         </div>
                     `;
-            
+
                     picturesDiv.append(imageHtml);
                 });
             }
-            
-            
-            CKEDITOR.instances['description'].setData(data.translation?.description ?? '') 
-            CKEDITOR.instances['content'].setData(data.translation?.content ?? '') 
+
+
+            CKEDITOR.instances['description'].setData(data.translation?.description ?? '')
+            CKEDITOR.instances['content'].setData(data.translation?.content ?? '')
         },
-        error: function(error){
+        error: function (error) {
             console.log(error);
         }
     })
@@ -176,7 +177,7 @@ function getBlog(langId, langCode){
 $(document).on('click', '.btn-delete-image', function (e) {
     e.preventDefault();
 
-    let imageId = $(this).data('id'); 
+    let imageId = $(this).data('id');
     let blogId = $(this).data('blog-id');
     let langId = $(this).data('lang-id');
 
