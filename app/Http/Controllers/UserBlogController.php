@@ -53,27 +53,13 @@ class UserBlogController extends Controller
             ->where('slug', 'hoat-dong')
             ->first();
 
-        $blogs = Activity::query()
+        $blogs = Blog::query()
             ->where('active', 1)
-            ->with('translations.language', 'image')
+            ->where('menu_id', $menu->id)
+            ->with('translations.language', 'image_fe')
             ->get();
 
         return Inertia::render('Activity', compact('blogs', 'menu'));
-    }
-
-    public function show_activity(Request $request)
-    {
-        $slug_blog = $request->title;
-
-        $blog = Activity::query()
-            ->where('slug', $slug_blog)
-            ->with('translations.language','image',
-            'blog.activities.translations.language',
-            'blog.activities.image'
-            )
-            ->first();
-
-        return Inertia::render('ActivityDetail', compact('blog'));
     }
 
 }

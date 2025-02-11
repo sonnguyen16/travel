@@ -15,10 +15,6 @@ class UserHomeController extends Controller
         $menus = Menu::query()->with(['image', 'translations.language', 'blogs'])
         ->whereHas('image')
         ->get();
-        $activities = Activity::query()
-            ->where('active', 1)
-            ->with('translations.language', 'image')
-            ->get();
-        return Inertia::render('Home', compact('menus', 'activities'));
+        return Inertia::render('Home', compact('menus'));
     }
 }

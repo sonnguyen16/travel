@@ -22,7 +22,7 @@ class UserServiceController extends Controller
         $blogs_related = Blog::query()
             ->where('active', 1)
             ->whereHas('menu', function ($query) {
-                $query->where('slug', 'nha-hang');
+                $query->where('slug', 'luu-tru');
             })
             ->with('translations.language', 'image_fe')
             ->get();

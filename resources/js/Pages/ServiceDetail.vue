@@ -117,9 +117,11 @@
         </h2>
         <div class="swiper swiper-3">
           <div class="swiper-wrapper">
-            <!-- Slide 1 -->
-            <template v-if="mounted" v-for="image in blog.images_fe">
-              <div class="swiper-slide hover:cursor-pointer shadow-md">
+            <template v-for="(image, index) in blog.images_fe" :key="image.picture">
+              <div
+                class="swiper-slide hover:cursor-pointer shadow-md transition-all duration-500"
+                :class="{ 'active-slide': index === activeIndex + 1 }"
+              >
                 <div class="rounded-xl bg-white">
                   <div class="img-container h-[400px]">
                     <img :src="BLOG_MEDIA_ENDPOINT + image.picture" alt="home1" class="w-full rounded-xl" />
@@ -143,7 +145,10 @@
             <!-- Slide 1 -->
             <template v-if="mounted" v-for="blog_related in blog?.menu?.blogs">
               <div
-                v-if="blog_related.id != blog.id"
+                v-if="
+                  (blog_related.id != blog.id && !blog.location_id) ||
+                  (blog.location_id && blog_related.location_id === blog.location_id)
+                "
                 @click.prevent="router.visit(`/${blog.menu.slug}/${blog_related.slug}`)"
                 class="swiper-slide hover:cursor-pointer"
               >
@@ -190,10 +195,11 @@ import MainLayout from '@/Layouts/MainLayout.vue'
 import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
+import 'swiper/css/effect-coverflow'
 import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import { useI18n } from 'vue-i18n'
 import { router, Head } from '@inertiajs/vue3'
-import { updateNavigationButtons, updateSlideWidth, cleanHTML } from '@/Assets/common.js'
+import { updateNavigationButtons, cleanHTML } from '@/Assets/common.js'
 
 const props = defineProps({
   blog: Object
@@ -202,6 +208,7 @@ const props = defineProps({
 const { t, locale } = useI18n()
 const app_url = import.meta.env.VITE_APP_URL
 const mounted = ref(false)
+const activeIndex = ref(0)
 
 onMounted(() => {
   mounted.value = true
@@ -292,12 +299,28 @@ onMounted(() => {
       },
       resize: function () {
         updateNavigationButtons(this, 3)
+      },
+      slideChange: function () {
+        activeIndex.value = this.activeIndex
       }
     }
   })
 })
 </script>
 <style scoped>
+@media screen and (min-width: 768px) {
+  .swiper-3 .swiper-slide {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+
+  .swiper-3 .active-slide {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 img {
   transition: transform 0.3s ease;
 }
