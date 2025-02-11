@@ -276,7 +276,7 @@ onMounted(() => {
     loop: false,
     fadeEffect: { crossFade: true },
     speed: 1000,
-    spaceBetween: 20,
+    spaceBetween: 5,
     slidesPerView: 'auto',
     navigation: {
       nextEl: '.swiper-next-3',
