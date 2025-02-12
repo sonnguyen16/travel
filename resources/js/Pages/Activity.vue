@@ -37,8 +37,8 @@
               <div
                 class="line-clamp-6"
                 v-html="
-                  blog.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
-                  blog.translations[0].content
+                  blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+                  blog.translations[0].description
                 "
               ></div>
             </div>
