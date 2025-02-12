@@ -26,6 +26,8 @@ use App\Http\Controllers\UserNewsController;
 use App\Http\Controllers\UserRecruitmentController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\FaqCateController;
+use App\Http\Controllers\VNPayController;
+use App\Http\Controllers\TicketController;
 
 Route::get('/admin', [LoginController::class, 'login'])->name('backend.dashboard.login');
 Route::post('/check', [LoginController::class, 'check'])->name('backend.dashboard.login.check');
@@ -135,8 +137,15 @@ Route::get('/tuyen-dung/{title?}', [UserRecruitmentController::class, 'show'])->
 
 Route::get('/hoat-dong', [UserBlogController::class, 'activity'])->name('activity');
 
+Route::get('/vnpay-payment', [VNPayController::class, 'createPayment'])->name('vnpay.payment');
+Route::get('/vnpay-return', [VNPayController::class, 'vnpayReturn'])->name('vnpay.return');
+
+Route::get('/export-ticket/{order_id}', [TicketController::class, 'exportPDF'])->name('exportPDF');
+
 Route::get('/{slug?}', [UserBlogController::class, 'index'])->name('blog');
 Route::get('/{slug?}/{title?}', [UserBlogController::class, 'show'])->name('blog.show');
+
+
 
 
 

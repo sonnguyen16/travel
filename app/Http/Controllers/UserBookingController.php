@@ -60,6 +60,7 @@ class UserBookingController extends Controller
         ]);
 
         $order_details = $request->order_details;
+
         foreach ($order_details as $order_detail) {
             $order->details()->create([
                 'product_fk' => $order_detail['product_fk'],
@@ -70,5 +71,7 @@ class UserBookingController extends Controller
                 'date' => $order_detail['date'],
             ]);
         }
+
+        return response()->json(['order_id' => $order->id]);
     }
 }
