@@ -55,25 +55,20 @@
               <div>
                 <h2 class="font-bold text-[1.2rem]">
                   {{
-                    (products
+                    products
                       .find((p) => p.id === c.product_fk)
                       ?.translations.find((t) => t.language.code === locale.toUpperCase())?.name ||
-                      products.find((p) => p.id === c.product_fk)?.translations[0].name) + ' - '
+                    products.find((p) => p.id === c.product_fk)?.translations[0].name
                   }}
-                  <span class="font-normal text-lg">
-                    {{
-                      products
-                        .find((p) => p.id === c.product_fk)
-                        ?.price.toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ'
-                    }}
-                  </span>
                 </h2>
                 <div class="flex items-center">
                   <i class="far fa-calendar-alt text-green-600 text-2xl"></i>
-                  <p class="mb-0 ms-2">
-                    {{ new Date(c.date).toLocaleDateString() }}
-                  </p>
+                  <input
+                    @change="changeDate($event, c.product_fk)"
+                    type="date"
+                    :value="c.date"
+                    class="border-none font-normal"
+                  />
                 </div>
               </div>
               <div>
@@ -286,6 +281,15 @@ let cart = ref([])
 onMounted(() => {
   cart.value = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
 })
+
+const changeDate = (e, id) => {
+  if (e.target.value < formatDateToYYYYMMDD()) {
+    e.target.value = formatDateToYYYYMMDD()
+  }
+
+  cart.value.find((form) => form.product_fk == id).date = e.target.value
+  localStorage.setItem('cart', JSON.stringify(cart.value))
+}
 
 const incrementChild = (id) => {
   cart.value.find((form) => form.product_fk == id).num_child++

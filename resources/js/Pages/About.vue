@@ -96,7 +96,7 @@
               <div v-for="(_, i) in 4" class="swiper-slide">
                 <span class="count"> 0{{ i + 1 }} </span>
                 <div class="slide-content-1 mt-3">
-                  <h2>{{ $t(`achievements[${i}].title`) }}</h2>
+                  <h4>{{ $t(`achievements[${i}].title`) }}</h4>
                   <p class="text-justify">
                     {{ $t(`achievements[${i}].event_details`) }}
                   </p>
@@ -135,13 +135,13 @@
                 </div>
               </div>
             </div>
-            <div class="position-absolute left-1/3 top-0 ms-3 md:block hidden">
-              <h3>{{ $t('slide_1_title') }}</h3>
-              <h2 class="font-bold">{{ $t('slide_2_title') }}</h2>
+            <div class="position-absolute left-1/3 top-5 ms-3 md:block hidden">
+              <h4 class="mb-0">{{ $t('slide_1_title') }}</h4>
+              <h3 class="font-bold mb-0">{{ $t('slide_2_title') }}</h3>
               <!-- Navigation -->
-              <div class="mt-[150px]">
+              <div class="mt-[115px]">
                 <div class="swiper-button-prev" style="left: auto"></div>
-                <div class="swiper-button-next" style="margin-right: 80px"></div>
+                <div class="swiper-button-next" style="margin-right: 70px"></div>
               </div>
             </div>
           </div>
@@ -260,7 +260,7 @@ onMounted(async () => {
 </script>
 <style scoped>
 .swiper-wrapper {
-  height: 500px;
+  height: 400px;
 }
 
 .swiper-1 .swiper-wrapper {
@@ -290,13 +290,13 @@ onMounted(async () => {
 }
 
 .swiper-2 > .swiper-wrapper > .swiper-slide:nth-child(1) {
-  height: 500px;
+  height: 380px;
 }
 
 .swiper-2 > .swiper-wrapper > .swiper-slide:not(.swiper-slide-active) {
   position: relative;
   overflow: hidden;
-  height: 300px;
+  height: 270px;
   transition: height 0.5s ease-in-out;
 }
 
@@ -312,7 +312,7 @@ onMounted(async () => {
 }
 
 .swiper-slide.intro-slide.active-slide {
-  height: 500px;
+  height: 380px;
   transition: height 0.5s ease-in-out;
   object-fit: cover;
 }
@@ -320,8 +320,8 @@ onMounted(async () => {
 /* Tùy chỉnh nút prev và next */
 .swiper-button-prev,
 .swiper-button-next {
-  width: 40px; /* Kích thước nút */
-  height: 40px;
+  width: 35px; /* Kích thước nút */
+  height: 35px;
   background-color: white; /* Nền trắng */
   border: 2px solid green; /* Viền xanh lá cây */
   border-radius: 50%; /* Hình tròn */

@@ -93,7 +93,6 @@
               <input
                 v-model="forms.find((f) => f.product_fk == product.id).date"
                 type="date"
-                @mousedown="focusInput($event)"
                 class="border-none font-normal"
               />
             </div>

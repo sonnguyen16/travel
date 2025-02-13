@@ -123,7 +123,7 @@
                 :class="{ 'active-slide': index === activeIndex + 1 }"
               >
                 <div class="rounded-xl bg-white">
-                  <div class="img-container h-[400px]">
+                  <div class="img-container h-[300px]">
                     <img
                       :src="BLOG_MEDIA_ENDPOINT + image.picture"
                       alt="home1"
@@ -276,7 +276,7 @@ onMounted(() => {
     }
   })
 
-  new Swiper('.swiper-3', {
+  const swiper = new Swiper('.swiper-3', {
     loop: false,
     fadeEffect: { crossFade: true },
     speed: 1000,
@@ -313,13 +313,23 @@ onMounted(() => {
 </script>
 <style scoped>
 @media screen and (min-width: 768px) {
-  .swiper-3 .swiper-slide {
+  .swiper-3 .swiper-slide:not(.active-slide):not(.swiper-slide-prev):not(:has(+ .swiper-slide-prev)) {
     transition: all 0.5s ease-in-out;
-    transform: scaleY(0.7) scaleX(0.8);
+    transform: scaleY(0.7);
+    width: 25% !important;
   }
 
   .swiper-3 .active-slide {
-    transform: scaleY(1) scaleX(1.2);
+    width: 48% !important;
+  }
+
+  .swiper-3 .swiper-slide-prev {
+    width: 33% !important;
+  }
+
+  .swiper-3 .swiper-slide:has(+ .swiper-slide-prev),
+  .swiper-3 .swiper-slide:has(+ .swiper-slide:has(+ .swiper-slide-prev)) {
+    width: 33% !important;
   }
 }
 
