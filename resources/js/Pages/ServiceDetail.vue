@@ -125,14 +125,8 @@
                   'side-slide': index === activeIndex || index === activeIndex + 2
                 }"
               >
-                <div class="rounded-xl bg-white">
-                  <div class="img-container h-[300px]">
-                    <img
-                      :src="BLOG_MEDIA_ENDPOINT + image.picture"
-                      alt="home1"
-                      class="w-full rounded-xl object-cover"
-                    />
-                  </div>
+                <div class="img-container h-[100%]">
+                  <img :src="BLOG_MEDIA_ENDPOINT + image.picture" alt="home1" class="w-full rounded-xl object-cover" />
                 </div>
               </div>
             </template>
@@ -319,13 +313,18 @@ onMounted(() => {
   .swiper-3 .active-slide {
     transition: all 0.5s ease-in-out;
     width: 48% !important;
+    height: 300px !important;
   }
 
   .side-slide {
     transition: all 0.5s ease-in-out;
-    transform: scaleY(0.7);
+    height: 200px !important;
     width: 25% !important;
   }
+}
+.swiper-3 .swiper-slide {
+  height: 300px;
+  margin: auto 0;
 }
 
 img {
