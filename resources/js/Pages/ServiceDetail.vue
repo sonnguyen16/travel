@@ -120,7 +120,10 @@
             <template v-for="(image, index) in blog.images_fe" :key="image.picture">
               <div
                 class="swiper-slide hover:cursor-pointer shadow-md transition-all duration-500"
-                :class="{ 'active-slide': index === activeIndex + 1 }"
+                :class="{
+                  'active-slide': index === activeIndex + 1,
+                  'side-slide': index === activeIndex || index === activeIndex + 2
+                }"
               >
                 <div class="rounded-xl bg-white">
                   <div class="img-container h-[300px]">
@@ -313,23 +316,15 @@ onMounted(() => {
 </script>
 <style scoped>
 @media screen and (min-width: 768px) {
-  .swiper-3 .swiper-slide:not(.active-slide):not(.swiper-slide-prev):not(:has(+ .swiper-slide-prev)) {
-    transition: all 0.5s ease-in-out;
-    transform: scaleY(0.7);
-    width: 25% !important;
-  }
-
   .swiper-3 .active-slide {
+    transition: all 0.5s ease-in-out;
     width: 48% !important;
   }
 
-  .swiper-3 .swiper-slide-prev {
-    width: 33% !important;
-  }
-
-  .swiper-3 .swiper-slide:has(+ .swiper-slide-prev),
-  .swiper-3 .swiper-slide:has(+ .swiper-slide:has(+ .swiper-slide-prev)) {
-    width: 33% !important;
+  .side-slide {
+    transition: all 0.5s ease-in-out;
+    transform: scaleY(0.7);
+    width: 25% !important;
   }
 }
 

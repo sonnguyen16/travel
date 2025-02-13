@@ -244,7 +244,7 @@ onMounted(async () => {
 }
 
 .promo-item {
-  height: 400px;
+  height: 250px;
 }
 /* Tùy chỉnh nút prev và next */
 .swiper-button-prev,
