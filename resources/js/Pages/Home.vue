@@ -107,7 +107,47 @@
           </div>
         </div>
       </div>
-      <img src="@/Assets/images/site_map.png" alt="home6" class="w-full mt-5 rounded-xl" />
+      <div class="grid grid-cols-2 gap-2">
+        <div class="col-span-2 md:col-span-2 gap-2 flex items-stretch justify-start rounded-md">
+          <div class="flex-1 flex flex-col items-stretch justify-start relative">
+            <!-- Danh sách các vị trí có tooltip và link -->
+            <div
+              v-tooltip="'Nice Dream Hotel'"
+              class="datanla cursor-pointer"
+              @click="openLink('https://web-nicedreamhotel.vt360.vn/?skip-loading')"
+            ></div>
+
+            <div
+              v-tooltip="'Lang Biang'"
+              class="langbiang cursor-pointer"
+              @click="openLink('https://web-langbiang.vt360.vn/?skip-loading')"
+            ></div>
+
+            <div
+              v-tooltip="'Nice Dream Villa'"
+              class="nicedreamvl cursor-pointer"
+              @click="openLink('https://web-nicedreamvilla.vt360.vn/?skip-loading')"
+            ></div>
+
+            <div
+              v-tooltip="'Datanla'"
+              class="nicedreamht cursor-pointer"
+              @click="openLink('https://web-datanla.vt360.vn/?skip-loading')"
+            ></div>
+
+            <div
+              v-tooltip="'Cáp Treo Đà Lạt'"
+              class="captreo cursor-pointer"
+              @click="openLink('https://kdlcaptreodalat.vt360.vn/')"
+            ></div>
+
+            <!-- Hình ảnh bản đồ -->
+            <div class="flex-1 overflow-hidden">
+              <img src="@/Assets/images/site_map.png" alt="home6" class="w-full rounded-xl" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </MainLayout>
 </template>
@@ -122,6 +162,10 @@ const props = defineProps({
 })
 
 const { t, locale } = useI18n()
+
+const openLink = (url) => {
+  window.open(url, '_blank')
+}
 
 onMounted(async () => {
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
@@ -190,5 +234,50 @@ const app_url = import.meta.env.VITE_APP_URL
     rgba(0, 0, 0, 0.6),
     rgba(255, 255, 255, 0)
   );
+}
+
+.datanla {
+  position: absolute;
+  top: 70%;
+  right: 5%;
+  width: 20%;
+  height: 20%;
+  z-index: 9999;
+}
+
+.captreo {
+  position: absolute;
+  top: 55%;
+  right: 20%;
+  width: 20%;
+  height: 20%;
+}
+
+.nicedreamvl {
+  position: absolute;
+  top: 25%;
+  right: 15%;
+  width: 20%;
+  height: 20%;
+}
+
+.nicedreamht {
+  position: absolute;
+  top: 25%;
+  left: 5%;
+  width: 20%;
+  height: 10%;
+}
+
+.langbiang {
+  position: absolute;
+  top: 2%;
+  left: 42%;
+  width: 25%;
+  height: 18%;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 </style>
