@@ -60,13 +60,13 @@
             </div>
           </div>
         </div>
-        <!-- <div
+        <div
           class="text-justify mt-4"
           v-html="
             blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
             blog?.translations[0].content
           "
-        ></div> -->
+        ></div>
       </div>
 
       <div v-if="blog?.activities.length > 0" class="row pt-5">
