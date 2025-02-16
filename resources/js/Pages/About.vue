@@ -208,7 +208,7 @@ onMounted(async () => {
       activeSlide.classList.add('active-slide')
 
       swiper1.slideTo(swiper.realIndex)
-      console.log(swiper.realIndex)
+      console.log(swiper.realIndex + 1)
     })
 
     // ScrollReveal - Hiệu ứng nhập từ 2 bên
