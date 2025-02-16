@@ -207,8 +207,8 @@ onMounted(async () => {
       const activeSlide = swiper.slides[swiper.activeIndex]
       activeSlide.classList.add('active-slide')
 
-      swiper1.slideTo(swiper.realIndex)
-      console.log(swiper.realIndex + 1)
+      swiper1.slideTo(swiper.realIndex + 1)
+      console.log(swiper.realIndex)
     })
 
     // ScrollReveal - Hiệu ứng nhập từ 2 bên
