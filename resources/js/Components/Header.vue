@@ -177,7 +177,7 @@
               <div class="flex items-center gap-2">
                 <i class="fas fa-person text-green-600 text-2xl"></i>
                 <div class="flex flex-col items-center">
-                  <label class="font-normal mb-0" for="num_adult">Người lớn</label>
+                  <label class="font-normal mb-0" for="num_adult">{{ $t('adults') }}</label>
                   <div>
                     <button @click.prevent="decreaseAdult" class="border-none">
                       <i class="fas fa-minus text-green-600 text-[12px]"></i>
@@ -195,7 +195,7 @@
               <div v-if="form.select != 4" class="flex items-center gap-2">
                 <i class="fas fa-child text-green-600 text-xl"></i>
                 <div class="flex flex-col items-center">
-                  <label class="font-normal mb-0" for="num_adult">Trẻ em</label>
+                  <label class="font-normal mb-0" for="num_adult">{{ $t('children') }}</label>
                   <div>
                     <button @click.prevent="decreaseChild" class="border-none">
                       <i class="fas fa-minus text-green-600 text-[12px]"></i>

@@ -146,10 +146,7 @@
             <!-- Slide 1 -->
             <template v-if="mounted" v-for="blog_related in blog?.menu?.blogs">
               <div
-                v-if="
-                  (blog_related.id != blog.id && !blog.location_id) ||
-                  (blog.location_id && blog_related.location_id === blog.location_id)
-                "
+                v-if="blog_related.id != blog.id || (blog.location_id && blog_related.location_id === blog.location_id)"
                 @click.prevent="router.visit(`/${blog.menu.slug}/${blog_related.slug}`)"
                 class="swiper-slide hover:cursor-pointer"
               >

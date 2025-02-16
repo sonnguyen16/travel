@@ -135,7 +135,7 @@
                 </div>
               </div>
             </div>
-            <div class="position-absolute left-1/3 top-5 ms-3 md:block hidden">
+            <div class="position-absolute left-1/3 top-5 ms-3 md:block hidden min-w-[170px]">
               <h4 class="mb-0">{{ $t('slide_1_title') }}</h4>
               <h3 class="font-bold mb-0">{{ $t('slide_2_title') }}</h3>
               <!-- Navigation -->
