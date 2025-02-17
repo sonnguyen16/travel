@@ -102,12 +102,13 @@
                       blog.translations[0].name
                     }}
                   </h4>
-                  <p class="text-justify">
-                    {{
+                  <div
+                    v-html="
                       blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
                       blog.translations[0].description
-                    }}
-                  </p>
+                    "
+                    class="text-justify"
+                  ></div>
                 </div>
               </div>
             </div>
@@ -130,11 +131,7 @@
                 <!-- Slide 2 -->
                 <template v-for="(blog, index) in blogs">
                   <div v-if="index !== 0" class="swiper-slide intro-slide">
-                    <img
-                      :src="BLOG_MEDIA_ENDPOINT + blogs[0].image_fe?.picture"
-                      alt="slide"
-                      class="w-full object-cover"
-                    />
+                    <img :src="BLOG_MEDIA_ENDPOINT + blogs.image_fe?.picture" alt="slide" class="w-full object-cover" />
                   </div>
                 </template>
               </div>
@@ -218,7 +215,6 @@ onMounted(async () => {
       activeSlide.classList.add('active-slide')
 
       swiper1.slideTo(swiper.realIndex + 1)
-      console.log(swiper.realIndex)
     })
 
     // ScrollReveal - Hiệu ứng nhập từ 2 bên
