@@ -131,7 +131,7 @@
                 <!-- Slide 2 -->
                 <template v-for="(blog, index) in blogs">
                   <div v-if="index !== 0" class="swiper-slide intro-slide">
-                    <img :src="BLOG_MEDIA_ENDPOINT + blogs.image_fe?.picture" alt="slide" class="w-full object-cover" />
+                    <img :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture" alt="slide" class="w-full object-cover" />
                   </div>
                 </template>
               </div>
@@ -214,7 +214,7 @@ onMounted(async () => {
       const activeSlide = swiper.slides[swiper.activeIndex]
       activeSlide.classList.add('active-slide')
 
-      swiper1.slideTo(swiper.realIndex + 1)
+      swiper1.slideTo(swiper.realIndex)
     })
 
     // ScrollReveal - Hiệu ứng nhập từ 2 bên
