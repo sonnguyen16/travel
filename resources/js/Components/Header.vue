@@ -159,6 +159,9 @@
               <div class="flex items-center">
                 <i class="fas fa-map-marker-alt text-green-600 text-lg"></i>
                 <select v-model="form.select" class="border-0 form-control">
+                  <!-- Placeholder -->
+                  <option class="font-normal" value="" disabled hidden>Chọn điểm đến</option>
+                  <!-- Các địa điểm -->
                   <option class="font-normal" v-for="location in locations" :key="location.id" :value="location.id">
                     {{ location.translations.find((t) => t.language.code === locale.toUpperCase())?.name }}
                   </option>
@@ -243,7 +246,7 @@ const { t, locale } = useI18n()
 
 let cart = ref([])
 const form = useForm({
-  select: 1,
+  select: '',
   num_child: 0,
   num_adult: 0,
   date: formatDateToYYYYMMDD()
