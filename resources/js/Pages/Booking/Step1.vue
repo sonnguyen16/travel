@@ -240,8 +240,8 @@
 import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import MainLayout from '@/Layouts/MainLayout.vue'
 import emitter from '@/mitt'
-import { router, useForm } from '@inertiajs/vue3'
-import { onMounted, provide, ref } from 'vue'
+import { router } from '@inertiajs/vue3'
+import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
