@@ -113,7 +113,7 @@
             <!-- Danh sách các vị trí có tooltip và link -->
             <div
               v-tooltip="'Nice Dream Hotel'"
-              class="datanla cursor-pointer"
+              class="nicedreamht cursor-pointer"
               @click="openLink('https://web-nicedreamhotel.vt360.vn/?skip-loading')"
             ></div>
 
@@ -131,7 +131,7 @@
 
             <div
               v-tooltip="'Datanla'"
-              class="nicedreamht cursor-pointer"
+              class="datanla cursor-pointer"
               @click="openLink('https://web-datanla.vt360.vn/?skip-loading')"
             ></div>
 
