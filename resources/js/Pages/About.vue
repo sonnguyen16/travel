@@ -161,7 +161,9 @@ import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
 import { Head } from '@inertiajs/vue3'
 import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
+import { useI18n } from 'vue-i18n'
 
+const { t, locale } = useI18n()
 const mounted = ref(false)
 const moved = ref(false)
 const props = defineProps({
