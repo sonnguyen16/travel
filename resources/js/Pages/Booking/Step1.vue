@@ -239,8 +239,9 @@
 <script setup>
 import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import MainLayout from '@/Layouts/MainLayout.vue'
+import emitter from '@/mitt'
 import { router, useForm } from '@inertiajs/vue3'
-import { onMounted, ref } from 'vue'
+import { onMounted, provide, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
@@ -376,6 +377,8 @@ const addToCart = (id) => {
       confirmButton: 'bg-green-600 text-white'
     }
   })
+
+  emitter.emit('cart-updated', cart)
 }
 
 const buyNow = (id) => {

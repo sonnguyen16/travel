@@ -234,7 +234,7 @@
                     }}
                   </p>
                   <div>
-                    <p class="text-end mb-0 text-[1.2rem]">
+                    <p class="mb-0 text-[1.2rem] bg-green-600 text-white inline-block px-3 rounded-xl">
                       {{ product.price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}
                     </p>
                   </div>
@@ -271,6 +271,7 @@ import { router } from '@inertiajs/vue3'
 import Swal from 'sweetalert2'
 import { defineProps, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import emitter from '@/mitt'
 
 const props = defineProps({
   products: Object
@@ -294,6 +295,7 @@ const changeDate = (e, id) => {
 const incrementChild = (id) => {
   cart.value.find((form) => form.product_fk == id).num_child++
   localStorage.setItem('cart', JSON.stringify(cart.value))
+  emitter.emit('cart-updated', cart.value)
 }
 
 const decrementChild = (id) => {
@@ -307,11 +309,13 @@ const decrementChild = (id) => {
   } else {
     localStorage.setItem('cart', JSON.stringify(cart.value))
   }
+  emitter.emit('cart-updated', cart.value)
 }
 
 const incrementAdult = (id) => {
   cart.value.find((form) => form.product_fk == id).num_adult++
   localStorage.setItem('cart', JSON.stringify(cart.value))
+  emitter.emit('cart-updated', cart.value)
 }
 
 const decrementAdult = (id) => {
@@ -325,6 +329,7 @@ const decrementAdult = (id) => {
   } else {
     localStorage.setItem('cart', JSON.stringify(cart.value))
   }
+  emitter.emit('cart-updated', cart.value)
 }
 
 const addToCart = (id) => {
@@ -350,11 +355,13 @@ const addToCart = (id) => {
     title: t('success'),
     text: t('add_to_cart_success')
   })
+  emitter.emit('cart-updated', cart.value)
 }
 
 const deleteCartItem = (id) => {
   cart.value = cart.value.filter((item) => item.product_fk != id)
   localStorage.setItem('cart', JSON.stringify(cart.value))
+  emitter.emit('cart-updated', cart.value)
 }
 
 function formatDateToYYYYMMDD(date = new Date()) {

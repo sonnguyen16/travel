@@ -89,16 +89,24 @@
         </div>
       </div>
 
-      <div id="slide" class="grid md:grid-cols-4 grid-cols-1 md:gap-4 mb-5">
+      <div v-if="blogs.length > 0" id="slide" class="grid md:grid-cols-4 grid-cols-1 md:gap-4 mb-5">
         <div class="col-span-1 h-100 flex flex-col justify-end">
           <div v-if="mounted" class="swiper swiper-1 w-full">
             <div class="swiper-wrapper">
-              <div v-for="(_, i) in 4" class="swiper-slide">
+              <div v-for="(blog, i) in blogs" class="swiper-slide">
                 <span class="count"> 0{{ i + 1 }} </span>
                 <div class="slide-content-1 mt-3">
-                  <h4>{{ $t(`achievements[${i}].title`) }}</h4>
+                  <h4>
+                    {{
+                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                      blog.translations[0].name
+                    }}
+                  </h4>
                   <p class="text-justify">
-                    {{ $t(`achievements[${i}].event_details`) }}
+                    {{
+                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+                      blog.translations[0].description
+                    }}
                   </p>
                 </div>
               </div>
@@ -112,27 +120,23 @@
                 <!-- Slide 1 -->
                 <div class="swiper-slide intro-slide" :class="[moved == false ? 'h-[500px]' : '']">
                   <img
-                    src="@/Assets/images/about3.jpg"
-                    alt="slide 1"
+                    :src="BLOG_MEDIA_ENDPOINT + blogs[0].image_fe?.picture"
+                    alt="slide"
                     :class="[moved == false ? 'h-[500px]' : '']"
                     class="w-full object-cover"
                   />
                 </div>
 
                 <!-- Slide 2 -->
-                <div class="swiper-slide intro-slide">
-                  <img src="@/Assets/images/about4.jpg" alt="slide 2" class="w-full object-cover" />
-                </div>
-
-                <!-- Slide 3 -->
-                <div class="swiper-slide intro-slide">
-                  <img src="@/Assets/images/about5.jpg" alt="slide 3" class="w-full object-cover" />
-                </div>
-
-                <!-- Slide 4 -->
-                <div class="swiper-slide intro-slide">
-                  <img src="@/Assets/images/about4.jpg" alt="slide 4" class="w-full object-cover" />
-                </div>
+                <template v-for="(blog, index) in blogs">
+                  <div v-if="index !== 0" class="swiper-slide intro-slide">
+                    <img
+                      :src="BLOG_MEDIA_ENDPOINT + blogs[0].image_fe?.picture"
+                      alt="slide"
+                      class="w-full object-cover"
+                    />
+                  </div>
+                </template>
               </div>
             </div>
             <div class="position-absolute left-1/3 top-5 ms-3 md:block hidden min-w-[170px]">
@@ -156,9 +160,13 @@ import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
 import { Head } from '@inertiajs/vue3'
+import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 
 const mounted = ref(false)
 const moved = ref(false)
+const props = defineProps({
+  blogs: Object
+})
 
 onMounted(async () => {
   mounted.value = true

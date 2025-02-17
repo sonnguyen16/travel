@@ -110,9 +110,7 @@ Route::prefix('/admin')->group(function () {
 });
 
 Route::get('/', [UserHomeController::class, 'index'])->name('home');
-Route::get('/ve-chung-toi', function () {
-    return Inertia::render('About');
-});
+Route::get('/ve-chung-toi', [UserHomeController::class, 'about'])->name('about');
 
 Route::get('/dich-vu', [UserServiceController::class, 'index'])->name('service');
 Route::get('/dich-vu/{title?}', [UserServiceController::class, 'show'])->name('service.show');

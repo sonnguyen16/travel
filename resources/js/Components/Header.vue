@@ -227,10 +227,11 @@
   </div>
 </template>
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { Link, useForm, usePage } from '@inertiajs/vue3'
 import { router } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
+import emitter from '@/mitt'
 
 const showMenu = ref(false)
 const isFixed = ref(false)
@@ -278,6 +279,7 @@ const decreaseChild = () => {
 
 onMounted(() => {
   cart.value = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
+  emitter.on('cart-updated', updateCart)
 
   if (location.pathname == '/') {
     document.getElementById('header').style.height = `85vh`
@@ -295,6 +297,15 @@ onMounted(() => {
     }
   })
 })
+
+onUnmounted(() => {
+  emitter.off('cart-updated', updateCart)
+})
+
+const updateCart = (data) => {
+  console.log(data)
+  cart.value = data
+}
 
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value
