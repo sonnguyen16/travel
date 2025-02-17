@@ -119,11 +119,10 @@
             <div v-if="mounted" class="swiper swiper-2">
               <div class="swiper-wrapper flex items-end">
                 <!-- Slide 1 -->
-                <div class="swiper-slide intro-slide" :class="[moved == false ? 'h-[500px]' : '']">
+                <div class="swiper-slide intro-slide active-slide">
                   <img
                     :src="BLOG_MEDIA_ENDPOINT + blogs[0].image_fe?.picture"
                     alt="slide"
-                    :class="[moved == false ? 'h-[500px]' : '']"
                     class="w-full object-cover"
                   />
                 </div>
@@ -162,7 +161,6 @@ import { useI18n } from 'vue-i18n'
 
 const { t, locale } = useI18n()
 const mounted = ref(false)
-const moved = ref(false)
 const props = defineProps({
   blogs: Object
 })
@@ -205,7 +203,6 @@ onMounted(async () => {
 
     // Gắn sự kiện slideChange
     swiper.on('slideChange', () => {
-      moved.value = true
       // Xóa lớp active-slide khỏi tất cả các slide
       const slides = document.querySelectorAll('.swiper-slide')
       slides.forEach((slide) => slide.classList.remove('active-slide'))
@@ -215,7 +212,6 @@ onMounted(async () => {
       activeSlide.classList.add('active-slide')
 
       swiper1.slideTo(swiper.realIndex)
-      console.log(swiper.realIndex)
     })
 
     // ScrollReveal - Hiệu ứng nhập từ 2 bên
