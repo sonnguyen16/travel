@@ -143,7 +143,7 @@
                   v-if="cart.length"
                   class="bg-red-500 text-white rounded-[50%] w-[20px] h-[20px] text-sm flex justify-center items-center absolute bottom-3 left-3"
                 >
-                  {{ cart.reduce((acc, item) => acc + parseInt(item.num_child) + parseInt(item.num_adult), 0) }}
+                  {{ quantity }}
                 </span>
               </a>
             </li>
@@ -243,6 +243,9 @@ const page = usePage()
 const languages = computed(() => page.props.languages)
 const locations = computed(() => page.props.locations)
 const { t, locale } = useI18n()
+const quantity = computed(() =>
+  cart.value.reduce((acc, item) => acc + parseInt(item.num_child) + parseInt(item.num_adult), 0)
+)
 
 let cart = ref([])
 const form = useForm({

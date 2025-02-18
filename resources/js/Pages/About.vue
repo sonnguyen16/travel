@@ -325,7 +325,7 @@ onMounted(async () => {
 .swiper-button-next {
   width: 35px; /* Kích thước nút */
   height: 35px;
-  background-color: white; /* Nền trắng */
+  background-color: green; /* Nền trắng */
   border: 2px solid green; /* Viền xanh lá cây */
   border-radius: 50%; /* Hình tròn */
   display: flex;
@@ -338,7 +338,7 @@ onMounted(async () => {
 /* Biểu tượng mũi tên */
 .swiper-button-prev::after,
 .swiper-button-next::after {
-  color: green; /* Mũi tên màu xanh lá cây */
+  color: white; /* Mũi tên màu xanh lá cây */
   font-size: 16px;
   font-weight: bold;
 }
@@ -346,13 +346,13 @@ onMounted(async () => {
 /* Hiệu ứng hover */
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
-  background-color: green; /* Đổi nền thành xanh lá cây */
-  color: white; /* Đổi màu mũi tên */
+  background-color: white; /* Đổi nền thành xanh lá cây */
+  color: green; /* Đổi màu mũi tên */
 }
 
 .swiper-button-prev:hover::after,
 .swiper-button-next:hover::after {
-  color: white; /* Mũi tên màu trắng khi hover */
+  color: green; /* Mũi tên màu trắng khi hover */
 }
 
 .text-outline {
