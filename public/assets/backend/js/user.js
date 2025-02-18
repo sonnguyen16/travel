@@ -40,6 +40,7 @@ function getUser(id){
             }
             if (data.user.image) {
                 $('#image').attr('src', '/public/uploads/users/' + data.user.image.picture).show();
+                imageFromDb = '/public/uploads/users/' + data.image.picture;
             } else {
                 $('#image').hide();
             }

@@ -102,15 +102,55 @@
 @endsection
 @section('styles')
 <style>
+    @media (max-width: 768px) {
+        #chi-tiet {
+         width: auto;
+      }
+      .confirm-dia{
+        width: auto;
+      }
+    }
     @media (min-width: 768px) {
-      .modal-dialog {
-         min-width: 768px !important;
+      #chi-tiet {
+         width: 768px;
+      }
+      .confirm-dia{
+        width: 500px;
       }
     }
 </style>
 @endsection
 @section('scripts')
-
 <script src="{{ asset('/assets/backend/js/order.js') }}"></script>
+
+<script>
+    function alertDelete(id) {
+        $('#myModal').data('id', id);
+        $('#myModal').modal('toggle');
+    }
+    $('#myModal button.delete').on('click', function(e) {
+        e.preventDefault();
+        window.location.href = "{{ route('backend.dashboard.order.delete') }}" + "?id=" + $('#myModal').data('id') + "&{{ http_build_query(request()->query()) }}";
+    });
+
+    function alertUpload(id, status) {
+        $('#uploadModal').data('id', id);
+        $('#uploadModal').data('status', status);
+        $('#uploadModal').modal('toggle');
+    }
+    $('#uploadModal button.btn-success').on('click', function(e) {
+        e.preventDefault();
+        window.location.href = "{{ route('backend.dashboard.order.status') }}" + "?id=" + $('#uploadModal').data('id') + "&statuss=" + $('#uploadModal').data('status') + "&{{ http_build_query(request()->query()) }}";
+    });
+    function alertCancel(id, status) {
+        $('#cancelModal').data('id', id);
+        $('#cancelModal').data('status', status);
+        $('#cancelModal').modal('toggle');
+    }
+    $('#cancelModal button.btn-danger').on('click', function(e) {
+        e.preventDefault();
+        window.location.href = "{{ route('backend.dashboard.order.status') }}" + "?id=" + $('#cancelModal').data('id') + "&statuss=" + $('#cancelModal').data('status') + "&{{ http_build_query(request()->query()) }}";
+    });
+</script>
 
 @endsection

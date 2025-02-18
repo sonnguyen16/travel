@@ -131,7 +131,7 @@ class ProductController extends Controller
             ]
         );
 
-        return redirect(route('backend.dashboard.product.index'));
+        return redirect(route('backend.dashboard.product.index', $request->query()));
     }
     public function edit(Request $request) {
 		$product = Product::find($request->input('id'));

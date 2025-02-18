@@ -35,7 +35,7 @@
 <div id="activityModal" class="modal fade" role="dialog" aria-labelledby="activityModalLabel">
     <div class="modal-dialog" style="width: 800px; overflow-y: auto;">
         <div class="modal-content">
-            <form action="{{ route('backend.dashboard.activity.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('backend.dashboard.activity.store', request()->query()) }}" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <input type="text" id="id" name="id" value="" hidden>

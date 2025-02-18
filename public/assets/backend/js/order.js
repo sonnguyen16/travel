@@ -1,31 +1,3 @@
-function alertDelete(id) {
-    $('#myModal').data('id', id);
-    $('#myModal').modal('toggle');
-}
-$('#myModal button.delete').on('click', function(e) {
-    e.preventDefault();
-    window.location.href = "order/delete" + "?id=" + $('#myModal').data('id');
-});
-
-function alertUpload(id, status) {
-    $('#uploadModal').data('id', id);
-    $('#uploadModal').data('status', status);
-    $('#uploadModal').modal('toggle');
-}
-$('#uploadModal button.btn-success').on('click', function(e) {
-    e.preventDefault();
-    window.location.href = "order/status" + "?id=" + $('#uploadModal').data('id') + "&status=" + $('#uploadModal').data('status');
-});
-function alertCancel(id, status) {
-    $('#cancelModal').data('id', id);
-    $('#cancelModal').data('status', status);
-    $('#cancelModal').modal('toggle');
-}
-$('#cancelModal button.btn-danger').on('click', function(e) {
-    e.preventDefault();
-    window.location.href = "order/status" + "?id=" + $('#cancelModal').data('id') + "&status=" + $('#cancelModal').data('status');
-});
-
 function alertDetail(id) {
     $.ajax({
         type: 'GET',

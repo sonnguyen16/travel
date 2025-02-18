@@ -119,7 +119,7 @@ class MenuController extends Controller
             ]
         );
 
-        return redirect(route('backend.dashboard.menu.index'));
+        return redirect(route('backend.dashboard.menu.index', $request->query()));
     }
     
     public function delete(Request $request){

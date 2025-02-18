@@ -65,11 +65,7 @@
 @section('scripts')
 <script src="{{ asset('/assets/backend/themes/bower_components/ckeditor/ckeditor.js') }}"></script>
 <script>
-    CKEDITOR.replace('content', {
-        height: 150,
-        filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
-        filebrowserUploadMethod: 'form'
-    });
+    CKEDITOR.replace('content', ckConfig);
 </script>
 <script src="{{ asset('/assets/backend/js/page.js') }}"></script>
 

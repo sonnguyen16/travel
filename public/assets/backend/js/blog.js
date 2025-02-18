@@ -1,3 +1,5 @@
+var imageFromDb = '';
+
 function checkMenuSelection() {
     var selectedValue = $("#menu_id").val();
 
@@ -33,19 +35,6 @@ function checkMenuSelection() {
     }
 }
 
-// function checkMenuSelection() {
-//     var selectedValue = $("#menu_id").val();
-
-//     if (selectedValue != 2) {
-//         $("#type_child").hide();
-//         $('#news_id').prop('required', false);
-//         $("#type_menu").removeClass("col-md-3").addClass("col-md-6");
-//     } else {
-//         $("#type_child").show();
-//         $('#news_id').prop('required', true);
-//         $("#type_menu").removeClass("col-md-6").addClass("col-md-3");
-//     }
-// }
 $("#menu_id").change(checkMenuSelection);
 
 function alertDelete(id) {
@@ -117,32 +106,13 @@ function getBlog(langId, langCode) {
             if (data.image) {
                 $('#image').attr('src', '/public/uploads/blogs/' + data.image.picture).show();
                 $('#picture').prop('required', false);
+                imageFromDb = '/public/uploads/blogs/' + data.image.picture;
             }
             if (data.blog.active == 1) {
                 $('#active').iCheck('check');
             } else {
                 $('#active').iCheck('uncheck');
             }
-
-            // if (data.images) {
-            //     let picturesDiv = $('#pictures');
-            //     picturesDiv.empty();
-
-            //     data.images.forEach(function (item) {
-            //         let imageHtml = `
-            //             <div class="col-md-2" style="flex: 0 0 auto; position: relative; ">
-            //                 <div class="wrap-btn-delete" style="position: absolute;">
-            //                     <a href="/admin/blog/delete-img/${item.id}/${data.blog.id}">
-            //                         <span class="btn-delete-image" style="color: red; font-size: 15px; margin-left: 1px; background-color: white; padding: 0 5px"><b>x</b></span>
-            //                     </a>
-            //                 </div>
-            //                 <img style="width: 100px; height: 80px; background-size: contain; display: block;" src="/public/uploads/blogs/${item.picture}" alt="Blog Image">
-            //             </div>
-            //         `;
-
-            //         picturesDiv.append(imageHtml);
-            //     });
-            // }
             if (data.images) {
                 let picturesDiv = $('#pictures');
                 picturesDiv.empty();
@@ -165,8 +135,8 @@ function getBlog(langId, langCode) {
             }
 
 
-            CKEDITOR.instances['description'].setData(data.translation?.description ?? '')
-            CKEDITOR.instances['content'].setData(data.translation?.content ?? '')
+            CKEDITOR.instances['description'].setData(data.translation ? data.translation.description : '')
+            CKEDITOR.instances['content'].setData(data.translation ? data.translation.content : '')
         },
         error: function (error) {
             console.log(error);
@@ -214,5 +184,50 @@ $(document).on('click', '.btn-delete-image', function (e) {
                 alert('Đã xảy ra lỗi, vui lòng thử lại.');
             },
         });
+    }
+});
+
+$('#picture').on('change', function(event) {
+    var file = event.target.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#image').attr('src', e.target.result);
+            $('#image').show();
+        };
+        reader.readAsDataURL(file);
+    } else {
+        if (imageFromDb != ''){
+            $('#image').attr('src', imageFromDb).show();
+        }else{
+            $('#image').attr('src', imageFromDb).hide();
+        }
+    }
+});
+
+$('#picturesInput').on('change', function(event) {
+    var files = event.target.files; 
+    var picturesDiv = $('#pictures');
+    
+    picturesDiv.find('.new-image').remove();
+
+    if (files.length === 0) {
+        return;
+    }
+
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {
+            var imageHtml = `
+                <div class="col-md-2 new-image" style="flex: 0 0 auto; position: relative; margin-bottom: 10px;">
+                    <img style="width: 100px; height: 80px; background-size: contain; display: block;" src="${e.target.result}" alt="Selected Image">
+                </div>
+            `;
+            picturesDiv.append(imageHtml);
+        };
+        
+        reader.readAsDataURL(file);
     }
 });

@@ -102,6 +102,9 @@
 @include('backend.dashboard.menu.modal')
 @endsection
 @section('scripts')
+<script>
+
+</script>
 <script src="{{ asset('/assets/backend/js/menu.js') }}">
 </script>
 @endsection

@@ -52,9 +52,9 @@ class OrderController extends Controller
     }
     public function status(Request $request){
         $order = Order::where('id', $request->id)->first();
-        $order->status = $request->status;
+        $order->status = $request->statuss;
         $order->save();
-        return redirect()->back();
+        return redirect(route('backend.dashboard.order.index', $request->query()));
     }
     public function show(Request $request){
         $order = Order::where('id', $request->id)->first();

@@ -109,11 +109,7 @@
 <script src="{{ asset('/assets/backend/themes/plugins/iCheck/icheck.min.js') }}"></script>
 <script src="{{ asset('/assets/backend/themes/bower_components/ckeditor/ckeditor.js') }}"></script>
 <script>
-    CKEDITOR.replace('description', {
-        height: 100,
-        filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
-        filebrowserUploadMethod: 'form'
-    });
+    CKEDITOR.replace('description', ckConfig);
 </script>
 <script src="{{ asset('/assets/backend/js/recruitment.js') }}"></script>
 @endsection

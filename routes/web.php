@@ -28,6 +28,11 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\FaqCateController;
 use App\Http\Controllers\VNPayController;
 use App\Http\Controllers\TicketController;
+use UniSharp\LaravelFileManager\Lfm;
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 Route::get('/admin', [LoginController::class, 'login'])->name('backend.dashboard.login');
 Route::post('/check', [LoginController::class, 'check'])->name('backend.dashboard.login.check');
@@ -124,7 +129,7 @@ Route::get('/dat-ve/buoc3', [UserBookingController::class, 'pay'])->name('pay');
 Route::post('/dat-ve/buoc4', [UserBookingController::class, 'confirm'])->name('confirm');
 
 Route::get('/trang/{title?}', [UserPageController::class, 'show'])->name('page.show');
-Route::get('/faq', [UserPageController::class, 'faq'])->name('page.show');
+Route::get('/faq', [UserPageController::class, 'faq'])->name('faq.show');
 
 Route::get('/tin-tuc', [UserNewsController::class, 'index'])->name('news');
 Route::get('/tin-tuc/{category_slug?}', [UserNewsController::class, 'category'])->name('news.category');

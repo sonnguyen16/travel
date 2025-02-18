@@ -61,7 +61,7 @@ class FaqController extends Controller
             ]
         );
 
-        return redirect(route('backend.dashboard.faq.index'));
+        return redirect(route('backend.dashboard.faq.index', $request->query()));
     }
     public function edit(Request $request) {
 

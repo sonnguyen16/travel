@@ -101,7 +101,7 @@ class RecruitmentController extends Controller
             ]
         );
 
-        return redirect(route('backend.dashboard.recruitment.index'));
+        return redirect(route('backend.dashboard.recruitment.index', $request->query()));
     }
     public function edit(Request $request) {
 

@@ -16,5 +16,22 @@
 <script src="{{ asset('/assets/backend/themes/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{ asset('/assets/backend/themes/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
 <script src="{{ asset('/assets/backend/themes/plugins/iCheck/icheck.min.js') }}"></script>
+<script src="{{ asset('/assets/backend/themes/bower_components/ckeditor/ckeditor.js') }}"></script>
+
 <script src="{{ asset('/assets/backend/js/script.js') }}"></script>
+<script>
+  
+  var ckConfig = {
+      extraPlugins: 'image2',
+      removePlugins: 'image',
+      height: 100,
+      // filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
+      // filebrowserUploadMethod: 'form'
+      filebrowserBrowseUrl: "{{ url('laravel-filemanager') }}?type=Files",
+      filebrowserImageBrowseUrl: "{{ url('laravel-filemanager') }}?type=Images",
+      filebrowserUploadUrl: "{{ url('laravel-filemanager/upload') }}?type=Files&_token={{ csrf_token() }}",
+      filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}"
+  };
+
+</script>
 @yield('scripts')

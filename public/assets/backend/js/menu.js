@@ -47,6 +47,7 @@ function getMenu(langId, langCode){
                 if (data.menu.image) {
                     $('#div-image').show();
                     $('#image').attr('src', '/public/uploads/menus/' + data.menu.image.picture).show();
+                    imageFromDb = '/public/uploads/menus/' + data.image.picture;
                 }
             }else{
                 $('#div-toggle').hide();

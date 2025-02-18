@@ -35,7 +35,7 @@
 <div id="menuModal" class="modal fade" role="dialog" aria-labelledby="menuModalLabel">
     <div class="modal-dialog" style="max-width: 500px;">
         <div class="modal-content">
-            <form action="{{ route('backend.dashboard.menu.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('backend.dashboard.menu.store', request()->query()) }}" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <input type="text" id="id" name="id" value="" hidden>
