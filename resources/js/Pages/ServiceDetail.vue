@@ -27,7 +27,7 @@
         )
       "
     />
-    <meta property="og:image" :content="app_url + BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture" />
+    <meta property="og:image" :content="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture" />
   </Head>
   <MainLayout>
     <div class="container">
@@ -204,7 +204,6 @@ const props = defineProps({
 })
 
 const { t, locale } = useI18n()
-const app_url = import.meta.env.VITE_APP_URL
 const mounted = ref(false)
 const activeIndex = ref(0)
 

@@ -27,7 +27,7 @@
         )
       "
     />
-    <meta property="og:image" :content="app_url + BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture" />
+    <meta property="og:image" :content="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture" />
   </Head>
   <MainLayout>
     <div class="container">
@@ -145,6 +145,7 @@ import MainLayout from '@/Layouts/MainLayout.vue'
 import { Head, router } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 import { defineProps, onMounted } from 'vue'
+import { cleanHTML } from '@/Assets/common'
 
 const { t, locale } = useI18n()
 const props = defineProps({
@@ -159,13 +160,6 @@ onMounted(() => {
     el.style.height = 'auto'
   })
 })
-
-const app_url = import.meta.env.VITE_APP_URL
-
-const cleanHTML = (html) => {
-  // Loại bỏ toàn bộ thẻ HTML
-  return html?.replace(/<\/?[^>]+(>|$)/g, '')
-}
 </script>
 <style scoped>
 ul li span {

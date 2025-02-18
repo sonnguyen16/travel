@@ -27,7 +27,7 @@
         )
       "
     />
-    <meta property="og:image" :content="app_url + '/images/logo.png'" />
+    <meta property="og:image" content="/images/logo.png" />
   </Head>
   <MainLayout>
     <div class="container">
@@ -57,17 +57,11 @@
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { Head } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
+import { cleanHTML } from '@/Assets/common'
 
 const { t, locale } = useI18n()
 const props = defineProps({
   page: Object
 })
-
-const app_url = import.meta.env.VITE_APP_URL
-
-const cleanHTML = (html) => {
-  // Loại bỏ toàn bộ thẻ HTML
-  return html?.replace(/<\/?[^>]+(>|$)/g, '')
-}
 </script>
 <style scoped></style>

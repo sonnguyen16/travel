@@ -59,7 +59,7 @@
                   <Link href="/faq">{{ $t('faq') }}</Link>
                 </li>
                 <li>
-                  <Link href="/trang/ban-do-trang">{{ $t('site_map') }}</Link>
+                  <Link href="/thu-vien-anh">{{ $t('gallery') }}</Link>
                 </li>
               </ul>
             </div>

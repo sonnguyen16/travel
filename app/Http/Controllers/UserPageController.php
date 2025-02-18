@@ -6,6 +6,7 @@ use App\Models\Page;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Faq;
+use App\Models\Location;
 
 class UserPageController extends Controller
 {
@@ -28,5 +29,13 @@ class UserPageController extends Controller
             ->get();
 
         return Inertia::render('FAQ', compact('faq'));
+    }
+
+    public function gallery(){
+        $locations = Location::query()
+            ->with('translations.language', 'images')
+            ->get();
+
+        return Inertia::render('Gallery', compact('locations'));
     }
 }

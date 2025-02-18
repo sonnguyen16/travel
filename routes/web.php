@@ -130,6 +130,7 @@ Route::get('/dat-ve/buoc3', [UserBookingController::class, 'pay'])->name('pay');
 Route::post('/dat-ve/buoc4', [UserBookingController::class, 'confirm'])->name('confirm');
 
 Route::get('/trang/{title?}', [UserPageController::class, 'show'])->name('page.show');
+Route::get('/thu-vien-anh', [UserPageController::class, 'gallery'])->name('gallery');
 Route::get('/faq', [UserPageController::class, 'faq'])->name('faq.show');
 
 Route::get('/tin-tuc', [UserNewsController::class, 'index'])->name('news');
