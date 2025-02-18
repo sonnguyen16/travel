@@ -55,6 +55,20 @@
 </section>
 @include('backend.dashboard.location.modal')
 @endsection
+@section('styles')
+<style>
+    @media (min-width: 768px) {
+        #modalInput{
+            width: 768px;
+        }
+    }
+    @media (max-width: 768px) {
+        #modalInput{
+            width: auto;
+        }
+    }
+</style>
+@endsection
 @section('scripts')
 <script src="{{ asset('/assets/backend/js/location.js') }}">
 </script>

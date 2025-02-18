@@ -20,4 +20,9 @@ class Location extends Model
 	{
 		return $this->hasMany('App\Models\Translation', 'record_id', 'id')->where('record_type', 'Location');
 	}
+
+    public function images()
+    {
+        return $this->hasMany('App\Models\Image', 'record_id', 'id')->where('record_type', 'Location')->where('name', 'Gallery');
+    }
 }

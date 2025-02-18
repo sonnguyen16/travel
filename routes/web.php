@@ -69,6 +69,7 @@ Route::prefix('/admin')->group(function () {
     Route::post('/location/store', [LocationController::class, 'store'])->name('backend.dashboard.location.store');
     Route::get('/location/edit', [LocationController::class, 'edit'])->name('backend.dashboard.location.edit');
     Route::get('/location/delete', [LocationController::class, 'delete'])->name('backend.dashboard.location.delete');
+    Route::delete('/location/delete-img/{idImg}/{id}', [LocationController::class, 'deleteImg'])->name('backend.dashboard.location.delete.img');
 
     Route::get('/blog', [BlogController::class,'index'])->name('backend.dashboard.blog.index');
 	Route::post('/blog/store', [BlogController::class,'store'])->name('backend.dashboard.blog.store');
