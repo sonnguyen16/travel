@@ -1,5 +1,5 @@
 <div id="locationModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="locationModalLabel" aria-modal="true">
-    <div class="modal-dialog" id="modal-dialog-delete">
+    <div class="modal-dialog" id="modalInput">
         <div class="modal-content">
             <form action="{{ route('backend.dashboard.location.store') }}" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
@@ -12,6 +12,12 @@
                             <label id="lang_code">VI</label>
                         </div>
                         <input name="name" id="name" type="text" class="form-control" placeholder="Nhập địa điểm ..." required>
+                    </div>
+                    <div class="form-group">
+                        <label>Hình ảnh khác</label>
+                        <input type="file" name="pictures[]" multiple class="form-control" id="picturesInput">
+                    </div>
+                    <div class="row" style="display: flex; flex-wrap: wrap;" id="pictures">
                     </div>
                 </div>
                 <div class="modal-footer">

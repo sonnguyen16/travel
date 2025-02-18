@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\Location;
 use Illuminate\Support\Str;
+use App\Models\Image;
+
 
 class LocationController extends Controller
 {
@@ -49,6 +51,21 @@ class LocationController extends Controller
             $locationData
         );
 
+        if ($request->hasFile('pictures')){
+            foreach($request->file('pictures') as $file){
+                $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
+                $file->move('public/uploads/locations/', $file_name);
+                Image::create(
+                    [
+                        'record_type' => 'Location',
+                        'record_id' => $location->id,
+                        'name' => 'Gallery',
+                        'picture' => $file_name
+                    ]
+                );
+            }
+        }
+
         Translation::updateOrCreate(
             [
                 'record_type' => 'Location',
@@ -64,7 +81,7 @@ class LocationController extends Controller
     }
 
     public function edit(Request $request){
-        $location = Location::find($request->id);
+        $location = Location::with('images')->find($request->id);
 
         $translation = $location->translation($request->lang)->first();
 
@@ -79,5 +96,25 @@ class LocationController extends Controller
         
         Translation::where('record_type', 'Location')->where('record_id', $request->id)->delete();
         return redirect(route('backend.dashboard.location.index'));
+    }
+
+    public function deleteImg($idImg, $id)
+    {
+        $img = Image::find($idImg);
+
+        if ($img) {
+            $path = 'public/uploads/locations/' . $img->picture;
+
+            if (file_exists($path)) {
+                unlink($path);
+            }
+
+            $img->delete();
+
+            $location = Location::with('images')->find($id);
+            return response()->json(['success' => true, 'location' => $location]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Image not found']);
     }
 }
