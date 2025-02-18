@@ -28,11 +28,11 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\FaqCateController;
 use App\Http\Controllers\VNPayController;
 use App\Http\Controllers\TicketController;
-use UniSharp\LaravelFileManager\Lfm;
+// use UniSharp\LaravelFileManager\Lfm;
 
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-    \UniSharp\LaravelFilemanager\Lfm::routes();
-});
+// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+//     \UniSharp\LaravelFilemanager\Lfm::routes();
+// });
 
 Route::get('/admin', [LoginController::class, 'login'])->name('backend.dashboard.login');
 Route::post('/check', [LoginController::class, 'check'])->name('backend.dashboard.login.check');
