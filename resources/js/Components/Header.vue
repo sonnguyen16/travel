@@ -228,6 +228,22 @@
       </div>
     </div>
   </div>
+  <div
+    @click="scrollToTopAndNavigate('/dat-ve/buoc2')"
+    class="fixed bottom-5 right-5 hover:cursor-pointer md:hidden bg-green-600 w-[40px] h-[40px] rounded-circle z-[9999] flex justify-center items-center"
+  >
+    <div class="relative">
+      <a style="color: white">
+        <i class="fas fa-shopping-cart text-white"></i>
+        <span
+          v-if="cart.length"
+          class="bg-red-500 text-white rounded-[50%] w-[25px] h-[25px] text-sm flex justify-center items-center absolute bottom-3 left-4"
+        >
+          {{ quantity }}
+        </span>
+      </a>
+    </div>
+  </div>
 </template>
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue'
