@@ -2,7 +2,7 @@
   <div id="header" class="header position-relative">
     <div class="overlay"></div>
     <div class="container pt-5 position absolute top-0 left-0 right-0 d-flex flex-column">
-      <div class="d-flex align-items-center gap-3 justify-end">
+      <div class="d-flex align-items-center md:gap-3 justify-end">
         <div class="p-2 bg-green-600 rounded-xl">
           <a href="tel:84 98 1166 088" class="sm:text-[16px] text-[10px] text-white text-decoration-none">{{
             $t('hotline') + ' +84 98 1166 088'
