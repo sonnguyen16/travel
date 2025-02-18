@@ -39,7 +39,7 @@
 <div id="blogModal" class="modal fade" role="dialog" aria-labelledby="blogModalLabel">
     <div class="modal-dialog" style="width: 800px; overflow-y: auto;">
         <div class="modal-content">
-            <form action="{{ route('backend.dashboard.blog.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('backend.dashboard.blog.store', request()->query()) }}" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <input type="text" id="id" name="id" value="" hidden>
@@ -94,7 +94,7 @@
                         </div>
                         <div class="form-group">
                             <label>Hình ảnh khác</label>
-                            <input type="file" name="pictures[]" multiple class="form-control"></input>
+                            <input type="file" name="pictures[]" multiple class="form-control" id="picturesInput">
                         </div>
                         <div class="row" style="display: flex; flex-wrap: wrap;" id="pictures">
                         </div>

@@ -54,6 +54,8 @@ function getRecruitment(langId, langCode){
             if (data.image) {
                 $('#image').attr('src', '/public/uploads/recruitments/' + data.image.picture).show();
                 $('#picture').prop('required', false);
+                imageFromDb = '/public/uploads/recruitments/' + data.image.picture;
+
             }
             if (data.recruitment.active == 1) {
                 $('#active').iCheck('check');
@@ -61,7 +63,7 @@ function getRecruitment(langId, langCode){
                 $('#active').iCheck('uncheck');
             }
 
-            CKEDITOR.instances['description'].setData(data.translation?.description ?? ''); 
+            CKEDITOR.instances['description'].setData(data.translation ? data.translation.description : ''); 
         },
         error: function(error){
             console.log(error);

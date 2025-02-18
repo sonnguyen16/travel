@@ -116,21 +116,9 @@
 <script src="{{ asset('/assets/backend/themes/plugins/iCheck/icheck.min.js') }}"></script>
 <script src="{{ asset('/assets/backend/themes/bower_components/ckeditor/ckeditor.js') }}"></script>
 <script>
-    CKEDITOR.replace('description', {
-        height: 100,
-        extraPlugins: 'uploadimage,image2',
-        filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
-        filebrowserUploadMethod: 'form'
-    });
+    CKEDITOR.replace('description', ckConfig);
 
-    CKEDITOR.replace('content', {
-        height: 100,
-        extraPlugins: 'uploadimage',
-        filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
-        filebrowserUploadMethod: 'form'
-        // filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
-        // filebrowserUploadMethod: 'form'
-    });
+    CKEDITOR.replace('content', ckConfig);
 </script>
 <script src="{{ asset('/assets/backend/js/blog.js') }}"></script>
 @endsection

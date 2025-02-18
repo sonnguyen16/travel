@@ -162,7 +162,7 @@ class BlogController extends Controller
             ]
         );
 
-        return redirect(route('backend.dashboard.blog.index'));
+        return redirect(route('backend.dashboard.blog.index', $request->query()));
     }
 
 	public function delete(Request $request) {

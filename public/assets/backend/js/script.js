@@ -1,3 +1,21 @@
+var imageFromDb = '';
+$('#picture').on('change', function(event) {
+    var file = event.target.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#image').attr('src', e.target.result);
+            $('#image').show();
+        };
+        reader.readAsDataURL(file);
+    } else {
+        if (imageFromDb != ''){
+            $('#image').attr('src', imageFromDb).show();
+        }else{
+            $('#image').attr('src', imageFromDb).hide();
+        }
+    }
+});
 $(function () {
     $('input[type="checkbox"].flat-red').iCheck({
         checkboxClass: 'icheckbox_flat-green'

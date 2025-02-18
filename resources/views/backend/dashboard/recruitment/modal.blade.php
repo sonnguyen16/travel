@@ -35,7 +35,7 @@
 <div id="recruitmentModal" class="modal fade" role="dialog" aria-labelledby="recruitmentModalLabel">
     <div class="modal-dialog" style="width: 800px;">
         <div class="modal-content">
-            <form action="{{ route('backend.dashboard.recruitment.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('backend.dashboard.recruitment.store', request()->query()) }}" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <input type="text" id="id" name="id" value="" hidden>

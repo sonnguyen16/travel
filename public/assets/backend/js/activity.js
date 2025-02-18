@@ -46,6 +46,8 @@ function getActivity(langId, langCode){
             if (data.activity.image) {
                 $('#picture').prop('required', false);  
                 $('#image').attr('src', '/public/uploads/activities/' + data.activity.image.picture).show();
+                imageFromDb = '/public/uploads/activities/' + data.image.picture;
+
             }
             if (data.activity.active == 1) {
                 $('#active').iCheck('check');
@@ -53,7 +55,7 @@ function getActivity(langId, langCode){
                 $('#active').iCheck('uncheck');
             }
 
-            CKEDITOR.instances['content'].setData(data.translation?.content ?? '') 
+            CKEDITOR.instances['content'].setData(data.translation ? data.translation.content : '') 
         },
         error: function(error){
             console.log(error);

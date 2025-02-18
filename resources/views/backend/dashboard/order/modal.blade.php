@@ -1,5 +1,5 @@
 <div id="myModal" class="modal fade" role="dialog" data-id="0">
-    <div class="modal-dialog" id="modal-dialog-delete">
+    <div class="modal-dialog confirm-dia">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -16,7 +16,7 @@
     </div>
 </div>
 <div id="uploadModal" class="modal fade" role="dialog" data-id="0" data-status="0">
-    <div class="modal-dialog" style="max-width: 500px;">
+    <div class="modal-dialog confirm-dia">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -33,7 +33,7 @@
     </div>
 </div>
 <div id="cancelModal" class="modal fade" role="dialog" data-id="0" data-status="0">
-    <div class="modal-dialog" style="max-width: 500px;">
+    <div class="modal-dialog confirm-dia">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -50,7 +50,7 @@
     </div>
 </div>
 <div id="orderModal" class="modal fade" role="dialog" aria-labelledby="orderModalLabel">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="chi-tiet">
         <div class="modal-content">
             {{-- <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>

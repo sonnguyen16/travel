@@ -35,7 +35,7 @@
 <div id="productModal" class="modal fade" role="dialog" aria-labelledby="productModalLabel">
     <div class="modal-dialog" style="width: 800px; overflow-y: auto;">
         <div class="modal-content">
-            <form action="{{ route('backend.dashboard.product.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('backend.dashboard.product.store', request()->query()) }}" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <input type="text" id="id" name="id" value="" hidden>
@@ -77,13 +77,7 @@
                         <label>Hình ảnh</label>
                         <input name="picture" id="picture" type="file" class="form-control" required>
                     </div>
-                    <img src="" alt="Picture" style="width: 150px; margin-bottom: 15px;" id="image" hidden>
-                    {{-- <div class="form-group">
-                        <label>Hình ảnh khác</label>
-                        <input type="file" name="pictures[]" multiple class="form-control"></input>
-                    </div>
-                    <div class="row" style="display: flex; flex-wrap: wrap; gap: 10px;" id="pictures">
-                    </div> --}}
+                    <img id="image" src="" alt="Picture" style="width: 150px; margin-bottom: 15px;" hidden>
                     <div class="form-group">
                         <label style="margin-top: 15px">
                             <input name="active" id="active" type="checkbox" class="flat-red"> Hoạt động

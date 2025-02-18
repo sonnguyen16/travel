@@ -65,6 +65,7 @@ function getProduct(langId, langCode) {
             if (data.image) {
                 $('#image').attr('src', '/public/uploads/products/' + data.image.picture).show();
                 $('#picture').prop('required', false);
+                imageFromDb = '/public/uploads/products/' + data.image.picture;
             }
             if (data.product.active == 1) {
                 $('#active').iCheck('check');
@@ -72,27 +73,8 @@ function getProduct(langId, langCode) {
                 $('#active').iCheck('uncheck');
             }
 
-            // if (data.images) {
-            //     let picturesDiv = $('#pictures');
-            //     picturesDiv.empty();
-
-            //     data.images.forEach(function (item) {
-            //         let imageHtml = `
-            //             <div class="col-md-2" style="flex: 0 0 auto; position: relative; ">
-            //                 <div class="wrap-btn-delete" style="position: absolute;">
-            //                     <a href="/admin/product/delete-img/${item.id}">
-            //                         <span class="btn-delete-image" style="color: red; font-size: 15px; margin-left: 1px; background-color: white; padding: 0 5px"><b>x</b></span>
-            //                     </a>
-            //                 </div>
-            //                 <img style="width: 100px; height: 80px; background-size: contain; display: block;" src="/public/uploads/products/${item.picture}" alt="Product Image">
-            //             </div>
-            //         `;
-
-            //         picturesDiv.append(imageHtml);
-            //     });
-            // }
-            CKEDITOR.instances['description'].setData(data.translation?.description ?? '')
-            CKEDITOR.instances['content'].setData(data.translation?.content ?? '')
+            CKEDITOR.instances['description'].setData(data.translation ? data.translation.description : '')
+            CKEDITOR.instances['content'].setData(data.translation ? data.translation.content : '')
         },
         error: function (error) {
             console.log(error);
