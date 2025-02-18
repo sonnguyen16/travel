@@ -279,8 +279,8 @@ onMounted(async () => {
     forms.value = forms.value.map((f) => {
       if (f.location_id == select) {
         f.date = date
-        f.num_adult = num_adult
-        f.num_child = num_child
+        f.num_adult = parseInt(num_adult)
+        f.num_child = parseInt(num_child)
       }
       return f
     })

@@ -160,7 +160,7 @@
                 <i class="fas fa-map-marker-alt text-green-600 text-lg"></i>
                 <select v-model="form.select" class="border-0 form-control">
                   <!-- Placeholder -->
-                  <option class="font-normal" value="" disabled hidden>Chọn điểm đến</option>
+                  <option class="font-normal" value="" disabled hidden>{{ t('select_destination') }}</option>
                   <!-- Các địa điểm -->
                   <option class="font-normal" v-for="location in locations" :key="location.id" :value="location.id">
                     {{ location.translations.find((t) => t.language.code === locale.toUpperCase())?.name }}
