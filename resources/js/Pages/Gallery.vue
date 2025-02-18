@@ -24,17 +24,17 @@
               <div class="overflow-x-auto whitespace-nowrap flex space-x-6 border-b pb-2 mb-4">
                 <button
                   @click.prevent="currentLocation = 'all'"
-                  class="tab-btn text-gray-600 pb-1 border-b-2 border-transparent"
-                  :class="{ ' text-red-600 border-red-600 transition-all': currentLocation == 'all' }"
+                  class="tab-btn text-gray-600 pb-1"
+                  :class="{ ' border-b-2 text-red-600 border-red-600 transition-all': currentLocation == 'all' }"
                 >
                   {{ $t('all') }}
                 </button>
                 <button
                   @click.prevent="currentLocation = location.slug"
                   v-for="location in locations"
-                  class="tab-btn text-gray-600 pb-1 border-b-2 border-transparent"
+                  class="tab-btn text-gray-600 pb-1"
                   :class="{
-                    ' text-red-600 border-red-600 transition-all': currentLocation == location.slug
+                    '  border-b-2 text-red-600 border-red-600 transition-all': currentLocation == location.slug
                   }"
                 >
                   {{ location.translations.find((t) => t.language.code == locale.toUpperCase())?.name }}
