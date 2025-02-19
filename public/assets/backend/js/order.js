@@ -37,8 +37,8 @@ function alertDetail(id) {
                 let total = 0;
                 details.forEach((item, index) => {
                     const productName = item.product.translation.name;
-                    const priceAdult = item.price_adult;
-                    const priceChild = item.price_child;
+                    const priceAdult = Number(item.price_adult);
+                    const priceChild = Number(item.price_child);
                     const numAdult = item.num_adult;
                     const numChild = item.num_child;
                     const subtotal = priceAdult * numAdult + priceChild * numChild;
