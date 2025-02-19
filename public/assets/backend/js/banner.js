@@ -31,7 +31,7 @@ function getBanner(bannerId){
             if (data.banner.image) {
                 $('#picture').prop('required', false);  
                 $('#image').attr('src', '/public/uploads/banners/' + data.banner.image.picture).show();
-                imageFromDb = '/public/uploads/banners/' + data.image.picture;
+                imageFromDb = '/public/uploads/banners/' + data.banner.image.picture;
             }
             if (data.banner.active == 1) {
                 $('#active').iCheck('check');

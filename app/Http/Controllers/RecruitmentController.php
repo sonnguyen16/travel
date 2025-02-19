@@ -75,7 +75,7 @@ class RecruitmentController extends Controller
                 [
                     'record_type' => 'Recruitment',
                     'record_id' => $recruitment->id,
-                    'language_id' => $request->language_id,
+                    // 'language_id' => $request->language_id,
                     'name' => 'Picture'
                 ],
                 [
@@ -106,7 +106,8 @@ class RecruitmentController extends Controller
     public function edit(Request $request) {
 
         $recruitment = Recruitment::find($request->input('id'));
-        $image = $recruitment->image($request->lang);
+        // $image = $recruitment->image($request->lang);
+        $image = $recruitment->image_fe;
 		$translation = $recruitment->translation($request->lang)->first();
         return response()->json([
             'recruitment' => $recruitment,

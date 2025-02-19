@@ -105,8 +105,12 @@
 <style>
     @media (max-width: 768px) {
         .modal-dialog {
-            max-width: 400px;
             width: auto; 
+        }
+    }
+    @media (min-width: 768px) {
+        .modal-dialog {
+            width: 768px;
         }
     }
 </style>

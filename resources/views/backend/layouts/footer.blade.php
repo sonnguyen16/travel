@@ -34,26 +34,18 @@
       // filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}"
   };
 
-  // CKEDITOR.on('instanceReady', function (event) {
-  //     var editor = event.editor;
+  function toggleModalOverflow() {
+    let ckeditorBg = $('.cke_dialog_background_cover');
 
-  //     editor.on('focus', function () {
-  //         $('.modal-open .modal').css('overflow', 'visible'); // Tắt cuộn khi focus vào CKEditor
-  //     });
+    if (ckeditorBg.length > 0 && ckeditorBg.css('display') !== 'none') {
+        $('.modal-open .modal').css('overflow', 'visible');
+    } else {
+        $('.modal-open .modal').css('overflow-y', 'auto');
+    }
+  }
 
-  //     editor.on('blur', function () {
-  //         $('.modal-open .modal').css('overflow-y', 'auto'); // Bật cuộn khi blur khỏi CKEditor
-  //     });
-  // });
+  setInterval(toggleModalOverflow, 500);
 
-  $(document).on('click', '.cke_toolbar', function () {
-      $('.modal-open .modal').css('overflow', 'visible'); // Tắt cuộn khi click vào toolbar
-  });
 
-  $(document).on('click', function (e) {
-      if (!$(e.target).closest('.cke').length) {
-          $('.modal-open .modal').css('overflow-y', 'auto'); // Bật lại cuộn nếu click ra ngoài CKEditor
-      }
-  });
 </script>
 @yield('scripts')

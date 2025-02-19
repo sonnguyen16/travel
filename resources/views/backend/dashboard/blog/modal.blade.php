@@ -37,7 +37,7 @@
     </div>
 </div>
 <div id="blogModal" class="modal fade" role="dialog" aria-labelledby="blogModalLabel">
-    <div class="modal-dialog" style="width: 800px;">
+    <div class="modal-dialog">
         <div class="modal-content">
             <form action="{{ route('backend.dashboard.blog.store', request()->query()) }}" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
