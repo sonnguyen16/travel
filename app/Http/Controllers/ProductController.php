@@ -93,7 +93,7 @@ class ProductController extends Controller
                 [
                     'record_type' => 'Product',
                     'record_id' => $product->id,
-                    'language_id' => $request->language_id,
+                    // 'language_id' => $request->language_id,
                     'name' => 'Picture'
                 ],
                 [
@@ -111,7 +111,7 @@ class ProductController extends Controller
                         'record_type' => 'Product',
                         'record_id' => $product->id,
                         'name' => 'Other',
-                        'language_id' => $request->language_id,
+                        // 'language_id' => $request->language_id,
                         'picture' => $file_name
                     ]
                 );
@@ -135,8 +135,10 @@ class ProductController extends Controller
     }
     public function edit(Request $request) {
 		$product = Product::find($request->input('id'));
-        $image = $product->image($request->lang);
-        $images = $product->images($request->lang);
+        // $image = $product->image($request->lang);
+        // $images = $product->images($request->lang);
+        $image = $product->image_fe;
+        $images = $product->images_fe;
 		$translation = $product->translation($request->lang)->first();
         return response()->json([
             'product' => $product,

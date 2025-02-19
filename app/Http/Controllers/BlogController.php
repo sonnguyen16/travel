@@ -71,8 +71,10 @@ class BlogController extends Controller
 	public function edit(Request $request) {
 		$blog = Blog::find($request->input('id'));
         // dd($blog);
-        $image = $blog->image($request->lang);
-        $images = $blog->images($request->lang);
+        // $image = $blog->image($request->lang);
+        // $images = $blog->images($request->lang);
+        $image = $blog->image_fe;
+        $images = $blog->images_fe;
 		$translation = $blog->translation($request->lang)->first();
         return response()->json([
             'blog' => $blog,
@@ -124,7 +126,7 @@ class BlogController extends Controller
                 [
                     'record_type' => 'Blog',
                     'record_id' => $blog->id,
-                    'language_id' => $request->language_id,
+                    // 'language_id' => $request->language_id,
                     'name' => 'Picture'
                 ],
                 [
@@ -142,7 +144,7 @@ class BlogController extends Controller
                         'record_type' => 'Blog',
                         'record_id' => $blog->id,
                         'name' => 'Other',
-                        'language_id' => $request->language_id,
+                        // 'language_id' => $request->language_id,
                         'picture' => $file_name
                     ]
                 );
@@ -213,7 +215,8 @@ class BlogController extends Controller
             $img->delete();
 
             $blog = Blog::find($id);
-            $images = $blog->images($lang);
+            // $images = $blog->images($lang);
+            $images = $blog->images_fe;
             return response()->json(['success' => true, 'images' => $images]);
         }
 

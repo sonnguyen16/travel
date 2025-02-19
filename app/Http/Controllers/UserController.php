@@ -117,12 +117,12 @@ class UserController extends Controller
             return redirect()->back()->withErrors("Không thể xóa mục này")->withInput();
         }
         $user = User::where('id', $request->id)->delete();
-        $image = Image::where('record_type', 'User')->where('record_id', $request->id)->first();
-        $path = 'public/uploads/users/' . $image->picture;
-        if (file_exists($path)) {
-            unlink($path);
-        }
-        $image->delete();
+        // $image = Image::where('record_type', 'User')->where('record_id', $request->id)->first();
+        // $path = 'public/uploads/users/' . $image->picture;
+        // if (file_exists($path)) {
+        //     unlink($path);
+        // }
+        // $image->delete();
         return redirect(route('backend.dashboard.user.index'));
     }
 }

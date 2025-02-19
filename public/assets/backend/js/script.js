@@ -16,6 +16,24 @@ $('#picture').on('change', function(event) {
         }
     }
 });
+var imageFromDbP = '';
+$('#picture_p').on('change', function(event) {
+    var file = event.target.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#image_p').attr('src', e.target.result);
+            $('#image_p').show();
+        };
+        reader.readAsDataURL(file);
+    } else {
+        if (imageFromDbP != ''){
+            $('#image_p').attr('src', imageFromDbP).show();
+        }else{
+            $('#image_p').attr('src', imageFromDbP).hide();
+        }
+    }
+});
 $(function () {
     $('input[type="checkbox"].flat-red').iCheck({
         checkboxClass: 'icheckbox_flat-green'
@@ -49,6 +67,7 @@ function getProfile(id){
             $('#super_user_p').val(data.user.super_user);
             if (data.user.image) {
                 $('#image_p').attr('src', '/public/uploads/users/' + data.user.image.picture).show();
+                imageFromDbP = '/public/uploads/users/' + data.user.image.picture;
                 $('#image_p').show();
             }else{
                 $('#image_p').hide();
