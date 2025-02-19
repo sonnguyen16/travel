@@ -93,7 +93,7 @@
                 @click.prevent="router.visit(`/tin-tuc/${blog.news_category?.slug}/${blog.slug}`)"
                 class="col-md-6 mb-4 hover:cursor-pointer"
               >
-                <div class="img-container w-full">
+                <div class="img-container w-full h-[250px]">
                   <img
                     :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
                     alt="home1"
