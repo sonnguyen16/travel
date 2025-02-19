@@ -66,7 +66,7 @@
           <div
             @click.prevent="router.visit(`/tin-tuc/${hot_blogs[2].news_category?.slug}/${hot_blogs[2].slug}`)"
             class="img-container w-full"
-            style="height: calc(50% - 16px)"
+            style="height: calc(50% - 1px)"
           >
             <img
               :src="BLOG_MEDIA_ENDPOINT + hot_blogs[2].image_fe?.picture"
