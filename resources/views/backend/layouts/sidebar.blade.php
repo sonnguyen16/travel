@@ -51,11 +51,11 @@
                 <i class="fa fa-question-circle"></i> <span>FAQ</span>
             </a>
         </li>
-           <li class="{{ Route::is('backend.dashboard.banner.index') ? 'active' : '' }}">
+           {{-- <li class="{{ Route::is('backend.dashboard.banner.index') ? 'active' : '' }}">
                 <a href="{{ route('backend.dashboard.banner.index') }}">
                     <i class="fa fa-picture-o"></i> <span>Banner</span>
                 </a>
-            </li>
+            </li> --}}
            <li class="{{ Route::is('backend.dashboard.menu.index') ? 'active' : '' }}">
                 <a href="{{ route('backend.dashboard.menu.index') }}">
                     <i class="fa fa-bars"></i> <span>Danh mục</span>
@@ -63,7 +63,7 @@
             </li>
             <li class="{{ Route::is('backend.dashboard.location.index') ? 'active' : '' }}">
                 <a href="{{ route('backend.dashboard.location.index') }}">
-                    <i class="fa fa-map-marker"></i> <span>Địa điểm</span>
+                    <i class="fa fa-map-marker"></i> <span>Điểm đến & ảnh</span>
                 </a>
             </li>
            <li class="{{ Route::is('backend.dashboard.language.index') ? 'active' : '' }}">
