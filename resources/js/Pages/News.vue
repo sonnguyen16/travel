@@ -15,8 +15,8 @@
     </Head>
     <div class="container pt-[80px]">
       <h2 class="mb-3">{{ $t('hot_news') }}</h2>
-      <div class="row">
-        <div class="col-md-8 h-full mb-3">
+      <div class="row g-3">
+        <div class="col-md-8 h-full">
           <div
             @click.prevent="router.visit(`/tin-tuc/${hot_blogs[0].news_category?.slug}/${hot_blogs[0].slug}`)"
             class="img-container w-full h-full hover:cursor-pointer"
@@ -47,6 +47,7 @@
           <div
             @click.prevent="router.visit(`/tin-tuc/${hot_blogs[1].news_category?.slug}/${hot_blogs[1].slug}`)"
             class="img-container w-full mb-3"
+            style="height: calc(50% - 15px)"
           >
             <img
               :src="BLOG_MEDIA_ENDPOINT + hot_blogs[1].image_fe?.picture"
@@ -65,6 +66,7 @@
           <div
             @click.prevent="router.visit(`/tin-tuc/${hot_blogs[2].news_category?.slug}/${hot_blogs[2].slug}`)"
             class="img-container w-full"
+            style="height: calc(50% - 16px)"
           >
             <img
               :src="BLOG_MEDIA_ENDPOINT + hot_blogs[2].image_fe?.picture"
