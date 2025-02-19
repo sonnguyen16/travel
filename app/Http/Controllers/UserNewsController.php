@@ -125,6 +125,7 @@ class UserNewsController extends Controller
 
         $blog = Blog::query()
             ->where('slug', $slug_blog)
+            ->where('active', 1)
             ->whereHas('menu', function ($query) {
                 $query->where('slug', 'tin-tuc');
             })
