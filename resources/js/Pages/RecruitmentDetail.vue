@@ -104,7 +104,7 @@
             <hr />
             <template v-for="blog_related in blogs.slice(0, 11)">
               <div
-                v-if="blog.id != blog_related.id"
+                v-if="blog.id != blog_related.id && blog_related.active == 1"
                 @click.prevent="router.visit(`/tuyen-dung/${blog_related.slug}`)"
                 class="flex gap-3 mb-4 hover:cursor-pointer"
               >
