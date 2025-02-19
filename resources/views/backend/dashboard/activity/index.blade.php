@@ -83,8 +83,6 @@
 <link rel="stylesheet" href="{{ asset('/assets/backend/themes/plugins/iCheck/all.css') }}">
 @endsection
 @section('scripts')
-<script src="{{ asset('/assets/backend/themes/plugins/iCheck/icheck.min.js') }}"></script>
-<script src="{{ asset('/assets/backend/themes/bower_components/ckeditor/ckeditor.js') }}"></script>
 <script>
     CKEDITOR.replace('content', ckConfig);
 </script>

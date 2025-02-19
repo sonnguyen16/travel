@@ -35,7 +35,7 @@ function alertDelete(id) {
              $('#language_id').val(langId);
              $('#name').val(data.translation?.name ?? '');
              $('#description').val(data.translation?.description ?? '');
-             CKEDITOR.instances['content'].setData(data.translation ? data.translation.description : content)  
+             CKEDITOR.instances['content'].setData(data.translation ? data.translation.description : content);  
          },
          error: function(error){
              console.log(error);

@@ -17,7 +17,7 @@ $('#activityModal').on('hidden.bs.modal', function() {
     $('#active').iCheck('uncheck');
     $('#image').hide();
     $('#div-toggle').show();
-    CKEDITOR.instances['content'].setData('') 
+    CKEDITOR.instances['content'].setData('') ;
     $('#lang_code').text('VI');
     $('body').css('padding-right', '');
     $('#picture').val('');
@@ -46,7 +46,7 @@ function getActivity(langId, langCode){
             if (data.activity.image) {
                 $('#picture').prop('required', false);  
                 $('#image').attr('src', '/public/uploads/activities/' + data.activity.image.picture).show();
-                imageFromDb = '/public/uploads/activities/' + data.image.picture;
+                imageFromDb = '/public/uploads/activities/' + data.activity.image.picture;
 
             }
             if (data.activity.active == 1) {
@@ -55,7 +55,7 @@ function getActivity(langId, langCode){
                 $('#active').iCheck('uncheck');
             }
 
-            CKEDITOR.instances['content'].setData(data.translation ? data.translation.content : '') 
+            CKEDITOR.instances['content'].setData(data.translation ? data.translation.content : '');
         },
         error: function(error){
             console.log(error);

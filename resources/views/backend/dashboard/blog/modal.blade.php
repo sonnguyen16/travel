@@ -42,7 +42,7 @@
             <form action="{{ route('backend.dashboard.blog.store', request()->query()) }}" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
-                    <input type="text" id="id" name="id" value="" hidden>
+                    <input type="text" id="id" name="id" hidden>
                     <input type="text" value="1" id="language_id" name="language_id" hidden>
                     <div class="form-group">
                         <div style="display: flex; justify-content: space-between;">
@@ -94,10 +94,9 @@
                         </div>
                         <div class="form-group">
                             <label>Hình ảnh khác</label>
-                            <input type="file" name="pictures[]" multiple class="form-control" id="picturesInput">
+                            <input type="file" name="pictures[]" class="form-control" id="picturesInput" multiple >
                         </div>
-                        <div class="row" style="display: flex; flex-wrap: wrap;" id="pictures">
-                        </div>
+                        <div class="row" style="display: flex; flex-wrap: wrap;" id="pictures"></div>
                         <div class="form-group">
                             <label style="margin-top: 15px">
                                 <input name="active" id="active" type="checkbox" class="flat-red"> Hoạt động
