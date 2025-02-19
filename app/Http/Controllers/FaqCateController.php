@@ -16,7 +16,7 @@ class FaqCateController extends Controller
     public function index(Request $request)
     {
         $query = FaqCate::query();
-        $faqs = $query->orderby('id', 'desc')->with('translation')->paginate(10);
+        $faqs = $query->orderby('id', 'desc')->with('translation')->paginate(20);
         $faqs->each(function ($faq) {
             $languageIds = Translation::where('record_id', $faq->id)->where('record_type', 'FaqCate')->pluck('language_id');
     

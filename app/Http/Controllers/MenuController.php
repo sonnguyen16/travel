@@ -31,7 +31,7 @@ class MenuController extends Controller
             });
         }
 
-        $menus = $query->orderBy('id','desc')->with('Menu')->with('translation')->with('image')->paginate(10);
+        $menus = $query->orderBy('id','desc')->with('Menu')->with('translation')->with('image')->paginate(20);
 
         $menus->each(function ($menu) {
             $languageIds = Translation::where('record_id', $menu->id)->where('record_type', 'Menu')->pluck('language_id');
