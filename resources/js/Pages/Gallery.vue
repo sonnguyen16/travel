@@ -41,7 +41,7 @@
                 </button>
               </div>
 
-              <div class="grid md:grid-cols-3 gap-4">
+              <div class="grid md:grid-cols-3 gap-3">
                 <img
                   v-if="currentLocation !== 'all'"
                   v-for="(image, index) in foundLocation.images"

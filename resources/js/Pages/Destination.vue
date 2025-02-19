@@ -14,7 +14,7 @@
       <meta property="og:image" content="/images/logo.png" />
     </Head>
     <div class="container">
-      <h1 class="text-center mb-3 pt-[100px]">
+      <h1 class="text-center mb-3 pt-[80px]">
         {{ menu.translations.find((t) => t.language.code == locale.toUpperCase())?.name || menu.translations[0].name }}
       </h1>
       <div v-if="blogs.length > 0 && mounted" id="service-4" class="pb-[50px]">

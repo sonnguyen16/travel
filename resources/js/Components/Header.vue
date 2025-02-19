@@ -162,9 +162,11 @@
                   <!-- Placeholder -->
                   <option class="font-normal" value="" disabled hidden>{{ t('select_destination') }}</option>
                   <!-- Các địa điểm -->
-                  <option class="font-normal" v-for="location in locations" :key="location.id" :value="location.id">
-                    {{ location.translations.find((t) => t.language.code === locale.toUpperCase())?.name }}
-                  </option>
+                  <template v-for="location in locations" :key="location.id">
+                    <option v-if="location.active == 1" class="font-normal" :value="location.id">
+                      {{ location.translations.find((t) => t.language.code === locale.toUpperCase())?.name }}
+                    </option>
+                  </template>
                 </select>
               </div>
             </div>
