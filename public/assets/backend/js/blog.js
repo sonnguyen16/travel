@@ -73,13 +73,14 @@ $('#blogModal').on('hidden.bs.modal', function () {
     $('#active').iCheck('uncheck');
     $('#image').hide();
     $('#div-toggle').show();
-    CKEDITOR.instances['description'].setData('')
-    CKEDITOR.instances['content'].setData('')
+    CKEDITOR.instances['description'].setData('');
+    CKEDITOR.instances['content'].setData('');
     $('#lang_code').text('VI');
     $('body').css('padding-right', '');
     $('#picture').prop('required', true);
     $('#picture').val('');
     $('#pictures').empty();
+    $('#picturesInput').val('');
     $('#language_id').val('1')
 });
 function getBlog(langId, langCode) {
@@ -135,8 +136,8 @@ function getBlog(langId, langCode) {
             }
 
 
-            CKEDITOR.instances['description'].setData(data.translation ? data.translation.description : '')
-            CKEDITOR.instances['content'].setData(data.translation ? data.translation.content : '')
+            CKEDITOR.instances['description'].setData(data.translation ? data.translation.description : '');
+            CKEDITOR.instances['content'].setData(data.translation ? data.translation.content : '');
         },
         error: function (error) {
             console.log(error);

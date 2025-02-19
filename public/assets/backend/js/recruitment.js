@@ -24,7 +24,7 @@ $('#recruitmentModal').on('hidden.bs.modal', function() {
     $('#active').iCheck('uncheck');
     $('#image').hide();
     $('#div-toggle').show();
-    CKEDITOR.instances['description'].setData('') 
+    CKEDITOR.instances['description'].setData(''); 
     $('#lang_code').text('VI');
     $('body').css('padding-right', '');
     $('#picture').prop('required', true);

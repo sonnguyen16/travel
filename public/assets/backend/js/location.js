@@ -17,7 +17,9 @@ function alertDelete(id) {
       $('#name').val('');
       $('body').css('padding-right', '');
       $('#lang_code').text('VI');
-      $('#language_id').val('1')
+      $('#language_id').val('1');
+      $('#picturesInput').val('');
+      $('#pictures').empty();
   });
   function getLocation(langId, langCode){
       $('#langModal').modal('hide');
