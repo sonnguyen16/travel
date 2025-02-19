@@ -52,11 +52,11 @@
                                     <button type="button" class="btn btn-success btn-sm" onclick="alertLang({{ $menu->id }})">
                                         <i class="fa fa-edit"></i>
                                     </button>
-                                    @if ($menu->menu->count() == 0)
+                                    {{-- @if ($menu->menu->count() == 0)
                                         <button type="button" class="btn btn-danger btn-sm" onclick="alertDelete({{ $menu->id }})">
                                             <i class="fa fa-trash"></i>
                                         </button>
-                                    @endif
+                                    @endif --}}
                                 </td>
                             </tr>
                             <?php $j = 1; ?>

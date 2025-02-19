@@ -37,7 +37,7 @@
     </div>
 </div>
 <div id="blogModal" class="modal fade" role="dialog" aria-labelledby="blogModalLabel">
-    <div class="modal-dialog" style="width: 800px; overflow-y: auto;">
+    <div class="modal-dialog" style="width: 800px;">
         <div class="modal-content">
             <form action="{{ route('backend.dashboard.blog.store', request()->query()) }}" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
@@ -103,15 +103,22 @@
                             </label>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="description">Mô tả</label>
+                                <textarea id="description" name="description"></textarea>  
+                            </div>
+                            <div class="form-group">
+                                <label for="content">Nội dung</label>
+                                <textarea id="content" name="content"></textarea>  
+                            </div>
+                        </div>
+                        
+                    </div>
                     
-                    <div class="form-group">
-                        <label for="description">Mô tả</label>
-                        <textarea id="description" name="description"></textarea>  
-                    </div>
-                    <div class="form-group">
-                        <label for="content">Nội dung</label>
-                        <textarea id="content" name="content"></textarea>  
-                    </div>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>

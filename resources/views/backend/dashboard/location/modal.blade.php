@@ -15,7 +15,7 @@
                     </div>
                     <div class="form-group">
                         <label style="margin-top: 10px">
-                            Điểm đến <input name="active" id="active" type="checkbox" class="flat-red"> 
+                            Hiển thị trong danh mục chọn điểm đến <input name="active" id="active" type="checkbox" class="flat-red"> 
                         </label>
                     </div>
                     <div class="form-group">

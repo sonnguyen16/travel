@@ -89,7 +89,7 @@
 <script src="{{ asset('/assets/backend/themes/bower_components/ckeditor/ckeditor.js') }}"></script>
 
 <script>
-    CKEDITOR.replace('answer', , ckConfig);
+    CKEDITOR.replace('answer', ckConfig);
 
     function alertDelete(id) {
         $('#myModal').data('id', id);

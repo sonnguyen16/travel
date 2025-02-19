@@ -25,13 +25,35 @@
       extraPlugins: 'image2',
       removePlugins: 'image',
       height: 100,
-      // filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
-      // filebrowserUploadMethod: 'form'
-      filebrowserBrowseUrl: "{{ url('laravel-filemanager') }}?type=Files",
-      filebrowserImageBrowseUrl: "{{ url('laravel-filemanager') }}?type=Images",
-      filebrowserUploadUrl: "{{ url('laravel-filemanager/upload') }}?type=Files&_token={{ csrf_token() }}",
-      filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}"
+      filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
+      filebrowserUploadMethod: 'form',
+      
+      // filebrowserBrowseUrl: "{{ url('laravel-filemanager') }}?type=Files",
+      // filebrowserImageBrowseUrl: "{{ url('laravel-filemanager') }}?type=Images",
+      // filebrowserUploadUrl: "{{ url('laravel-filemanager/upload') }}?type=Files&_token={{ csrf_token() }}",
+      // filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}"
   };
 
+  // CKEDITOR.on('instanceReady', function (event) {
+  //     var editor = event.editor;
+
+  //     editor.on('focus', function () {
+  //         $('.modal-open .modal').css('overflow', 'visible'); // Tắt cuộn khi focus vào CKEditor
+  //     });
+
+  //     editor.on('blur', function () {
+  //         $('.modal-open .modal').css('overflow-y', 'auto'); // Bật cuộn khi blur khỏi CKEditor
+  //     });
+  // });
+
+  $(document).on('click', '.cke_toolbar', function () {
+      $('.modal-open .modal').css('overflow', 'visible'); // Tắt cuộn khi click vào toolbar
+  });
+
+  $(document).on('click', function (e) {
+      if (!$(e.target).closest('.cke').length) {
+          $('.modal-open .modal').css('overflow-y', 'auto'); // Bật lại cuộn nếu click ra ngoài CKEditor
+      }
+  });
 </script>
 @yield('scripts')
