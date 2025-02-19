@@ -34,6 +34,7 @@ class UserBlogController extends Controller
 
         $blog = Blog::query()
             ->where('slug', $slug_blog)
+            ->where('active', 1)
             ->whereHas('menu', function ($query) use ($slug_menu) {
                 $query->where('slug', $slug_menu);
             })
