@@ -43,7 +43,7 @@ class HandleInertiaRequests extends Middleware
                 'location' => $request->url(),
             ],
             'languages' => Language::where('active', 1)->get(),
-            'locations' => Location::with('translations.language')->get(),
+            'locations' => Location::where('active', 1)->with('translations.language')->get(),
         ];
     }
 }

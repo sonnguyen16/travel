@@ -26,8 +26,8 @@
               alt="home1"
               class="w-full object-cover rounded-lg h-full hover:cursor-pointer"
             />
-            <div class="slide-content">
-              <h3 class="line-clamp-4">
+            <div class="overlay slide-content px-3">
+              <h3 class="line-clamp-4 text-[24px] text-white">
                 {{
                   hot_blogs[0].translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                   hot_blogs[0].translations[0].name
@@ -53,13 +53,13 @@
               alt="home1"
               class="w-full object-cover rounded-lg hover:cursor-pointer"
             />
-            <div class="slide-content">
-              <h5 class="line-clamp-4">
+            <div class="overlay slide-content px-3">
+              <h3 class="line-clamp-4 text-[24px] text-white">
                 {{
                   hot_blogs[1].translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                   hot_blogs[1].translations[0].name
                 }}
-              </h5>
+              </h3>
             </div>
           </div>
           <div
@@ -71,13 +71,13 @@
               alt="home1"
               class="w-full object-cover rounded-lg hover:cursor-pointer"
             />
-            <div class="slide-content">
-              <h5 class="line-clamp-4">
+            <div class="overlay slide-content px-3">
+              <h3 class="line-clamp-4 text-[24px] text-white">
                 {{
                   hot_blogs[2].translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                   hot_blogs[2].translations[0].name
                 }}
-              </h5>
+              </h3>
             </div>
           </div>
         </div>
@@ -352,12 +352,20 @@ const changePage = (page) => {
 
 .slide-content {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  padding: 10px;
-  border-radius: 8px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.overlay {
+  padding-top: 20px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.5),
+    rgba(255, 255, 255, 0)
+  );
 }
 </style>
