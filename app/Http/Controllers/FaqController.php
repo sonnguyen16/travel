@@ -23,7 +23,7 @@ class FaqController extends Controller
             $query->where('active', $status);
         }
 
-        $faqs = $query->orderby('id', 'desc')->with('translation')->paginate(10);
+        $faqs = $query->orderby('id', 'desc')->with('translation')->paginate(20);
         $faqs->each(function ($faq) {
             $languageIds = FaqTranslations::where('record_id', $faq->id)->pluck('language_id');
     
