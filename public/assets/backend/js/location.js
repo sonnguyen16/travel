@@ -15,6 +15,7 @@ function alertDelete(id) {
   $('#locationModal').on('hidden.bs.modal', function() {
       $('#id').val('');
       $('#name').val('');
+      $('#active').iCheck('uncheck');
       $('body').css('padding-right', '');
       $('#lang_code').text('VI');
       $('#language_id').val('1');
@@ -31,6 +32,11 @@ function alertDelete(id) {
               $('#id').val(data.location.id);
               $('#language_id').val(langId);
               $('#name').val(data.translation ? data.translation.name : '');
+              if (data.location.active == 1) {
+                $('#active').iCheck('check');
+              } else {
+                $('#active').iCheck('uncheck');
+              }
               if (data.location.images) {
                 let picturesDiv = $('#pictures');
                 picturesDiv.empty();

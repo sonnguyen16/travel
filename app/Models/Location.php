@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Location extends Model
 {
     protected $table = 'locations';
-	protected $fillable = ['id', 'name', 'slug'];
+	protected $fillable = ['id', 'name', 'slug', 'active'];
 	public $timestamps = false;
     public function products() {
 		return $this->hasmany('App\Models\Product', 'location_id');

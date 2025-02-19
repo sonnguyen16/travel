@@ -14,7 +14,12 @@
                         <input name="name" id="name" type="text" class="form-control" placeholder="Nhập địa điểm ..." required>
                     </div>
                     <div class="form-group">
-                        <label>Hình ảnh khác</label>
+                        <label style="margin-top: 10px">
+                            Điểm đến <input name="active" id="active" type="checkbox" class="flat-red"> 
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Thư viện ảnh</label>
                         <input type="file" name="pictures[]" multiple class="form-control" id="picturesInput">
                     </div>
                     <div class="row" style="display: flex; flex-wrap: wrap;" id="pictures">
