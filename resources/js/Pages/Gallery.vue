@@ -21,7 +21,7 @@
               {{ $t('gallery') }}
             </h2>
             <div class="mb-5">
-              <div class="whitespace-nowrap flex border-b pb-2 mb-4 flex-wrap">
+              <div class="whitespace-nowrap flex border-b pb-2 mb-4 flex-wrap space-y-1">
                 <button
                   @click.prevent="currentLocation = 'all'"
                   class="tab-btn text-gray-600 pb-1 me-3"
