@@ -39,7 +39,8 @@ class LocationController extends Controller
         }
 
         $locationData = [
-            'name' => ''
+            'name' => '',
+            'active' => $request->active ? 1 : 0,
         ];
 
         if($request->language_id == 1){
