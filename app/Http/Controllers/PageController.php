@@ -20,7 +20,7 @@ class PageController extends Controller
     }
 
     public function index() {
-        $pages = Page::orderBy('id','desc')->with('translation')->paginate(10);
+        $pages = Page::orderBy('id','desc')->with('translation')->paginate(20);
 
         $pages->each(function ($page) {
             $languageIds = Translation::where('record_id', $page->id)->where('record_type', 'Page')->pluck('language_id');

@@ -33,7 +33,7 @@
                             <tr>
                                 <th style="width: 50px;">#</th>
                                 <th>Tên</th>
-                                <th>Emal</th>
+                                <th>Email</th>
                                 <th>Số điện thoại</th>
                                 <th>Mã giảm giá</th>
                                 <th>Tổng tiền</th>
@@ -53,8 +53,9 @@
                                 <td>{{ $order->phone }}</td>
                                 <td>{{ $order->discount_code }}</td>
                                 <td>{{ $order->total }}</td>
-                                <td>{{ $order->payment_method }}</td>
-                                <td>{{ $order->created_at }}</td>
+                                <td>{{ strtoupper($order->payment_method) }} 
+                                </td>
+                                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('H:i:s d-m-Y') }}</td>
                                 <td>
                                     @if ($order->status == 0)
                                     <span class="label label-warning">Chưa duyệt</span>
@@ -130,7 +131,7 @@
     }
     $('#myModal button.delete').on('click', function(e) {
         e.preventDefault();
-        window.location.href = "{{ route('backend.dashboard.order.delete') }}" + "?id=" + $('#myModal').data('id') + "&{{ http_build_query(request()->query()) }}";
+        window.location.href = "{{ route('backend.dashboard.order.delete') }}" + "?id=" + $('#myModal').data('id') + "&search={{ request('search') }}&status={{ request('status') }}";
     });
 
     function alertUpload(id, status) {
@@ -140,7 +141,7 @@
     }
     $('#uploadModal button.btn-success').on('click', function(e) {
         e.preventDefault();
-        window.location.href = "{{ route('backend.dashboard.order.status') }}" + "?id=" + $('#uploadModal').data('id') + "&statuss=" + $('#uploadModal').data('status') + "&{{ http_build_query(request()->query()) }}";
+        window.location.href = "{{ route('backend.dashboard.order.status') }}" + "?id=" + $('#uploadModal').data('id') + "&statuss=" + $('#uploadModal').data('status') + "&search={{ request('search') }}&status={{ request('status') }}";
     });
     function alertCancel(id, status) {
         $('#cancelModal').data('id', id);
@@ -149,7 +150,7 @@
     }
     $('#cancelModal button.btn-danger').on('click', function(e) {
         e.preventDefault();
-        window.location.href = "{{ route('backend.dashboard.order.status') }}" + "?id=" + $('#cancelModal').data('id') + "&statuss=" + $('#cancelModal').data('status') + "&{{ http_build_query(request()->query()) }}";
+        window.location.href = "{{ route('backend.dashboard.order.status') }}" + "?id=" + $('#cancelModal').data('id') + "&statuss=" + $('#cancelModal').data('status') + "&search={{ request('search') }}&status={{ request('status') }}";
     });
 </script>
 
