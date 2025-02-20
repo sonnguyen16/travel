@@ -40,7 +40,10 @@ export function updateSlideWidth(swiperInstance, swiperIndex) {
 export const cleanHTML = (html) => {
     if (!html) return '';
     let text = html.replace(/<\/?[^>]+(>|$)/g, '');
-    const doc = new DOMParser().parseFromString(text, "text/html");
-    return doc.body.textContent || "";
+    if (typeof window !== 'undefined') {
+        const doc = new DOMParser().parseFromString(text, 'text/html');
+        return doc.body.textContent || "";
+    }
+    return text || "";
 };
 
