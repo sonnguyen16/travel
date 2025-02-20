@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Models\Language;
 use App\Models\Image;
 use App\Models\Translation;
+use App\Models\Blog;
 
 class ActivityController extends Controller
 {
@@ -20,7 +21,8 @@ class ActivityController extends Controller
     }
     public function index(Request $request)
     {
-        $activities = Activity::where('blog_id', $request->blog_id)->orderby('id', 'desc')->get();
+        $blog = Blog::find($request->blog_id);
+        $activities = Activity::where('blog_id', $request->blog_id)->orderby('id', 'desc')->paginate(20);
         $activities->each(function ($activity) {
             $languageIds = Translation::where('record_id', $activity->id)->where('record_type', 'Activity')->pluck('language_id');
     
@@ -30,7 +32,7 @@ class ActivityController extends Controller
         });
         return view('backend.dashboard.activity.index',[
             'activities' => $activities,
-            'title' => 'Hoạt động nổi bật #' . $request->blog_id
+            'title' => 'Hoạt động nổi bật : #' . $blog->translation->name
         ]);
     }
     public function store(Request $request) {

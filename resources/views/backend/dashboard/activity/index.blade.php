@@ -24,7 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = 1; ?>
+                            <?php $i = ($activities->currentPage() - 1) * $activities->perPage() + 1; ?>
                             @forelse($activities as $activity)
                             <tr>
                                 <td><?php echo $i++; ?></td>
@@ -62,6 +62,9 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="text-center">
+                {{ $activities->appends(request()->except('page'))->links('vendor.pagination.bootstrap-4') }}
             </div>
             <a class="btn btn-default btn-sm" href="{{ route('backend.dashboard.blog.index') }}">
                 Quay lại

@@ -38,7 +38,7 @@ class RecruitmentController extends Controller
             $query->where('active', $status);
         }
 
-        $recruitments = $query->orderby('id', 'desc')->with('translation')->paginate(10);
+        $recruitments = $query->orderby('id', 'desc')->with('translation')->paginate(20);
         $recruitments->each(function ($recruitment) {
             $languageIds = RecruitmentTranslations::where('record_id', $recruitment->id)->pluck('language_id');
     

@@ -29,7 +29,7 @@ class UserController extends Controller
             });
         }
         
-        $users = $query->orderby('id', 'desc')->with('image')->paginate(10);
+        $users = $query->orderby('id', 'desc')->with('image')->paginate(20);
     
         return view('backend.dashboard.user.index', [
             'users' => $users,

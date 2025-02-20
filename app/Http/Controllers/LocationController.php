@@ -16,7 +16,7 @@ use App\Models\Image;
 class LocationController extends Controller
 {
     public function index(){
-        $locations = Location::with('translation')->paginate(10);
+        $locations = Location::with('translation')->paginate(20);
         $locations->each(function ($location) {
             $languageIds = Translation::where('record_id', $location->id)->where('record_type', 'Location')->pluck('language_id');
     

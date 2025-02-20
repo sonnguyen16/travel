@@ -36,7 +36,7 @@ class OrderController extends Controller
             $query->where('status', $status);
         }
 
-        $orders = $query->orderby('id', 'desc')->where('isdelete', 0)->paginate(10);
+        $orders = $query->orderby('id', 'desc')->where('isdelete', 0)->paginate(20);
 
         return view('backend.dashboard.order.index', [
 			'orders' => $orders,

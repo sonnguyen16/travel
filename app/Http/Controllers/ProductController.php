@@ -40,7 +40,7 @@ class ProductController extends Controller
             $query->where('active', $status);
         }
 
-        $products = $query->orderby('id', 'desc')->with('translation')->with('location')->paginate(10);
+        $products = $query->orderby('id', 'desc')->with('translation')->with('location')->paginate(20);
         $locations = Location::all();
         $products->each(function ($product) {
             $languageIds = Translation::where('record_id', $product->id)->where('record_type', 'Product')->pluck('language_id');

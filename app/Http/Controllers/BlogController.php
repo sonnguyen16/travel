@@ -47,7 +47,7 @@ class BlogController extends Controller
 			$query->where('menu_id', $s_menu);
 		}
 
-        $blogs = $query->orderby('id', 'desc')->with('translation')->with('menu')->paginate(10);
+        $blogs = $query->orderby('id', 'desc')->with('translation')->with('menu')->paginate(20);
 
 		$menus = Menu::where('menu_fk', 0)->orwhereNull('menu_fk')->get();
 
