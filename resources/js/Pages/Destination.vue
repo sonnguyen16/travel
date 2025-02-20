@@ -17,9 +17,9 @@
       <h1 class="text-center mb-3 pt-[80px]">
         {{ menu.translations.find((t) => t.language.code == locale.toUpperCase())?.name || menu.translations[0].name }}
       </h1>
-      <div v-if="blogs.length > 0 && mounted" id="service-4" class="pb-[50px]">
+      <div v-if="blogs.length > 0 && mounted" id="service-4" class="pb-[20px]">
         <div class="swiper swiper-2">
-          <div class="swiper-wrapper">
+          <div class="swiper-wrapper pb-5">
             <!-- Slide 1 -->
             <div v-for="blog in blogs" class="swiper-slide hover:cursor-pointer">
               <div @click.prevent="router.visit(`/${menu.slug}/${blog.slug}`)" class="rounded-xl shadow-xl bg-white">
@@ -40,6 +40,13 @@
                       blog.translations[0].name
                     }}
                   </h3>
+                  <p v-if="blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
+                    <i class="fas fa-map-marker-alt text-green-600 me-2 text-lg"></i>
+                    {{
+                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address ||
+                      blog.translations[0].address
+                    }}
+                  </p>
                   <div
                     class="line-clamp-6"
                     v-html="
@@ -139,9 +146,6 @@ onMounted(async () => {
   );
 }
 
-.swiper-slide {
-  height: 620px;
-}
 /* Tùy chỉnh nút prev và next */
 .swiper-button-prev,
 .swiper-button-next {

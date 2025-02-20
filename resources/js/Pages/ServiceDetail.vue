@@ -142,7 +142,7 @@
           {{ t('service_detail.related_services') }}
         </h2>
         <div class="swiper swiper-2">
-          <div class="swiper-wrapper">
+          <div class="swiper-wrapper pb-4">
             <!-- Slide 1 -->
             <template v-if="mounted" v-for="blog_related in blog?.menu?.blogs">
               <div
@@ -172,6 +172,13 @@
                         blog_related.translations[0].name
                       }}
                     </h3>
+                    <p v-if="blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
+                      <i class="fas fa-map-marker-alt text-green-600 me-2 text-lg"></i>
+                      {{
+                        blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address ||
+                        blog.translations[0].address
+                      }}
+                    </p>
                     <div
                       class="line-clamp-4"
                       v-html="
@@ -329,10 +336,6 @@ onMounted(() => {
 
 img {
   transition: transform 0.3s ease;
-}
-
-.swiper-2 .swiper-slide {
-  height: 600px;
 }
 
 .swiper-button-prev,

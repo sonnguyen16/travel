@@ -34,6 +34,13 @@
                   blog.translations[0].name
                 }}
               </h3>
+              <p v-if="blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
+                <i class="fas fa-map-marker-alt text-green-600 me-2 text-lg"></i>
+                {{
+                  blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address ||
+                  blog.translations[0].address
+                }}
+              </p>
               <div
                 class="line-clamp-6"
                 v-html="
