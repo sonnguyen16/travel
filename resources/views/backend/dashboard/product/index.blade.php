@@ -50,8 +50,8 @@
                             <tr>
                                 <td><?php echo $i++; ?></td>
                                 <td>
-                                    @if($product->image(1))
-                                    <div class="picture" style="background-image: url('{{ asset('public/uploads/products/'. $product->image(1)->picture) }}')">
+                                    @if($product->image_fe)
+                                    <div class="picture" style="background-image: url('{{ asset('public/uploads/products/'. $product->image_fe->picture) }}')">
                                     </div>
                                     @endif
                                 </td>

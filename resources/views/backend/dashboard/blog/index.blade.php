@@ -56,8 +56,8 @@
                             <tr>
                                 <td><?php echo $i++; ?></td>
                                 <td>
-                                    @if ($blog->image(1))
-                                    <div class="picture" style="background-image: url('{{ asset('public/uploads/blogs/'. $blog->image(1)->picture) }}')">
+                                    @if ($blog->image_fe)
+                                    <div class="picture" style="background-image: url('{{ asset('public/uploads/blogs/'. $blog->image_fe->picture) }}')">
                                     </div>
                                     @endif
                                 </td>

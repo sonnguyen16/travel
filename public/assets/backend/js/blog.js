@@ -69,6 +69,7 @@ $('#blogModal').on('hidden.bs.modal', function () {
     $('#name').val('');
     $('#menu_id').val('2');
     $('#news_id').val('');
+    $('#address').val('');
     $('#location_id').val('');
     $('#active').iCheck('uncheck');
     $('#image').hide();
@@ -114,6 +115,7 @@ function getBlog(langId, langCode) {
             } else {
                 $('#active').iCheck('uncheck');
             }
+            $('#address').val(data.translation?.address ?? '');
             if (data.images) {
                 let picturesDiv = $('#pictures');
                 picturesDiv.empty();

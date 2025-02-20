@@ -161,6 +161,7 @@ class BlogController extends Controller
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),    
                 'content' => $request->input('content'),
+                'address' => $request->input('address')
             ]
         );
 
