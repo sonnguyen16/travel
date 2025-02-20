@@ -8,7 +8,7 @@ class Translation extends Model
 {
     protected $table = 'translations';
     public $timestamps = false;
-    protected $fillable = ['id', 'record_type', 'record_id', 'language_id', 'name', 'description', 'content', 'slug'];
+    protected $fillable = ['id', 'record_type', 'record_id', 'language_id', 'name', 'description', 'content', 'address', 'slug'];
 
     public function language()
     {

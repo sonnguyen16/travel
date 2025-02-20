@@ -22,16 +22,11 @@
 <script>
   
   var ckConfig = {
-      extraPlugins: 'image2',
-      removePlugins: 'image',
-      height: 100,
-      filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
-      filebrowserUploadMethod: 'form',
-      
-      // filebrowserBrowseUrl: "{{ url('laravel-filemanager') }}?type=Files",
-      // filebrowserImageBrowseUrl: "{{ url('laravel-filemanager') }}?type=Images",
-      // filebrowserUploadUrl: "{{ url('laravel-filemanager/upload') }}?type=Files&_token={{ csrf_token() }}",
-      // filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}"
+    extraPlugins: 'image2,justify,colorbutton,colordialog,emoji,indent',
+    removePlugins: 'image',
+    height: 100,
+    filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
+    filebrowserUploadMethod: 'form',
   };
 
   function toggleModalOverflow() {

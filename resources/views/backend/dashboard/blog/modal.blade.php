@@ -103,19 +103,22 @@
                             </label>
                         </div>
                     </div>
-
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="description">Mô tả</label>
-                                <textarea id="description" name="description"></textarea>  
-                            </div>
-                            <div class="form-group">
-                                <label for="content">Nội dung</label>
-                                <textarea id="content" name="content"></textarea>  
+                                <label>Địa điểm</label>
+                                <input type="text" name="address" id="address" class="form-control" placeholder="Mô tả địa điểm...">
                             </div>
                         </div>
-                        
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Mô tả</label>
+                        <textarea id="description" name="description"></textarea>  
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Nội dung</label>
+                        <textarea id="content" name="content"></textarea>  
                     </div>
                     
                     
