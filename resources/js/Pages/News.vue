@@ -33,13 +33,14 @@
                   hot_blogs[0].translations[0].name
                 }}
               </h3>
-              <div
-                class="text-description md:block hidden line-clamp-3"
-                v-html="
-                  hot_blogs[0].translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
-                  hot_blogs[0].translations[0].description
-                "
-              ></div>
+              <p class="text-description md:block hidden line-clamp-3 text-white">
+                {{
+                  cleanHTML(
+                    hot_blogs[0].translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+                      hot_blogs[0].translations[0].description
+                  )
+                }}
+              </p>
             </div>
           </div>
         </div>
@@ -240,9 +241,10 @@
 import MainLayout from '@/Layouts/MainLayout.vue'
 import Pagination from '@/Components/Pagination.vue'
 import { router, Head } from '@inertiajs/vue3'
-import { onMounted, ref } from 'vue'
+import { onMounted, watch, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { BLOG_MEDIA_ENDPOINT, RECRUITMENT_MEDIA_ENDPOINT } from '@/Constants/endpoint'
+import { cleanHTML } from '@/Assets/common'
 
 const props = defineProps({
   blogs: Object,
@@ -262,11 +264,6 @@ const searchNews = () => {
 }
 
 onMounted(async () => {
-  const paragraphs = document.querySelectorAll('.text-description p')
-
-  paragraphs.forEach((p) => {
-    p.style.color = 'white'
-  })
   mounted.value = true
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const ScrollReveal = (await import('scrollreveal')).default

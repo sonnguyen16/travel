@@ -38,6 +38,9 @@ export function updateSlideWidth(swiperInstance, swiperIndex) {
 }
 
 export const cleanHTML = (html) => {
-    // Loại bỏ toàn bộ thẻ HTML
-    return html?.replace(/<\/?[^>]+(>|$)/g, '')
-}
+    if (!html) return '';
+    let text = html.replace(/<\/?[^>]+(>|$)/g, '');
+    const doc = new DOMParser().parseFromString(text, "text/html");
+    return doc.body.textContent || "";
+};
+
