@@ -45,15 +45,27 @@
       <div class="row g-3">
         <div class="col-lg-7">
           <div class="img-container h-100">
-            <img src="@/Assets/images/booking1.jpg" alt="about" class="w-full rounded-xl h-100 object-cover" />
+            <img
+              :src="BANNER_MEDIA_ENDPOINT + props.banners.find((b) => b.slug == 'banner-muc-dat-ve-vi-tri-1')?.picture"
+              alt="about"
+              class="w-full rounded-xl h-100 object-cover"
+            />
           </div>
         </div>
         <div class="col-lg-5">
           <div class="img-container h-[200px] mt-lg-0 mb-3">
-            <img src="@/Assets/images/booking2.jpg" alt="about" class="w-full rounded-xl h-[200px] object-cover" />
+            <img
+              :src="BANNER_MEDIA_ENDPOINT + props.banners.find((b) => b.slug == 'banner-muc-dat-ve-vi-tri-2')?.picture"
+              alt="about"
+              class="w-full rounded-xl h-[200px] object-cover"
+            />
           </div>
           <div class="img-container h-[200px]">
-            <img src="@/Assets/images/booking3.jpg" alt="about" class="w-full rounded-xl h-[200px] object-cover" />
+            <img
+              :src="BANNER_MEDIA_ENDPOINT + props.banners.find((b) => b.slug == 'banner-muc-dat-ve-vi-tri-3')?.picture"
+              alt="about"
+              class="w-full rounded-xl h-[200px] object-cover"
+            />
           </div>
         </div>
       </div>
@@ -237,7 +249,7 @@
   </MainLayout>
 </template>
 <script setup>
-import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
+import { BANNER_MEDIA_ENDPOINT, BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import MainLayout from '@/Layouts/MainLayout.vue'
 import emitter from '@/mitt'
 import { router } from '@inertiajs/vue3'
@@ -246,7 +258,8 @@ import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
   products: Object,
-  promo: Object
+  promo: Object,
+  banners: Object
 })
 
 let Swal = null
