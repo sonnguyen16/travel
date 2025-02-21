@@ -44,10 +44,10 @@
       </div>
     </div>
     <div id="promo-3" class="w-full py-[200px] bg_promo mt-5">
-      <div class="container text-center">
+      <!-- <div class="container text-center">
         <h2 id="promo-title" class="text-white">{{ $t('register_now') }}</h2>
         <button id="promo-btn" class="btn btn-success px-5" style="font-size: 20px">{{ $t('register') }}</button>
-      </div>
+      </div> -->
     </div>
     <div class="container">
       <div id="promo-2" class="pt-[50px]">

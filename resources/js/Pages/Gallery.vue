@@ -21,20 +21,20 @@
               {{ $t('gallery') }}
             </h2>
             <div class="mb-5">
-              <div class="whitespace-nowrap flex border-b pb-2 mb-4 flex-wrap space-y-1">
+              <div class="whitespace-nowrap flex border-b pb-2 mb-4 flex-wrap">
                 <button
                   @click.prevent="currentLocation = 'all'"
-                  class="tab-btn text-gray-600 pb-1 me-3"
-                  :class="{ ' border-b-2 text-red-600 border-red-600 transition-all': currentLocation == 'all' }"
+                  class="tab-btn text-green-600 border-1 border-green-600 px-3 py-1 me-3 mb-2 rounded-lg"
+                  :class="{ ' text-white bg-green-600 transition-all': currentLocation == 'all' }"
                 >
                   {{ $t('all') }}
                 </button>
                 <button
                   @click.prevent="currentLocation = location.slug"
                   v-for="location in locations"
-                  class="tab-btn text-gray-600 pb-1 me-3"
+                  class="tab-btn text-green-600 border-1 border-green-600 px-3 py-1 me-3 rounded-lg mb-2"
                   :class="{
-                    '  border-b-2 text-red-600 border-red-600 transition-all': currentLocation == location.slug
+                    '  text-white bg-green-600 transition-all': currentLocation == location.slug
                   }"
                 >
                   {{ location.translations.find((t) => t.language.code == locale.toUpperCase())?.name }}
