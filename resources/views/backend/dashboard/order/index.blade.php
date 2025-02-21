@@ -1,27 +1,31 @@
 @extends('backend.layouts.app')
 @section ('content')
 <section class="content-header">
-    <div style="display: flex; justify-content: end; flex-wrap: nowrap; gap: 10px;">
-        <form method="GET" action="{{ route('backend.dashboard.order.index') }}" class="form-inline" id="search-form" style="display: flex; flex-wrap: nowrap; align-items: center;">
-            <div class="input-group input-group-sm" style="margin-right: 10px;">
-                <select name="status" class="form-control" onchange="this.form.submit()">
-                    <option value="0" {{ $status == 0 ? 'selected' : '' }}>Chưa duyệt</option>
-                    <option value="1" {{ $status == 1 ? 'selected' : '' }}>Đã duyệt</option>
-                    <option value="2" {{ $status == 2 ? 'selected' : '' }}>Đã hủy</option>
-                    <option value="3" {{ $status == 3 ? 'selected' : '' }}>Tất cả</option>
-                </select>
+    <form method="GET" action="{{ route('backend.dashboard.order.index') }}" class="form-inline" id="search-form" style="display: flex; justify-content: flex-end; flex-wrap: nowrap; gap: 10px;">
+        <div class="input-group input-group-sm" style="width: 280px;">
+            <div class="input-group-addon">
+              <i class="fa fa-clock-o"></i>
             </div>
-            <div class="input-group input-group-sm">
-                <input type="text" class="form-control" id="search" name="search" value="{{ request('search') }}" placeholder="Tìm kiếm ...">
-                <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                    @if(request('search'))
-                    <button type="button" id="clear-search" class="btn btn-default" onclick="clearSearch()"><i class="fa fa-remove"></i></button>
-                    @endif 
-                </div>
+            <input type="text" class="form-control pull-right" id="datetimepicker" name="datetime_range" value="{{ request('datetime_range') }}" placeholder="Tìm kiếm theo khoảng thời gian">
+        </div>
+        <div class="input-group input-group-sm">
+            <select name="status" class="form-control" onchange="this.form.submit()">
+                <option value="0" {{ $status == 0 ? 'selected' : '' }}>Chưa duyệt</option>
+                <option value="1" {{ $status == 1 ? 'selected' : '' }}>Đã duyệt</option>
+                <option value="2" {{ $status == 2 ? 'selected' : '' }}>Đã hủy</option>
+                <option value="3" {{ $status == 3 ? 'selected' : '' }}>Tất cả</option>
+            </select>
+        </div>
+        <div class="input-group input-group-sm">
+            <input type="text" class="form-control" id="search" name="search" value="{{ request('search') }}" placeholder="Tìm kiếm ...">
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                @if(request('search'))
+                <button type="button" id="clear-search" class="btn btn-default" onclick="clearSearch()"><i class="fa fa-remove"></i></button>
+                @endif 
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </section>
 <section class="content">
     <div class="row">
@@ -103,6 +107,9 @@
 @endsection
 @section('styles')
 <style>
+    .daterangepicker select.hourselect, .daterangepicker select.minuteselect, .daterangepicker select.secondselect, .daterangepicker select.ampmselect {
+        width: 60px !important;
+    }
     @media (max-width: 768px) {
         #chi-tiet {
          width: auto;
@@ -120,8 +127,12 @@
       }
     }
 </style>
+<link rel="stylesheet" href="{{ asset('assets/backend/themes/bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
+
 @endsection
 @section('scripts')
+<script src="{{ asset('assets/backend/themes/bower_components/moment/min/moment.min.js') }}"></script>
+<script src="{{ asset('assets/backend/themes/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 <script src="{{ asset('/assets/backend/js/order.js') }}"></script>
 
 <script>
@@ -151,6 +162,44 @@
     $('#cancelModal button.btn-danger').on('click', function(e) {
         e.preventDefault();
         window.location.href = "{{ route('backend.dashboard.order.status') }}" + "?id=" + $('#cancelModal').data('id') + "&statuss=" + $('#cancelModal').data('status') + "&search={{ request('search') }}&status={{ request('status') }}";
+    });
+</script>
+
+<script>
+    $(function () {
+        $('#datetimepicker').daterangepicker({
+            timePicker: true, 
+            timePicker24Hour: true,  
+            timePickerSeconds: true, 
+            autoUpdateInput: false,
+            locale: {
+                format: 'DD/MM/YYYY HH:mm:ss',
+                applyLabel: 'Áp dụng',
+                cancelLabel: 'Hủy',
+                fromLabel: 'Từ',
+                toLabel: 'Đến',
+                customRangeLabel: 'Tùy chọn',
+                daysOfWeek: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+                monthNames: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
+                    'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                firstDay: 1
+            },
+            // startDate: moment().startOf('hour'),
+            // endDate: moment().startOf('hour').add(1, 'hour')
+        });
+    
+        // $('#datetimepicker').on('apply.daterangepicker', function(ev, picker) {
+        //     console.log("Bắt đầu: " + picker.startDate.format('DD/MM/YYYY HH:mm:ss'));
+        //     console.log("Kết thúc: " + picker.endDate.format('DD/MM/YYYY HH:mm:ss'));
+        // });
+
+        $('#datetimepicker').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('DD/MM/YYYY HH:mm:ss') + ' - ' + picker.endDate.format('DD/MM/YYYY HH:mm:ss'));
+        });
+
+        $('#datetimepicker').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
     });
 </script>
 
