@@ -35,7 +35,7 @@
                                 <th>Tên</th>
                                 <th>Email</th>
                                 <th>Số điện thoại</th>
-                                <th>Mã giảm giá</th>
+                                {{-- <th>Mã giảm giá</th> --}}
                                 <th>Tổng tiền</th>
                                 <th>HT thanh toán</th>
                                 <th>Ngày đặt</th>
@@ -48,10 +48,10 @@
                             @forelse($orders as $order)
                             <tr>
                                 <td><?php echo $i++; ?></td>
-                                <td>{{ $order->name }}</td>
-                                <td>{{ $order->email }}</td>
+                                <td style="text-align: left; padding-left: 20px;">{{ $order->name }}</td>
+                                <td style="text-align: left; padding-left: 20px;">{{ $order->email }}</td>
                                 <td>{{ $order->phone }}</td>
-                                <td>{{ $order->discount_code }}</td>
+                                {{-- <td>{{ $order->discount_code }}</td> --}}
                                 <td>{{ $order->total }}</td>
                                 <td>{{ strtoupper($order->payment_method) }} 
                                 </td>

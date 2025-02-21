@@ -9,9 +9,9 @@ $('#myModal button.delete').on('click', function(e) {
 $('#bannerModal').on('hidden.bs.modal', function() {
     $('#id').val('');
     $('#name').val('');
-    $('#item').val('1');
-    $('#link').val('');
-    $('#active').iCheck('uncheck');
+    // $('#item').val('1');
+    // $('#link').val('');
+    // $('#active').iCheck('uncheck');
     $('#image').hide();
     $('body').css('padding-right', '');
     $('#picture').val('');
@@ -26,18 +26,18 @@ function getBanner(bannerId){
         success: function(data){
             $('#id').val(data.banner.id);
             $('#name').val(data.banner.name ?? '');
-            $('#link').val(data.banner.link ?? '');
-            $('#item').val(data.banner.item ?? '');
-            if (data.banner.image) {
+            // $('#link').val(data.banner.link ?? '');
+            // $('#item').val(data.banner.item ?? '');
+            if (data.banner.picture) {
                 $('#picture').prop('required', false);  
-                $('#image').attr('src', '/public/uploads/banners/' + data.banner.image.picture).show();
-                imageFromDb = '/public/uploads/banners/' + data.banner.image.picture;
+                $('#image').attr('src', '/public/uploads/banners/' + data.banner.picture).show();
+                imageFromDb = '/public/uploads/banners/' + data.banner.picture;
             }
-            if (data.banner.active == 1) {
-                $('#active').iCheck('check');
-            } else {
-                $('#active').iCheck('uncheck');
-            }
+            // if (data.banner.active == 1) {
+            //     $('#active').iCheck('check');
+            // } else {
+            //     $('#active').iCheck('uncheck');
+            // }
 
         },
         error: function(error){
