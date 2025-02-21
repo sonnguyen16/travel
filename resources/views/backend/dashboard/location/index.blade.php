@@ -14,7 +14,7 @@
                         <thead>
                             <tr>
                                 <th style="width: 50px;">#</th>
-                                <th style="text-align: left; padding-left: 20px;">Tên</th>
+                                <th>Tên điểm đến</th>
                                 <th style="width: 150px;">Bản dịch</th>
                                 <th style="width: 100px;">Thực hiện</th>
                             </tr>

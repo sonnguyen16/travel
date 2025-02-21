@@ -55,7 +55,7 @@
                             @forelse($blogs as $blog)
                             <tr>
                                 <td><?php echo $i++; ?></td>
-                                <td>
+                                <td style="width: 80px;">
                                     @if ($blog->image_fe)
                                     <div class="picture" style="background-image: url('{{ asset('public/uploads/blogs/'. $blog->image_fe->picture) }}')">
                                     </div>

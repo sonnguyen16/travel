@@ -22,7 +22,7 @@
                 <div class="modal-body">
                     @csrf
                     <input type="text" id="id" name="id" value="" hidden>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-xs-10">
                             <div class="form-group">
                                 <label>Tên <span style="color: red">*</span></label>
@@ -35,9 +35,9 @@
                                 <input name="item" id="item" type="number" step="1" class="form-control" min="1" value="1">
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="row">
+                    </div> --}}
+
+                    {{-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Hình ảnh</label>
@@ -51,12 +51,21 @@
                                 <input name="link" id="link" type="text" class="form-control" placeholder="Enter ..." >
                             </div>
                         </div>
+                    </div> --}}
+                    <div class="form-group">
+                        <label>Tên banner <span style="color: red">*</span></label>
+                        <input name="name" id="name" type="text" class="form-control" placeholder="Nhập tên banner ..." required readonly>
                     </div>
                     <div class="form-group">
+                        <label>Hình ảnh</label>
+                        <input name="picture" id="picture" type="file" class="form-control" required>
+                    </div>
+                    <img src="" alt="Picture" style="width: 200px; margin-bottom: 15px;" id="image" hidden>
+                    {{-- <div class="form-group">
                         <label style="margin-top: 15px">
                             <input name="active" id="active" type="checkbox" class="flat-red"> Hoạt động
                         </label>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>

@@ -56,10 +56,10 @@
                                     </div>
                                     @endif
                                 </td>
-                                <td>{{ $recruitment->translation->name }}</td>
-                                <td>{{ $recruitment->translation->address }}</td>
-                                <td>{{ $recruitment->deadline }}</td>
-                                <td>{{ $recruitment->translation->department }}</td>
+                                <td style="text-align: left; padding-left: 20px;">{{ $recruitment->translation->name }}</td>
+                                <td style="text-align: left; padding-left: 20px;">{{ $recruitment->translation->address }}</td>
+                                <td>{{ \Carbon\Carbon::parse($recruitment->deadline)->format('d-m-Y') }}</td>
+                                <td style="text-align: left; padding-left: 20px;">{{ $recruitment->translation->department }}</td>
                                 <td>{{ implode(', ', $recruitment->language_codes->toArray()) }}</td>
                                 <td>
                                     @if ($recruitment->active == 1)

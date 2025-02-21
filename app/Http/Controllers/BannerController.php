@@ -17,16 +17,18 @@ class BannerController extends Controller
     }
 
     public function index(Request $request) {
-        $query = Banner::query();
+        // $query = Banner::query();
 
-        $status = $request->status !== null ? $request->status : 1;
+        // $status = $request->status !== null ? $request->status : 1;
 
-        if ($status != 2) {
-            $query->where('active', $status);
-        }
+        // if ($status != 2) {
+        //     $query->where('active', $status);
+        // }
 
-        $banners = $query->orderby('item')->paginate(10);
-        return view('backend.dashboard.banner.index',['banners'=>$banners, 'status' => $status, 'title' => 'Danh sách banner']);
+        // $banners = $query->orderby('item')->get();
+
+        $banners = Banner::all();
+        return view('backend.dashboard.banner.index',['banners'=>$banners, 'title' => 'Danh sách banner']);
     }
 
     public function store(Request $request){
@@ -39,12 +41,20 @@ class BannerController extends Controller
         }
 
         $bannerData = [
-            'active' => $request->active ? 1 : 0,
+            // 'active' => 1,
             'name' => $request->name,
-            'link' => $request->link ?? '',
-            'item' => $request->item,
+            // 'link' => $request->link ?? '',
+            // 'item' => $request->item,
             'slug' => Str::slug($request->input('name'))
         ];
+
+        if ($request->hasFile('picture')) {
+            $file = $request->file('picture');
+            $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
+            $file->move('public/uploads/banners/', $file_name);
+
+            $bannerData['picture'] = $file_name;
+        }
 
 
         $banner = Banner::updateOrCreate(
@@ -52,22 +62,22 @@ class BannerController extends Controller
             $bannerData
         );
 
-        if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
-            $file->move('public/uploads/banners/', $file_name);
+        // if ($request->hasFile('picture')) {
+        //     $file = $request->file('picture');
+        //     $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
+        //     $file->move('public/uploads/banners/', $file_name);
 
-            Image::updateOrCreate(
-                [
-                    'record_type' => 'Banner',
-                    'record_id' => $banner->id,
-                    'name' => 'Picture'
-                ],
-                [
-                    'picture' => $file_name
-                ]
-            );
-        }
+        //     Image::updateOrCreate(
+        //         [
+        //             'record_type' => 'Banner',
+        //             'record_id' => $banner->id,
+        //             'name' => 'Picture'
+        //         ],
+        //         [
+        //             'picture' => $file_name
+        //         ]
+        //     );
+        // }
         return redirect(route('backend.dashboard.banner.index'));
     }
 
