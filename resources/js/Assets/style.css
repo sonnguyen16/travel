@@ -1,5 +1,7 @@
 * {
+  font-size: 16px;
   font-family: Geomanist, sans-serif;
+  color: rgb(0, 71, 80);
 }
 
 p {
@@ -8,6 +10,14 @@ p {
 
 a {
   font-weight: 400;
+}
+.ql-editor {
+  all: unset;
+  all: revert;
+}
+
+.ql-editor * {
+  all: revert;
 }
 
 .img-container {
