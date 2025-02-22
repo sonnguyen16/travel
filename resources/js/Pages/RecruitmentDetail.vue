@@ -40,14 +40,7 @@
                 blog.translations[0].name
               }}
             </h2>
-            <div
-              v-html="
-                blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
-                blog.translations[0].description
-              "
-              class="ql-editor"
-            ></div>
-            <div class="mb-5">
+            <div class="">
               <ul class="list-disc">
                 <li>
                   <span> {{ t('address') }}: </span>
@@ -96,6 +89,13 @@
                 </li>
               </ul>
             </div>
+            <div
+              v-html="
+                blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+                blog.translations[0].description
+              "
+              class="ql-editor"
+            ></div>
           </div>
           <div class="col-lg-4">
             <h4 class="">

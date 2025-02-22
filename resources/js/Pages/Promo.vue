@@ -43,11 +43,19 @@
         </div>
       </div>
     </div>
-    <div id="promo-3" class="w-full py-[200px] bg_promo mt-5">
-      <div class="container text-center">
+    <div
+      id="promo-3"
+      class="w-full py-[250px] mt-5"
+      :style="{
+        background: `url(${BANNER_MEDIA_ENDPOINT + props.banner.picture})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover'
+      }"
+    >
+      <!-- <div class="container text-center">
         <h2 id="promo-title" class="text-white">{{ $t('register_now') }}</h2>
         <button id="promo-btn" class="btn btn-success px-5" style="font-size: 20px">{{ $t('register') }}</button>
-      </div>
+      </div> -->
     </div>
     <div class="container">
       <div id="promo-2" class="pt-[50px]">
@@ -109,14 +117,15 @@ import { router, Head } from '@inertiajs/vue3'
 import { onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
-import { BLOG_MEDIA_ENDPOINT, PRODUCT_MEDIA_ENDPOINT } from '@/Constants/endpoint'
+import { BANNER_MEDIA_ENDPOINT, PRODUCT_MEDIA_ENDPOINT, BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import { useI18n } from 'vue-i18n'
 import { updateNavigationButtons } from '@/Assets/common.js'
 
 const { t, locale } = useI18n()
 const props = defineProps({
   blogs: Object,
-  products: Object
+  products: Object,
+  banner: Object
 })
 const mounted = ref(false)
 
@@ -229,10 +238,6 @@ onMounted(async () => {
 })
 </script>
 <style scoped>
-.bg_promo {
-  background: url('@/Assets/images/promo4.jpeg') no-repeat center center;
-}
-
 .overlay1 {
   background: linear-gradient(
     to top,

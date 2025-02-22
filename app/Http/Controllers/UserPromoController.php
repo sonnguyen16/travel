@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Blog;
@@ -24,7 +25,11 @@ class UserPromoController extends Controller
             ->with('translations.language', 'image_fe')
             ->get();
 
-        return Inertia::render('Promo', compact('blogs', 'products'));
+        $banner = Banner::query()
+            ->where('slug', 'banner-muc-uu-dai')
+            ->first();
+
+        return Inertia::render('Promo', compact('blogs', 'products', 'banner'));
     }
 
     public function show(Request $request)

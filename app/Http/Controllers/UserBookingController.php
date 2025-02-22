@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -25,7 +26,11 @@ class UserBookingController extends Controller
             ->with('translations.language', 'image_fe')
             ->get();
 
-        return Inertia::render('Booking/Step1', compact('products', 'promo'));
+        $banners = Banner::query()
+            ->where('slug','like', 'banner-muc-dat-ve-%')
+            ->get();
+
+        return Inertia::render('Booking/Step1', compact('products', 'promo', 'banners'));
     }
 
     public function cart()

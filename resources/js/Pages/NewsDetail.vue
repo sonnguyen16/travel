@@ -33,7 +33,7 @@
     <div class="container">
       <div class="pt-[70px]">
         <!-- breadcum -->
-        <div class="flex gap-2 mb-3">
+        <div class="flex gap-2 mb-3 flex-wrap">
           <a @click.prevent="router.visit('/')" class="text-gray-500 hover:text-gray-700 hover:cursor-pointer">
             <i class="fas fa-home"></i>
           </a>
