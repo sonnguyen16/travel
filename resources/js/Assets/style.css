@@ -20,6 +20,12 @@ a {
   all: revert;
 }
 
+table,
+th,
+td {
+  border: 1px solid;
+}
+
 .img-container {
   position: relative;
   overflow: hidden;
