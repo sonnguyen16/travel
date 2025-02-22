@@ -101,6 +101,7 @@
               class="hidden p-4 bg-gray-50 overflow-hidden transition-all duration-500 collapse-content"
             >
               <div
+                class="ql-editor"
                 v-html="
                   product.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
                   product.translations[0].content
