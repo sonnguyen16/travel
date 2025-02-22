@@ -11,13 +11,10 @@ p {
 a {
   font-weight: 400;
 }
-.ql-editor {
-  all: unset;
-  all: revert;
-}
 
 .ql-editor * {
-  all: revert;
+  font-size: revert;
+  color: unset;
 }
 
 table,
