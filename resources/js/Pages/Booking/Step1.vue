@@ -76,16 +76,16 @@
         :id="product.id"
         class="w-full mx-auto bg-white px-[20px] pt-[20px] pb-[20px] border-[1.5px] border-green-600 rounded-xl mt-4"
       >
-        <div class="md:flex justify-between items-center">
+        <div class="flex justify-between items-center flex-wrap">
           <p class="font-bold mb-0 text-[1.2rem]">
             {{
               product.translations.find((item) => item.language.code === locale.toUpperCase())?.name ||
               product.translations[0].name
             }}
           </p>
-          <div>
-            <p class="text-end mb-0 text-[1.2rem]">
-              {{ product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}
+          <div class="rounded-xl bg-green-600 px-3 py-1">
+            <p class="text-white text-center mb-0">
+              {{ product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' + 'đ' }}
             </p>
           </div>
         </div>
