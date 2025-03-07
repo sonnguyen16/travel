@@ -21,6 +21,7 @@ $('#activityModal').on('hidden.bs.modal', function() {
     $('#lang_code').text('VI');
     $('body').css('padding-right', '');
     $('#picture').val('');
+    $('#link').val('');
     $('#picture').prop('required', true);
     $('#language_id').val('1')
 });
@@ -38,6 +39,7 @@ function getActivity(langId, langCode){
             $('#id').val(data.activity.id);
             $('#language_id').val(langId);
             $('#name').val(data.translation?.name ?? '');
+            $('#link').val(data.activity.link ?? '');
             if(langId == 1){
                 $('#div-toggle').show();
             }else{
