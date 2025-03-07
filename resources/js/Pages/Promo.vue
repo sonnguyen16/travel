@@ -87,7 +87,7 @@
 
       <!-- Danh sách ưu đãi theo điểm đến -->
       <div class="row g-4">
-        <template v-if="blogs?.length > 0 && mounted" v-for="blog in blogs">
+        <template v-if="filteredBlogs.length > 0 && mounted" v-for="blog in filteredBlogs" :key="blog.id">
           <div class="col-md-4">
             <div
               @click.prevent="router.visit(`/uu-dai/${blog.slug}`)"
@@ -102,7 +102,15 @@
               <div class="p-3">
                 <div class="location mb-2">
                   <i class="fas fa-map-marker-alt text-danger me-2"></i>
-                  <span class="text-secondary small">Khu du lịch Langbiang</span>
+                  <span class="text-secondary small">
+                    {{
+                      locations
+                        ?.find((loc) => loc.id === blog.location_id)
+                        ?.translations.find((t) => t.language.code === locale.toUpperCase())?.name ||
+                      locations?.find((loc) => loc.id === blog.location_id)?.translations[0]?.name ||
+                      'Không xác định'
+                    }}
+                  </span>
                 </div>
                 <h5 class="text-dark mb-0 line-clamp-2">
                   {{
@@ -114,6 +122,13 @@
             </div>
           </div>
         </template>
+
+        <!-- Hiển thị thông báo khi không có ưu đãi nào -->
+        <div v-if="filteredBlogs.length === 0 && mounted" class="col-12 text-center py-5">
+          <p class="text-muted">
+            {{ t('no_promo') }}
+          </p>
+        </div>
       </div>
     </div>
   </MainLayout>
@@ -122,7 +137,7 @@
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { router, Head } from '@inertiajs/vue3'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { BANNER_MEDIA_ENDPOINT, PRODUCT_MEDIA_ENDPOINT, BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import { useI18n } from 'vue-i18n'
 
@@ -130,23 +145,36 @@ const { t, locale } = useI18n()
 const props = defineProps({
   blogs: Object,
   products: Object,
-  banner: Object
+  banner: Object,
+  locations: Object
 })
 const mounted = ref(false)
 
 // Thêm ref cho selectedTab
 const selectedTab = ref('all')
 
-// Thêm danh sách các điểm đến
-const destinations = [
-  { id: 'all', name: 'Tất cả' },
-  { id: 'datanla', name: 'KDL Datanla' },
-  { id: 'langbiang', name: 'KDL Langbiang' },
-  { id: 'cable-car', name: 'KDL Cáp treo' },
-  { id: 'nice-dream', name: 'Nice Dream Hotel' },
-  { id: 'leguda', name: 'Buffet rau Leguda' },
-  { id: 'thuy-ta', name: 'Nhà hàng Thủy Tạ' }
-]
+// Tạo danh sách điểm đến từ locations
+const destinations = computed(() => {
+  if (!props.locations) return [{ id: 'all', name: 'Tất cả' }]
+
+  const locationItems = props.locations.map((location) => ({
+    id: location.id.toString(),
+    name:
+      location.translations.find((t) => t.language.code === locale.value.toUpperCase())?.name ||
+      location.translations[0]?.name ||
+      'Không có tên'
+  }))
+
+  return [{ id: 'all', name: t('all') }, ...locationItems]
+})
+
+// Lọc blogs theo location_id
+const filteredBlogs = computed(() => {
+  if (!props.blogs) return []
+  if (selectedTab.value === 'all') return props.blogs
+
+  return props.blogs.filter((blog) => blog.location_id?.toString() === selectedTab.value)
+})
 
 onMounted(async () => {
   mounted.value = true

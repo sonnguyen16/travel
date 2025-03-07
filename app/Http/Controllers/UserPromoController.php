@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Blog;
 use App\Models\Product;
+use App\Models\Location;
 
 class UserPromoController extends Controller
 {
@@ -17,7 +18,7 @@ class UserPromoController extends Controller
                 $query->where('slug', 'uu-dai');
             })
             ->where('active', 1)
-            ->with('translations.language', 'image_fe')
+            ->with('translations.language', 'image_fe', 'location.translations.language')
             ->orderBy('id', 'desc')
             ->get();
 
@@ -30,7 +31,11 @@ class UserPromoController extends Controller
             ->where('slug', 'banner-muc-uu-dai')
             ->first();
 
-        return Inertia::render('Promo', compact('blogs', 'products', 'banner'));
+        $locations = Location::query()
+            ->with('translations.language')
+            ->get();
+
+        return Inertia::render('Promo', compact('blogs', 'products', 'banner', 'locations'));
     }
 
     public function show(Request $request)
@@ -46,6 +51,7 @@ class UserPromoController extends Controller
             ->with('translations.language','image_fe',
             'menu.blogs.translations.language',
             'menu.blogs.image_fe',
+            'location.translations.language',
             'activities.translations.language')
             ->first();
 

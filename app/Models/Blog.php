@@ -52,4 +52,9 @@ class Blog extends Model
     {
         return $this->hasMany('App\Models\Image', 'record_id', 'id')->where('record_type', 'Blog')->where('name', 'Other');
     }
+
+    public function location()
+    {
+        return $this->belongsTo('App\Models\Location', 'location_id');
+    }
 }

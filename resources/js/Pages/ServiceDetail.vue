@@ -145,7 +145,7 @@
         <div class="swiper swiper-2">
           <div class="swiper-wrapper pb-4">
             <!-- Slide 1 -->
-            <template v-if="mounted" v-for="blog_related in blogs_related">
+            <template v-if="mounted" v-for="blog_related in blog.menu.blogs">
               <div
                 v-if="
                   blog_related.id != blog.id &&

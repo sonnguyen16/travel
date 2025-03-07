@@ -169,5 +169,6 @@
   "collapse": "Collapse",
   "expand": "Expand",
   "promo.highlight": "Highlight Promotions",
-  "promo.destination": "Promotions by Destination"
+  "promo.destination": "Promotions by Destination",
+  "no_promo": "No promotions available"
 }
