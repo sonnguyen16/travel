@@ -80,21 +80,23 @@
               class="activity-button w-full flex justify-between items-center px-4 py-3 border-green-600 border hover:bg-gray-200 font-semibold"
               :data-target="`collapse${index + 1}`"
             >
-              <span class="text-white">
+              <span class="text-white text-start">
                 {{
                   product.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                   product.translations[0].name
                 }}
               </span>
-              <svg
-                class="w-5 h-5 transform transition-transform duration-300"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="#f4fbd2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
+              <div class="flex items-center gap-3">
+                <a
+                  v-if="product.link"
+                  :href="product.link"
+                  target="_blank"
+                  class="view-now-btn text-white px-3 py-1 rounded-md text-sm hover:bg-green-700"
+                  @click.stop
+                >
+                  {{ t('view_now') }}
+                </a>
+              </div>
             </button>
             <div
               :id="`collapse${index + 1}`"
@@ -345,8 +347,30 @@ img {
 }
 
 .activity-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #556c19;
   color: white;
+}
+
+.activity-button > span {
+  flex: 1;
+}
+
+.activity-button > div {
+  flex-shrink: 0;
+}
+
+.view-now-btn {
+  background-color: #16a34a;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.view-now-btn:hover {
+  background-color: #15803d;
+  transform: translateY(-1px);
 }
 
 .swiper-button-prev,
