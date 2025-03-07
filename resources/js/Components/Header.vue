@@ -165,8 +165,8 @@
                 <select v-model="form.select" class="border-0 form-control">
                   <!-- Placeholder -->
                   <option class="font-normal" value="" disabled hidden>{{ t('select_destination') }}</option>
-                  <!-- Các địa điểm -->
-                  <template v-for="location in locations" :key="location.id">
+                  <!-- Sử dụng sortedLocations thay vì locations -->
+                  <template v-for="location in sortedLocations" :key="location.id">
                     <option v-if="location.active == 1" class="font-normal" :value="location.id">
                       {{ location.translations.find((t) => t.language.code === locale.toUpperCase())?.name }}
                     </option>
@@ -368,6 +368,33 @@ const checkRoute = (route) => {
 }
 
 const app_url = import.meta.env.VITE_APP_URL
+
+// Thêm mảng thứ tự mong muốn
+const locationOrder = [
+  'Khu Du Lịch DATANLA',
+  'DATANLA ADVENTURES',
+  'Khu Du Lịch LANGBIANG',
+  'Khu Du Lịch CÁP TREO'
+]
+
+// Tạo computed property để sắp xếp locations
+const sortedLocations = computed(() => {
+  if (!locations.value) return []
+
+  return [...locations.value].sort((a, b) => {
+    const nameA = a.translations.find(t => t.language.code === locale.value.toUpperCase())?.name || a.translations[0].name
+    const nameB = b.translations.find(t => t.language.code === locale.value.toUpperCase())?.name || b.translations[0].name
+
+    const indexA = locationOrder.indexOf(nameA)
+    const indexB = locationOrder.indexOf(nameB)
+
+    // Nếu không tìm thấy trong danh sách, đẩy xuống cuối
+    if (indexA === -1) return 1
+    if (indexB === -1) return -1
+
+    return indexA - indexB
+  })
+})
 </script>
 <style scoped>
 .header {

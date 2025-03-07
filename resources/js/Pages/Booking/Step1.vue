@@ -71,7 +71,7 @@
       </div>
 
       <div
-        v-for="(product, index) in products"
+        v-for="(product, index) in sortedProducts"
         :key="index"
         :id="product.id"
         class="w-full mx-auto bg-white px-[20px] pt-[20px] pb-[20px] border-[1.5px] border-green-600 rounded-xl mt-4"
@@ -267,7 +267,7 @@ import { BANNER_MEDIA_ENDPOINT, BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint
 import MainLayout from '@/Layouts/MainLayout.vue'
 import emitter from '@/mitt'
 import { router } from '@inertiajs/vue3'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
@@ -461,5 +461,39 @@ function formatDateToYYYYMMDD(date = new Date()) {
 }
 
 const { t, locale } = useI18n()
+
+// Thêm mảng thứ tự mong muốn
+const productOrder = [
+  'VÉ THAM QUAN DATANLA',
+  'XE TRƯỢT THÁC 1 - MỘT CHIỀU',
+  'XE TRƯỢT THÁC 1 - KHỨ HỒI',
+  'XE TRƯỢT THÁC 3 - KHỨ HỒI',
+  'CANYONING',
+  'ZIPLINE 1500M',
+  'HÀNH TRÌNH TRÊN CAO',
+  'VÉ THAM QUAN LANGBIANG',
+  'XE LÊN ĐỈNH RADAR',
+  'CÁP TREO - MỘT CHIỀU',
+  'CÁP TREO - KHỨ HỒI'
+]
+
+// Tạo computed property để sắp xếp products
+const sortedProducts = computed(() => {
+  if (!props.products) return []
+
+  return [...props.products].sort((a, b) => {
+    const nameA = a.translations.find(t => t.language.code === locale.value.toUpperCase())?.name || a.translations[0].name
+    const nameB = b.translations.find(t => t.language.code === locale.value.toUpperCase())?.name || b.translations[0].name
+
+    const indexA = productOrder.indexOf(nameA)
+    const indexB = productOrder.indexOf(nameB)
+
+    // Nếu không tìm thấy trong danh sách, đẩy xuống cuối
+    if (indexA === -1) return 1
+    if (indexB === -1) return -1
+
+    return indexA - indexB
+  })
+})
 </script>
 <style scoped></style>

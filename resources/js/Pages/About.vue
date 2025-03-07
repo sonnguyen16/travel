@@ -16,8 +16,8 @@
     <div class="container">
       <div class="row pt-[100px]">
         <div id="about-1" class="col-lg-6">
-          <h3 class="mb-0 mt-3">{{ $t('story') }}</h3>
-          <h3 class="font-semi-bold text-[40px]">{{ $t('brand') }}</h3>
+          <h3 class="mb-0 mt-3 uppercase font-bold text-[32px]">{{ $t('story') }}</h3>
+          <h3 class="font-semi-bold uppercase font-bold text-[32px]">{{ $t('brand') }}</h3>
           <p class="text-justify mt-[30px] font-normal">
             {{ $t('about_text') }}
           </p>
@@ -32,12 +32,12 @@
           <img src="@/Assets/images/about2.png" alt="about" class="w-full rounded-xl h-100 object-contain" />
         </div>
         <div id="about-4" class="col-lg-6 order-md-2 order-1">
-          <h3 class="mb-0 mt-3">{{ $t('vision') }}</h3>
+          <h3 class="mb-0 mt-3 uppercase font-bold text-[32px]">{{ $t('vision') }}</h3>
           <p class="text-justify mt-[10px] font-normal">
             {{ $t('vision_text') }}
           </p>
 
-          <h3 class="mb-0 mt-3">{{ $t('mission') }}</h3>
+          <h3 class="mb-0 mt-3 uppercase font-bold text-[32px]">{{ $t('mission') }}</h3>
           <p class="text-justify mt-[10px] font-normal">
             {{ $t('mission_text') }}
           </p>
