@@ -164,5 +164,9 @@
   "faq": "자주 묻는 질문",
   "general_terms": "일반 약관",
   "reservation_policy": "예약 정책",
-  "dispute_resolution": "분쟁 해결 정책"
+  "dispute_resolution": "분쟁 해결 정책",
+  "collapse": "접기",
+  "expand": "열기",
+  "promo.highlight": "강조 프로모션",
+  "promo.destination": "목적지별 프로모션"
 }

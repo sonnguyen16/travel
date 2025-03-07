@@ -20,7 +20,7 @@
             <h2 class="text-center">
               {{ $t('faq') }}
             </h2>
-            <div class="ql-editor mb-5">
+            <div class="mb-5">
               <div v-if="faq.length > 0" class="row pt-3">
                 <div class="space-y-0 divide-y divide-gray-300">
                   <div v-for="(product, index) in faq" :key="index" class="border-none">

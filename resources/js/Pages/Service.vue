@@ -37,7 +37,10 @@
                       blog.translations[0].name
                     }}
                   </h3>
-                  <p v-if="blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
+                  <p
+                    class="text-[16px]"
+                    v-if="blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address"
+                  >
                     <i class="fas fa-map-marker-alt text-green-600 me-2 text-lg"></i>
                     {{
                       blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address ||
@@ -45,7 +48,7 @@
                     }}
                   </p>
                   <div
-                    class="line-clamp-6"
+                    class="line-clamp-5"
                     v-html="
                       blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
                       blog.translations[0].description
@@ -116,7 +119,7 @@
         </div>
       </div>
 
-      <div id="service-4" class="pt-[50px]">
+      <div id="service-4" class="pt-[50px] pb-[30px]">
         <div v-if="blogs_related.length > 0 && mounted" class="swiper swiper-2">
           <div class="swiper-wrapper">
             <div v-for="blog in blogs_related" class="swiper-slide hover:cursor-pointer">

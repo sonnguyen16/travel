@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-lg-3">
           <img src="@/Assets/images/logo.png" class="w-full" alt="logo" />
-          <p class="mt-3 text-lg font-bold mb-0 text-white">{{ $t('company_name') }}</p>
+          <p class="mt-3 text-[15px] font-bold mb-0 text-white">{{ $t('company_name') }}</p>
           <p class="mt-2 text-white">{{ $t('slogan') }}</p>
           <div class="flex gap-4">
             <a target="_blank" href="https://www.facebook.com/dalattourism"
@@ -129,14 +129,7 @@ import { Link } from '@inertiajs/vue3'
 
 <style>
 footer {
-  background: linear-gradient(
-    to right,
-    rgb(26, 117, 38) 0%,
-    rgb(14, 75, 22) 45%,
-    rgb(14, 75, 22) 45%,
-    rgb(13, 74, 21) 58%,
-    rgb(26, 117, 38) 100%
-  );
+  background: #058643;
   color: white;
 }
 
