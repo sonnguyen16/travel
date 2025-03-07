@@ -227,10 +227,10 @@
         <div class="col-lg-4 py-[50px]">
           <h4 class="">{{ $t(`other_promos_title`) }}</h4>
           <hr />
-          <template v-for="blog_related in promo">
+          <template v-for="blog_related in promo.slice(0, 5)">
             <div
               @click.prevent="router.visit(`/uu-dai/${blog_related.slug}`)"
-              class="flex gap-3 mb-4 hover:cursor-pointer"
+              class="flex gap-3 mb-3 hover:cursor-pointer"
             >
               <img
                 :src="BLOG_MEDIA_ENDPOINT + blog_related.image_fe?.picture"
@@ -238,7 +238,7 @@
                 class="w-[150px] h-[100px] object-cover rounded-xl"
               />
               <div style="width: calc(100% - 150px)">
-                <p class="mb-0">
+                <p class="mb-0 line-clamp-3">
                   {{
                     blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                     blog_related.translations[0].name
@@ -482,8 +482,10 @@ const sortedProducts = computed(() => {
   if (!props.products) return []
 
   return [...props.products].sort((a, b) => {
-    const nameA = a.translations.find(t => t.language.code === locale.value.toUpperCase())?.name || a.translations[0].name
-    const nameB = b.translations.find(t => t.language.code === locale.value.toUpperCase())?.name || b.translations[0].name
+    const nameA =
+      a.translations.find((t) => t.language.code === locale.value.toUpperCase())?.name || a.translations[0].name
+    const nameB =
+      b.translations.find((t) => t.language.code === locale.value.toUpperCase())?.name || b.translations[0].name
 
     const indexA = productOrder.indexOf(nameA)
     const indexB = productOrder.indexOf(nameB)
