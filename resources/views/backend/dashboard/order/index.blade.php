@@ -20,8 +20,8 @@
             <input type="text" class="form-control" id="search" name="search" value="{{ request('search') }}" placeholder="Tìm kiếm ...">
             <div class="input-group-btn">
                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                @if(request('search'))
-                <button type="button" id="clear-search" class="btn btn-default" onclick="clearSearch()"><i class="fa fa-remove"></i></button>
+                @if(request('search') || request('datetime_range'))
+                <a href="{{ route('backend.dashboard.order.index') }}" class="btn btn-default"><i class="fa fa-remove"></i></a>
                 @endif 
             </div>
         </div>
@@ -142,7 +142,7 @@
     }
     $('#myModal button.delete').on('click', function(e) {
         e.preventDefault();
-        window.location.href = "{{ route('backend.dashboard.order.delete') }}" + "?id=" + $('#myModal').data('id') + "&search={{ request('search') }}&status={{ request('status') }}";
+        window.location.href = "{{ route('backend.dashboard.order.delete') }}" + "?id=" + $('#myModal').data('id') + "&search={{ request('search') }}&status={{ request('status') }}&datetime_range={{ request('datetime_range') }}";
     });
 
     function alertUpload(id, status) {
@@ -152,7 +152,7 @@
     }
     $('#uploadModal button.btn-success').on('click', function(e) {
         e.preventDefault();
-        window.location.href = "{{ route('backend.dashboard.order.status') }}" + "?id=" + $('#uploadModal').data('id') + "&statuss=" + $('#uploadModal').data('status') + "&search={{ request('search') }}&status={{ request('status') }}";
+        window.location.href = "{{ route('backend.dashboard.order.status') }}" + "?id=" + $('#uploadModal').data('id') + "&statuss=" + $('#uploadModal').data('status') + "&search={{ request('search') }}&status={{ request('status') }}&datetime_range={{ request('datetime_range') }}";
     });
     function alertCancel(id, status) {
         $('#cancelModal').data('id', id);
@@ -161,7 +161,7 @@
     }
     $('#cancelModal button.btn-danger').on('click', function(e) {
         e.preventDefault();
-        window.location.href = "{{ route('backend.dashboard.order.status') }}" + "?id=" + $('#cancelModal').data('id') + "&statuss=" + $('#cancelModal').data('status') + "&search={{ request('search') }}&status={{ request('status') }}";
+        window.location.href = "{{ route('backend.dashboard.order.status') }}" + "?id=" + $('#cancelModal').data('id') + "&statuss=" + $('#cancelModal').data('status') + "&search={{ request('search') }}&status={{ request('status') }}&datetime_range={{ request('datetime_range') }}";
     });
 </script>
 

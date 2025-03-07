@@ -22,11 +22,12 @@
 <script>
   
   var ckConfig = {
-    extraPlugins: 'image2,justify,colorbutton,colordialog,emoji,indent',
+    extraPlugins: 'image2,justify,colorbutton,colordialog,emoji',
     removePlugins: 'image',
     height: 100,
     filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",
     filebrowserUploadMethod: 'form',
+    tabSpaces: 5,
   };
 
   function toggleModalOverflow() {

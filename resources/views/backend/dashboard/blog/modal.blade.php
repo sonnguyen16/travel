@@ -110,6 +110,12 @@
                                 <input type="text" name="address" id="address" class="form-control" placeholder="Mô tả địa điểm...">
                             </div>
                         </div>
+                        <div class="col-md-6" id="clink">
+                            <div class="form-group">
+                                <label>Link</label>
+                                <input type="text" name="link" id="link" class="form-control" placeholder="Nhập link...">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
