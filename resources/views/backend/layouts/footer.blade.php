@@ -1,9 +1,8 @@
-
 <footer class="main-footer">
-  <div class="pull-right hidden-xs">
-    <b>Version</b> 2.4.0
-  </div>
-  <strong>Copyright &copy; 2025 <a>travel.vn</a>.</strong> All rights reserved.
+    <div class="pull-right hidden-xs">
+        <b>Version</b> 2.4.0
+    </div>
+    <strong>Copyright &copy; 2025 <a>travel.vn</a>.</strong> All rights reserved.
 </footer>
 
 <script src="{{ asset('assets/backend/themes/bower_components/jquery/dist/jquery.min.js') }}"></script>
@@ -14,15 +13,15 @@
 <script src="{{ asset('assets/backend/themes/dist/js/demo.js') }}"></script>
 
 <script src="{{ asset('/assets/backend/themes/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{ asset('/assets/backend/themes/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{ asset('/assets/backend/themes/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}">
+</script>
 <script src="{{ asset('/assets/backend/themes/plugins/iCheck/icheck.min.js') }}"></script>
 <script src="{{ asset('/assets/backend/themes/bower_components/ckeditor/ckeditor.js') }}"></script>
 
 <script src="{{ asset('/assets/backend/js/script.js') }}"></script>
 <script>
-  
-  var ckConfig = {
-    extraPlugins: 'image2,justify,colorbutton,colordialog,emoji',
+   var ckConfig = {
+    extraPlugins: 'image2,justify,colorbutton,colordialog,emoji,indent',
     removePlugins: 'image',
     height: 100,
     filebrowserImageUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}",

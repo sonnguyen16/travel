@@ -165,5 +165,9 @@
   "restaurant_description_1": "Nằm bên hồ Xuân Hương thơ mộng của thành phố Đà Lạt, nhà hàng THỦY TẠ mang đến cho khách hàng những bữa ăn nhẹ nhàng, tinh tế, giúp khách hàng trải nghiệm một bữa ăn trọn vẹn nhất, ấm cúng nhất giữa lòng thành phố nhỏ.",
   "select_destination": "Chọn điểm đến",
   "gallery": "Thư viện ảnh",
-  "all": "Tất cả"
+  "all": "Tất cả",
+  "collapse": "Thu gọn",
+  "expand": "Mở rộng",
+  "promo.highlight": "Ưu đãi nổi bật",
+  "promo.destination": "Ưu đãi theo điểm đến"
 }

@@ -45,7 +45,7 @@
       </div>
 
       <div id="timeline" class="pt-[50px] pb-[200px]">
-        <h1 class="text-center">{{ $t('history_title') }}</h1>
+        <h1 class="text-center text-[32px] font-bold uppercase">{{ $t('history_title') }}</h1>
         <div class="w-full mt-5">
           <div class="relative">
             <!-- Horizontal Line -->
@@ -135,13 +135,13 @@
                 </template>
               </div>
             </div>
-            <div class="position-absolute left-1/3 top-5 ms-3 md:block hidden min-w-[170px]">
+            <div class="position-absolute left-1/3 top-4 ms-3 md:block hidden min-w-[170px]">
               <h4 class="mb-0">{{ $t('slide_1_title') }}</h4>
               <h3 class="font-bold mb-0">{{ $t('slide_2_title') }}</h3>
               <!-- Navigation -->
-              <div class="mt-[115px]">
+              <div class="mt-[116px]">
                 <div class="swiper-button-prev" style="left: auto"></div>
-                <div class="swiper-button-next" style="margin-right: 70px"></div>
+                <div class="swiper-button-next" style="margin-right: 80px"></div>
               </div>
             </div>
           </div>
