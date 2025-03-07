@@ -156,7 +156,7 @@
       </nav>
     </div>
     <div class="container position-absolute bottom-[-50px] start-50 translate-middle-x">
-      <div class="w-full mx-auto bg-white px-[20px] py-[15px] border-[1.5px] border-green-600 rounded-xl">
+      <div class="w-full mx-auto bg-white px-[20px] py-[20px] border-[1.5px] border-green-600 rounded-xl">
         <form>
           <div class="row">
             <div class="col-md-3 col-12 flex items-center">
@@ -310,7 +310,7 @@ onMounted(() => {
   emitter.on('cart-updated', updateCart)
 
   if (location.pathname == '/') {
-    document.getElementById('header').style.height = `85vh`
+    document.getElementById('header').style.height = `92vh`
   } else {
     if (window.innerWidth > 1024) {
       document.getElementById('header').style.height = `30vh`

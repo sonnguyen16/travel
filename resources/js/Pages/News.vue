@@ -14,7 +14,7 @@
       <meta property="og:image" content="/images/logo.png" />
     </Head>
     <div class="container pt-[80px]">
-      <h2 class="mb-3">{{ $t('hot_news') }}</h2>
+      <h2 class="mb-3 uppercase font-bold text-[32px]">{{ $t('hot_news') }}</h2>
       <div class="row g-3">
         <div class="col-md-8 h-full">
           <div
@@ -85,7 +85,7 @@
           </div>
         </div>
       </div>
-      <h2 class="mb-3 mt-3">{{ $t('newest_news') }}</h2>
+      <h2 class="mb-3 mt-3 uppercase font-bold text-[32px]">{{ $t('newest_news') }}</h2>
       <div class="row">
         <div class="col-md-8">
           <div class="row">

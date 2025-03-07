@@ -90,12 +90,26 @@
           </div>
         </div>
         <hr />
-        <div
-          v-html="
-            product.translations.find((item) => item.language.code === locale.toUpperCase())?.content ||
-            product.translations[0].content
-          "
-        ></div>
+        <div>
+          <div
+            :class="expandedProducts.includes(product.id) ? '' : 'line-clamp-3'"
+            v-html="
+              product.translations.find((item) => item.language.code === locale.toUpperCase())?.content ||
+              product.translations[0].content
+            "
+          ></div>
+          <div class="text-center mt-2">
+            <button
+              @click="toggleProductContent(product.id)"
+              class="px-3 py-1 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition"
+            >
+              <span v-if="expandedProducts.includes(product.id)">
+                <i class="fas fa-chevron-up mr-1"></i> {{ $t('collapse') }}
+              </span>
+              <span v-else> <i class="fas fa-chevron-down mr-1"></i> {{ $t('expand') }} </span>
+            </button>
+          </div>
+        </div>
         <hr />
         <div class="grid md:grid-cols-5 grid-cols-1 gap-2">
           <div class="col-span-1">
@@ -265,6 +279,15 @@ const props = defineProps({
 let Swal = null
 
 const forms = ref([])
+const expandedProducts = ref([])
+
+const toggleProductContent = (id) => {
+  if (expandedProducts.value.includes(id)) {
+    expandedProducts.value = expandedProducts.value.filter((productId) => productId !== id)
+  } else {
+    expandedProducts.value.push(id)
+  }
+}
 
 props.products.forEach((product) => {
   forms.value.push({

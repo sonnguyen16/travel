@@ -70,17 +70,17 @@
       </div>
 
       <div v-if="blog?.activities.length > 0" class="row pt-5">
-        <h2 class="text-center mb-4 text-2xl font-bold">
+        <h2 class="text-center mb-4 text-2xl uppercase font-bold text-[32px]">
           {{ t('service_detail.activities') }}
         </h2>
         <div class="space-y-0 divide-y divide-gray-300">
           <div v-for="(product, index) in blog?.activities" :key="index" class="border-none">
             <button
               :class="[index == 0 ? 'rounded-t-xl' : '', index == blog.activities.length - 1 ? 'rounded-b-xl' : '']"
-              class="w-full flex justify-between items-center px-4 py-3 border-green-600 border bg-gray-100 hover:bg-gray-200 font-semibold"
+              class="activity-button w-full flex justify-between items-center px-4 py-3 border-green-600 border hover:bg-gray-200 font-semibold"
               :data-target="`collapse${index + 1}`"
             >
-              <span>
+              <span class="text-white">
                 {{
                   product.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                   product.translations[0].name
@@ -89,7 +89,7 @@
               <svg
                 class="w-5 h-5 transform transition-transform duration-300"
                 xmlns="http://www.w3.org/2000/svg"
-                fill="none"
+                fill="#f4fbd2"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
@@ -98,7 +98,7 @@
             </button>
             <div
               :id="`collapse${index + 1}`"
-              class="hidden p-4 bg-gray-50 overflow-hidden transition-all duration-500 collapse-content"
+              class="hidden p-4 overflow-hidden transition-all duration-500 collapse-content"
             >
               <div
                 class="ql-editor"
@@ -113,7 +113,7 @@
       </div>
 
       <div v-if="blog.images_fe?.length > 0" class="pt-[30px] pb-[30px]">
-        <h2 class="text-center mb-4">
+        <h2 class="text-center mb-4 uppercase font-bold text-[32px]">
           {{ t('images') }}
         </h2>
         <div class="swiper swiper-3">
@@ -139,13 +139,13 @@
       </div>
 
       <div class="pt-[30px] pb-[30px]">
-        <h2 class="text-center mb-4">
+        <h2 class="text-center mb-4 uppercase font-bold text-[32px]">
           {{ t('service_detail.related_services') }}
         </h2>
         <div class="swiper swiper-2">
           <div class="swiper-wrapper pb-4">
             <!-- Slide 1 -->
-            <template v-if="mounted" v-for="blog_related in blog?.menu?.blogs">
+            <template v-if="mounted" v-for="blog_related in blogs_related">
               <div
                 v-if="
                   blog_related.id != blog.id &&
@@ -212,7 +212,8 @@ import { router, Head } from '@inertiajs/vue3'
 import { updateNavigationButtons, cleanHTML } from '@/Assets/common.js'
 
 const props = defineProps({
-  blog: Object
+  blog: Object,
+  blogs_related: Object
 })
 
 const { t, locale } = useI18n()
@@ -337,6 +338,15 @@ onMounted(() => {
 
 img {
   transition: transform 0.3s ease;
+}
+
+.collapse-content {
+  background-color: #f4fbd2;
+}
+
+.activity-button {
+  background-color: #556c19;
+  color: white;
 }
 
 .swiper-button-prev,

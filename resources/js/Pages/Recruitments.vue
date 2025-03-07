@@ -14,7 +14,7 @@
       <meta property="og:image" content="/images/logo.png" />
     </Head>
     <div class="container">
-      <h1 class="text-center mb-3 pt-[100px]">
+      <h1 class="text-center mb-3 pt-[100px] uppercase font-bold text-[32px]">
         {{ $t('recruitment') }}
       </h1>
       <div v-if="blogs.length > 0 && mounted" id="service-4" class="pb-[50px]">

@@ -18,6 +18,7 @@ class UserPromoController extends Controller
             })
             ->where('active', 1)
             ->with('translations.language', 'image_fe')
+            ->orderBy('id', 'desc')
             ->get();
 
         $products = Product::query()

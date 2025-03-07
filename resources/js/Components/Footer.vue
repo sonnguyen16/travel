@@ -129,14 +129,7 @@ import { Link } from '@inertiajs/vue3'
 
 <style>
 footer {
-  background: linear-gradient(
-    to right,
-    rgb(26, 117, 38) 0%,
-    rgb(14, 75, 22) 45%,
-    rgb(14, 75, 22) 45%,
-    rgb(13, 74, 21) 58%,
-    rgb(26, 117, 38) 100%
-  );
+  background: #058643;
   color: white;
 }
 

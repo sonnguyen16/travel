@@ -13,113 +13,118 @@
       />
       <meta property="og:image" content="/images/logo.png" />
     </Head>
-    <div class="container">
-      <div id="promo-1" class="mt-[100px]">
-        <div v-if="blogs?.length > 0 && mounted" class="row g-3">
-          <template v-for="blog in blogs">
-            <div class="col-md-4 hover:cursor-pointer promo-item">
-              <div
-                @click.prevent="router.visit(`/uu-dai/${blog.slug}`)"
-                class="rounded-xl shadow-xl bg-white position-relative h-100"
-              >
-                <div class="img-container h-100">
-                  <img
-                    :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
-                    alt="home1"
-                    class="w-full rounded-xl object-cover h-[300px]"
-                  />
-                </div>
-                <div class="p-3 position-absolute bottom-0 rounded-xl left-0 right-0 overlay1 h-[150px]">
-                  <h3 class="text-white mt-5 line-clamp-2">
-                    {{
-                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
-                      blog.translations[0].name
-                    }}
-                  </h3>
-                </div>
-              </div>
-            </div>
-          </template>
+
+    <!-- Ưu đãi nổi bật -->
+    <div class="container pt-[70px]">
+      <h2 class="section-title fw-bold mb-4 uppercase font-bold text-[32px]">
+        {{ $t('promo.highlight') }}
+      </h2>
+
+      <div class="row g-3">
+        <!-- Ưu đãi lớn bên trái -->
+        <div class="col-md-8">
+          <div
+            v-if="blogs?.length > 0 && mounted"
+            @click.prevent="router.visit(`/uu-dai/${blogs[0].slug}`)"
+            class="img-container w-full hover:cursor-pointer big-promo"
+          >
+            <img
+              :src="BLOG_MEDIA_ENDPOINT + blogs[0].image_fe?.picture"
+              alt="Ưu đãi nổi bật"
+              class="w-full object-cover rounded-lg hover:cursor-pointer"
+            />
+          </div>
+        </div>
+
+        <!-- Ưu đãi nhỏ bên phải -->
+        <div class="col-md-4">
+          <div
+            v-if="blogs?.length > 1 && mounted"
+            @click.prevent="router.visit(`/uu-dai/${blogs[1].slug}`)"
+            class="img-container w-full mb-3 small-promo"
+          >
+            <img
+              :src="BLOG_MEDIA_ENDPOINT + blogs[1].image_fe?.picture"
+              alt="Ưu đãi"
+              class="w-full object-cover rounded-lg hover:cursor-pointer"
+            />
+          </div>
+
+          <div
+            v-if="blogs?.length > 2 && mounted"
+            @click.prevent="router.visit(`/uu-dai/${blogs[2].slug}`)"
+            class="img-container w-full small-promo"
+          >
+            <img
+              :src="BLOG_MEDIA_ENDPOINT + blogs[2].image_fe?.picture"
+              alt="Ưu đãi"
+              class="w-full object-cover rounded-lg hover:cursor-pointer"
+            />
+          </div>
         </div>
       </div>
     </div>
-    <div
-      id="promo-3"
-      class="w-full py-[250px] mt-5"
-      :style="{
-        background: `url(${BANNER_MEDIA_ENDPOINT + props.banner.picture})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover'
-      }"
-    >
-      <!-- <div class="container text-center">
-        <h2 id="promo-title" class="text-white">{{ $t('register_now') }}</h2>
-        <button id="promo-btn" class="btn btn-success px-5" style="font-size: 20px">{{ $t('register') }}</button>
-      </div> -->
-    </div>
-    <div class="container">
-      <div id="promo-2" class="pt-[50px]">
-        <div class="swiper swiper-2" style="height: 350px">
-          <div class="swiper-wrapper">
-            <!-- Slide 1 -->
-            <template v-if="mounted" v-for="product in products">
-              <div
-                @click.prevent="router.visit(`dat-ve/buoc1?ticket_id=${product.id}`)"
-                class="swiper-slide hover:cursor-pointer"
-              >
-                <div class="rounded-xl shadow-xl bg-white">
-                  <div
-                    class="img-container h-[200px]"
-                    style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
-                  >
-                    <img
-                      :src="PRODUCT_MEDIA_ENDPOINT + product.image_fe?.picture"
-                      alt="home1"
-                      class="w-full rounded-tr-xl rounded-tl-xl object-cover h-[200px]"
-                    />
-                  </div>
-                  <div class="p-3">
-                    <div class="">
-                      <h5>
-                        {{
-                          product.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
-                          product.translations[0].name
-                        }}
-                      </h5>
-                      <div class="flex justify-between items-center">
-                        <p class="font-normal text-justify mb-0">
-                          <i class="fas fa-star text-yellow-400"></i>
-                          4.5
-                        </p>
-                        <div class="rounded-xl bg-green-600 px-3 py-1">
-                          <p class="text-white text-center mb-0">
-                            {{ product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' + 'đ' }}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+
+    <!-- Ưu đãi theo điểm đến -->
+    <div class="container mt-5 mb-5">
+      <h2 class="section-title fw-bold mb-4 uppercase font-bold text-[32px]">
+        {{ $t('promo.destination') }}
+      </h2>
+
+      <!-- Tabs điểm đến -->
+      <ul class="nav nav-tabs mb-4 border-0">
+        <li v-for="dest in destinations" :key="dest.id" class="nav-item">
+          <a
+            class="nav-link"
+            :class="{ active: selectedTab === dest.id }"
+            href="#"
+            @click.prevent="selectedTab = dest.id"
+          >
+            {{ dest.name }}
+          </a>
+        </li>
+      </ul>
+
+      <!-- Danh sách ưu đãi theo điểm đến -->
+      <div class="row g-4">
+        <template v-if="blogs?.length > 0 && mounted" v-for="blog in blogs">
+          <div class="col-md-4">
+            <div
+              @click.prevent="router.visit(`/uu-dai/${blog.slug}`)"
+              class="promo-location-card bg-white shadow-md hover:cursor-pointer"
+            >
+              <img
+                :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
+                alt="Ưu đãi"
+                class="w-100 object-cover"
+                style="height: 200px; border-top-left-radius: 8px; border-top-right-radius: 8px"
+              />
+              <div class="p-3">
+                <div class="location mb-2">
+                  <i class="fas fa-map-marker-alt text-danger me-2"></i>
+                  <span class="text-secondary small">Khu du lịch Langbiang</span>
                 </div>
+                <h5 class="text-dark mb-0 line-clamp-2">
+                  {{
+                    blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                    blog.translations[0].name
+                  }}
+                </h5>
               </div>
-            </template>
+            </div>
           </div>
-          <!-- Navigation -->
-          <div class="swiper-button-next swiper-next-2"></div>
-          <div class="swiper-button-prev swiper-prev-2"></div>
-        </div>
+        </template>
       </div>
     </div>
   </MainLayout>
 </template>
+
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { router, Head } from '@inertiajs/vue3'
 import { onMounted, ref } from 'vue'
-import Swiper from 'swiper/bundle'
-import 'swiper/css/bundle'
 import { BANNER_MEDIA_ENDPOINT, PRODUCT_MEDIA_ENDPOINT, BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import { useI18n } from 'vue-i18n'
-import { updateNavigationButtons } from '@/Assets/common.js'
 
 const { t, locale } = useI18n()
 const props = defineProps({
@@ -129,160 +134,183 @@ const props = defineProps({
 })
 const mounted = ref(false)
 
+// Thêm ref cho selectedTab
+const selectedTab = ref('all')
+
+// Thêm danh sách các điểm đến
+const destinations = [
+  { id: 'all', name: 'Tất cả' },
+  { id: 'datanla', name: 'KDL Datanla' },
+  { id: 'langbiang', name: 'KDL Langbiang' },
+  { id: 'cable-car', name: 'KDL Cáp treo' },
+  { id: 'nice-dream', name: 'Nice Dream Hotel' },
+  { id: 'leguda', name: 'Buffet rau Leguda' },
+  { id: 'thuy-ta', name: 'Nhà hàng Thủy Tạ' }
+]
+
 onMounted(async () => {
   mounted.value = true
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const ScrollReveal = (await import('scrollreveal')).default
     const scrollReveal = ScrollReveal()
 
-    new Swiper('.swiper-1', {
-      loop: false,
-      fadeEffect: { crossFade: true },
-      speed: 1000,
-      spaceBetween: 20,
-      slidesPerView: 'auto',
-      navigation: {
-        nextEl: '.swiper-next-1',
-        prevEl: '.swiper-prev-1'
-      },
-      breakpoints: {
-        1024: {
-          slidesPerView: 3
-        },
-        768: {
-          slidesPerView: 2
-        },
-        480: {
-          slidesPerView: 1
-        }
-      },
-      on: {
-        init: function () {
-          updateNavigationButtons(this, 1)
-        },
-        resize: function () {
-          updateNavigationButtons(this, 1)
-        }
-      }
-    })
-
-    new Swiper('.swiper-2', {
-      loop: false,
-      fadeEffect: { crossFade: true },
-      speed: 1000,
-      spaceBetween: 20,
-      slidesPerView: 'auto',
-      navigation: {
-        nextEl: '.swiper-next-2',
-        prevEl: '.swiper-prev-2'
-      },
-      breakpoints: {
-        1024: {
-          slidesPerView: 3
-        },
-        768: {
-          slidesPerView: 2
-        },
-        480: {
-          slidesPerView: 1
-        }
-      },
-      on: {
-        init: function () {
-          updateNavigationButtons(this, 2)
-        },
-        resize: function () {
-          updateNavigationButtons(this, 2)
-        }
-      }
-    })
-
-    // ScrollReveal - Hiệu ứng cho Timeline
-    ScrollReveal().reveal('#promo-1', {
-      duration: 2000,
-      origin: 'top',
-      distance: '50px',
-      easing: 'ease-in-out'
-    })
-
-    // ScrollReveal - Hiệu ứng cho Timeline
-    scrollReveal.reveal('#promo-3', {
-      duration: 2000,
-      origin: 'top',
-      distance: '50px',
-      easing: 'ease-in-out'
-    })
-
-    scrollReveal.reveal('#promo-title', {
-      duration: 2000,
+    // ScrollReveal - Hiệu ứng cho các phần
+    ScrollReveal().reveal('.section-title', {
+      duration: 1500,
       origin: 'left',
-      distance: '100px',
-      easing: 'ease-in-out'
-    })
-
-    scrollReveal.reveal('#promo-btn', {
-      duration: 2000,
-      origin: 'right',
-      distance: '100px',
-      easing: 'ease-in-out'
-    })
-
-    // ScrollReveal - Hiệu ứng cho Swiper
-    scrollReveal.reveal('#promo-2', {
-      duration: 2000,
-      origin: 'bottom',
       distance: '50px',
       easing: 'ease-in-out'
+    })
+
+    scrollReveal.reveal('.img-container', {
+      duration: 1500,
+      origin: 'bottom',
+      distance: '30px',
+      easing: 'ease-in-out',
+      interval: 200
+    })
+
+    scrollReveal.reveal('.promo-location-card', {
+      duration: 1500,
+      origin: 'bottom',
+      distance: '30px',
+      easing: 'ease-in-out',
+      interval: 100
     })
   }
 })
 </script>
+
 <style scoped>
-.overlay1 {
+.overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.3),
+    rgba(255, 255, 255, 0)
+  );
+  padding-top: 20px;
+}
+
+.promo-overlay {
   background: linear-gradient(
     to top,
     rgba(22, 163, 74, 1),
-    rgba(22, 163, 74, 1),
-    rgba(22, 163, 74, 0.6),
+    rgba(22, 163, 74, 0.8),
+    rgba(22, 163, 74, 0.4),
     rgba(255, 255, 255, 0)
   );
 }
 
-.promo-item {
-  height: 250px;
+.nav-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
-/* Tùy chỉnh nút prev và next */
-.swiper-button-prev,
-.swiper-button-next {
-  width: 40px; /* Kích thước nút */
-  height: 40px;
-  background-color: white; /* Nền trắng */
-  border: 2px solid green; /* Viền xanh lá cây */
-  border-radius: 50%; /* Hình tròn */
+
+.nav-tabs::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.nav-tabs .nav-link {
+  white-space: nowrap;
+  color: #333;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link.active {
+  color: #16a34a;
+  background: none;
+  border-bottom: 4px solid #16a34a;
+}
+
+.nav-tabs .nav-link:hover:not(.active) {
+  border-bottom: 4px solid #ddd;
+  color: #16a34a;
+}
+
+.location-badge {
+  font-size: 0.8rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.slide-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.img-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.img-container img {
+  transition: transform 0.3s ease;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.img-container:hover img {
+  transform: scale(1.05);
+}
+
+.big-promo {
+  height: 500px;
+}
+
+.small-promo {
+  height: 242px;
+}
+
+@media (max-width: 768px) {
+  .big-promo {
+    height: 300px;
+  }
+
+  .small-promo {
+    height: 150px;
+  }
+}
+
+.promo-location-card {
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.promo-location-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.location {
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Tạo bóng nhẹ */
-  transition: all 0.3s ease; /* Hiệu ứng khi hover */
 }
 
-/* Biểu tượng mũi tên */
-.swiper-button-prev::after,
-.swiper-button-next::after {
-  color: green; /* Mũi tên màu xanh lá cây */
-  font-size: 16px;
-  font-weight: bold;
-}
-
-/* Hiệu ứng hover */
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-  background-color: green; /* Đổi nền thành xanh lá cây */
-  color: white; /* Đổi màu mũi tên */
-}
-
-.swiper-button-prev:hover::after,
-.swiper-button-next:hover::after {
-  color: white; /* Mũi tên màu trắng khi hover */
+/* Loại bỏ các style không cần thiết */
+.location-badge,
+.promo-overlay {
+  display: none;
 }
 </style>

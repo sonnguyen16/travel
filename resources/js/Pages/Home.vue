@@ -33,7 +33,7 @@
       </div>
 
       <div id="business" class="pt-5">
-        <h1 class="mx-auto text-center mb-4">{{ $t('business_field') }}</h1>
+        <h1 class="mx-auto text-center mb-4 uppercase font-bold text-[32px]">{{ $t('business_field') }}</h1>
         <div class="row g-3">
           <div class="col-lg-5 mb-md-4">
             <div @click.prevent="router.visit('/diem-den')" class="position-relative h-100 hover:cursor-pointer">
@@ -110,36 +110,25 @@
       <div class="grid grid-cols-2 gap-2">
         <div class="col-span-2 md:col-span-2 gap-2 flex items-stretch justify-start rounded-md">
           <div class="flex-1 flex flex-col items-stretch justify-start relative">
-            <!-- Danh sách các vị trí có tooltip và link -->
+            <!-- Danh sách các vị trí và link -->
             <div
-              v-tooltip="'Nice Dream Hotel'"
               class="nicedreamht cursor-pointer"
               @click="openLink('https://web-nicedreamhotel.vt360.vn/?skip-loading')"
             ></div>
 
             <div
-              v-tooltip="'Lang Biang'"
               class="langbiang cursor-pointer"
               @click="openLink('https://web-langbiang.vt360.vn/?skip-loading')"
             ></div>
 
             <div
-              v-tooltip="'Nice Dream Villa'"
               class="nicedreamvl cursor-pointer"
               @click="openLink('https://web-nicedreamvilla.vt360.vn/?skip-loading')"
             ></div>
 
-            <div
-              v-tooltip="'Datanla'"
-              class="datanla cursor-pointer"
-              @click="openLink('https://web-datanla.vt360.vn/?skip-loading')"
-            ></div>
+            <div class="datanla cursor-pointer" @click="openLink('https://web-datanla.vt360.vn/?skip-loading')"></div>
 
-            <div
-              v-tooltip="'Cáp Treo Đà Lạt'"
-              class="captreo cursor-pointer"
-              @click="openLink('https://kdlcaptreodalat.vt360.vn/')"
-            ></div>
+            <div class="captreo cursor-pointer" @click="openLink('https://kdlcaptreodalat.vt360.vn/')"></div>
 
             <!-- Hình ảnh bản đồ -->
             <div class="flex-1 overflow-hidden">
