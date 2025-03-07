@@ -24,19 +24,21 @@
             <h5 class="text-white mt-4">{{ $t('contact_info') }}</h5>
             <div class="flex gap-4 mt-4">
               <i class="text-white fas fa-phone-alt text-2xl"></i>
-              <a href="tel:84 98 1166 088" class="text-white text-decoration-none"
+              <a href="tel:84 98 1166 088" class="text-white text-decoration-none text-[16px]"
                 >{{ $t('phone') }}: +84 98 1166 088</a
               >
             </div>
             <div class="flex gap-4 mt-3">
               <i class="fas fa-envelope text-2xl text-white"></i>
-              <a href="mailto:info@dalattourist.com.vn" class="text-white text-decoration-none"
+              <a href="mailto:info@dalattourist.com.vn" class="text-white text-decoration-none text-[16px]"
                 >{{ $t('email') }}: info@dalattourist.com.vn</a
               >
             </div>
             <div class="flex gap-4 mt-3">
               <i class="fas fa-map text-2xl text-white"></i>
-              <p class="text-white">{{ $t('address') }}: 1 Lê Đại Hành, Phường 1, Thành phố Đà Lạt, Lâm Đồng</p>
+              <p class="text-white text-[16px]">
+                {{ $t('address') }}: 1 Lê Đại Hành, Phường 1, Thành phố Đà Lạt, Lâm Đồng
+              </p>
             </div>
           </div>
         </div>
