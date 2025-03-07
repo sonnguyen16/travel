@@ -54,12 +54,21 @@
                             <input name="picture" id="picture" type="file" class="form-control" required>
                         </div>
                         <img src="" alt="Picture" style="width: 150px; margin-bottom: 15px;" id="image" hidden>
+                        <div class="row">
+                            <div class="col-md-6" id="clink">
+                                <div class="form-group">
+                                    <label>Link</label>
+                                    <input type="text" name="link" id="link" class="form-control" placeholder="Nhập link...">
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label style="margin-top: 15px">
                                 <input name="active" id="active" type="checkbox" class="flat-red"> Hoạt động
                             </label>
                         </div>
                     </div>
+                    
                     <div class="form-group">
                         <label for="content">Nội dung</label>
                         <textarea id="content" name="content"></textarea>  

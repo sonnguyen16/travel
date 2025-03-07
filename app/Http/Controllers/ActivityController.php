@@ -46,7 +46,8 @@ class ActivityController extends Controller
 
         $activityData = [
             'active' => $request->active ? 1 : 0,
-            'blog_id' => $request->blog_id
+            'blog_id' => $request->blog_id,
+            'link' => $request->link
         ];
 
         if($request->language_id == 1){

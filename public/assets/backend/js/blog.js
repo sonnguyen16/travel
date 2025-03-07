@@ -7,7 +7,6 @@ function checkMenuSelection() {
     $("#type_child").hide();
     $("#type_child select").prop('required', false).val(""); // Xóa required & reset value
     $("#type_menu").removeClass("col-md-3").addClass("col-md-6");
-    $('#clink').hide();
 
     // Kiểm tra giá trị được chọn
     if (selectedValue == 2) {
@@ -32,10 +31,7 @@ function checkMenuSelection() {
         // Hiển thị "Thuộc địa điểm"
         var locationSelect = $("#news_id").closest('.form-group').next();
         locationSelect.show();
-        locationSelect.find("select").prop('required', true);
-        if(selectedValue == 7){
-            $('#clink').show();
-        }  
+        locationSelect.find("select").prop('required', true); 
     }
 }
 
@@ -104,7 +100,6 @@ function getBlog(langId, langCode) {
             $('#language_id').val(langId);
             $('#name').val(data.translation?.name ?? '');
             $('#menu_id').val(data.blog.menu_id);
-            $('#link').val(data.blog.link ?? '');
             setTimeout(() => {
                 $("#news_id").val(data.blog.news_id).trigger("change");
                 $("#location_id").val(data.blog.location_id).trigger("change");

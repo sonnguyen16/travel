@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Activity extends Model
 {
     protected $table = 'activities';
-	protected $fillable = ['id', 'name', 'content', 'active', 'slug', 'blog_id'];
+	protected $fillable = ['id', 'name', 'content', 'active', 'slug', 'blog_id', 'link'];
 	public $timestamps = true;
 
 	public function image()
