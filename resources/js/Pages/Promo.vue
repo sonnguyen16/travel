@@ -234,15 +234,22 @@ onMounted(async () => {
 
 .nav-tabs {
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: none;
+  padding-bottom: 8px;
+  overflow-x: initial;
+  -webkit-overflow-scrolling: initial;
+  scrollbar-width: initial;
+  -ms-overflow-style: initial;
 }
 
 .nav-tabs::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: initial;
+}
+
+.nav-tabs .nav-item {
+  margin-bottom: 8px;
 }
 
 .nav-tabs .nav-link {
@@ -253,17 +260,19 @@ onMounted(async () => {
   font-weight: 500;
   border-bottom: 2px solid transparent;
   transition: all 0.3s ease;
+  border-radius: 4px;
 }
 
 .nav-tabs .nav-link.active {
   color: #16a34a;
-  background: none;
+  background: rgba(22, 163, 74, 0.1);
   border-bottom: 4px solid #16a34a;
 }
 
 .nav-tabs .nav-link:hover:not(.active) {
   border-bottom: 4px solid #ddd;
   color: #16a34a;
+  background: rgba(22, 163, 74, 0.05);
 }
 
 .location-badge {
