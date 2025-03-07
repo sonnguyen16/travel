@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-lg-3">
           <img src="@/Assets/images/logo.png" class="w-full" alt="logo" />
-          <p class="mt-3 text-lg font-bold mb-0 text-white">{{ $t('company_name') }}</p>
+          <p class="mt-3 text-[15px] font-bold mb-0 text-white">{{ $t('company_name') }}</p>
           <p class="mt-2 text-white">{{ $t('slogan') }}</p>
           <div class="flex gap-4">
             <a target="_blank" href="https://www.facebook.com/dalattourism"

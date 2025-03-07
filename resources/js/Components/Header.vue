@@ -71,7 +71,11 @@
         <div :class="[isFixed ? 'container' : '', 'd-flex justify-between align-items-center flex-wrap']">
           <div class="d-flex align-items-center lg:w-auto w-full justify-between gap-3">
             <a @click.prevent="router.visit('/')" class="" href="#">
-              <img :src="app_url + '/images/logo.png'" :class="[isFixed ? 'w-[200px] my-3' : 'w-[300px]']" alt="logo" />
+              <img
+                :src="isFixed ? '/images/logo1.png' : '/images/logo.png'"
+                :class="[isFixed ? 'w-[200px] my-3' : 'w-[300px]']"
+                alt="logo"
+              />
             </a>
             <button
               @click.prevent="showMenu = !showMenu"
