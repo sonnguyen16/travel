@@ -20,7 +20,7 @@
 
 <script src="{{ asset('/assets/backend/js/script.js') }}"></script>
 <script>
-    var ckConfig = {
+   var ckConfig = {
     extraPlugins: 'image2,justify,colorbutton,colordialog,emoji,indent',
     removePlugins: 'image',
     height: 100,

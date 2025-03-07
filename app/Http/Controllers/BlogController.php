@@ -97,6 +97,7 @@ class BlogController extends Controller
             'menu_id' => $request->menu_id,
             'news_id' => null,
             'location_id' => null,
+            'link' => null,
             'active' => $request->active ? 1 : 0,
         ];
 
@@ -108,8 +109,11 @@ class BlogController extends Controller
             $blogData['news_id'] = $request->news_id;
         }
 
-        if($request->menu_id == 7){
+        if($request->menu_id == 7 || $request->menu_id == 11){
             $blogData['location_id'] = $request->location_id;
+            if($request->menu_id == 7){
+                $blogData['link'] = $request->link;
+            }
         }
 
         $blog = Blog::updateOrCreate(

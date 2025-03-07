@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Image;
+use App\Models\Image;   
+use Carbon\Carbon;
+
 
 class OrderController extends Controller
 {
@@ -29,6 +31,18 @@ class OrderController extends Controller
                     ->orWhere('phone', 'like', '%' . $search . '%');
             });
         }
+
+        if ($request->has('datetime_range') && $request->datetime_range) {
+            $dates = explode(' - ', $request->datetime_range);
+
+            if (count($dates) == 2) {
+                $start_date = Carbon::createFromFormat('d/m/Y H:i:s', trim($dates[0]))->startOfSecond();
+                $end_date = Carbon::createFromFormat('d/m/Y H:i:s', trim($dates[1]))->endOfSecond();
+
+                $query->whereBetween('created_at', [$start_date, $end_date]);
+            }
+        }
+    
 
 		$status = $request->status !== null ? $request->status : 0;
 
