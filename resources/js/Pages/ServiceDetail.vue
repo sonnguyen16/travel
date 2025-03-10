@@ -343,14 +343,14 @@ img {
 }
 
 .collapse-content {
-  background-color: #f4fbd2;
+  background-color: #efe3c2;
 }
 
 .activity-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #556c19;
+  background-color: #3e7b27;
   color: white;
 }
 

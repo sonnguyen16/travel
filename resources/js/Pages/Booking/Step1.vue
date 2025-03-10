@@ -77,12 +77,21 @@
         class="w-full mx-auto bg-white px-[20px] pt-[20px] pb-[20px] border-[1.5px] border-green-600 rounded-xl mt-4"
       >
         <div class="flex justify-between items-center flex-wrap">
-          <p class="font-bold mb-0 text-[1.2rem]">
-            {{
-              product.translations.find((item) => item.language.code === locale.toUpperCase())?.name ||
-              product.translations[0].name
-            }}
-          </p>
+          <div>
+            <p class="font-bold mb-0 text-[1.2rem]">
+              {{
+                product.translations.find((item) => item.language.code === locale.toUpperCase())?.name ||
+                product.translations[0].name
+              }}
+            </p>
+            <p class="text-sm text-gray-600 mb-0">
+              <i class="fas fa-map-marker-alt text-green-600 mr-1"></i>
+              {{
+                product.location?.translations?.find((item) => item.language.code === locale.toUpperCase())?.name ||
+                product.location?.translations[0]?.name
+              }}
+            </p>
+          </div>
           <div class="rounded-xl bg-green-600 px-3 py-1">
             <p class="text-white text-center mb-0">
               {{ product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' ' + 'đ' }}

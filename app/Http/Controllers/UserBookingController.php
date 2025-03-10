@@ -15,7 +15,7 @@ class UserBookingController extends Controller
     {
         $products = Product::query()
             ->where('active', 1)
-            ->with('translations.language', 'image_fe', 'location')
+            ->with('translations.language', 'image_fe', 'location.translations.language')
             ->get();
 
         $promo = Blog::query()
