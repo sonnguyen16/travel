@@ -57,16 +57,16 @@
                   blog?.translations[0].description
                 "
               ></div>
+              <div
+                class="text-justify mt-4"
+                v-html="
+                  blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
+                  blog?.translations[0].content
+                "
+              ></div>
             </div>
           </div>
         </div>
-        <div
-          class="text-justify mt-4"
-          v-html="
-            blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
-            blog?.translations[0].content
-          "
-        ></div>
       </div>
 
       <div v-if="blog?.activities.length > 0" class="row pt-5">
@@ -163,7 +163,7 @@
         <div class="swiper swiper-2">
           <div class="swiper-wrapper pb-4">
             <!-- Slide 1 -->
-            <template v-if="mounted" v-for="blog_related in blog.menu.blogs">
+            <template v-if="mounted" v-for="blog_related in blogs_related_computed">
               <div
                 v-if="
                   blog_related.id != blog.id &&
@@ -220,7 +220,7 @@
 </template>
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
 import 'swiper/css/effect-coverflow'
@@ -237,6 +237,10 @@ const props = defineProps({
 const { t, locale } = useI18n()
 const mounted = ref(false)
 const activeIndex = ref(0)
+const blogs_related_computed = computed(() => {
+  if (props.blog.menu.slug === 'hoat-dong') return props.blog.menu.blogs
+  return props.blogs_related
+})
 
 onMounted(() => {
   mounted.value = true

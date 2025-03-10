@@ -44,7 +44,16 @@ class UserBlogController extends Controller
             'activities.translations.language')
             ->first();
 
-        return Inertia::render('ServiceDetail', compact('blog'));
+        $blogs_related = Blog::query()
+            ->where('active', 1)
+            ->whereHas('menu', function ($query) use ($slug_menu) {
+                $query->whereIn('slug', ['nha-hang', 'luu-tru', 'diem-den']);
+            })
+            ->where('id', '!=', $blog->id)
+            ->with('translations.language', 'image_fe')
+            ->get();
+
+        return Inertia::render('ServiceDetail', compact('blog', 'blogs_related'));
     }
 
     public function activity(Request $request)
