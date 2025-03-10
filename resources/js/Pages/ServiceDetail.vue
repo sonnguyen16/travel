@@ -1,7 +1,7 @@
 <template>
   <Head>
     <title>
-      {{ blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name || blog.translations[0].name }}
+      {{ blog?.translations?.find((t) => t.language.code == locale.toUpperCase())?.name || blog.translations[0].name }}
     </title>
     <meta
       name="description"
@@ -109,6 +109,22 @@
                   product.translations[0].content
                 "
               ></div>
+              <div class="text-center mt-4">
+                <a
+                  @click.prevent="
+                    router.visit(
+                      `/dat-ve/buoc1?ticket_name=${encodeURIComponent(
+                        product.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                          product.translations[0].name
+                      )}`
+                    )
+                  "
+                  style="background-color: #3e7b27"
+                  class="px-6 py-[12px] text-white rounded-lg hover:bg-green-700 transition-colors text-lg text-decoration-none cursor-pointer"
+                >
+                  {{ t('book_ticket') }}
+                </a>
+              </div>
             </div>
           </div>
         </div>

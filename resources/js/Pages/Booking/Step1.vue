@@ -318,6 +318,7 @@ onMounted(async () => {
   const date = urlParams.get('date')
   const num_adult = urlParams.get('num_adult')
   const num_child = urlParams.get('num_child')
+  const ticket_name = urlParams.get('ticket_name')
 
   const ticket_id = urlParams.get('ticket_id')
   if (select) {
@@ -336,6 +337,24 @@ onMounted(async () => {
         behavior: 'smooth'
       })
     }, 500)
+  }
+
+  if (ticket_name) {
+    const matchedProduct = props.products.find((product) => {
+      const productName =
+        product.translations.find((t) => t.language.code === locale.value.toUpperCase())?.name ||
+        product.translations[0].name
+      return productName.toLowerCase() === decodeURIComponent(ticket_name).toLowerCase()
+    })
+
+    if (matchedProduct) {
+      setTimeout(() => {
+        window.scrollTo({
+          top: document.getElementById(matchedProduct.id).offsetTop - 80,
+          behavior: 'smooth'
+        })
+      }, 500)
+    }
   }
 
   if (ticket_id) {

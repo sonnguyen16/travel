@@ -57,31 +57,31 @@
               <!-- Item 1 -->
               <div class="text-center col-span-1">
                 <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
-                <p class="mt-2 text-green-900 font-bold">1976</p>
+                <p class="mt-2 text-green-900 font-bold text-lg">1976</p>
                 <p class="text-sm text-gray-600">{{ $t('timeline_1976') }}</p>
               </div>
               <!-- Item 2 -->
               <div class="text-center col-span-1">
                 <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
-                <p class="mt-2 text-green-900 font-bold">2006</p>
+                <p class="mt-2 text-green-900 font-bold text-lg">2006</p>
                 <p class="text-sm text-gray-600">{{ $t('timeline_2006') }}</p>
               </div>
               <!-- Item 3 -->
               <div class="text-center col-span-1">
                 <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
-                <p class="mt-2 text-green-900 font-bold">2013</p>
+                <p class="mt-2 text-green-900 font-bold text-lg">2013</p>
                 <p class="text-sm text-gray-600">{{ $t('timeline_2013') }}</p>
               </div>
               <!-- Item 4 -->
               <div class="text-center col-span-1">
                 <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
-                <p class="mt-2 text-green-900 font-bold">2020</p>
+                <p class="mt-2 text-green-900 font-bold text-lg">2020</p>
                 <p class="text-sm text-gray-600">{{ $t('timeline_2020') }}</p>
               </div>
               <!-- Item 5 -->
               <div class="text-center col-span-1">
                 <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
-                <p class="mt-2 text-green-900 font-bold">2024</p>
+                <p class="mt-2 text-green-900 font-bold text-lg">2024</p>
                 <p class="text-sm text-gray-600">{{ $t('timeline_2024') }}</p>
               </div>
             </div>

@@ -131,7 +131,7 @@ import { Link } from '@inertiajs/vue3'
 
 <style>
 footer {
-  background: #058643;
+  background: #3e7b27;
   color: white;
 }
 
