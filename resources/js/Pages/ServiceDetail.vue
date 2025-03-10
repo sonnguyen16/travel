@@ -170,7 +170,7 @@
                   blog_related.location_id === blog.location_id &&
                   blog_related.active == 1
                 "
-                @click.prevent="router.visit(`/${blog_related.menu.slug}/${blog_related.slug}`)"
+                @click.prevent="router.visit(`/${blog_related?.menu?.slug || blog?.menu?.slug}/${blog_related.slug}`)"
                 class="swiper-slide hover:cursor-pointer"
               >
                 <div class="rounded-xl bg-white shadow-md">
