@@ -50,7 +50,7 @@ class UserBlogController extends Controller
                 $query->whereIn('slug', ['nha-hang', 'luu-tru', 'diem-den']);
             })
             ->where('id', '!=', $blog->id)
-            ->with('translations.language', 'image_fe')
+            ->with('translations.language', 'image_fe', 'menu')
             ->get();
 
         return Inertia::render('ServiceDetail', compact('blog', 'blogs_related'));
