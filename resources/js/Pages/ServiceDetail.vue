@@ -34,7 +34,7 @@
       <div class="pt-[100px]">
         <div class="rounded-xl bg-white">
           <div class="row">
-            <div class="col-lg-5">
+            <div class="col-lg-6">
               <div class="position-relative w-full md:h-[260px] h-[250px]">
                 <img
                   :src="BLOG_MEDIA_ENDPOINT + blog?.image_fe?.picture"
@@ -43,7 +43,7 @@
                 />
               </div>
             </div>
-            <div class="col-lg-7 lg:pe-5 lg:pt-3">
+            <div class="col-lg-6 lg:pe-5 lg:pt-3">
               <h3 class="font-semibold mt-md-0 mt-3">
                 {{
                   blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
@@ -57,14 +57,14 @@
                   blog?.translations[0].description
                 "
               ></div>
-              <div
-                class="text-justify mt-4"
-                v-html="
-                  blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
-                  blog?.translations[0].content
-                "
-              ></div>
             </div>
+            <div
+              class="text-justify mt-4"
+              v-html="
+                blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
+                blog?.translations[0].content
+              "
+            ></div>
           </div>
         </div>
       </div>
