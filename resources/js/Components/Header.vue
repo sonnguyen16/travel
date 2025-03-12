@@ -191,7 +191,11 @@
                     <button @click.prevent="decreaseAdult" class="border-none">
                       <i class="fas fa-minus text-green-600 text-[12px]"></i>
                     </button>
-                    <input type="text" class="border-none w-[50px] py-0 font-normal text-sm" v-model="form.num_adult" />
+                    <input
+                      type="text"
+                      class="border-none w-[50px] py-0 font-normal text-sm text-center"
+                      v-model="form.num_adult"
+                    />
                     <button @click.prevent="incrementAdult" class="border-none">
                       <i class="fas fa-plus text-green-600 text-[12px]"></i>
                     </button>
@@ -209,7 +213,11 @@
                     <button @click.prevent="decreaseChild" class="border-none">
                       <i class="fas fa-minus text-green-600 text-[12px]"></i>
                     </button>
-                    <input type="text" class="border-none w-[50px] py-0 font-normal text-sm" v-model="form.num_child" />
+                    <input
+                      type="text"
+                      class="border-none w-[50px] py-0 font-normal text-sm text-center"
+                      v-model="form.num_child"
+                    />
                     <button @click.prevent="incrementChild" class="border-none">
                       <i class="fas fa-plus text-green-600 text-[12px]"></i>
                     </button>
