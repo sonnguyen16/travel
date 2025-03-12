@@ -19,6 +19,10 @@
             <a target="_blank" href="https://www.tiktok.com/@dalattourist?is_from_webapp=1&amp;sender_device=pc"
               ><i class="text-white fab fa-tiktok text-2xl"></i
             ></a>
+            <!-- zalo -->
+            <a target="_blank" href="https://zalo.me/208756278048926276"
+              ><img src="@/Assets/images/zalo.jpg" class="w-[30px] rounded-md" alt="zalo"
+            /></a>
           </div>
           <div>
             <h5 class="text-white mt-4">{{ $t('contact_info') }}</h5>
