@@ -191,7 +191,7 @@
                     <button @click.prevent="decreaseAdult" class="border-none">
                       <i class="fas fa-minus text-green-600 text-[12px]"></i>
                     </button>
-                    <input type="text" class="border-none w-[35px] py-0 font-normal text-sm" v-model="form.num_adult" />
+                    <input type="text" class="border-none w-[50px] py-0 font-normal text-sm" v-model="form.num_adult" />
                     <button @click.prevent="incrementAdult" class="border-none">
                       <i class="fas fa-plus text-green-600 text-[12px]"></i>
                     </button>
@@ -209,7 +209,7 @@
                     <button @click.prevent="decreaseChild" class="border-none">
                       <i class="fas fa-minus text-green-600 text-[12px]"></i>
                     </button>
-                    <input type="text" class="border-none w-[35px] py-0 font-normal text-sm" v-model="form.num_child" />
+                    <input type="text" class="border-none w-[50px] py-0 font-normal text-sm" v-model="form.num_child" />
                     <button @click.prevent="incrementChild" class="border-none">
                       <i class="fas fa-plus text-green-600 text-[12px]"></i>
                     </button>
@@ -370,20 +370,17 @@ const checkRoute = (route) => {
 const app_url = import.meta.env.VITE_APP_URL
 
 // Thêm mảng thứ tự mong muốn
-const locationOrder = [
-  'Khu Du Lịch DATANLA',
-  'DATANLA ADVENTURES',
-  'Khu Du Lịch LANGBIANG',
-  'Khu Du Lịch CÁP TREO'
-]
+const locationOrder = ['Khu Du Lịch DATANLA', 'DATANLA ADVENTURES', 'Khu Du Lịch LANGBIANG', 'Khu Du Lịch CÁP TREO']
 
 // Tạo computed property để sắp xếp locations
 const sortedLocations = computed(() => {
   if (!locations.value) return []
 
   return [...locations.value].sort((a, b) => {
-    const nameA = a.translations.find(t => t.language.code === locale.value.toUpperCase())?.name || a.translations[0].name
-    const nameB = b.translations.find(t => t.language.code === locale.value.toUpperCase())?.name || b.translations[0].name
+    const nameA =
+      a.translations.find((t) => t.language.code === locale.value.toUpperCase())?.name || a.translations[0].name
+    const nameB =
+      b.translations.find((t) => t.language.code === locale.value.toUpperCase())?.name || b.translations[0].name
 
     const indexA = locationOrder.indexOf(nameA)
     const indexB = locationOrder.indexOf(nameB)
