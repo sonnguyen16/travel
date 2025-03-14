@@ -341,10 +341,15 @@ onMounted(async () => {
 
   if (ticket_name) {
     const matchedProduct = props.products.find((product) => {
-      const productName =
+      const productName = (
         product.translations.find((t) => t.language.code === locale.value.toUpperCase())?.name ||
         product.translations[0].name
-      return productName.toLowerCase() === decodeURIComponent(ticket_name).toLowerCase()
+      ).toLowerCase()
+
+      const searchName = decodeURIComponent(ticket_name).toLowerCase()
+
+      // Tìm kiếm gần giống nhất
+      return productName.includes(searchName) || searchName.includes(productName)
     })
 
     if (matchedProduct) {
