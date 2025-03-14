@@ -378,7 +378,7 @@ const checkRoute = (route) => {
 const app_url = import.meta.env.VITE_APP_URL
 
 // Thêm mảng thứ tự mong muốn
-const locationOrder = ['Khu Du Lịch DATANLA', 'DATANLA ADVENTURES', 'Khu Du Lịch LANGBIANG', 'Khu Du Lịch CÁP TREO']
+const locationOrder = ['khu du lịch datanla', 'datanla adventures', 'khu du lịch langbiang', 'khu du lịch cáp treo']
 
 // Tạo computed property để sắp xếp locations
 const sortedLocations = computed(() => {
@@ -390,8 +390,8 @@ const sortedLocations = computed(() => {
     const nameB =
       b.translations.find((t) => t.language.code === locale.value.toUpperCase())?.name || b.translations[0].name
 
-    const indexA = locationOrder.indexOf(nameA)
-    const indexB = locationOrder.indexOf(nameB)
+    const indexA = locationOrder.indexOf(nameA.toLowerCase())
+    const indexB = locationOrder.indexOf(nameB.toLowerCase())
 
     // Nếu không tìm thấy trong danh sách, đẩy xuống cuối
     if (indexA === -1) return 1

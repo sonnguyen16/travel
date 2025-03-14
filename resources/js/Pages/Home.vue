@@ -107,34 +107,44 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-2">
-        <div class="col-span-2 md:col-span-2 gap-2 flex items-stretch justify-start rounded-md">
-          <div class="flex-1 flex flex-col items-stretch justify-start relative">
-            <!-- Danh sách các vị trí và link -->
-            <div
-              class="nicedreamht cursor-pointer"
-              @click="openLink('https://web-nicedreamhotel.vt360.vn/?skip-loading')"
-            ></div>
+      <div class="relative">
+        <!-- Hình ảnh bản đồ nền -->
+        <img src="@/Assets/images/map.png" alt="Map" class="w-full rounded-xl" />
 
-            <div
-              class="langbiang cursor-pointer"
-              @click="openLink('https://web-langbiang.vt360.vn/?skip-loading')"
-            ></div>
+        <!-- Các địa điểm và title -->
+        <div class="nicedreamht cursor-pointer" @click="openLink('https://web-nicedreamhotel.vt360.vn/?skip-loading')">
+          <img src="@/Assets/images/nice_dream_hotel.png" alt="Nice Dream Hotel" />
+          <img src="@/Assets/images/nicedream_hotel_title.png" alt="Nice Dream Hotel Title" />
+        </div>
 
-            <div
-              class="nicedreamvl cursor-pointer"
-              @click="openLink('https://web-nicedreamvilla.vt360.vn/?skip-loading')"
-            ></div>
+        <div class="langbiang cursor-pointer" @click="openLink('https://web-langbiang.vt360.vn/?skip-loading')">
+          <img src="@/Assets/images/langbiang.png" alt="Langbiang" />
+          <img src="@/Assets/images/langbiang_title.png" alt="Langbiang Title" />
+        </div>
 
-            <div class="datanla cursor-pointer" @click="openLink('https://web-datanla.vt360.vn/?skip-loading')"></div>
+        <div class="nicedreamvl cursor-pointer" @click="openLink('https://web-nicedreamvilla.vt360.vn/?skip-loading')">
+          <img src="@/Assets/images/nicedream_villa.png" alt="Nice Dream Villa" />
+          <img src="@/Assets/images/nicedream_villa_title.png" alt="Nice Dream Villa Title" />
+        </div>
 
-            <div class="captreo cursor-pointer" @click="openLink('https://kdlcaptreodalat.vt360.vn/')"></div>
+        <div class="datanla cursor-pointer" @click="openLink('https://web-datanla.vt360.vn/?skip-loading')">
+          <img src="@/Assets/images/datanla.png" alt="Datanla" />
+          <img src="@/Assets/images/datanla_title.png" alt="Datanla Title" />
+        </div>
 
-            <!-- Hình ảnh bản đồ -->
-            <div class="flex-1 overflow-hidden">
-              <img src="@/Assets/images/site_map.png" alt="home6" class="w-full rounded-xl" />
-            </div>
-          </div>
+        <div class="captreo cursor-pointer" @click="openLink('https://kdlcaptreodalat.vt360.vn/')">
+          <img src="@/Assets/images/cap_treo.png" alt="Cap Treo" />
+          <img src="@/Assets/images/cap_treo_title.png" alt="Cap Treo Title" />
+        </div>
+
+        <div class="thuy_ta cursor-pointer">
+          <img src="@/Assets/images/thuy_ta.png" alt="Thuy Ta" />
+          <img src="@/Assets/images/thuy_ta_title.png" alt="Thuy Ta Title" />
+        </div>
+
+        <div class="leguda cursor-pointer">
+          <img src="@/Assets/images/leguda.png" alt="Leguda" />
+          <img src="@/Assets/images/leguda_title.png" alt="Leguda Title" />
         </div>
       </div>
     </div>
@@ -225,48 +235,95 @@ const app_url = import.meta.env.VITE_APP_URL
   );
 }
 
-.datanla {
+/* Định vị các địa điểm */
+.nicedreamht,
+.langbiang,
+.nicedreamvl,
+.datanla,
+.captreo,
+.thuy_ta,
+.leguda {
   position: absolute;
-  top: 70%;
-  right: 5%;
-  width: 20%;
-  height: 20%;
-  z-index: 9999;
+  transition: transform 0.3s ease;
 }
 
-.captreo {
-  position: absolute;
-  top: 55%;
-  right: 20%;
-  width: 20%;
-  height: 20%;
+.nicedreamht:hover,
+.langbiang:hover,
+.nicedreamvl:hover,
+.datanla:hover,
+.captreo:hover,
+.thuy_ta:hover,
+.leguda:hover {
+  transform: scale(1.1);
+  z-index: 100;
 }
 
-.nicedreamvl {
-  position: absolute;
-  top: 25%;
-  right: 15%;
-  width: 20%;
-  height: 20%;
-}
-
+/* Vị trí cụ thể cho từng địa điểm */
 .nicedreamht {
-  position: absolute;
-  top: 25%;
-  left: 5%;
-  width: 20%;
-  height: 10%;
+  top: 32%;
+  left: 18%;
+  width: 15%;
 }
 
 .langbiang {
-  position: absolute;
-  top: 2%;
-  left: 42%;
-  width: 25%;
-  height: 18%;
+  top: 20%;
+  left: 40%;
+  width: 15%;
 }
 
+.nicedreamvl {
+  top: 30%;
+  right: 15%;
+  width: 15%;
+}
+
+.datanla {
+  bottom: 10%;
+  right: 5%;
+  width: 15%;
+}
+
+.captreo {
+  top: 55%;
+  right: 10%;
+  width: 15%;
+}
+
+.thuy_ta {
+  bottom: 28%;
+  left: 25%;
+  width: 15%;
+}
+
+.leguda {
+  top: 50%;
+  right: 25%;
+  width: 15%;
+}
+
+/* Định dạng cho các hình ảnh trong địa điểm */
 .cursor-pointer {
   cursor: pointer;
+}
+
+.cursor-pointer img {
+  width: 100%;
+  height: auto;
+}
+
+.cursor-pointer img:nth-child(2) {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .cursor-pointer img:nth-child(2) {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+  }
 }
 </style>
