@@ -13,14 +13,10 @@ use Illuminate\Support\Str;
 use App\Models\Language;
 use App\Models\Image;
 use App\Models\Translation;
+use App\Helpers\ImageHelper;
 
 class ProductController extends Controller
 {
-    public function __construct() {
-    	if (!Auth::check())
-    		return redirect(route('backend.dashboard.login'));
-    }
-
     public function index(Request $request) {
         $query = Product::query();
 
@@ -85,36 +81,30 @@ class ProductController extends Controller
         );
 
         if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
-            $file->move('public/uploads/products/', $file_name);
+            $fileName = ImageHelper::saveImage($request->file('picture'),'public/uploads/products/');
 
             Image::updateOrCreate(
                 [
                     'record_type' => 'Product',
                     'record_id' => $product->id,
-                    // 'language_id' => $request->language_id,
-                    'name' => 'Picture'
+                    'name' => 'Picture',
                 ],
                 [
-                    'picture' => $file_name
+                    'picture' => $fileName
                 ]
             );
         }
 
-        if ($request->hasFile('pictures')){
-            foreach($request->file('pictures') as $file){
-                $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
-                $file->move('public/uploads/products/', $file_name);
-                Image::create(
-                    [
-                        'record_type' => 'Product',
-                        'record_id' => $product->id,
-                        'name' => 'Other',
-                        // 'language_id' => $request->language_id,
-                        'picture' => $file_name
-                    ]
-                );
+        if ($request->hasFile('pictures')) {
+            $fileNames = ImageHelper::saveImages($request->file('pictures'),'public/uploads/products/');
+
+            foreach ($fileNames as $fileName) {
+                Image::create([
+                    'record_type' => 'Product',
+                    'record_id' => $product->id,
+                    'name' => 'Other',
+                    'picture' => $fileName
+                ]);
             }
         }
 

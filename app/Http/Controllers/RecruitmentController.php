@@ -12,13 +12,10 @@ use Illuminate\Support\Str;
 use App\Models\Image;
 use App\Models\Language;
 use App\Models\RecruitmentTranslations;
+use App\Helpers\ImageHelper;
 
 class RecruitmentController extends Controller
 {
-    public function __construct() {
-    	if (!Auth::check())
-    		return redirect(route('backend.dashboard.login'));
-    }
     public function index(Request $request) {
         $query = Recruitment::query();
 
@@ -66,20 +63,35 @@ class RecruitmentController extends Controller
             $recruitmentData
         );
 
+        // if ($request->hasFile('picture')) {
+        //     $file = $request->file('picture');
+        //     $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
+        //     $file->move('public/uploads/recruitments/', $file_name);
+
+        //     Image::updateOrCreate(
+        //         [
+        //             'record_type' => 'Recruitment',
+        //             'record_id' => $recruitment->id,
+        //             // 'language_id' => $request->language_id,
+        //             'name' => 'Picture'
+        //         ],
+        //         [
+        //             'picture' => $file_name
+        //         ]
+        //     );
+        // }
+
         if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
-            $file->move('public/uploads/recruitments/', $file_name);
+            $fileName = ImageHelper::saveImage($request->file('picture'),'public/uploads/recruiments/');
 
             Image::updateOrCreate(
                 [
                     'record_type' => 'Recruitment',
-                    'record_id' => $recruitment->id,
-                    // 'language_id' => $request->language_id,
-                    'name' => 'Picture'
+                    'record_id' => $recruiment->id,
+                    'name' => 'Picture',
                 ],
                 [
-                    'picture' => $file_name
+                    'picture' => $fileName
                 ]
             );
         }

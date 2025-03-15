@@ -57,8 +57,8 @@
                                 </td>
                                 <td class="text-left" style="padding-left: 20px;">{{ $product->translation->name }}<br>
                                 </td>
-                                <td>{{$product->price}}</td>
-                                <td>{{$product->price_child}}</td>
+                                <td>{{ number_format($product->price, 0, ',', '.') }}</td>
+                                <td>{{ number_format($product->price_child, 0, ',', '.') }}</td>
                                 <td class="text-left" style="padding-left: 20px;">{{ $product->location?->translation?->name ?? ''}}</td>
                                 <td>{{ implode(', ', $product->language_codes->toArray()) }}</td>
                                 <td>

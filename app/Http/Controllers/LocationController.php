@@ -11,7 +11,7 @@ use App\Models\User;
 use App\Models\Location;
 use Illuminate\Support\Str;
 use App\Models\Image;
-
+use App\Helpers\ImageHelper;
 
 class LocationController extends Controller
 {
@@ -52,18 +52,31 @@ class LocationController extends Controller
             $locationData
         );
 
-        if ($request->hasFile('pictures')){
-            foreach($request->file('pictures') as $file){
-                $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
-                $file->move('public/uploads/locations/', $file_name);
-                Image::create(
-                    [
-                        'record_type' => 'Location',
-                        'record_id' => $location->id,
-                        'name' => 'Gallery',
-                        'picture' => $file_name
-                    ]
-                );
+        // if ($request->hasFile('pictures')){
+        //     foreach($request->file('pictures') as $file){
+        //         $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
+        //         $file->move('public/uploads/locations/', $file_name);
+        //         Image::create(
+        //             [
+        //                 'record_type' => 'Location',
+        //                 'record_id' => $location->id,
+        //                 'name' => 'Gallery',
+        //                 'picture' => $file_name
+        //             ]
+        //         );
+        //     }
+        // }
+
+        if ($request->hasFile('pictures')) {
+            $fileNames = ImageHelper::saveImages($request->file('pictures'),'public/uploads/locations/');
+
+            foreach ($fileNames as $fileName) {
+                Image::create([
+                    'record_type' => 'Location',
+                    'record_id' => $location->id,
+                    'name' => 'Gallery',
+                    'picture' => $fileName
+                ]);
             }
         }
 

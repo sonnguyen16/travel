@@ -12,13 +12,10 @@ use App\Models\Language;
 use App\Models\Image;
 use App\Models\Translation;
 use App\Models\Blog;
+use App\Helpers\ImageHelper;
 
 class ActivityController extends Controller
 {
-    public function __construct() {
-    	if (!Auth::check())
-    		return redirect(route('backend.dashboard.login'));
-    }
     public function index(Request $request)
     {
         $blog = Blog::find($request->blog_id);
@@ -59,19 +56,34 @@ class ActivityController extends Controller
             $activityData
         );
 
+        // if ($request->hasFile('picture')) {
+        //     $file = $request->file('picture');
+        //     $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
+        //     $file->move('public/uploads/activities/', $file_name);
+
+        //     Image::updateOrCreate(
+        //         [
+        //             'record_type' => 'Activity',
+        //             'record_id' => $activity->id,
+        //             'name' => 'Picture'
+        //         ],
+        //         [
+        //             'picture' => $file_name
+        //         ]
+        //     );
+        // }
+
         if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
-            $file->move('public/uploads/activities/', $file_name);
+            $fileName = ImageHelper::saveImage($request->file('picture'),'public/uploads/activities/');
 
             Image::updateOrCreate(
                 [
                     'record_type' => 'Activity',
                     'record_id' => $activity->id,
-                    'name' => 'Picture'
+                    'name' => 'Picture',
                 ],
                 [
-                    'picture' => $file_name
+                    'picture' => $fileName
                 ]
             );
         }

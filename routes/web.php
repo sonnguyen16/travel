@@ -34,11 +34,11 @@ use App\Http\Controllers\TicketController;
 //     \UniSharp\LaravelFilemanager\Lfm::routes();
 // });
 
-Route::get('/admin', [LoginController::class, 'login'])->name('backend.dashboard.login');
+Route::get('/admin', [LoginController::class, 'login'])->name('login');
 Route::post('/check', [LoginController::class, 'check'])->name('backend.dashboard.login.check');
 Route::get('/logout', [LoginController::class, 'logout'])->name('backend.dashboard.login.logout');
 
-Route::prefix('/admin')->group(function () {
+Route::prefix('/admin')->middleware(['auth'])->group(function () {
     Route::post('ckeditor/upload', [CKEditorController::class, 'upload'])->name('ckeditor.upload');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard.home.index');
     Route::get('/logout', [LoginController::class, 'logout'])->name('backend.dashboard.logout');

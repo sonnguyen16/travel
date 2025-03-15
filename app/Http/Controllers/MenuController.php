@@ -11,14 +11,10 @@ use App\Models\Translation;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Str;
+use App\Helpers\ImageHelper;
 
 class MenuController extends Controller
 {
-    public function __construct() {
-    	if (!Auth::check())
-    		return redirect(route('backend.dashboard.login'));
-    }
-
     public function index(Request $request)
     {
         $query = Menu::where('menu_fk', 0);
@@ -91,10 +87,25 @@ class MenuController extends Controller
             $menuData
         );
 
+        // if ($request->hasFile('picture')) {
+        //     $file = $request->file('picture');
+        //     $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
+        //     $file->move('public/uploads/menus/', $file_name);
+
+        //     Image::updateOrCreate(
+        //         [
+        //             'record_type' => 'Menu',
+        //             'record_id' => $menu->id,
+        //             'name' => 'Picture',
+        //         ],
+        //         [
+        //             'picture' => $file_name
+        //         ]
+        //     );
+        // }
+
         if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
-            $file->move('public/uploads/menus/', $file_name);
+            $fileName = ImageHelper::saveImage($request->file('picture'),'public/uploads/menus/');
 
             Image::updateOrCreate(
                 [
@@ -103,10 +114,11 @@ class MenuController extends Controller
                     'name' => 'Picture',
                 ],
                 [
-                    'picture' => $file_name
+                    'picture' => $fileName
                 ]
             );
         }
+
 
         Translation::updateOrCreate(
             [

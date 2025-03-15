@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class LanguageController extends Controller
 {
-    public function __construct() {
-    	if (!Auth::check())
-    		return redirect(route('backend.dashboard.login'));
-    }
-
     public function index(Request $request) {
         $languages = Language::paginate(10);
         return view('backend.dashboard.language.index',[

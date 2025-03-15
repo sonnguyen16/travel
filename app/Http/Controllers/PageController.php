@@ -14,11 +14,6 @@ use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
-    public function __construct() {
-    	if (!Auth::check())
-    		return redirect(route('backend.dashboard.login'));
-    }
-
     public function index() {
         $pages = Page::orderBy('id','desc')->with('translation')->paginate(20);
 

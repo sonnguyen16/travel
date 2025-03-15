@@ -8,14 +8,10 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Banner;
 use Illuminate\Support\Str;
 use App\Models\Image;
+use App\Helpers\ImageHelper;
 
 class BannerController extends Controller
 {
-    public function __construct() {
-    	if (!Auth::check())
-    		return redirect(route('backend.dashboard.login'));
-    }
-
     public function index(Request $request) {
         // $query = Banner::query();
 
@@ -48,12 +44,17 @@ class BannerController extends Controller
             'slug' => Str::slug($request->input('name'))
         ];
 
-        if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
-            $file->move('public/uploads/banners/', $file_name);
+        // if ($request->hasFile('picture')) {
+        //     $file = $request->file('picture');
+        //     $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
+        //     $file->move('public/uploads/banners/', $file_name);
 
-            $bannerData['picture'] = $file_name;
+        //     $bannerData['picture'] = $file_name;
+        // }
+
+        if ($request->hasFile('picture')) {
+            $fileName = ImageHelper::saveImage($request->file('picture'),'public/uploads/banners/');
+            $bannerData['picture'] = $fileName;
         }
 
 

@@ -13,15 +13,10 @@ use App\Models\Language;
 use App\Models\Image;
 use App\Models\Translation;
 use App\Models\Activity;
+use App\Helpers\ImageHelper;
 
 class BlogController extends Controller
 {
-
-    public function __construct() {
-    	if (!Auth::check())
-    		return redirect(route('backend.dashboard.login'));
-    }
-
     public function index(Request $request)
     {
         $query = Blog::query();
@@ -120,37 +115,65 @@ class BlogController extends Controller
             $blogData
         );
 
+        // if ($request->hasFile('picture')) {
+        //     $file = $request->file('picture');
+        //     $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
+        //     $file->move('public/uploads/blogs/', $file_name);
+
+        //     Image::updateOrCreate(
+        //         [
+        //             'record_type' => 'Blog',
+        //             'record_id' => $blog->id,
+        //             // 'language_id' => $request->language_id,
+        //             'name' => 'Picture'
+        //         ],
+        //         [
+        //             'picture' => $file_name
+        //         ]
+        //     );
+        // }
+
+        // if ($request->hasFile('pictures')){
+        //     foreach($request->file('pictures') as $file){
+        //         $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
+        //         $file->move('public/uploads/blogs/', $file_name);
+        //         Image::create(
+        //             [
+        //                 'record_type' => 'Blog',
+        //                 'record_id' => $blog->id,
+        //                 'name' => 'Other',
+        //                 // 'language_id' => $request->language_id,
+        //                 'picture' => $file_name
+        //             ]
+        //         );
+        //     }
+        // }
+
         if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
-            $file->move('public/uploads/blogs/', $file_name);
+            $fileName = ImageHelper::saveImage($request->file('picture'),'public/uploads/blogs/');
 
             Image::updateOrCreate(
                 [
                     'record_type' => 'Blog',
                     'record_id' => $blog->id,
-                    // 'language_id' => $request->language_id,
-                    'name' => 'Picture'
+                    'name' => 'Picture',
                 ],
                 [
-                    'picture' => $file_name
+                    'picture' => $fileName
                 ]
             );
         }
 
-        if ($request->hasFile('pictures')){
-            foreach($request->file('pictures') as $file){
-                $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
-                $file->move('public/uploads/blogs/', $file_name);
-                Image::create(
-                    [
-                        'record_type' => 'Blog',
-                        'record_id' => $blog->id,
-                        'name' => 'Other',
-                        // 'language_id' => $request->language_id,
-                        'picture' => $file_name
-                    ]
-                );
+        if ($request->hasFile('pictures')) {
+            $fileNames = ImageHelper::saveImages($request->file('pictures'),'public/uploads/blogs/');
+
+            foreach ($fileNames as $fileName) {
+                Image::create([
+                    'record_type' => 'Blog',
+                    'record_id' => $blog->id,
+                    'name' => 'Other',
+                    'picture' => $fileName
+                ]);
             }
         }
 

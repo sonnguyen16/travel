@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Image;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use App\Helpers\ImageHelper;
 
 class UserController extends Controller
 {
@@ -88,19 +89,34 @@ class UserController extends Controller
             $userData
         );
 
+        // if ($request->hasFile('picture')) {
+        //     $file = $request->file('picture');
+        //     $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
+        //     $file->move('public/uploads/users/', $file_name);
+
+        //     Image::updateOrCreate(
+        //         [
+        //             'record_type' => 'User',
+        //             'record_id' => $user->id
+        //         ],
+        //         [
+        //             'name' => 'Picture',
+        //             'picture' => $file_name
+        //         ]
+        //     );
+        // }
+
         if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
-            $file->move('public/uploads/users/', $file_name);
+            $fileName = ImageHelper::saveImage($request->file('picture'),'public/uploads/users/');
 
             Image::updateOrCreate(
                 [
                     'record_type' => 'User',
-                    'record_id' => $user->id
+                    'record_id' => $user->id,
+                    'name' => 'Picture',
                 ],
                 [
-                    'name' => 'Picture',
-                    'picture' => $file_name
+                    'picture' => $fileName
                 ]
             );
         }

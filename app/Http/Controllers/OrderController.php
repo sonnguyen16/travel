@@ -13,11 +13,6 @@ use Carbon\Carbon;
 
 class OrderController extends Controller
 {
-    public function __construct() {
-    	if (!Auth::check())
-    		return redirect(route('backend.dashboard.login'));
-    }
-
     public function index(Request $request)
     {
         $query = Order::query();

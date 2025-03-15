@@ -45,11 +45,11 @@ function alertDelete(id) {
                     let imageHtml = `
                         <div class="col-md-2" style="flex: 0 0 auto; position: relative; margin-bottom: 10px;">
                             <div class="wrap-btn-delete" style="position: absolute;">
-                                <button class="btn-delete-image" data-id="${item.id}" data-location-id="${data.location.id}" style="color: red; font-size: 15px; margin-left: 1px; border-radius:2px; margin-top: 1px; background-color: white; padding: 0 5px; border: none; cursor: pointer;">
-                                    <b>x</b>
+                                <button class="btn-delete-image" data-id="${item.id}" data-location-id="${data.location.id}" style="color: white; font-size: 15px; background-color: red; border: none; cursor: pointer;">
+                                    <b>&times;</b>
                                 </button>
                             </div>
-                            <img style="width: 100px; height: 80px; background-size: contain; display: block;" src="/public/uploads/locations/${item.picture}" alt="Location Image">
+                            <img loading="lazy" style="width: 100px; height: 80px; background-size: contain; display: block;" src="/public/uploads/locations/${item.picture}" alt="Location Image">
                         </div>
                     `;
 
@@ -85,11 +85,11 @@ function alertDelete(id) {
                         let imageHtml = `
                             <div class="col-md-2" style="flex: 0 0 auto; position: relative; margin-bottom: 10px;">
                                 <div class="wrap-btn-delete" style="position: absolute;">
-                                    <button class="btn-delete-image" data-id="${item.id}" data-location-id="${locationId}" style="color: red; font-size: 15px; margin-left: 1px; border-radius:2px; margin-top: 1px; background-color: white; padding: 0 5px; border: none; cursor: pointer;">
-                                        <b>x</b>
+                                    <button class="btn-delete-image" data-id="${item.id}" data-location-id="${locationId}" style="color: white; font-size: 15px; background-color: red; border: none; cursor: pointer;">
+                                        <b>&times;</b>
                                     </button>
                                 </div>
-                                <img style="width: 100px; height: 80px; background-size: contain; display: block;" src="/public/uploads/locations/${item.picture}" alt="Location Image">
+                                <img loading="lazy" style="width: 100px; height: 80px; background-size: contain; display: block;" src="/public/uploads/locations/${item.picture}" alt="Location Image">
                             </div>
                         `;
                         picturesDiv.append(imageHtml);

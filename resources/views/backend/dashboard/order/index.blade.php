@@ -36,7 +36,7 @@
                         <thead>
                             <tr>
                                 <th style="width: 50px;">#</th>
-                                <th>Tên</th>
+                                <th>Họ tên</th>
                                 <th>Email</th>
                                 <th>Số điện thoại</th>
                                 {{-- <th>Mã giảm giá</th> --}}
@@ -56,7 +56,7 @@
                                 <td style="text-align: left; padding-left: 20px;">{{ $order->email }}</td>
                                 <td>{{ $order->phone }}</td>
                                 {{-- <td>{{ $order->discount_code }}</td> --}}
-                                <td>{{ $order->total }}</td>
+                                <td>{{ number_format($order->total, 0, ',', '.') }}</td>
                                 <td>{{ strtoupper($order->payment_method) }} 
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($order->created_at)->format('H:i:s d-m-Y') }}</td>
