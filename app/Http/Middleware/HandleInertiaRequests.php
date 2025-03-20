@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Banner;
 use App\Models\Language;
 use App\Models\Location;
 use App\Models\Translation;
@@ -44,6 +45,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'languages' => Language::where('active', 1)->get(),
             'locations' => Location::where('active', 1)->with('translations.language')->get(),
+            'background' => Banner::where('name', 'Background')->first(),
         ];
     }
 }
