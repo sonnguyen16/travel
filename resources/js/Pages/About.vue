@@ -16,31 +16,61 @@
     <div class="container">
       <div class="row pt-[100px]">
         <div id="about-1" class="col-lg-6">
-          <h3 class="mb-0 mt-3 uppercase font-bold text-[32px]">{{ $t('story') }}</h3>
-          <h3 class="font-semi-bold uppercase font-bold text-[32px]">{{ $t('brand') }}</h3>
-          <p class="text-justify mt-[30px] font-normal">
-            {{ $t('about_text') }}
-          </p>
+          <div
+            v-if="ve_chung_toi.length > 0"
+            v-html="
+              ve_chung_toi[0].translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
+              ve_chung_toi[0].translations[0].content
+            "
+          ></div>
+          <div v-else>
+            <h3 class="mb-0 mt-3 uppercase font-bold text-[32px]">{{ $t('story') }}</h3>
+            <h3 class="font-semi-bold uppercase font-bold text-[32px]">{{ $t('brand') }}</h3>
+            <p class="text-justify mt-[30px] font-normal">
+              {{ $t('about_text') }}
+            </p>
+          </div>
         </div>
         <div id="about-2" class="col-lg-6">
-          <img src="@/Assets/images/about1.png" alt="about" class="w-full rounded-xl h-100 object-cover" />
+          <img
+            v-if="ve_chung_toi.length > 0"
+            :src="BLOG_MEDIA_ENDPOINT + ve_chung_toi[0].image_fe?.picture"
+            alt="about"
+            class="w-full rounded-xl h-100 object-cover"
+          />
+          <img v-else src="@/Assets/images/about1.png" alt="about" class="w-full rounded-xl h-100 object-cover" />
         </div>
       </div>
 
       <div class="row pt-[50px]">
         <div id="about-3" class="col-lg-6 order-md-1 order-2">
-          <img src="@/Assets/images/about2.png" alt="about" class="w-full rounded-xl h-100 object-contain" />
+          <img
+            v-if="ve_chung_toi.length > 0"
+            :src="BLOG_MEDIA_ENDPOINT + ve_chung_toi[1].image_fe?.picture"
+            alt="about"
+            class="w-full rounded-xl h-100 object-contain"
+          />
+          <img v-else src="@/Assets/images/about2.png" alt="about" class="w-full rounded-xl h-100 object-contain" />
         </div>
         <div id="about-4" class="col-lg-6 order-md-2 order-1">
-          <h3 class="mb-0 mt-3 uppercase font-bold text-[32px]">{{ $t('vision') }}</h3>
-          <p class="text-justify mt-[10px] font-normal">
-            {{ $t('vision_text') }}
-          </p>
+          <div
+            v-if="ve_chung_toi.length > 0"
+            v-html="
+              ve_chung_toi[1].translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
+              ve_chung_toi[1].translations[0].content
+            "
+          ></div>
+          <div v-else>
+            <h3 class="mb-0 mt-3 uppercase font-bold text-[32px]">{{ $t('vision') }}</h3>
+            <p class="text-justify mt-[10px] font-normal">
+              {{ $t('vision_text') }}
+            </p>
 
-          <h3 class="mb-0 mt-3 uppercase font-bold text-[32px]">{{ $t('mission') }}</h3>
-          <p class="text-justify mt-[10px] font-normal">
-            {{ $t('mission_text') }}
-          </p>
+            <h3 class="mb-0 mt-3 uppercase font-bold text-[32px]">{{ $t('mission') }}</h3>
+            <p class="text-justify mt-[10px] font-normal">
+              {{ $t('mission_text') }}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -162,7 +192,8 @@ import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n()
 const mounted = ref(false)
 const props = defineProps({
-  blogs: Object
+  blogs: Object,
+  ve_chung_toi: Object
 })
 
 onMounted(async () => {

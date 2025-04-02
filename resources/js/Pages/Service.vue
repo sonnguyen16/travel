@@ -300,10 +300,6 @@ onMounted(async () => {
   padding-bottom: 50px;
 }
 
-.swiper-slide {
-  height: 600px;
-}
-
 /* Tùy chỉnh nút prev và next */
 .swiper-button-prev,
 .swiper-button-next {

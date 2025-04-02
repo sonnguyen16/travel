@@ -25,6 +25,12 @@ class UserHomeController extends Controller
         ->with(['image_fe', 'translations.language'])
         ->get();
 
-        return Inertia::render('About', compact('blogs'));
+        $ve_chung_toi = Blog::query()->whereHas('menu', function ($query) {
+                    $query->where('slug', 've-chung-toi');
+                })->where('active', 1)
+                ->with(['image_fe', 'translations.language'])
+                ->get();
+
+        return Inertia::render('About', compact('blogs', 've_chung_toi'));
     }
 }
