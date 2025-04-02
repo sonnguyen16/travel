@@ -17,7 +17,7 @@
       <div class="row pt-[100px]">
         <div id="about-1" class="col-lg-6">
           <div
-            class="ql-editor mt-"
+            class="ql-editor mt-5"
             v-if="ve_chung_toi.length > 0"
             v-html="
               ve_chung_toi[0].translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
