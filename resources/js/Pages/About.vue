@@ -17,6 +17,7 @@
       <div class="row pt-[100px]">
         <div id="about-1" class="col-lg-6">
           <div
+            class="mt-3"
             v-if="ve_chung_toi.length > 0"
             v-html="
               ve_chung_toi[0].translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
@@ -52,7 +53,7 @@
           />
           <img v-else src="@/Assets/images/about2.png" alt="about" class="w-full rounded-xl h-100 object-contain" />
         </div>
-        <div id="about-4" class="col-lg-6 order-md-2 order-1 mt-3">
+        <div id="about-4" class="col-lg-6 order-md-2 order-1">
           <div
             v-if="ve_chung_toi.length > 0"
             v-html="
