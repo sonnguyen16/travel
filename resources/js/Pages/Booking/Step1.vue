@@ -333,14 +333,14 @@ onMounted(async () => {
 
     setTimeout(() => {
       window.scrollTo({
-        top: document.getElementById(props.products.find((p) => p.location_id == select)?.id).offsetTop - 80,
+        top: document.getElementById(sortedProducts.value.find((p) => p.location_id == select)?.id).offsetTop - 80,
         behavior: 'smooth'
       })
     }, 500)
   }
 
   if (ticket_name) {
-    const matchedProduct = props.products.find((product) => {
+    const matchedProduct = sortedProducts.value.find((product) => {
       const productName = (
         product.translations.find((t) => t.language.code === locale.value.toUpperCase())?.name ||
         product.translations[0].name
