@@ -88,25 +88,25 @@
 
           <div class="py-3">
             <ul class="mb-0 lg:flex hidden gap-4 justify-end">
-              <li @click="scrollToTopAndNavigate('/')" :class="[checkRoute('/')]">
+              <li @click="scrollToTopAndNavigate('/')" :class="[checkRoute(['/home'])]">
                 <Link href="">{{ $t('home') }}</Link>
               </li>
-              <li @click="scrollToTopAndNavigate('/ve-chung-toi')" :class="[checkRoute('/ve-chung-toi')]">
+              <li @click="scrollToTopAndNavigate('/ve-chung-toi')" :class="[checkRoute(['/ve-chung-toi'])]">
                 <Link href="">{{ $t('about') }}</Link>
               </li>
-              <li @click="scrollToTopAndNavigate('/dich-vu')" :class="[checkRoute('/dich-vu')]">
+              <li @click="scrollToTopAndNavigate('/dich-vu')" :class="[checkRoute(['/dich-vu', '/nha-hang', '/diem-den', '/khach-san', '/hoat-dong', '/luu-tru', '/khac'])]">
                 <Link href="">{{ $t('services') }}</Link>
               </li>
-              <li @click="scrollToTopAndNavigate('/uu-dai')" :class="[checkRoute('/uu-dai')]">
+              <li @click="scrollToTopAndNavigate('/uu-dai')" :class="[checkRoute(['/uu-dai'])]">
                 <Link href="">{{ $t('promo') }}</Link>
               </li>
-              <li @click="scrollToTopAndNavigate('/tin-tuc')" :class="[checkRoute('/tin-tuc')]">
+              <li @click="scrollToTopAndNavigate('/tin-tuc')" :class="[checkRoute(['/tin-tuc'])]">
                 <Link href="">{{ $t('news') }}</Link>
               </li>
-              <li @click="scrollToTopAndNavigate('/dat-ve/buoc1')" :class="[checkRoute('/dat-ve/buoc1')]">
+              <li @click="scrollToTopAndNavigate('/dat-ve/buoc1')" :class="[checkRoute(['/dat-ve/buoc1'])]">
                 <Link href="">{{ $t('booking') }}</Link>
               </li>
-              <li @click="scrollToTopAndNavigate('/dat-ve/buoc2')" :class="[checkRoute('/dat-ve/buoc2')]">
+              <li @click="scrollToTopAndNavigate('/dat-ve/buoc2')" :class="[checkRoute(['/dat-ve/buoc2'])]">
                 <a id="cart" href="#" class="relative">
                   <i class="fas fa-shopping-cart"></i>
                   <span
@@ -370,7 +370,10 @@ function scrollToTopAndNavigate(url, options = {}) {
 
 const checkRoute = (route) => {
   if (typeof window !== 'undefined') {
-    return window.location.pathname === route ? 'active' : ''
+    if (window.location.pathname == '/' && route.includes('/home')) {
+      return 'active'
+    }
+    return route.find((item) => window.location.pathname.includes(item)) ? 'active' : ''
   }
   return ''
 }

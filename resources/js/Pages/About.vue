@@ -167,14 +167,14 @@
                 </template>
               </div>
             </div>
-            <div class="position-absolute left-1/3 top-4 ms-3 md:block hidden min-w-[170px]">
+            <div class="position-absolute left-1/3 top-4 ms-3 md:block hidden">
+              <!-- Navigation -->
+              <div class="flex gap-[40px] mb-2">
+                <div class="swiper-button-prev" style="position: relative;"></div>
+                <div class="swiper-button-next" style="position: relative;"></div>
+              </div>
               <h4 class="mb-0">{{ $t('slide_1_title') }}</h4>
               <h3 class="font-bold mb-0">{{ $t('slide_2_title') }}</h3>
-              <!-- Navigation -->
-              <div class="mt-[116px]">
-                <div class="swiper-button-prev" style="left: auto"></div>
-                <div class="swiper-button-next" style="margin-right: 80px"></div>
-              </div>
             </div>
           </div>
         </div>

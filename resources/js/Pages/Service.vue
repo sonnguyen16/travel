@@ -72,7 +72,7 @@
         <div
           id="service-2"
           class="col-lg-6 md:pe-4 hover:cursor-pointer"
-          @click.prevent="router.visit('/nha-hang/nha-hang-lau-rau-leguda')"
+          @click.prevent="router.visit('/nha-hang/buffet-rau-leguda')"
         >
           <h4>{{ $t('restaurant_title') }}</h4>
           <!-- Location -->
@@ -90,7 +90,7 @@
         <div
           id="service-3"
           class="col-lg-6 md:ps-4 md:block hidden hover:cursor-pointer"
-          @click.prevent="router.visit('/nha-hang/nha-hang-ca-phe-thuy-ta')"
+          @click.prevent="router.visit('/nha-hang/nha-hang-cafe-thuy-ta')"
         >
           <div class="img-container h-[300px] mb-3 mt-4 order-md-1 order-2">
             <img src="@/Assets/images/service4.jpg" alt="home1" class="w-full rounded-xl object-cover" />
