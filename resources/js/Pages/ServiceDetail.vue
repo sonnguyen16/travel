@@ -191,7 +191,7 @@
                         blog_related.translations[0].name
                       }}
                     </h3>
-                    <p class="cursor-pointer" @click.stop="if(blog_related.location_id) router.visit(`/diem-den/${blog_related.location?.slug}`)" v-if="blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
+                    <p class="cursor-pointer" @click.stop="viewLocation(blog_related)" v-if="blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
                       <i class="fas fa-map-marker-alt text-green-600 me-2 text-lg"></i>
                       {{
                         blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address ||
@@ -338,6 +338,10 @@ onMounted(() => {
     }
   })
 })
+
+const viewLocation = (blog_related) => {
+  if(blog_related.location_id) router.visit(`/diem-den/${blog_related.location?.slug}`)
+}
 </script>
 <style scoped>
 @media screen and (min-width: 768px) {
