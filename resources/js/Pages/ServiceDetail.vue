@@ -191,7 +191,7 @@
                         blog_related.translations[0].name
                       }}
                     </h3>
-                    <p v-if="blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
+                    <p class="cursor-pointer" @click.stop="router.visit(`/diem-den/${blog_related.location?.slug}`)" v-if="blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
                       <i class="fas fa-map-marker-alt text-green-600 me-2 text-lg"></i>
                       {{
                         blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address ||
@@ -305,7 +305,7 @@ onMounted(() => {
   })
 
   const swiper = new Swiper('.swiper-3', {
-    loop: false,
+    loop: true,
     fadeEffect: { crossFade: true },
     speed: 1000,
     spaceBetween: 10,

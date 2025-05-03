@@ -49,11 +49,11 @@
         <div class="col-lg-6">
           <div class="row">
             <div class="col-lg-5">
-              <h5 class="font-bold mb-0 text-white">{{ $t('about_us') }}</h5>
+              <h5 class="font-bold mb-0 text-white">{{ $t('introduction') }}</h5>
               <hr />
               <ul class="list-unstyled flex flex-col gap-3">
                 <li>
-                  <Link href="/ve-chung-toi">{{ $t('introduction') }}</Link>
+                  <Link href="/ve-chung-toi">{{ $t('about_us') }}</Link>
                 </li>
                 <li>
                   <Link href="/tuyen-dung">{{ $t('recruitment') }}</Link>
@@ -137,6 +137,15 @@ import { Link } from '@inertiajs/vue3'
 footer {
   background: #3e7b27;
   color: white;
+  font-size: 16px !important;
+}
+
+footer h5 {
+  font-size: 16px !important;
+}
+
+footer p {
+  font-size: 16px !important;
 }
 
 li a {
@@ -144,5 +153,6 @@ li a {
   text-decoration: none;
   color: white;
   display: block;
+  font-size: 16px !important;
 }
 </style>

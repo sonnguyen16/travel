@@ -41,6 +41,7 @@ class UserBlogController extends Controller
             ->with('translations.language','image_fe', 'images_fe',
             'menu.blogs.translations.language',
             'menu.blogs.image_fe',
+            'menu.blogs.location',
             'activities.translations.language')
             ->first();
 
@@ -50,7 +51,7 @@ class UserBlogController extends Controller
                 $query->whereIn('slug', ['nha-hang', 'luu-tru', 'diem-den']);
             })
             ->where('id', '!=', $blog->id)
-            ->with('translations.language', 'image_fe', 'menu')
+            ->with('translations.language', 'image_fe', 'menu', 'location')
             ->get();
 
         return Inertia::render('ServiceDetail', compact('blog', 'blogs_related'));

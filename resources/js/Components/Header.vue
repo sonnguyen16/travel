@@ -321,7 +321,7 @@ onMounted(() => {
     document.getElementById('header').style.height = `92vh`
   } else {
     if (window.innerWidth > 1024) {
-      document.getElementById('header').style.height = `30vh`
+      document.getElementById('header').style.height = `33vh`
     }
   }
 
