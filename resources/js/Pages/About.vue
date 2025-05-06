@@ -95,14 +95,7 @@
                     timeline.translations[0].description
                   "></p>
                 </div>
-                <!-- Fallback items if less than 5 timelines -->
-                <template v-if="timelines.length < 5">
-                  <div v-for="i in 5 - timelines.length" :key="'empty-' + i" class="text-center timeline-item">
-                    <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
-                    <p class="mt-2 text-green-900 font-bold text-lg"></p>
-                    <p class="text-sm text-gray-600"></p>
-                  </div>
-                </template>
+
               </div>
             </div>
           </div>
