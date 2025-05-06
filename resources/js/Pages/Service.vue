@@ -47,13 +47,16 @@
                       blog.translations[0].address
                     }}
                   </p>
-                  <div
-                    class="line-clamp-5 card-description"
-                    v-html="
-                      blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
-                      blog.translations[0].description
-                    "
-                  ></div>
+                  <div class="card-description-container">
+                    <div
+                      class="card-description"
+                      v-html="
+                        blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+                        blog.translations[0].description
+                      "
+                    ></div>
+                    <div class="fade-out-effect"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -311,9 +314,27 @@ onMounted(async () => {
   flex: 0 0 auto; /* Không co giãn phần địa chỉ */
 }
 
-.card-description {
-  flex: 1; /* Phần mô tả sẽ co giãn để điều chỉnh chiều cao */
+.card-description-container {
+  flex: 1;
+  position: relative;
   overflow: hidden;
+  max-height: 120px;
+}
+
+.card-description {
+  line-height: 1.5;
+  overflow: hidden;
+  max-height: 120px;
+}
+
+.fade-out-effect {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 1));
+  pointer-events: none;
 }
 
 /* Đảm bảo swiper-slide có chiều cao bằng nhau */
