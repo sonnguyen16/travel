@@ -305,7 +305,7 @@ onMounted(() => {
   })
 
   const swiper = new Swiper('.swiper-3', {
-    loop: true,
+    loop: false,
     fadeEffect: { crossFade: true },
     speed: 1000,
     spaceBetween: 10,
