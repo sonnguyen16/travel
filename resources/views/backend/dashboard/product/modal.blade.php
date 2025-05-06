@@ -75,7 +75,7 @@
                     </div>
                     <div class="form-group">
                         <label>Hình ảnh</label>
-                        <input name="picture" id="picture" type="file" class="form-control" required>
+                        <input name="picture" id="picture" type="file" class="form-control" >
                     </div>
                     <img id="image" src="" alt="Picture" style="width: 150px; margin-bottom: 15px;" hidden>
                     <div class="form-group">
@@ -85,11 +85,11 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Mô tả</label>
-                        <textarea id="description" name="description"></textarea>  
+                        <textarea id="description" name="description"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="content">Nội dung</label>
-                        <textarea id="content" name="content"></textarea>  
+                        <textarea id="content" name="content"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

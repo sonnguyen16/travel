@@ -27,7 +27,6 @@ $('#productModal').on('hidden.bs.modal', function () {
     CKEDITOR.instances['content'].setData('');
     $('#lang_code').text('VI');
     $('body').css('padding-right', '');
-    $('#picture').prop('required', true);
     $('#picture').val('');
     $('#pictures').empty();
     $('#language_id').val('1')
