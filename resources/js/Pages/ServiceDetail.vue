@@ -185,13 +185,13 @@
                     />
                   </div>
                   <div class="p-3 card-content">
-                    <h3 class="text-xl font-semibold line-clamp-1 card-title">
+                    <h3 class="text-xl font-semibold line-clamp-1 card-title mb-2">
                       {{
                         blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                         blog_related.translations[0].name
                       }}
                     </h3>
-                    <p class="cursor-pointer card-address mt-1 mb-2" @click.stop="viewLocation(blog_related)" v-if="blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
+                    <p class="cursor-pointer card-address mt-1 mb-3" @click.stop="viewLocation(blog_related)" v-if="blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
                       <i class="fas fa-map-marker-alt text-green-600 me-2 text-lg"></i>
                       {{
                         blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address ||
@@ -199,7 +199,7 @@
                       }}
                     </p>
                     <div
-                      class="line-clamp-4 card-description"
+                      class="line-clamp-3 card-description overflow-hidden"
                       v-html="
                         blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
                         blog_related.translations[0].description
@@ -373,6 +373,8 @@ const viewLocation = (blog_related) => {
 .card-description {
   flex: 1; /* Phần mô tả sẽ co giãn để điều chỉnh chiều cao */
   overflow: hidden;
+  line-height: 1.5;
+  max-height: 200px;
 }
 
 /* Đảm bảo swiper-slide có chiều cao bằng nhau */
