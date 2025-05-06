@@ -14,7 +14,35 @@ class UserHomeController extends Controller
         $menus = Menu::query()->with(['image', 'translations.language', 'blogs'])
         ->whereHas('image')
         ->get();
-        return Inertia::render('Home', compact('menus'));
+
+        // Lấy hình ảnh cho các menu cụ thể
+        $menuSlugs = ['diem-den', 'hoat-dong', 'nha-hang', 'luu-tru', 'khac'];
+        $menuImages = [];
+
+        foreach ($menuSlugs as $slug) {
+            $menu = Menu::where('slug', $slug)->first();
+
+            if ($menu) {
+                $images = \App\Models\Image::where('record_type', 'Menu')
+                    ->where('record_id', $menu->id)
+                    ->take(5)
+                    ->get();
+
+                $menuImages[$slug] = $images->isNotEmpty() ? $images : null;
+            } else {
+                $menuImages[$slug] = null;
+            }
+        }
+        
+        // Lấy trang có nội dung tiêu đề trang chủ
+        $homePage = \App\Models\Page::query()
+            ->whereHas('translations', function($query) {
+                $query->where('name', 'like', '%tiêu đề trang chủ%');
+            })
+            ->with('translations.language')
+            ->first();
+
+        return Inertia::render('Home', compact('menus', 'menuImages', 'homePage'));
     }
 
     public function about()

@@ -29,8 +29,16 @@ class UserBookingController extends Controller
         $banners = Banner::query()
             ->where('slug','like', 'banner-muc-dat-ve-%')
             ->get();
+            
+        // Lấy trang có nội dung lưu ý khi mua vé
+        $ticketNotesPage = \App\Models\Page::query()
+            ->whereHas('translations', function($query) {
+                $query->where('name', 'like', '%mua vé%');
+            })
+            ->with('translations.language')
+            ->first();
 
-        return Inertia::render('Booking/Step1', compact('products', 'promo', 'banners'));
+        return Inertia::render('Booking/Step1', compact('products', 'promo', 'banners', 'ticketNotesPage'));
     }
 
     public function cart()

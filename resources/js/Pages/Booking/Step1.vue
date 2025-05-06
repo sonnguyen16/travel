@@ -133,7 +133,7 @@
             </div>
           </div>
           <div class="col-span-3 flex flex-col justify-center">
-            <div v-if="product.location.slug != 'datanla-adventures'" class="grid md:grid-cols-6 grid-cols-3">
+            <div v-if="product.price_child > 0" class="grid md:grid-cols-6 grid-cols-3">
               <div class="flex items-center">
                 <label class="">{{ $t('children') }}</label>
               </div>
@@ -165,7 +165,7 @@
                 </p>
               </div>
             </div>
-            <div class="grid md:grid-cols-6 grid-cols-3">
+            <div v-if="product.price > 0" class="grid md:grid-cols-6 grid-cols-3">
               <div class="flex items-center">
                 <label class="">{{ $t('adults') }}</label>
               </div>
@@ -215,8 +215,19 @@
       <div class="row">
         <div class="col-lg-8">
           <div class="w-full mx-auto bg-gray-100 px-[20px] py-[30px] border-[1.5px] border-green-600 rounded-xl mt-5">
-            <h3 class="font-bold">{{ $t(`notes_title`) }}</h3>
-            <div>
+            <h3 class="font-bold">
+              {{
+                props.ticketNotesPage && props.ticketNotesPage.translations
+                ? (props.ticketNotesPage.translations.find(t => t.language.code === locale.toUpperCase())?.name || props.ticketNotesPage.translations[0]?.name)
+                : $t(`notes_title`)
+              }}
+            </h3>
+            <div class="note-content" v-if="props.ticketNotesPage && props.ticketNotesPage.translations" v-html="
+              props.ticketNotesPage.translations.find(t => t.language.code === locale.toUpperCase())?.content ||
+              props.ticketNotesPage.translations[0]?.content
+            ">
+            </div>
+            <div v-else>
               <p v-for="(_, index) in 6" :key="index" class="mb-0">
                 <i class="fas fa-check text-green-600 me-2"></i> {{ $t(`notes.${index}`) }}
               </p>
@@ -282,7 +293,8 @@ import { useI18n } from 'vue-i18n'
 const props = defineProps({
   products: Object,
   promo: Object,
-  banners: Object
+  banners: Object,
+  ticketNotesPage: Object
 })
 
 let Swal = null
@@ -517,18 +529,18 @@ const sortedProducts = computed(() => {
   // Bước 1: Sắp xếp y chang theo productOrder
   const result = []
   const unusedProducts = [...props.products] // Sản phẩm chưa được sắp xếp
-  
+
   // Lặp qua từng sản phẩm trong productOrder
   productOrder.forEach(orderName => {
     // Tìm các sản phẩm trùng với tên trong productOrder
     for (let i = 0; i < unusedProducts.length; i++) {
       const product = unusedProducts[i]
       if (!product) continue
-      
+
       // Lấy tên sản phẩm
       const translation = product.translations.find(t => t.language && t.language.code === locale.value.toUpperCase())
       const productName = translation ? translation.name : (product.translations[0] ? product.translations[0].name : '')
-      
+
       // So sánh không phân biệt hoa thường và khoảng trắng
       if (productName.toLowerCase().trim() === orderName.toLowerCase().trim()) {
         result.push(product)
@@ -536,13 +548,13 @@ const sortedProducts = computed(() => {
       }
     }
   })
-  
+
   // Bước 2: Tìm các sản phẩm không nằm trong productOrder
   const remainingProducts = unusedProducts.filter(p => p !== null)
-  
+
   // Bước 3: Tìm vị trí cuối cùng của mỗi location_id trong mảng đã sắp xếp
   const lastIndexByLocation = {}
-  
+
   // Tìm vị trí cuối cùng của mỗi location_id
   for (let i = result.length - 1; i >= 0; i--) {
     const locationId = result[i].location_id
@@ -550,21 +562,25 @@ const sortedProducts = computed(() => {
       lastIndexByLocation[locationId] = i
     }
   }
-  
+
   // Bước 4: Chèn các sản phẩm còn lại vào sau sản phẩm cuối cùng có cùng location_id
   const insertedProducts = []
-  
+
   remainingProducts.forEach(product => {
     const locationId = product.location_id
-    const insertIndex = lastIndexByLocation[locationId] !== undefined 
-      ? lastIndexByLocation[locationId] + 1 + insertedProducts.filter(p => p.location_id === locationId).length 
+    const insertIndex = lastIndexByLocation[locationId] !== undefined
+      ? lastIndexByLocation[locationId] + 1 + insertedProducts.filter(p => p.location_id === locationId).length
       : result.length
-    
+
     result.splice(insertIndex, 0, product)
     insertedProducts.push(product)
   })
-  
+
   return result
 })
 </script>
-<style scoped></style>
+<style >
+.note-content ul li {
+    list-style: circle;
+}
+</style>

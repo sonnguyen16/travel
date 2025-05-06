@@ -173,7 +173,7 @@
                 @click.prevent="router.visit(`/${blog_related?.menu?.slug || blog?.menu?.slug}/${blog_related.slug}`)"
                 class="swiper-slide hover:cursor-pointer"
               >
-                <div class="rounded-xl bg-white shadow-md">
+                <div class="rounded-xl bg-white shadow-md card-equal-height">
                   <div
                     class="img-container h-[400px] position-relative"
                     style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
@@ -181,17 +181,17 @@
                     <img
                       :src="BLOG_MEDIA_ENDPOINT + blog_related.image_fe?.picture"
                       alt="home1"
-                      class="w-full rounded-tr-xl rounded-tl-xl object-cover"
+                      class="w-full h-full rounded-tr-xl rounded-tl-xl object-cover"
                     />
                   </div>
-                  <div class="p-3">
-                    <h3 class="text-xl font-semibold line-clamp-1">
+                  <div class="p-3 card-content">
+                    <h3 class="text-xl font-semibold line-clamp-1 card-title">
                       {{
                         blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                         blog_related.translations[0].name
                       }}
                     </h3>
-                    <p class="cursor-pointer" @click.stop="viewLocation(blog_related)" v-if="blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
+                    <p class="cursor-pointer card-address mt-1 mb-2" @click.stop="viewLocation(blog_related)" v-if="blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
                       <i class="fas fa-map-marker-alt text-green-600 me-2 text-lg"></i>
                       {{
                         blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address ||
@@ -199,7 +199,7 @@
                       }}
                     </p>
                     <div
-                      class="line-clamp-4"
+                      class="line-clamp-4 card-description"
                       v-html="
                         blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
                         blog_related.translations[0].description
@@ -343,6 +343,43 @@ const viewLocation = (blog_related) => {
   if(blog_related.location_id) router.visit(`/diem-den/${blog_related.location?.slug}`)
 }
 </script>
+
+<style>
+/* Đảm bảo các card có chiều cao bằng nhau */
+.card-equal-height {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.img-container {
+  flex: 0 0 auto; /* Không co giãn phần ảnh */
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Phần nội dung sẽ co giãn để điều chỉnh chiều cao */
+}
+
+.card-title {
+  flex: 0 0 auto; /* Không co giãn phần tiêu đề */
+}
+
+.card-address {
+  flex: 0 0 auto; /* Không co giãn phần địa chỉ */
+}
+
+.card-description {
+  flex: 1; /* Phần mô tả sẽ co giãn để điều chỉnh chiều cao */
+  overflow: hidden;
+}
+
+/* Đảm bảo swiper-slide có chiều cao bằng nhau */
+.swiper-slide {
+  height: auto !important;
+}
+</style>
 <style scoped>
 @media screen and (min-width: 768px) {
   .swiper-3 .active-slide {

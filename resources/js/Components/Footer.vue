@@ -3,7 +3,7 @@
     <div class="container py-5">
       <div class="row">
         <div class="col-lg-3">
-          <img src="@/Assets/images/logo.png" class="w-full" alt="logo" />
+          <img :src="locale === 'vi' ? '/images/logo.png' : '/images/logoeng.png'" class="w-full" alt="logo" />
           <p class="mt-3 text-[15px] font-bold mb-0 text-white">{{ $t('company_name') }}</p>
           <p class="mt-2 text-white">{{ $t('slogan') }}</p>
           <div class="flex gap-4">
@@ -131,6 +131,8 @@
 
 <script setup>
 import { Link } from '@inertiajs/vue3'
+import { useI18n } from 'vue-i18n'
+const { t, locale } = useI18n()
 </script>
 
 <style>

@@ -22,7 +22,7 @@
           <div class="swiper-wrapper pb-5">
             <!-- Slide 1 -->
             <div v-for="blog in blogs" class="swiper-slide hover:cursor-pointer">
-              <div @click.prevent="router.visit(`/${menu.slug}/${blog.slug}`)" class="rounded-xl shadow-xl bg-white">
+              <div @click.prevent="router.visit(`/${menu.slug}/${blog.slug}`)" class="rounded-xl shadow-xl bg-white card-equal-height">
                 <div
                   class="img-container h-[350px] position-relative"
                   style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
@@ -30,18 +30,18 @@
                   <img
                     :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
                     alt="home1"
-                    class="w-full rounded-tr-xl rounded-tl-xl object-cover"
+                    class="w-full h-full rounded-tr-xl rounded-tl-xl object-cover"
                   />
                 </div>
-                <div class="p-3">
-                  <h3 class="line-clamp-1">
+                <div class="p-3 card-content">
+                  <h3 class="line-clamp-1 card-title">
                     {{
                       blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                       blog.translations[0].name
                     }}
                   </h3>
                   <p
-                    class="text-[16px]"
+                    class="text-[16px] card-address mt-1 mb-2"
                     v-if="blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address"
                   >
                     <i class="fas fa-map-marker-alt text-green-600 me-2 text-lg"></i>
@@ -51,7 +51,7 @@
                     }}
                   </p>
                   <div
-                    class="line-clamp-6"
+                    class="line-clamp-6 card-description"
                     v-html="
                       blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
                       blog.translations[0].description

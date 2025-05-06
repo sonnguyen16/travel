@@ -22,7 +22,12 @@
             </span>
             <span class="text-[65px]">{{ $t('year') }}</span>
           </h1>
-          <h3>{{ $t('sustainable_development') }}</h3>
+          <div v-if="props.homePage && props.homePage.translations" v-html="
+            props.homePage.translations.find(t => t.language.code === locale.toUpperCase())?.content ||
+            props.homePage.translations[0]?.content
+          ">
+          </div>
+          <h3 v-else>{{ $t('sustainable_development') }}</h3>
           <p class="font-bold">1976-{{ new Date().getFullYear() }}</p>
         </div>
         <div id="about2" class="col-lg-6">
@@ -38,7 +43,12 @@
           <div class="col-lg-5 mb-md-4">
             <div @click.prevent="router.visit('/diem-den')" class="position-relative h-100 hover:cursor-pointer">
               <div class="img-container h-100">
-                <img src="@/Assets/images/home1.jpg" alt="home1" class="w-full rounded-xl h-100 object-cover" />
+                <img
+                  :src="props.menuImages && props.menuImages['diem-den'] && props.menuImages['diem-den'][0]
+                    ? `/public/uploads/menus/${props.menuImages['diem-den'][0].picture}`
+                    : '@/Assets/images/home1.jpg'"
+                  alt="home1"
+                  class="w-full rounded-xl h-100 object-cover" />
               </div>
               <div id="img-content" class="position-absolute bottom-0 left-0 right-0 overlay ps-3 rounded-xl">
                 <h2 class="text-white mb-0">{{ $t('section_destinations') }}</h2>
@@ -53,7 +63,12 @@
               <div @click.prevent="router.visit('/hoat-dong')" class="col-lg-6">
                 <div class="position-relative h-100 hover:cursor-pointer">
                   <div class="img-container h-100">
-                    <img src="@/Assets/images/home2.jpg" alt="home1" class="w-full rounded-xl h-100" />
+                    <img
+                      :src="props.menuImages && props.menuImages['hoat-dong'] && props.menuImages['hoat-dong'][0]
+                        ? `/public/uploads/menus/${props.menuImages['hoat-dong'][0].picture}`
+                        : '@/Assets/images/home2.jpg'"
+                      alt="home1"
+                      class="w-full rounded-xl h-100" />
                   </div>
                   <div id="img-content" class="position-absolute bottom-0 left-0 right-0 overlay ps-3 rounded-xl">
                     <h2 class="text-white mb-0">{{ $t('section_activities') }}</h2>
@@ -66,7 +81,12 @@
               <div class="col-lg-6">
                 <div @click.prevent="router.visit('/nha-hang')" class="position-relative h-100 hover:cursor-pointer">
                   <div class="img-container h-100">
-                    <img src="@/Assets/images/home3.jpg" alt="home1" class="w-full rounded-xl h-100" />
+                    <img
+                      :src="props.menuImages && props.menuImages['nha-hang'] && props.menuImages['nha-hang'][0]
+                        ? `/public/uploads/menus/${props.menuImages['nha-hang'][0].picture}`
+                        : '@/Assets/images/home3.jpg'"
+                      alt="home1"
+                      class="w-full rounded-xl h-100" />
                   </div>
                   <div id="img-content" class="position-absolute bottom-0 left-0 right-0 overlay ps-3 rounded-xl">
                     <h2 class="text-white mb-0">{{ $t('section_restaurants') }}</h2>
@@ -79,7 +99,12 @@
               <div class="col-lg-6 mb-md-4">
                 <div @click.prevent="router.visit('/luu-tru')" class="position-relative h-100 hover:cursor-pointer">
                   <div class="img-container h-100">
-                    <img src="@/Assets/images/home4.jpg" alt="home1" class="w-full rounded-xl h-100" />
+                    <img
+                      :src="props.menuImages && props.menuImages['luu-tru'] && props.menuImages['luu-tru'][0]
+                        ? `/public/uploads/menus/${props.menuImages['luu-tru'][0].picture}`
+                        : '@/Assets/images/home4.jpg'"
+                      alt="home1"
+                      class="w-full rounded-xl h-100" />
                   </div>
                   <div id="img-content" class="position-absolute bottom-0 left-0 right-0 overlay ps-3 rounded-xl">
                     <h2 class="text-white mb-0">{{ $t('section_accommodation') }}</h2>
@@ -92,7 +117,12 @@
               <div class="col-lg-6 mb-4">
                 <div @click.prevent="router.visit('/khac')" class="position-relative h-100 hover:cursor-pointer">
                   <div class="img-container h-100">
-                    <img src="@/Assets/images/home5.jpg" alt="home1" class="w-full rounded-xl h-100" />
+                    <img
+                      :src="props.menuImages && props.menuImages['khac'] && props.menuImages['khac'][0]
+                        ? `/public/uploads/menus/${props.menuImages['khac'][0].picture}`
+                        : '@/Assets/images/home5.jpg'"
+                      alt="home1"
+                      class="w-full rounded-xl h-100" />
                   </div>
                   <div class="position-absolute bottom-0 left-0 right-0 overlay ps-3 rounded-xl">
                     <h2 class="text-white mb-0">{{ $t('section_others') }}</h2>
@@ -157,7 +187,9 @@ import { router, Head } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
-  menus: Object
+  menus: Object,
+  menuImages: Object,
+  homePage: Object
 })
 
 const { t, locale } = useI18n()
