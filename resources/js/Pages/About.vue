@@ -90,10 +90,10 @@
                 <div v-for="(timeline, index) in timelines" :key="index" class="text-center timeline-item">
                   <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
                   <p class="mt-2 text-green-900 font-bold text-lg">{{ timeline.translations.find((t) => t.language.code == locale.toUpperCase())?.name || timeline.translations[0].name }}</p>
-                  <p class="text-sm text-gray-600" v-html="
+                  <div class="text-sm text-gray-600" v-html="
                     timeline.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
                     timeline.translations[0].description
-                  "></p>
+                  "></div>
                 </div>
 
               </div>
