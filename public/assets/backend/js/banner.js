@@ -59,7 +59,7 @@ $('#pictures-input').on('change', function(event) {
 
         reader.onload = function(e) {
             var imageHtml = `
-                <div class="col-md-3 mb-2">
+                <div class="col-md-4 mb-2">
                     <img src="${e.target.result}" class="img-thumbnail" style="height: 150px; object-fit: cover;">
                 </div>
             `;
