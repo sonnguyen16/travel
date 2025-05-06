@@ -31,7 +31,7 @@ function checkMenuSelection() {
         // Hiển thị "Thuộc địa điểm"
         var locationSelect = $("#news_id").closest('.form-group').next();
         locationSelect.show();
-        locationSelect.find("select").prop('required', true); 
+        locationSelect.find("select").prop('required', true);
     }
 }
 
@@ -78,7 +78,6 @@ $('#blogModal').on('hidden.bs.modal', function () {
     CKEDITOR.instances['content'].setData('');
     $('#lang_code').text('VI');
     $('body').css('padding-right', '');
-    $('#picture').prop('required', true);
     $('#picture').val('');
     $('#pictures').empty();
     $('#picturesInput').val('');
@@ -209,9 +208,9 @@ $('#picture').on('change', function(event) {
 });
 
 $('#picturesInput').on('change', function(event) {
-    var files = event.target.files; 
+    var files = event.target.files;
     var picturesDiv = $('#pictures');
-    
+
     picturesDiv.find('.new-image').remove();
 
     if (files.length === 0) {
@@ -221,7 +220,7 @@ $('#picturesInput').on('change', function(event) {
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
         var reader = new FileReader();
-        
+
         reader.onload = function(e) {
             var imageHtml = `
                 <div class="col-md-2 new-image" style="flex: 0 0 auto; position: relative; margin-bottom: 10px;">
@@ -230,7 +229,7 @@ $('#picturesInput').on('change', function(event) {
             `;
             picturesDiv.append(imageHtml);
         };
-        
+
         reader.readAsDataURL(file);
     }
 });
