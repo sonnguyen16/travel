@@ -81,11 +81,11 @@
         <div class="w-full mt-5">
           <div class="relative">
             <!-- Horizontal Line -->
-            <div class="inset-0 flex items-center">
+            <div class="flex items-center">
               <div class="w-full border-t-2 border-green-700"></div>
             </div>
             <!-- Timeline Content -->
-            <div class="timeline-container">
+            <div class="timeline-container absolute top-[4px]">
               <div class="timeline-items">
                 <div v-for="(timeline, index) in timelines" :key="index" class="text-center timeline-item">
                   <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
@@ -435,6 +435,7 @@ onMounted(async () => {
   flex: 0 0 20%;
   min-width: 20%;
   text-align: center;
+  padding: 0 10px;
 }
 
 @media (max-width: 768px) {
