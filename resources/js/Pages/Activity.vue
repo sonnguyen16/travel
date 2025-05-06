@@ -34,7 +34,7 @@
                   blog.translations[0].name
                 }}
               </h3>
-              <p v-if="blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
+              <p @click.stop="viewLocation(blog)" v-if="blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
                 <i class="fas fa-map-marker-alt text-green-600 me-2 text-lg"></i>
                 {{
                   blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address ||
@@ -88,6 +88,10 @@ onMounted(async () => {
     })
   }
 })
+
+const viewLocation = (blog_related) => {
+  if(blog_related.location_id) router.visit(`/diem-den/${blog_related.location?.slug}`)
+}
 </script>
 <style scoped>
 .overlay {

@@ -129,3 +129,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
   top: 0;
   width: auto;
 }
+
+
+.about-text p {
+    font-size: 14px;
+  }

@@ -20,7 +20,7 @@
             <span class="text-bold text-[150px]">
               {{ new Date().getFullYear() - 1976 }}
             </span>
-            {{ $t('year') }}
+            <span class="text-[65px]">{{ $t('year') }}</span>
           </h1>
           <h3>{{ $t('sustainable_development') }}</h3>
           <p class="font-bold">1976-{{ new Date().getFullYear() }}</p>

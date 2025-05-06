@@ -67,7 +67,7 @@ class UserBlogController extends Controller
         $blogs = Blog::query()
             ->where('active', 1)
             ->where('menu_id', $menu->id)
-            ->with('translations.language', 'image_fe')
+            ->with('translations.language', 'image_fe', 'location')
             ->get();
 
         return Inertia::render('Activity', compact('blogs', 'menu'));

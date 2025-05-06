@@ -31,12 +31,12 @@
                   />
                 </div>
                 <div class="p-3">
-                  <h3>
+                  <h4>
                     {{
                       blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                       blog.translations[0].name
                     }}
-                  </h3>
+                  </h4>
                   <p
                     class="text-[16px]"
                     v-if="blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address"
@@ -135,12 +135,12 @@
                   />
                 </div>
                 <div class="p-3">
-                  <h3 class="line-clamp-1">
+                  <h4 class="line-clamp-1">
                     {{
                       blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
                       blog.translations[0].name
                     }}
-                  </h3>
+                  </h4>
                   <p v-if="blog.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
                     <i class="fas fa-map-marker-alt text-green-600 me-2 text-lg"></i>
                     {{

@@ -512,23 +512,59 @@ const productOrder = [
 
 // Tạo computed property để sắp xếp products
 const sortedProducts = computed(() => {
-  if (!props.products) return []
+  if (!props.products || !props.products.length) return []
 
-  return [...props.products].sort((a, b) => {
-    const nameA =
-      a.translations.find((t) => t.language.code === locale.value.toUpperCase())?.name || a.translations[0].name
-    const nameB =
-      b.translations.find((t) => t.language.code === locale.value.toUpperCase())?.name || b.translations[0].name
-
-    const indexA = productOrder.indexOf(nameA)
-    const indexB = productOrder.indexOf(nameB)
-
-    // Nếu không tìm thấy trong danh sách, đẩy xuống cuối
-    if (indexA === -1) return 1
-    if (indexB === -1) return -1
-
-    return indexA - indexB
+  // Bước 1: Sắp xếp y chang theo productOrder
+  const result = []
+  const unusedProducts = [...props.products] // Sản phẩm chưa được sắp xếp
+  
+  // Lặp qua từng sản phẩm trong productOrder
+  productOrder.forEach(orderName => {
+    // Tìm các sản phẩm trùng với tên trong productOrder
+    for (let i = 0; i < unusedProducts.length; i++) {
+      const product = unusedProducts[i]
+      if (!product) continue
+      
+      // Lấy tên sản phẩm
+      const translation = product.translations.find(t => t.language && t.language.code === locale.value.toUpperCase())
+      const productName = translation ? translation.name : (product.translations[0] ? product.translations[0].name : '')
+      
+      // So sánh không phân biệt hoa thường và khoảng trắng
+      if (productName.toLowerCase().trim() === orderName.toLowerCase().trim()) {
+        result.push(product)
+        unusedProducts[i] = null // Đánh dấu đã sử dụng
+      }
+    }
   })
+  
+  // Bước 2: Tìm các sản phẩm không nằm trong productOrder
+  const remainingProducts = unusedProducts.filter(p => p !== null)
+  
+  // Bước 3: Tìm vị trí cuối cùng của mỗi location_id trong mảng đã sắp xếp
+  const lastIndexByLocation = {}
+  
+  // Tìm vị trí cuối cùng của mỗi location_id
+  for (let i = result.length - 1; i >= 0; i--) {
+    const locationId = result[i].location_id
+    if (lastIndexByLocation[locationId] === undefined) {
+      lastIndexByLocation[locationId] = i
+    }
+  }
+  
+  // Bước 4: Chèn các sản phẩm còn lại vào sau sản phẩm cuối cùng có cùng location_id
+  const insertedProducts = []
+  
+  remainingProducts.forEach(product => {
+    const locationId = product.location_id
+    const insertIndex = lastIndexByLocation[locationId] !== undefined 
+      ? lastIndexByLocation[locationId] + 1 + insertedProducts.filter(p => p.location_id === locationId).length 
+      : result.length
+    
+    result.splice(insertIndex, 0, product)
+    insertedProducts.push(product)
+  })
+  
+  return result
 })
 </script>
 <style scoped></style>

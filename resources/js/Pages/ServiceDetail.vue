@@ -175,7 +175,7 @@
               >
                 <div class="rounded-xl bg-white shadow-md">
                   <div
-                    class="img-container h-[400px]"
+                    class="img-container h-[400px] position-relative"
                     style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
                   >
                     <img
@@ -211,8 +211,8 @@
             </template>
           </div>
           <!-- Navigation -->
-          <div class="swiper-button-next swiper-next-2"></div>
-          <div class="swiper-button-prev swiper-prev-2"></div>
+          <div class="swiper-button-next swiper-next-2 custom-nav-button"></div>
+          <div class="swiper-button-prev swiper-prev-2 custom-nav-button"></div>
         </div>
       </div>
     </div>
@@ -427,5 +427,26 @@ img {
 .swiper-button-prev:hover::after,
 .swiper-button-next:hover::after {
   color: white;
+}
+
+/* CSS cho nút điều hướng ở giữa ảnh */
+.custom-nav-button {
+  position: absolute;
+  top: 200px; /* Giữa chiều cao của ảnh (400px/2) */
+  z-index: 10;
+  opacity: 0.8;
+}
+
+.swiper-next-2 {
+  right: 10px;
+}
+
+.swiper-prev-2 {
+  left: 10px;
+}
+
+/* Hiển thị nút khi hover vào slide */
+.swiper-2:hover .custom-nav-button {
+  opacity: 1;
 }
 </style>

@@ -81,40 +81,28 @@
         <div class="w-full mt-5">
           <div class="relative">
             <!-- Horizontal Line -->
-            <div class="absolute inset-0 flex items-center">
+            <div class="inset-0 flex items-center">
               <div class="w-full border-t-2 border-green-700"></div>
             </div>
             <!-- Timeline Content -->
-            <div class="grid grid-cols-5 gap-4 absolute md:translate-y-[-10%] translate-y-[-6%]">
-              <!-- Item 1 -->
-              <div class="text-center col-span-1">
-                <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
-                <p class="mt-2 text-green-900 font-bold text-lg">1976</p>
-                <p class="text-sm text-gray-600">{{ $t('timeline_1976') }}</p>
-              </div>
-              <!-- Item 2 -->
-              <div class="text-center col-span-1">
-                <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
-                <p class="mt-2 text-green-900 font-bold text-lg">2006</p>
-                <p class="text-sm text-gray-600">{{ $t('timeline_2006') }}</p>
-              </div>
-              <!-- Item 3 -->
-              <div class="text-center col-span-1">
-                <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
-                <p class="mt-2 text-green-900 font-bold text-lg">2013</p>
-                <p class="text-sm text-gray-600">{{ $t('timeline_2013') }}</p>
-              </div>
-              <!-- Item 4 -->
-              <div class="text-center col-span-1">
-                <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
-                <p class="mt-2 text-green-900 font-bold text-lg">2020</p>
-                <p class="text-sm text-gray-600">{{ $t('timeline_2020') }}</p>
-              </div>
-              <!-- Item 5 -->
-              <div class="text-center col-span-1">
-                <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
-                <p class="mt-2 text-green-900 font-bold text-lg">2024</p>
-                <p class="text-sm text-gray-600">{{ $t('timeline_2024') }}</p>
+            <div class="timeline-container">
+              <div class="timeline-items">
+                <div v-for="(timeline, index) in timelines" :key="index" class="text-center timeline-item">
+                  <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
+                  <p class="mt-2 text-green-900 font-bold text-lg">{{ timeline.translations.find((t) => t.language.code == locale.toUpperCase())?.name || timeline.translations[0].name }}</p>
+                  <p class="text-sm text-gray-600" v-html="
+                    timeline.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+                    timeline.translations[0].description
+                  "></p>
+                </div>
+                <!-- Fallback items if less than 5 timelines -->
+                <template v-if="timelines.length < 5">
+                  <div v-for="i in 5 - timelines.length" :key="'empty-' + i" class="text-center timeline-item">
+                    <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
+                    <p class="mt-2 text-green-900 font-bold text-lg"></p>
+                    <p class="text-sm text-gray-600"></p>
+                  </div>
+                </template>
               </div>
             </div>
           </div>
@@ -139,7 +127,7 @@
                       blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
                       blog.translations[0].description
                     "
-                    class="text-justify"
+                    class="text-justify about-text"
                   ></div>
                 </div>
               </div>
@@ -169,12 +157,11 @@
             </div>
             <div class="position-absolute left-1/3 top-4 ms-3 md:block hidden">
               <!-- Navigation -->
-              <div class="flex gap-[40px] mb-2">
+              <h3 class="font-bold mb-0 ">{{ $t('slide_2_title') }}</h3>
+              <div class="flex gap-[40px] mb-2 mt-[25px] ms-[-10px]">
                 <div class="swiper-button-prev" style="position: relative;"></div>
                 <div class="swiper-button-next" style="position: relative;"></div>
               </div>
-              <h4 class="mb-0">{{ $t('slide_1_title') }}</h4>
-              <h3 class="font-bold mb-0">{{ $t('slide_2_title') }}</h3>
             </div>
           </div>
         </div>
@@ -195,7 +182,8 @@ const { t, locale } = useI18n()
 const mounted = ref(false)
 const props = defineProps({
   blogs: Object,
-  ve_chung_toi: Object
+  ve_chung_toi: Object,
+  timelines: Object
 })
 
 onMounted(async () => {
@@ -416,6 +404,50 @@ onMounted(async () => {
 
   .swiper-slide {
     width: 100% !important;
+  }
+}
+
+.timeline-container {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 1.5rem;
+  transform: translateY(-10%);
+}
+
+/* Tùy chỉnh thanh scroll cho Chrome, Edge, và Safari */
+.timeline-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.timeline-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.timeline-container::-webkit-scrollbar-thumb {
+  background-color: #0c9444;
+  border-radius: 10px;
+}
+
+.timeline-items {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #0c9444 #f1f1f1;
+}
+
+.timeline-item {
+  flex: 0 0 20%;
+  min-width: 20%;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .timeline-item {
+    flex: 0 0 50%;
+    min-width: 50%;
   }
 }
 </style>

@@ -24,7 +24,7 @@
             <div v-for="blog in blogs" class="swiper-slide hover:cursor-pointer">
               <div @click.prevent="router.visit(`/${menu.slug}/${blog.slug}`)" class="rounded-xl shadow-xl bg-white">
                 <div
-                  class="img-container h-[350px]"
+                  class="img-container h-[350px] position-relative"
                   style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
                 >
                   <img
@@ -62,8 +62,8 @@
             </div>
           </div>
           <!-- Navigation -->
-          <div class="swiper-button-next swiper-next-2"></div>
-          <div class="swiper-button-prev swiper-prev-2"></div>
+          <div class="swiper-button-next swiper-next-2 custom-nav-button"></div>
+          <div class="swiper-button-prev swiper-prev-2 custom-nav-button"></div>
         </div>
       </div>
       <div v-else>
@@ -182,5 +182,26 @@ onMounted(async () => {
 .swiper-button-prev:hover::after,
 .swiper-button-next:hover::after {
   color: white; /* Mũi tên màu trắng khi hover */
+}
+
+/* CSS cho nút điều hướng ở giữa ảnh */
+.custom-nav-button {
+  position: absolute;
+  top: 175px; /* Giữa chiều cao của ảnh (350px/2) */
+  z-index: 10;
+  opacity: 0.8;
+}
+
+.swiper-next-2 {
+  right: 10px;
+}
+
+.swiper-prev-2 {
+  left: 10px;
+}
+
+/* Hiển thị nút khi hover vào slide */
+.swiper-2:hover .custom-nav-button {
+  opacity: 1;
 }
 </style>

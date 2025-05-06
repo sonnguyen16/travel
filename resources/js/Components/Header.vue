@@ -72,7 +72,9 @@
           <div class="d-flex align-items-center lg:w-auto w-full justify-between gap-3">
             <a @click.prevent="router.visit('/')" class="" href="#">
               <img
-                :src="isFixed ? '/images/logo1.png' : '/images/logo.png'"
+                :src="isFixed 
+                  ? (locale === 'vi' ? '/images/logo1.png' : '/images/logoeng1.png') 
+                  : (locale === 'vi' ? '/images/logo.png' : '/images/logoeng.png')"
                 :class="[isFixed ? 'w-[200px] my-3' : 'w-[300px]']"
                 alt="logo"
               />

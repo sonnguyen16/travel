@@ -31,6 +31,15 @@ class UserHomeController extends Controller
                 ->with(['image_fe', 'translations.language'])
                 ->get();
 
-        return Inertia::render('About', compact('blogs', 've_chung_toi'));
+        $timelines = Blog::query()->whereHas('menu', function ($query) {
+                    $query->where('slug', 'cot-moc');
+                })->where('active', 1)
+                ->with(['translations.language'])
+                ->get()
+                ->sortBy(function($blog) {
+                    return $blog->translations[0]->name;
+                })->values();
+
+        return Inertia::render('About', compact('blogs', 've_chung_toi', 'timelines'));
     }
 }

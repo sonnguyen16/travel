@@ -56,7 +56,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Hình ảnh</label>
-                                    <input name="picture" id="picture" type="file" class="form-control" required>
+                                    <input name="picture" id="picture" type="file" class="form-control">
                                 </div>
                                 <img src="" alt="Picture" style="width: 100px; margin-bottom: 15px;" id="image" hidden>
                             </div>
@@ -68,7 +68,7 @@
                                             <option value="{{ $item->id }}">{{ $item->translation->name }}</option>
                                         @endforeach
                                     </select>
-                                </div>  
+                                </div>
                             </div>
                             <div class="col-md-3" id="type_child">
                                 <div class="form-group">
@@ -114,14 +114,14 @@
 
                     <div class="form-group">
                         <label for="description">Mô tả</label>
-                        <textarea id="description" name="description"></textarea>  
+                        <textarea id="description" name="description"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="content">Nội dung</label>
-                        <textarea id="content" name="content"></textarea>  
+                        <textarea id="content" name="content"></textarea>
                     </div>
-                    
-                    
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
