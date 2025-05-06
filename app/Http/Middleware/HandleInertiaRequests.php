@@ -46,6 +46,36 @@ class HandleInertiaRequests extends Middleware
             'languages' => Language::where('active', 1)->get(),
             'locations' => Location::where('active', 1)->with('translations.language')->get(),
             'background' => Banner::where('name', 'Background')->first(),
+            'bannerImages' => function() use ($request) {
+                // Chỉ lấy dữ liệu banner trang chủ khi ở trang chủ
+                if ($request->is('/')) {
+                    $homeBanner = Banner::where('name', 'Banner trang chủ')->first();
+                    $bannerImages = [];
+                    
+                    if ($homeBanner) {
+                        // Lấy hình ảnh chính của banner nếu có
+                        if ($homeBanner->picture) {
+                            $bannerImages[] = ['picture' => $homeBanner->picture];
+                        }
+                        
+                        // Lấy các hình ảnh liên quan từ bảng images
+                        $additionalImages = \App\Models\Image::where('record_type', 'Banner')
+                                            ->where('record_id', $homeBanner->id)
+                                            ->where('name', 'Picture')
+                                            ->get();
+                        
+                        if ($additionalImages->count() > 0) {
+                            foreach ($additionalImages as $image) {
+                                $bannerImages[] = ['picture' => $image->picture];
+                            }
+                        }
+                    }
+                    
+                    return $bannerImages;
+                }
+                
+                return [];
+            },
         ];
     }
 }

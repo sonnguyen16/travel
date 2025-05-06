@@ -108,6 +108,7 @@ Route::prefix('/admin')->group(function () {
     Route::post('/banner/store', [BannerController::class,'store'])->name('backend.dashboard.banner.store');
     Route::get('/banner/edit', [BannerController::class,'edit'])->name('backend.dashboard.banner.edit');
     Route::get('/banner/delete', [BannerController::class,'delete'])->name('backend.dashboard.banner.delete');
+    Route::post('/banner/delete-image', [BannerController::class,'deleteImage'])->name('backend.dashboard.banner.delete-image');
 
     Route::get('/language', [LanguageController::class,'index'])->name('backend.dashboard.language.index');
     Route::post('/language/store', [LanguageController::class,'store'])->name('backend.dashboard.language.store');

@@ -1,5 +1,18 @@
 <template>
   <div id="header" class="header position-relative">
+
+    <!-- Slider tự động cho banner trang chủ -->
+    <div v-if="$page.url === '/' && (bannerImages && bannerImages.length > 0)" class="banner-slider">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div v-for="(image, index) in bannerImages" :key="index" class="swiper-slide">
+            <img :src="`/public/uploads/banners/${image.picture}`" alt="Banner" class="w-100 h-100 object-cover" />
+          </div>
+        </div>
+        <!-- Thêm điều hướng và phân trang nếu cần -->
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
     <div class="overlay"></div>
     <div class="container pt-5 position absolute top-0 left-0 right-0 d-flex flex-column">
       <div class="d-flex align-items-center gap-3 justify-end">
@@ -72,8 +85,8 @@
           <div class="d-flex align-items-center lg:w-auto w-full justify-between gap-3">
             <a @click.prevent="router.visit('/')" class="" href="#">
               <img
-                :src="isFixed 
-                  ? (locale === 'vi' ? '/images/logo1.png' : '/images/logoeng1.png') 
+                :src="isFixed
+                  ? (locale === 'vi' ? '/images/logo1.png' : '/images/logoeng1.png')
                   : (locale === 'vi' ? '/images/logo.png' : '/images/logoeng.png')"
                 :class="[isFixed ? 'w-[200px] my-3' : 'w-[300px]']"
                 alt="logo"
@@ -262,11 +275,14 @@
   </div>
 </template>
 <script setup>
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { Link, useForm, usePage } from '@inertiajs/vue3'
 import { router } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 import emitter from '@/mitt'
+// Import Swiper
+import Swiper from 'swiper/bundle'
+import 'swiper/css/bundle'
 
 const showMenu = ref(false)
 const isFixed = ref(false)
@@ -274,12 +290,18 @@ const isDropdownOpen = ref(false)
 const page = usePage()
 const languages = computed(() => page.props.languages)
 const locations = computed(() => page.props.locations)
+const bannerImages = computed(() => page.props.bannerImages || [])
 const { t, locale } = useI18n()
 const quantity = computed(() =>
   cart.value.reduce((acc, item) => acc + parseInt(item.num_child) + parseInt(item.num_adult), 0)
 )
 
 let cart = ref([])
+const props = defineProps({
+  locations: Object,
+  products: Object
+})
+
 const form = useForm({
   select: '',
   num_child: 0,
@@ -321,6 +343,31 @@ onMounted(() => {
 
   if (location.pathname == '/') {
     document.getElementById('header').style.height = `92vh`
+
+    // Khởi tạo Swiper cho banner trang chủ nếu có hình ảnh
+    if (bannerImages.value && bannerImages.value.length > 0) {
+      // Đợi DOM render xong
+      setTimeout(() => {
+        const swiper = new Swiper('.swiper-container', {
+          slidesPerView: 1,
+          spaceBetween: 0,
+          loop: true,
+          autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+          },
+          effect: 'fade',
+          fadeEffect: {
+            crossFade: true,
+          },
+          speed: 1500, // Tăng thời gian chuyển đổi giữa các slide lên 1.5 giây
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+        });
+      }, 100);
+    }
   } else {
     if (window.innerWidth > 1024) {
       document.getElementById('header').style.height = `33vh`
@@ -407,6 +454,62 @@ const sortedLocations = computed(() => {
 })
 </script>
 <style scoped>
+/* CSS cho banner slider */
+.banner-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Tạo lớp overlay gradient cho slider */
+.banner-slider::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 35%; /* Chỉ che phần trên của hình ảnh */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+  z-index: 1;
+  pointer-events: none; /* Đảm bảo có thể click qua overlay */
+}
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Styling cho pagination */
+.swiper-pagination {
+  bottom: 20px !important;
+}
+
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background: white;
+  opacity: 0.7;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #16a34a; /* Màu xanh giống theme */
+}
 .header {
   background: url('@/Assets/images/bg_home.jpg') no-repeat center center;
   background-size: cover;

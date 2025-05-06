@@ -99,6 +99,7 @@
               </div>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -185,48 +186,72 @@ onMounted(async () => {
     const ScrollReveal = (await import('scrollreveal')).default
     const scrollReveal = ScrollReveal()
 
-    const swiper = new Swiper('.swiper-2', {
-      loop: true,
-      fadeEffect: { crossFade: true },
-      speed: 1000,
-      spaceBetween: 20,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      },
-      breakpoints: {
-        1024: {
-          slidesPerView: 3
+    // Khởi tạo Swiper nếu có blogs
+    if (props.blogs && props.blogs.length > 0) {
+      const swiper = new Swiper('.swiper-2', {
+        loop: true,
+        fadeEffect: { crossFade: true },
+        speed: 1000,
+        spaceBetween: 20,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
         },
-        768: {
-          slidesPerView: 2
-        },
-        480: {
-          slidesPerView: 1
+        breakpoints: {
+          1024: {
+            slidesPerView: 3
+          },
+          768: {
+            slidesPerView: 2
+          },
+          480: {
+            slidesPerView: 1
+          }
         }
+      })
+
+      const swiper1 = new Swiper('.swiper-1', {
+        allowTouchMove: false,
+        loop: true,
+        speed: 1000,
+        spaceBetween: 20,
+        slidesPerView: 1
+      })
+
+      // Gắn sự kiện slideChange
+      if (swiper) {
+        swiper.on('slideChange', () => {
+          // Xóa lớp active-slide khỏi tất cả các slide
+          const slides = document.querySelectorAll('.swiper-slide')
+          slides.forEach((slide) => slide.classList.remove('active-slide'))
+
+          // Thêm lớp active-slide vào slide hiện tại
+          const activeSlide = swiper.slides[swiper.activeIndex]
+          if (activeSlide) {
+            activeSlide.classList.add('active-slide')
+          }
+
+          if (swiper1) {
+            swiper1.slideTo(swiper.realIndex)
+          }
+        })
       }
-    })
+    }
 
-    const swiper1 = new Swiper('.swiper-1', {
-      allowTouchMove: false,
-      loop: true,
-      speed: 1000,
-      spaceBetween: 20,
-      slidesPerView: 1
-    })
+    // Tính toán độ rộng cho các cột mốc trong timeline
+    if (props.timelines && props.timelines.length > 0) {
+      const timelineItems = document.querySelectorAll('.timeline-item');
+      const itemCount = timelineItems.length;
 
-    // Gắn sự kiện slideChange
-    swiper.on('slideChange', () => {
-      // Xóa lớp active-slide khỏi tất cả các slide
-      const slides = document.querySelectorAll('.swiper-slide')
-      slides.forEach((slide) => slide.classList.remove('active-slide'))
+      // Tính toán độ rộng: nếu có 5 cột mốc trở lên thì mỗi cột 20%, nếu ít hơn thì 100% / số cột
+      const itemWidth = Math.max(100 / itemCount, 20);
 
-      // Thêm lớp active-slide vào slide hiện tại
-      const activeSlide = swiper.slides[swiper.activeIndex]
-      activeSlide.classList.add('active-slide')
-
-      swiper1.slideTo(swiper.realIndex)
-    })
+      // Áp dụng độ rộng cho từng cột mốc
+      timelineItems.forEach(item => {
+        item.style.flex = `0 0 ${itemWidth}%`;
+        item.style.minWidth = `${itemWidth}%`;
+      });
+    }
 
     // ScrollReveal - Hiệu ứng nhập từ 2 bên
     scrollReveal.reveal('#about-1', {
@@ -432,8 +457,7 @@ onMounted(async () => {
 }
 
 .timeline-item {
-  flex: 0 0 20%;
-  min-width: 20%;
+  /* Độ rộng sẽ được tính toán bằng JavaScript */
   text-align: center;
   padding: 0 10px;
 }

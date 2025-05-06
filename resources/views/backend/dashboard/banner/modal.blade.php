@@ -56,11 +56,18 @@
                         <label>Tên banner <span style="color: red">*</span></label>
                         <input name="name" id="name" type="text" class="form-control" placeholder="Nhập tên banner ..." required readonly>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group single-image">
                         <label>Hình ảnh</label>
                         <input name="picture" id="picture" type="file" class="form-control" required>
                     </div>
                     <img src="" alt="Picture" style="width: 200px; margin-bottom: 15px;" id="image" hidden>
+
+                    <div class="form-group multiple-images" style="display: none;">
+                        <label>Chọn nhiều hình ảnh</label>
+                        <input name="pictures[]" id="pictures-input" type="file" class="form-control" multiple>
+                        <div id="pictures-preview" class="row mt-3"></div>
+                    </div>
+                    <div id="existing-images" class="row mt-3"></div>
                     {{-- <div class="form-group">
                         <label style="margin-top: 15px">
                             <input name="active" id="active" type="checkbox" class="flat-red"> Hoạt động

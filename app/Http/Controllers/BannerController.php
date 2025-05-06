@@ -48,6 +48,7 @@ class BannerController extends Controller
             'slug' => Str::slug($request->input('name'))
         ];
 
+        // Xử lý hình ảnh đơn cho các banner thông thường
         if ($request->hasFile('picture')) {
             $file = $request->file('picture');
             $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
@@ -56,46 +57,97 @@ class BannerController extends Controller
             $bannerData['picture'] = $file_name;
         }
 
-
         $banner = Banner::updateOrCreate(
             ['id' => $request->input('id')],
             $bannerData
         );
 
-        // if ($request->hasFile('picture')) {
-        //     $file = $request->file('picture');
-        //     $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
-        //     $file->move('public/uploads/banners/', $file_name);
-
-        //     Image::updateOrCreate(
-        //         [
-        //             'record_type' => 'Banner',
-        //             'record_id' => $banner->id,
-        //             'name' => 'Picture'
-        //         ],
-        //         [
-        //             'picture' => $file_name
-        //         ]
-        //     );
-        // }
+        // Xử lý nhiều hình ảnh cho Banner trang chủ
+        if ($request->name === 'Banner trang chủ' && $request->hasFile('pictures')) {
+            foreach ($request->file('pictures') as $file) {
+                $file_name = Str::uuid().'_'.date('YmdHis')."_".Auth::user()->id."_".$file->getClientOriginalName();
+                $file->move('public/uploads/banners/', $file_name);
+                
+                // Lưu vào bảng images
+                Image::create([
+                    'record_type' => 'Banner',
+                    'record_id' => $banner->id,
+                    'name' => 'Picture',
+                    'picture' => $file_name
+                ]);
+            }
+        }
+        
         return redirect(route('backend.dashboard.banner.index'));
     }
 
     public function edit(Request $request) {
-		$banner = Banner::with('image')->find($request->input('id'));
+		$banner = Banner::find($request->input('id'));
+        
+        // Lấy danh sách hình ảnh từ bảng images nếu là Banner trang chủ
+        if ($banner->name === 'Banner trang chủ') {
+            $banner->images = Image::where('record_type', 'Banner')
+                                ->where('record_id', $banner->id)
+                                ->where('name', 'Picture')
+                                ->get();
+        }
+        
         return response()->json([
             'banner' => $banner,
         ]);
 	}
-    public function delete(Request $request){
-        $banner = Banner::where('id', $request->id)->delete();
-        $image = Image::where('record_type', 'Banner')->where('record_id', $request->id)->first();
+    
+    public function deleteImage(Request $request) {
+        $image = Image::find($request->image_id);
+        
+        if (!$image) {
+            return response()->json(['success' => false, 'message' => 'Không tìm thấy hình ảnh'], 404);
+        }
+        
+        // Xóa file hình ảnh
         $path = 'public/uploads/banners/' . $image->picture;
         if (file_exists($path)) {
             unlink($path);
         }
+        
+        // Xóa record trong database
         $image->delete();
-        return redirect(route('backend.dashboard.banner.index'));
+        
+        return response()->json(['success' => true]);
     }
-   
+    public function delete(Request $request){
+        // Lấy thông tin banner trước khi xóa
+        $banner = Banner::find($request->id);
+        
+        if (!$banner) {
+            return redirect(route('backend.dashboard.banner.index'))->with('error', 'Không tìm thấy banner');
+        }
+        
+        // Xóa hình ảnh chính của banner nếu có
+        if ($banner->picture) {
+            $path = 'public/uploads/banners/' . $banner->picture;
+            if (file_exists($path)) {
+                unlink($path);
+            }
+        }
+        
+        // Xóa tất cả các hình ảnh liên quan trong bảng images
+        $images = Image::where('record_type', 'Banner')
+                    ->where('record_id', $request->id)
+                    ->get();
+                    
+        foreach ($images as $image) {
+            $path = 'public/uploads/banners/' . $image->picture;
+            if (file_exists($path)) {
+                unlink($path);
+            }
+            $image->delete();
+        }
+        
+        // Xóa banner
+        $banner->delete();
+        
+        return redirect(route('backend.dashboard.banner.index'))->with('success', 'Xóa banner thành công');
+    }
+
 }
