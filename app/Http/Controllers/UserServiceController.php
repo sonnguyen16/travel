@@ -26,8 +26,22 @@ class UserServiceController extends Controller
             })
             ->with('translations.language', 'image_fe')
             ->get();
+            
+        // Lấy thông tin nhà hàng Leguda
+        $leguda = Blog::query()
+            ->where('active', 1)
+            ->where('slug', 'like', '%leguda%')
+            ->with('translations.language', 'image_fe')
+            ->first();
+            
+        // Lấy thông tin nhà hàng Thủy Tạ
+        $thuyTa = Blog::query()
+            ->where('active', 1)
+            ->where('slug', 'like', '%thuy-ta%')
+            ->with('translations.language', 'image_fe')
+            ->first();
 
-        return Inertia::render('Service', compact('blogs', 'blogs_related'));
+        return Inertia::render('Service', compact('blogs', 'blogs_related', 'leguda', 'thuyTa'));
     }
 
     public function show(Request $request)

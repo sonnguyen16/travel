@@ -70,13 +70,29 @@
         <h5 class="text-center mb-5">{{ $t('no_data') }}</h5>
       </div>
 
-      <div class="row">
-        <!-- Desktop Section -->
+      <div class="row pt-[50px]">
+        <!-- Desktop Section - Leguda -->
         <div
+          v-if="leguda"
           id="service-2"
           class="col-lg-6 md:pe-4 hover:cursor-pointer"
-          @click.prevent="router.visit('/nha-hang/buffet-rau-leguda')"
+          @click.prevent="router.visit(`/nha-hang/${leguda.slug}`)"
         >
+          <h4>{{ leguda.translations.find((t) => t.language.code == locale.toUpperCase())?.name || leguda.translations[0].name }}</h4>
+          <!-- Location -->
+          <div class="d-flex gap-2 items-center" v-if="leguda.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
+            <i class="fas fa-location-dot text-green-600"></i>
+            <span>{{ leguda.translations.find((t) => t.language.code == locale.toUpperCase())?.address || leguda.translations[0].address }}</span>
+          </div>
+          <div class="mt-3 text-justify font-normal">
+            <div v-html="leguda.translations.find((t) => t.language.code == locale.toUpperCase())?.description || leguda.translations[0].description"></div>
+          </div>
+          <div class="img-container h-[300px]">
+            <img v-if="leguda.image_fe" :src="BLOG_MEDIA_ENDPOINT + leguda.image_fe?.picture" alt="leguda" class="w-full rounded-xl object-cover h-[300px]" />
+            <img v-else src="@/Assets/images/service5.jpg" alt="leguda" class="w-full rounded-xl object-cover h-[300px]" />
+          </div>
+        </div>
+        <div v-else id="service-2" class="col-lg-6 md:pe-4 hover:cursor-pointer" @click.prevent="router.visit('/nha-hang/buffet-rau-leguda')">
           <h4>{{ $t('restaurant_title') }}</h4>
           <!-- Location -->
           <div class="d-flex gap-2 items-center">
@@ -89,12 +105,28 @@
           </div>
         </div>
 
-        <!-- Desktop Image Section -->
+        <!-- Desktop Image Section - Thuy Ta -->
         <div
+          v-if="thuyTa"
           id="service-3"
           class="col-lg-6 md:ps-4 md:block hidden hover:cursor-pointer"
-          @click.prevent="router.visit('/nha-hang/nha-hang-cafe-thuy-ta')"
+          @click.prevent="router.visit(`/nha-hang/${thuyTa.slug}`)"
         >
+          <div class="img-container h-[300px] mb-3 mt-4 order-md-1 order-2">
+            <img v-if="thuyTa.image_fe" :src="BLOG_MEDIA_ENDPOINT + thuyTa.image_fe?.picture" alt="thuy-ta" class="w-full rounded-xl object-cover" />
+            <img v-else src="@/Assets/images/service4.jpg" alt="thuy-ta" class="w-full rounded-xl object-cover" />
+          </div>
+          <h4>{{ thuyTa.translations.find((t) => t.language.code == locale.toUpperCase())?.name || thuyTa.translations[0].name }}</h4>
+          <!-- Location -->
+          <div class="d-flex gap-2 items-center order-1 order-md-2" v-if="thuyTa.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
+            <i class="fas fa-location-dot text-green-600"></i>
+            <span>{{ thuyTa.translations.find((t) => t.language.code == locale.toUpperCase())?.address || thuyTa.translations[0].address }}</span>
+          </div>
+          <div class="mt-3 text-justify font-normal">
+            <div v-html="thuyTa.translations.find((t) => t.language.code == locale.toUpperCase())?.description || thuyTa.translations[0].description"></div>
+          </div>
+        </div>
+        <div v-else id="service-3" class="col-lg-6 md:ps-4 md:block hidden hover:cursor-pointer" @click.prevent="router.visit('/nha-hang/nha-hang-cafe-thuy-ta')">
           <div class="img-container h-[300px] mb-3 mt-4 order-md-1 order-2">
             <img src="@/Assets/images/service4.jpg" alt="home1" class="w-full rounded-xl object-cover" />
           </div>
@@ -107,15 +139,30 @@
           <p class="mt-3 text-justify font-normal">{{ $t('restaurant_description_1') }}</p>
         </div>
 
-        <!-- Mobile Section -->
-        <div id="service-3" class="col-lg-6 md:ps-4 md:hidden block mt-3">
-          <h4>{{ $t('restaurant_title') }}</h4>
+        <!-- Mobile Section - Thuy Ta -->
+        <div v-if="thuyTa" id="service-3" class="col-lg-6 md:ps-4 md:hidden block mt-3" @click.prevent="router.visit(`/nha-hang/${thuyTa.slug}`)">
+          <h4>{{ thuyTa.translations.find((t) => t.language.code == locale.toUpperCase())?.name || thuyTa.translations[0].name }}</h4>
+          <!-- Location -->
+          <div class="d-flex gap-2 items-center order-1 order-md-2" v-if="thuyTa.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
+            <i class="fas fa-map text-green-600"></i>
+            <span>{{ thuyTa.translations.find((t) => t.language.code == locale.toUpperCase())?.address || thuyTa.translations[0].address }}</span>
+          </div>
+          <div class="mt-3 text-justify font-normal card-description-container">
+            <div class="card-description" v-html="thuyTa.translations.find((t) => t.language.code == locale.toUpperCase())?.description || thuyTa.translations[0].description"></div>
+          </div>
+          <div class="img-container h-[300px] mb-3 mt-4 order-md-1 order-2">
+            <img v-if="thuyTa.image_fe" :src="BLOG_MEDIA_ENDPOINT + thuyTa.image_fe?.picture" alt="thuy-ta" class="w-full rounded-xl object-cover" />
+            <img v-else src="@/Assets/images/service4.jpg" alt="thuy-ta" class="w-full rounded-xl object-cover" />
+          </div>
+        </div>
+        <div v-else id="service-3" class="col-lg-6 md:ps-4 md:hidden block mt-3">
+          <h4>{{ $t('restaurant_title_1') }}</h4>
           <!-- Location -->
           <div class="d-flex gap-2 items-center order-1 order-md-2">
             <i class="fas fa-map text-green-600"></i>
-            <span>{{ $t('restaurant_location') }}</span>
+            <span>{{ $t('restaurant_location_1') }}</span>
           </div>
-          <p class="mt-3 text-justify font-normal">{{ $t('restaurant_description') }}</p>
+          <p class="mt-3 text-justify font-normal">{{ $t('restaurant_description_1') }}</p>
           <div class="img-container h-[300px] mb-3 mt-4 order-md-1 order-2">
             <img src="@/Assets/images/service4.jpg" alt="home1" class="w-full rounded-xl object-cover" />
           </div>
@@ -182,7 +229,9 @@ import { updateNavigationButtons } from '@/Assets/common.js'
 
 const props = defineProps({
   blogs: Object,
-  blogs_related: Object
+  blogs_related: Object,
+  leguda: Object,
+  thuyTa: Object
 })
 const { t, locale } = useI18n()
 const mounted = ref(false)

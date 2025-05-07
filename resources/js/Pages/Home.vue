@@ -28,7 +28,7 @@
           ">
           </div>
           <h3 v-else>{{ $t('sustainable_development') }}</h3>
-          <p class="font-bold">1976-{{ new Date().getFullYear() }}</p>
+          <p class="font-bold text-[32px]">1976-{{ new Date().getFullYear() }}</p>
         </div>
         <div id="about2" class="col-lg-6">
           <p class="text-justify mt-[60px] font-normal">
