@@ -134,17 +134,17 @@
         <h2 class="text-center mb-4 uppercase font-bold text-[32px]">
           {{ t('images') }}
         </h2>
-        <div class="swiper swiper-3">
+        <div class="swiper swiper-3 h-[300px]">
           <div class="swiper-wrapper">
             <template v-for="(image, index) in blog.images_fe" :key="image.picture">
               <div
-                class="swiper-slide hover:cursor-pointer shadow-md transition-all duration-500"
+                class="swiper-slide hover:cursor-pointer shadow-md transition-all duration-500 rounded-xl"
                 :class="{
                   'active-slide': index === activeIndex + 1,
                   'side-slide': index === activeIndex || index === activeIndex + 2
                 }"
               >
-                <div class="img-container h-[100%]">
+                <div class="img-container h-[100%] rounded-xl">
                   <img :src="BLOG_MEDIA_ENDPOINT + image.picture" alt="home1" class="w-full rounded-xl object-cover" />
                 </div>
               </div>
@@ -152,7 +152,7 @@
           </div>
           <!-- Navigation -->
           <div class="swiper-button-next swiper-next-3"></div>
-          <div class="swiper-button-prev swiper-prev-3"></div>
+          <div class="swiper-button-prev swiper-prev-3" :style="{ opacity: activeIndex > 0 ? 1 : 0 }"></div>
         </div>
       </div>
 
@@ -191,7 +191,11 @@
                         blog_related.translations[0].name
                       }}
                     </h3>
-                    <p class="cursor-pointer card-address mt-1 mb-3" @click.stop="viewLocation(blog_related)" v-if="blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address">
+                    <p
+                      class="cursor-pointer card-address mt-1 mb-3"
+                      @click.stop="viewLocation(blog_related)"
+                      v-if="blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address"
+                    >
                       <i class="fas fa-map-marker-alt text-green-600 me-2 text-lg"></i>
                       {{
                         blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address ||
@@ -308,7 +312,7 @@ onMounted(() => {
   })
 
   const swiper = new Swiper('.swiper-3', {
-    loop: false,
+    loop: true,
     fadeEffect: { crossFade: true },
     speed: 1000,
     spaceBetween: 10,
@@ -336,14 +340,19 @@ onMounted(() => {
         updateNavigationButtons(this, 3)
       },
       slideChange: function () {
+        const max_index = Math.max(0, props.blog.images_fe.length - 3)
         activeIndex.value = this.activeIndex
+        console.log(this.activeIndex)
+        if (this.activeIndex >= max_index) {
+          this.activeIndex = -1
+        }
       }
     }
   })
 })
 
 const viewLocation = (blog_related) => {
-  if(blog_related.location_id) router.visit(`/diem-den/${blog_related.location?.slug}`)
+  if (blog_related.location_id) router.visit(`/diem-den/${blog_related.location?.slug}`)
 }
 </script>
 
