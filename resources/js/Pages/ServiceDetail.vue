@@ -136,7 +136,7 @@
         </h2>
         <div class="swiper swiper-3 h-[300px]">
           <div class="swiper-wrapper">
-            <template v-for="(image, index) in blog.images_fe" :key="image.picture">
+            <template v-for="(image, index) in Array(10).fill(blog.images_fe).flat()" :key="image.picture">
               <div
                 class="swiper-slide hover:cursor-pointer shadow-md transition-all duration-500 rounded-xl"
                 :class="{
@@ -312,7 +312,7 @@ onMounted(() => {
   })
 
   const swiper = new Swiper('.swiper-3', {
-    loop: true,
+    loop: false,
     fadeEffect: { crossFade: true },
     speed: 1000,
     spaceBetween: 10,
@@ -340,12 +340,7 @@ onMounted(() => {
         updateNavigationButtons(this, 3)
       },
       slideChange: function () {
-        const max_index = Math.max(0, props.blog.images_fe.length - 3)
         activeIndex.value = this.activeIndex
-        console.log(this.activeIndex)
-        if (this.activeIndex >= max_index) {
-          this.activeIndex = -1
-        }
       }
     }
   })
