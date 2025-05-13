@@ -85,21 +85,27 @@
               <div class="w-full border-t-2 border-green-700"></div>
             </div>
             <!-- Timeline Content -->
-            <div class="timeline-container absolute top-[4px]">
+            <div class="timeline-container absolute md:top-[3px] top-[5px]">
               <div class="timeline-items">
                 <div v-for="(timeline, index) in timelines" :key="index" class="text-center timeline-item">
                   <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
-                  <p class="mt-2 text-green-900 font-bold text-lg">{{ timeline.translations.find((t) => t.language.code == locale.toUpperCase())?.name || timeline.translations[0].name }}</p>
-                  <div class="text-sm text-gray-600" v-html="
-                    timeline.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
-                    timeline.translations[0].description
-                  "></div>
+                  <p class="mt-2 text-green-900 font-bold text-lg">
+                    {{
+                      timeline.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
+                      timeline.translations[0].name
+                    }}
+                  </p>
+                  <div
+                    class="text-sm text-gray-600"
+                    v-html="
+                      timeline.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
+                      timeline.translations[0].description
+                    "
+                  ></div>
                 </div>
-
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -151,10 +157,10 @@
             </div>
             <div class="position-absolute left-1/3 top-4 ms-3 md:block hidden">
               <!-- Navigation -->
-              <h3 class="font-bold mb-0 ">{{ $t('slide_2_title') }}</h3>
+              <h3 class="font-bold mb-0">{{ $t('slide_2_title') }}</h3>
               <div class="flex gap-[40px] mb-2 mt-[25px] ms-[-10px]">
-                <div class="swiper-button-prev" style="position: relative;"></div>
-                <div class="swiper-button-next" style="position: relative;"></div>
+                <div class="swiper-button-prev" style="position: relative"></div>
+                <div class="swiper-button-next" style="position: relative"></div>
               </div>
             </div>
           </div>
@@ -240,17 +246,22 @@ onMounted(async () => {
 
     // Tính toán độ rộng cho các cột mốc trong timeline
     if (props.timelines && props.timelines.length > 0) {
-      const timelineItems = document.querySelectorAll('.timeline-item');
-      const itemCount = timelineItems.length;
+      const timelineItems = document.querySelectorAll('.timeline-item')
+      const itemCount = timelineItems.length
 
       // Tính toán độ rộng: nếu có 5 cột mốc trở lên thì mỗi cột 20%, nếu ít hơn thì 100% / số cột
-      const itemWidth = Math.max(100 / itemCount, 20);
+      let itemWidth = Math.max(100 / itemCount, 20)
+
+      // nếu ở mobile chỉ hiện tối đa 2 cột
+      if (window.innerWidth < 768) {
+        itemWidth = 50
+      }
 
       // Áp dụng độ rộng cho từng cột mốc
-      timelineItems.forEach(item => {
-        item.style.flex = `0 0 ${itemWidth}%`;
-        item.style.minWidth = `${itemWidth}%`;
-      });
+      timelineItems.forEach((item) => {
+        item.style.flex = `0 0 ${itemWidth}%`
+        item.style.minWidth = `${itemWidth}%`
+      })
     }
 
     // ScrollReveal - Hiệu ứng nhập từ 2 bên
