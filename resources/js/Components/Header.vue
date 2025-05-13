@@ -1,8 +1,7 @@
 <template>
   <div id="header" class="header position-relative">
-
     <!-- Slider tự động cho banner trang chủ -->
-    <div v-if="$page.url === '/' && (bannerImages && bannerImages.length > 0)" class="banner-slider">
+    <div v-if="$page.url === '/' && bannerImages && bannerImages.length > 0" class="banner-slider hidden md:block">
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <div v-for="(image, index) in bannerImages" :key="index" class="swiper-slide">
@@ -85,9 +84,15 @@
           <div class="d-flex align-items-center lg:w-auto w-full justify-between gap-3">
             <a @click.prevent="router.visit('/')" class="" href="#">
               <img
-                :src="isFixed
-                  ? (locale === 'vi' ? '/images/logo1.png' : '/images/logoeng1.png')
-                  : (locale === 'vi' ? '/images/logo.png' : '/images/logoeng.png')"
+                :src="
+                  isFixed
+                    ? locale === 'vi'
+                      ? '/images/logo1.png'
+                      : '/images/logoeng1.png'
+                    : locale === 'vi'
+                    ? '/images/logo.png'
+                    : '/images/logoeng.png'
+                "
                 :class="[isFixed ? 'w-[200px] my-3' : 'w-[300px]']"
                 alt="logo"
               />
@@ -109,7 +114,12 @@
               <li @click="scrollToTopAndNavigate('/ve-chung-toi')" :class="[checkRoute(['/ve-chung-toi'])]">
                 <Link href="">{{ $t('about') }}</Link>
               </li>
-              <li @click="scrollToTopAndNavigate('/dich-vu')" :class="[checkRoute(['/dich-vu', '/nha-hang', '/diem-den', '/khach-san', '/hoat-dong', '/luu-tru', '/khac'])]">
+              <li
+                @click="scrollToTopAndNavigate('/dich-vu')"
+                :class="[
+                  checkRoute(['/dich-vu', '/nha-hang', '/diem-den', '/khach-san', '/hoat-dong', '/luu-tru', '/khac'])
+                ]"
+              >
                 <Link href="">{{ $t('services') }}</Link>
               </li>
               <li @click="scrollToTopAndNavigate('/uu-dai')" :class="[checkRoute(['/uu-dai'])]">
@@ -135,7 +145,7 @@
             </ul>
           </div>
         </div>
-        <div v-if="showMenu" class="bg-green-600 h-[390px] py-3 lg:hidden w-full z-10 lg:mt-0 mt-2">
+        <div v-if="showMenu" class="bg-green-600 h-[410px] py-3 lg:hidden w-full z-10 lg:mt-0 mt-2">
           <ul class="flex mb-0 lg:flex-row flex-col gap-4 position-absolute justify-end">
             <li @click="scrollToTopAndNavigate('/')">
               <a style="color: white">{{ $t('home') }}</a>
@@ -354,19 +364,19 @@ onMounted(() => {
           loop: true,
           autoplay: {
             delay: 3000,
-            disableOnInteraction: false,
+            disableOnInteraction: false
           },
           effect: 'fade',
           fadeEffect: {
-            crossFade: true,
+            crossFade: true
           },
           speed: 1500, // Tăng thời gian chuyển đổi giữa các slide lên 1.5 giây
           pagination: {
             el: '.swiper-pagination',
-            clickable: true,
-          },
-        });
-      }, 100);
+            clickable: true
+          }
+        })
+      }, 100)
     }
   } else {
     if (window.innerWidth > 1024) {
