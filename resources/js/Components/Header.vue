@@ -283,6 +283,16 @@
       </a>
     </div>
   </div>
+
+   <!-- Nút liên hệ Zalo OA -->
+   <div
+    @click="openZaloChat"
+    class="fixed bottom-5 md:right-5 right-[70px] hover:cursor-pointer  bg-blue-500 w-[40px] h-[40px] md:w-[60px] md:h-[60px] rounded-circle z-[9999] flex justify-center items-center"
+  >
+    <div>
+        <img src="/images/icon-zalo.jpg" alt="zalo" class="w-[40px] h-[40px] md:w-[60px] md:h-[60px]" />
+    </div>
+  </div>
 </template>
 <script setup>
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
@@ -439,6 +449,10 @@ const checkRoute = (route) => {
 
 const app_url = import.meta.env.VITE_APP_URL
 
+const openZaloChat = () => {
+  // Mở Zalo OA với số điện thoại
+  window.open('https://zalo.me/84981166088', '_blank')
+}
 // Thêm mảng thứ tự mong muốn
 const locationOrder = ['khu du lịch datanla', 'datanla adventures', 'khu du lịch langbiang', 'khu du lịch cáp treo']
 

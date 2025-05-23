@@ -111,6 +111,15 @@
               ></div>
               <div class="text-center mt-4">
                 <a
+                  v-if="isGongActivity(product)"
+                  @click.prevent="openZaloChat()"
+                  style="background-color: #0068ff"
+                  class="px-6 py-[12px] text-white rounded-lg hover:bg-blue-700 transition-colors text-lg text-decoration-none cursor-pointer"
+                >
+                  {{ t('contact_us') }}
+                </a>
+                <a
+                  v-else
                   @click.prevent="
                     router.visit(
                       `/dat-ve/buoc1?ticket_name=${encodeURIComponent(
@@ -348,6 +357,19 @@ onMounted(() => {
 
 const viewLocation = (blog_related) => {
   if (blog_related.location_id) router.visit(`/diem-den/${blog_related.location?.slug}`)
+}
+
+// Hàm kiểm tra xem hoạt động có phải là "cồng chiêng tây nguyên" hay không
+const isGongActivity = (product) => {
+  const productName = product.translations.find((t) => t.language.code == locale.value.toUpperCase())?.name || 
+                     product.translations[0].name || ''
+  return productName.toLowerCase().includes('cồng chiêng tây nguyên')
+}
+
+// Hàm mở Zalo OA
+const openZaloChat = () => {
+  // Mở Zalo OA với số điện thoại
+  window.open('https://zalo.me/84981166088', '_blank')
 }
 </script>
 

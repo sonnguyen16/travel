@@ -133,4 +133,8 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 .about-text p {
     font-size: 14px;
-  }
+}
+
+h1 {
+    text-transform: uppercase;
+}

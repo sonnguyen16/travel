@@ -359,7 +359,6 @@ onMounted(async () => {
       ).toLowerCase()
 
       const searchName = decodeURIComponent(ticket_name).toLowerCase()
-
       // Tìm kiếm gần giống nhất
       return productName.includes(searchName) || searchName.includes(productName)
     })
@@ -509,14 +508,14 @@ const { t, locale } = useI18n()
 
 // Thêm mảng thứ tự mong muốn
 const productOrder = [
-  'VÉ THAM QUAN DATANLA',
+  'VÉ THAM QUAN THÁC DATANLA',
   'XE TRƯỢT THÁC 1 - MỘT CHIỀU',
   'XE TRƯỢT THÁC 1 - KHỨ HỒI',
   'XE TRƯỢT THÁC 3 - KHỨ HỒI',
   'CANYONING',
   'ZIPLINE 1500M',
   'HÀNH TRÌNH TRÊN CAO',
-  'VÉ THAM QUAN LANGBIANG',
+  'VÉ THAM QUAN NÚI LANGBIANG',
   'XE LÊN ĐỈNH RADAR',
   'CÁP TREO - MỘT CHIỀU',
   'CÁP TREO - KHỨ HỒI'

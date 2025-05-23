@@ -162,7 +162,7 @@
           <img src="@/Assets/images/datanla_title.png" alt="Datanla Title" />
         </div>
 
-        <div class="captreo cursor-pointer" @click="openLink('https://kdlcaptreodalat.vt360.vn/')">
+        <div class="captreo cursor-pointer" >
           <img src="@/Assets/images/cap_treo.png" alt="Cap Treo" />
           <img src="@/Assets/images/cap_treo_title.png" alt="Cap Treo Title" />
         </div>
@@ -172,7 +172,7 @@
           <img src="@/Assets/images/thuy_ta_title.png" alt="Thuy Ta Title" />
         </div>
 
-        <div class="leguda cursor-pointer">
+        <div class="leguda cursor-pointer" @click="openLink('https://kdlcaptreodalat.vt360.vn/')">
           <img src="@/Assets/images/leguda.png" alt="Leguda" />
           <img src="@/Assets/images/leguda_title.png" alt="Leguda Title" />
         </div>

@@ -82,7 +82,7 @@
             <div class="mt-2">
               <div class="">
                 <div
-                  v-if="products.find((p) => p.id == c.product_fk)?.location.slug != 'datanla-adventures'"
+                  v-if="products.find((p) => p.id == c.product_fk)?.location.slug != 'datanla-adventures' && c.price_child > 0"
                   class="grid md:grid-cols-6 grid-cols-3"
                 >
                   <div class="flex items-center">
@@ -99,7 +99,7 @@
                   </div>
                   <div class="flex items-center md:justify-around justify-center md:col-span-3 col-span-1">
                     <p class="mb-0 text-gray-500 md:inline hidden w-1/2 text-end">
-                      {{ c.price_child.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{
+                      {{ c.price_child.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{ 
                         $t('price_per_person')
                       }}
                     </p>
@@ -108,7 +108,7 @@
                     </p>
                   </div>
                 </div>
-                <div class="grid md:grid-cols-6 grid-cols-3">
+                <div v-if="c.price_adult > 0" class="grid md:grid-cols-6 grid-cols-3">
                   <div class="flex items-center">
                     <label class="">{{ $t('adults') }}</label>
                   </div>
@@ -123,7 +123,7 @@
                   </div>
                   <div class="flex items-center md:justify-around justify-center md:col-span-3 col-span-1">
                     <p class="mb-0 text-gray-500 md:inline hidden w-1/2 text-end">
-                      {{ c.price_adult.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{
+                      {{ c.price_adult.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{ 
                         $t('price_per_person')
                       }}
                     </p>
@@ -157,7 +157,7 @@
                   products.find((p) => p.id === c.product_fk)?.translations[0].name
                 }}
               </p>
-              <div v-if="c.num_child > 0" class="justify-between flex">
+              <div v-if="c.num_child > 0 && c.price_child > 0" class="justify-between flex">
                 <p class="mb-1">
                   {{ c.num_child + ' ' + $t('children') }}
                 </p>
@@ -165,7 +165,7 @@
                   {{ (c.price_child * c.num_child).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}
                 </p>
               </div>
-              <div v-if="c.num_adult > 0" class="justify-between flex">
+              <div v-if="c.num_adult > 0 && c.price_adult > 0" class="justify-between flex">
                 <p class="">
                   {{ c.num_adult + ' ' + $t('adults') }}
                 </p>
@@ -204,61 +204,66 @@
         </div>
       </div>
 
-      <div class="pb-[30px]">
-        <h2 class="text-center">
+      <div id="related_services" class="pb-[30px]">
+        <h2 class="text-center mb-4 uppercase font-bold text-[32px]">
           {{ t('service_detail.related_services') }}
         </h2>
-        <div class="row g-3">
-          <template
-            v-for="(product, index) in products
-              .filter((item) => !cart.some((c) => c.product_fk === item.id))
-              .slice(0, 3)"
-          >
-            <div :id="product.location_id" class="col-md-4">
-              <div class="bg-white border-[1.5px] border-green-600 rounded-xl mt-4">
-                <div
-                  class="img-container h-[200px]"
-                  style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
-                >
-                  <img
-                    :src="PRODUCT_MEDIA_ENDPOINT + product.image_fe?.picture"
-                    alt="home1"
-                    class="w-full rounded-tr-xl rounded-tl-xl object-cover h-[200px]"
-                  />
-                </div>
-                <div class="px-[20px] pt-[20px]">
-                  <p class="font-bold mb-0 text-[1.2rem]">
-                    {{
-                      product.translations?.find((item) => item.language.code === locale.toUpperCase())?.name ||
-                      product.translations?.[0]?.name
-                    }}
-                  </p>
-                  <div>
-                    <p class="mb-0 text-[1.2rem] bg-green-600 text-white inline-block px-3 rounded-xl">
-                      {{ product.price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}
-                    </p>
+        <div class="swiper swiper-related">
+          <div class="swiper-wrapper pb-4">
+            <template
+              v-for="(product, index) in products.filter((item) => !cart.some((c) => c.product_fk === item.id))"
+            >
+              <div class="swiper-slide hover:cursor-pointer">
+                <div class="rounded-xl bg-white shadow-md card-equal-height border-[1.5px] border-green-600">
+                  <div
+                    class="img-container h-[200px]"
+                    style="border-bottom-right-radius: 0; border-bottom-left-radius: 0"
+                  >
+                    <img
+                      :src="PRODUCT_MEDIA_ENDPOINT + product.image_fe?.picture"
+                      alt="home1"
+                      class="w-full rounded-tr-xl rounded-tl-xl object-cover h-full"
+                    />
+                  </div>
+                  <div class="p-3 card-content">
+                    <h3 class="text-xl font-semibold line-clamp-1 card-title mb-2">
+                      {{
+                        product.translations?.find((item) => item.language.code === locale.toUpperCase())?.name ||
+                        product.translations?.[0]?.name
+                      }}
+                    </h3>
+                    <div class="mb-2">
+                      <p class="mb-0 text-[1.2rem] bg-green-600 text-white inline-block px-3 rounded-xl">
+                        {{ product.price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}
+                      </p>
+                    </div>
+                    <div class="card-description-container">
+                      <div
+                        class="card-description"
+                        v-html="
+                          product.translations?.find((item) => item.language.code === locale.toUpperCase())?.content ||
+                          product.translations?.[0]?.content
+                        "
+                      ></div>
+                      <div class="fade-out-effect"></div>
+                    </div>
+                    <div class="mt-3 text-center">
+                      <a
+                        @click="addToCart(product.id)"
+                        class="block py-2 w-full text-center rounded-xl border-[1.5px] border-green-600 hover:cursor-pointer hover:bg-green-50 transition-colors"
+                      >
+                        <i class="fas fa-shopping-cart text-green-600 mr-2"></i>
+                        <span class="text-green-600">{{ t('add_to_cart') }}</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
-                <hr />
-                <div
-                  class="line-clamp-4 px-[20px]"
-                  v-html="
-                    product.translations?.find((item) => item.language.code === locale.toUpperCase())?.content ||
-                    product.translations?.[0]?.content
-                  "
-                ></div>
-                <hr />
-                <div class="flex justify-between px-[20px] pb-[20px]">
-                  <a
-                    @click="addToCart(product.id)"
-                    class="block py-2 w-full text-center rounded-xl border-1 border-green-600 hover:cursor-pointer"
-                  >
-                    <i class="fas fa-shopping-cart text-green-600"></i>
-                  </a>
-                </div>
               </div>
-            </div>
-          </template>
+            </template>
+          </div>
+          <!-- Navigation -->
+          <div class="swiper-button-next swiper-next-related custom-nav-button"></div>
+          <div class="swiper-button-prev swiper-prev-related custom-nav-button"></div>
         </div>
       </div>
     </div>
@@ -272,6 +277,9 @@ import Swal from 'sweetalert2'
 import { defineProps, onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import emitter from '@/mitt'
+import Swiper from 'swiper/bundle'
+import 'swiper/css/bundle'
+import { updateNavigationButtons } from '@/Assets/common.js'
 
 const props = defineProps({
   products: Object
@@ -281,6 +289,44 @@ const { t, locale } = useI18n()
 let cart = ref([])
 onMounted(() => {
   cart.value = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
+
+  // Khởi tạo swiper cho related services
+  setTimeout(() => {
+    new Swiper('.swiper-related', {
+      loop: false,
+      fadeEffect: { crossFade: true },
+      speed: 1000,
+      spaceBetween: 20,
+      slidesPerView: 'auto',
+      navigation: {
+        nextEl: '.swiper-next-related',
+        prevEl: '.swiper-prev-related'
+      },
+      breakpoints: {
+        1024: {
+          slidesPerView: 3
+        },
+        768: {
+          slidesPerView: 2
+        },
+        480: {
+          slidesPerView: 1
+        }
+      },
+      on: {
+        init: function () {
+          if (typeof updateNavigationButtons === 'function') {
+            updateNavigationButtons(this, 'related')
+          }
+        },
+        resize: function () {
+          if (typeof updateNavigationButtons === 'function') {
+            updateNavigationButtons(this, 'related')
+          }
+        }
+      }
+    })
+  }, 100)
 })
 
 const changeDate = (e, id) => {
@@ -381,5 +427,58 @@ function formatDateToYYYYMMDD(date = new Date()) {
     rgba(255, 255, 255, 0.7),
     rgba(255, 255, 255, 0)
   );
+}
+
+/* Swiper styles */
+.swiper-related {
+  padding-bottom: 40px;
+}
+
+.custom-nav-button {
+  color: #3e7b27 !important;
+}
+
+/* Card styles */
+.card-equal-height {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.img-container {
+  flex: 0 0 auto; /* Không co giãn phần ảnh */
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Phần nội dung sẽ co giãn để điều chỉnh chiều cao */
+}
+
+.card-title {
+  flex: 0 0 auto; /* Không co giãn phần tiêu đề */
+}
+
+.card-description-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  max-height: 120px;
+}
+
+.card-description {
+  line-height: 1.5;
+  overflow: hidden;
+  max-height: 120px;
+}
+
+.fade-out-effect {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 1));
+  pointer-events: none;
 }
 </style>
