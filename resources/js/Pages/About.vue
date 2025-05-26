@@ -88,7 +88,7 @@
             <div class="timeline-container absolute md:top-[5px] top-[5px] w-full">
               <!-- Nút mũi tên trái -->
               <button
-                v-if="timelines.length > 5"
+                v-if="timelines.length > 4"
                 @click="scrollTimeline('left')"
                 class="timeline-nav-btn timeline-prev absolute left-0 top-0 z-10 bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center shadow-md hover:bg-green-700 focus:outline-none"
               >
@@ -116,7 +116,7 @@
 
               <!-- Nút mũi tên phải -->
               <button
-                v-if="timelines.length > 5"
+                v-if="timelines.length > 4"
                 @click="scrollTimeline('right')"
                 class="timeline-nav-btn timeline-next absolute right-0 top-0 z-10 bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center shadow-md hover:bg-green-700 focus:outline-none"
               >
@@ -284,7 +284,7 @@ onMounted(async () => {
       const itemCount = timelineItems.length
 
       // Tính toán độ rộng: nếu có 5 cột mốc trở lên thì mỗi cột 20%, nếu ít hơn thì 100% / số cột
-      let itemWidth = Math.max(100 / itemCount, 20)
+      let itemWidth = Math.max(100 / itemCount, 25)
 
       // nếu ở mobile chỉ hiện tối đa 2 cột
       if (window.innerWidth < 768) {
@@ -300,7 +300,7 @@ onMounted(async () => {
       // Thêm sự kiện resize để cập nhật lại kích thước khi thay đổi màn hình
       window.addEventListener('resize', () => {
         // Tính toán lại độ rộng
-        let newItemWidth = Math.max(100 / itemCount, 20)
+        let newItemWidth = Math.max(100 / itemCount, 25)
         if (window.innerWidth < 768) {
           newItemWidth = 50
         }
