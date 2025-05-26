@@ -408,15 +408,14 @@ onMounted(async () => {
   color: #fff;
 }
 
-.swiper-2 > .swiper-wrapper > .swiper-slide:nth-child(1) {
-  height: 380px;
+.swiper-2 .swiper-wrapper .swiper-slide {
+  height: 270px !important;
+  transition: height 0.5s ease-in-out;
 }
 
-.swiper-2 > .swiper-wrapper > .swiper-slide:not(.swiper-slide-active) {
-  position: relative;
-  overflow: hidden;
-  height: 270px;
-  transition: height 0.5s ease-in-out;
+.swiper-2 .swiper-wrapper .swiper-slide.swiper-slide-active,
+.swiper-2 .swiper-wrapper .swiper-slide.intro-slide.active-slide {
+  height: 380px !important;
 }
 
 .swiper-slide img {
@@ -428,12 +427,6 @@ onMounted(async () => {
   object-fit: cover;
   transition: transform 0.5s ease-in-out;
   border-radius: 10px;
-}
-
-.swiper-slide.intro-slide.active-slide {
-  height: 380px;
-  transition: height 0.5s ease-in-out;
-  object-fit: cover;
 }
 
 /* Tùy chỉnh nút prev và next */
