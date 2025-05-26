@@ -85,8 +85,17 @@
               <div class="w-full border-t-2 border-green-700"></div>
             </div>
             <!-- Timeline Content -->
-            <div class="timeline-container absolute md:top-[3px] top-[5px]">
-              <div class="timeline-items">
+            <div class="timeline-container absolute md:top-[5px] top-[5px] w-full">
+              <!-- Nút mũi tên trái -->
+              <button
+                v-if="timelines.length > 5"
+                @click="scrollTimeline('left')"
+                class="timeline-nav-btn timeline-prev absolute left-0 top-0 z-10 bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center shadow-md hover:bg-green-700 focus:outline-none"
+              >
+                <i class="fas fa-chevron-left text-[14px]"></i>
+              </button>
+
+              <div class="timeline-items" ref="timelineItems">
                 <div v-for="(timeline, index) in timelines" :key="index" class="text-center timeline-item">
                   <div class="w-6 h-6 bg-green-700 rounded-full mx-auto"></div>
                   <p class="mt-2 text-green-900 font-bold text-lg">
@@ -104,6 +113,15 @@
                   ></div>
                 </div>
               </div>
+
+              <!-- Nút mũi tên phải -->
+              <button
+                v-if="timelines.length > 5"
+                @click="scrollTimeline('right')"
+                class="timeline-nav-btn timeline-next absolute right-0 top-0 z-10 bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center shadow-md hover:bg-green-700 focus:outline-none"
+              >
+                <i class="fas fa-chevron-right text-[14px]"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -111,7 +129,7 @@
 
       <div v-if="blogs.length > 0" id="slide" class="grid md:grid-cols-4 grid-cols-1 md:gap-4 mb-5">
         <div class="col-span-1 h-100 flex flex-col justify-end">
-          <div v-if="mounted" class="swiper swiper-1 w-full">
+          <div class="swiper swiper-1 w-full">
             <div class="swiper-wrapper">
               <div v-for="(blog, i) in blogs" class="swiper-slide">
                 <span class="count"> 0{{ i + 1 }} </span>
@@ -136,7 +154,7 @@
         </div>
         <div class="col-span-3">
           <div class="position-relative">
-            <div v-if="mounted" class="swiper swiper-2">
+            <div class="swiper swiper-2">
               <div class="swiper-wrapper flex items-end">
                 <!-- Slide 1 -->
                 <div class="swiper-slide intro-slide active-slide">
@@ -185,6 +203,22 @@ const props = defineProps({
   ve_chung_toi: Object,
   timelines: Object
 })
+
+const timelineItems = ref(null)
+
+// Hàm scroll timeline
+const scrollTimeline = (direction) => {
+  if (!timelineItems.value) return
+
+  const container = timelineItems.value
+  const scrollAmount = container.clientWidth / 2
+
+  if (direction === 'left') {
+    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
+  } else {
+    container.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+  }
+}
 
 onMounted(async () => {
   mounted.value = true
@@ -262,6 +296,21 @@ onMounted(async () => {
         item.style.flex = `0 0 ${itemWidth}%`
         item.style.minWidth = `${itemWidth}%`
       })
+
+      // Thêm sự kiện resize để cập nhật lại kích thước khi thay đổi màn hình
+      window.addEventListener('resize', () => {
+        // Tính toán lại độ rộng
+        let newItemWidth = Math.max(100 / itemCount, 20)
+        if (window.innerWidth < 768) {
+          newItemWidth = 50
+        }
+
+        // Áp dụng độ rộng mới
+        timelineItems.forEach((item) => {
+          item.style.flex = `0 0 ${newItemWidth}%`
+          item.style.minWidth = `${newItemWidth}%`
+        })
+      })
     }
 
     // ScrollReveal - Hiệu ứng nhập từ 2 bên
@@ -312,6 +361,23 @@ onMounted(async () => {
 })
 </script>
 <style scoped>
+/* CSS cho timeline */
+.timeline-items {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Ẩn thanh cuộn trên Firefox */
+  -ms-overflow-style: none; /* Ẩn thanh cuộn trên IE và Edge */
+  padding: 0 30px; /* Tạo khoảng trống cho nút điều hướng */
+}
+
+.timeline-items::-webkit-scrollbar {
+  display: none; /* Ẩn thanh cuộn trên Chrome, Safari và Opera */
+}
+
+.timeline-nav-btn {
+  transition: opacity 0.3s ease;
+}
 .swiper-wrapper {
   height: 400px;
 }
@@ -444,27 +510,10 @@ onMounted(async () => {
   transform: translateY(-10%);
 }
 
-/* Tùy chỉnh thanh scroll cho Chrome, Edge, và Safari */
-.timeline-container::-webkit-scrollbar {
-  height: 6px;
-}
-
-.timeline-container::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-.timeline-container::-webkit-scrollbar-thumb {
-  background-color: #0c9444;
-  border-radius: 10px;
-}
-
 .timeline-items {
   display: flex;
   width: 100%;
   overflow-x: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #0c9444 #f1f1f1;
 }
 
 .timeline-item {

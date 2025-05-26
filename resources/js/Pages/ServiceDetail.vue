@@ -113,8 +113,7 @@
                 <a
                   v-if="isGongActivity(product)"
                   @click.prevent="openZaloChat()"
-                  style="background-color: #0068ff"
-                  class="px-6 py-[12px] text-white rounded-lg hover:bg-blue-700 transition-colors text-lg text-decoration-none cursor-pointer"
+                  class="px-6 py-[12px] text-white rounded-lg bg-green-700 transition-colors text-lg text-decoration-none cursor-pointer"
                 >
                   {{ t('contact_us') }}
                 </a>
@@ -361,7 +360,7 @@ const viewLocation = (blog_related) => {
 
 // Hàm kiểm tra xem hoạt động có phải là "cồng chiêng tây nguyên" hay không
 const isGongActivity = (product) => {
-  const productName = product.translations.find((t) => t.language.code == locale.value.toUpperCase())?.name || 
+  const productName = product.translations.find((t) => t.language.code == locale.value.toUpperCase())?.name ||
                      product.translations[0].name || ''
   return productName.toLowerCase().includes('cồng chiêng tây nguyên')
 }

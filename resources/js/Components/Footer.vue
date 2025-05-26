@@ -2,7 +2,7 @@
   <footer>
     <div class="container py-5">
       <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-3 pe-0">
           <img :src="locale === 'vi' ? '/images/logo.png' : '/images/logoeng.png'" class="w-full" alt="logo" />
           <p class="mt-3 text-[15px] font-bold mb-0 text-white">{{ $t('company_name') }}</p>
           <p class="mt-2 text-white">{{ $t('slogan') }}</p>

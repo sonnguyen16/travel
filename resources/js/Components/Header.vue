@@ -199,17 +199,21 @@
                 </select>
               </div>
             </div>
-            <div class="col-md-2 col-12 flex items-center">
-              <!-- Chọn ngày -->
-              <div class="flex items-center">
+            <div class="col-md-2 col-12 flex items-center lg:justify-center">
+              <div class="flex items-center gap-2">
                 <i class="far fa-calendar-alt text-green-600 text-lg"></i>
-                <input type="date" class="border-0 lg:w-[100%] w-[80%] font-normal" v-model="form.date" />
+                <div class="flex flex-col">
+                  <label class="font-normal mb-0 ms-[15px]" >{{ $t('select_date') }}</label>
+                  <div>
+                    <input type="date" class="border-0 lg:w-[100%] w-[80%] py-0 font-normal" v-model="form.date" />
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-md-2 col-6 flex items-center lg:justify-center">
               <!-- Số lượng người -->
               <div class="flex items-center gap-2">
-                <i class="fas fa-person text-green-600 text-2xl"></i>
+                <i class="fas fa-person text-green-600 text-xl"></i>
                 <div class="flex flex-col items-center">
                   <label class="font-normal mb-0" for="num_adult">{{ $t('adults') }}</label>
                   <div>
@@ -273,7 +277,7 @@
   >
     <div class="relative">
       <a style="color: white">
-        <i class="fas fa-shopping-cart text-white"></i>
+        <i class="fas fa-shopping-cart text-white text-[16px]"></i>
         <span
           v-if="cart.length"
           class="bg-red-500 text-white rounded-[50%] w-[25px] h-[25px] text-sm flex justify-center items-center absolute bottom-3 left-4"
