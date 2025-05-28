@@ -499,7 +499,7 @@ onMounted(async () => {
   position: absolute;
   width: 100%;
   overflow: hidden;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1.8rem;
   transform: translateY(-10%);
 }
 
