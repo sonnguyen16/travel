@@ -24,7 +24,7 @@ class UserBlogController extends Controller
             ->with('translations.language', 'image_fe')
             ->get();
 
-        return Inertia::render('Destination', compact('blogs', 'menu'));
+        return Inertia::render('Activity', compact('blogs', 'menu'));
     }
 
     public function show(Request $request)

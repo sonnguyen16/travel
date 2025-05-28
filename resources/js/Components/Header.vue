@@ -203,7 +203,7 @@
               <div class="flex items-center gap-2">
                 <i class="far fa-calendar-alt text-green-600 text-lg"></i>
                 <div class="flex flex-col">
-                  <label class="font-normal mb-0 ms-[15px]" >{{ $t('select_date') }}</label>
+                  <label class="font-normal mb-0 ms-[15px]">{{ $t('select_date') }}</label>
                   <div>
                     <input type="date" class="border-0 lg:w-[100%] w-[80%] py-0 font-normal" v-model="form.date" />
                   </div>
@@ -288,13 +288,13 @@
     </div>
   </div>
 
-   <!-- Nút liên hệ Zalo OA -->
-   <div
+  <!-- Nút liên hệ Zalo OA -->
+  <div
     @click="openZaloChat"
-    class="fixed bottom-5 md:right-5 right-[70px] hover:cursor-pointer  bg-blue-500 w-[40px] h-[40px] md:w-[60px] md:h-[60px] rounded-circle z-[9999] flex justify-center items-center"
+    class="fixed bottom-5 md:right-5 right-[70px] hover:cursor-pointer bg-blue-500 w-[40px] h-[40px] md:w-[60px] md:h-[60px] rounded-circle z-[9999] flex justify-center items-center"
   >
     <div>
-        <img src="/images/icon-zalo.jpg" alt="zalo" class="w-[40px] h-[40px] md:w-[60px] md:h-[60px]" />
+      <img src="/images/icon-zalo.jpg" alt="zalo" class="w-[40px] h-[40px] md:w-[60px] md:h-[60px]" />
     </div>
   </div>
 </template>
@@ -455,7 +455,7 @@ const app_url = import.meta.env.VITE_APP_URL
 
 const openZaloChat = () => {
   // Mở Zalo OA với số điện thoại
-  window.open('https://zalo.me/84981166088', '_blank')
+  window.open('https://zalo.me/208756278048926276', '_blank')
 }
 // Thêm mảng thứ tự mong muốn
 const locationOrder = ['khu du lịch datanla', 'datanla adventures', 'khu du lịch langbiang', 'khu du lịch cáp treo']

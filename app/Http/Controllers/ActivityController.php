@@ -25,9 +25,9 @@ class ActivityController extends Controller
         $activities = Activity::where('blog_id', $request->blog_id)->orderby('id', 'desc')->paginate(20);
         $activities->each(function ($activity) {
             $languageIds = Translation::where('record_id', $activity->id)->where('record_type', 'Activity')->pluck('language_id');
-    
+
             $languageCodes = Language::whereIn('id', $languageIds)->orderby('id', 'asc')->pluck('code');
-        
+
             $activity->language_codes = $languageCodes;
         });
         return view('backend.dashboard.activity.index',[
@@ -47,7 +47,8 @@ class ActivityController extends Controller
         $activityData = [
             'active' => $request->active ? 1 : 0,
             'blog_id' => $request->blog_id,
-            'link' => $request->link
+            'link' => $request->link,
+            'booking' => $request->booking ? 1 : 0
         ];
 
         if($request->language_id == 1){

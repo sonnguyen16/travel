@@ -111,7 +111,7 @@
               ></div>
               <div class="text-center mt-4">
                 <a
-                  v-if="isGongActivity(product)"
+                  v-if="!product.booking"
                   @click.prevent="openZaloChat()"
                   class="px-6 py-[12px] text-white rounded-lg bg-green-700 transition-colors text-lg text-decoration-none cursor-pointer"
                 >
@@ -360,15 +360,17 @@ const viewLocation = (blog_related) => {
 
 // Hàm kiểm tra xem hoạt động có phải là "cồng chiêng tây nguyên" hay không
 const isGongActivity = (product) => {
-  const productName = product.translations.find((t) => t.language.code == locale.value.toUpperCase())?.name ||
-                     product.translations[0].name || ''
+  const productName =
+    product.translations.find((t) => t.language.code == locale.value.toUpperCase())?.name ||
+    product.translations[0].name ||
+    ''
   return productName.toLowerCase().includes('cồng chiêng tây nguyên')
 }
 
 // Hàm mở Zalo OA
 const openZaloChat = () => {
   // Mở Zalo OA với số điện thoại
-  window.open('https://zalo.me/84981166088', '_blank')
+  window.open('https://zalo.me/208756278048926276', '_blank')
 }
 </script>
 

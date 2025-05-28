@@ -82,7 +82,7 @@
           <div class="relative">
             <!-- Horizontal Line -->
             <div class="flex items-center">
-              <div class="w-full border-t-2 border-green-700"></div>
+              <div class="w-full border-t-[3px] border-green-700"></div>
             </div>
             <!-- Timeline Content -->
             <div class="timeline-container absolute md:top-[5px] top-[5px] w-full">
@@ -175,7 +175,7 @@
             </div>
             <div class="position-absolute left-1/3 top-4 ms-3 md:block hidden">
               <!-- Navigation -->
-              <h3 class="font-bold mb-0">{{ $t('slide_2_title') }}</h3>
+              <h3 class="font-bold mb-0 text-uppercase">{{ $t('slide_2_title') }}</h3>
               <div class="flex gap-[40px] mb-2 mt-[25px] ms-[-10px]">
                 <div class="swiper-button-prev" style="position: relative"></div>
                 <div class="swiper-button-next" style="position: relative"></div>
