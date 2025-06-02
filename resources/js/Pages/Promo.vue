@@ -305,11 +305,11 @@ onMounted(async () => {
 }
 
 .big-promo {
-  height: 500px;
+  height: 418px;
 }
 
 .small-promo {
-  height: 242px;
+  height: 200px;
 }
 
 @media (max-width: 768px) {
