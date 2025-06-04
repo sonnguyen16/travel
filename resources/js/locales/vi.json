@@ -173,5 +173,8 @@
   "no_promo": "Không có ưu đãi",
   "view_now": "Xem ngay",
   "book_ticket": "Đặt vé",
-  "contact_us": "Liên hệ"
+  "contact_us": "Liên hệ",
+  "booking_time_error": "Ngoài khung giờ đặt vé",
+  "booking_time_error_message": "Bạn không thể đặt vé vào thời điểm này cho sản phẩm:",
+  "booking_time_allowed": "Khung giờ cho phép đặt vé"
 }

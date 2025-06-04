@@ -137,7 +137,7 @@
           </div>
           <button
             v-if="cart.length"
-            @click="router.visit('/dat-ve/buoc3')"
+            @click="checkBookingTimeAndContinue()"
             class="w-full bg-green-600 text-white text-center py-3 mt-4 rounded-xl"
           >
             {{ $t('continue') }}
@@ -408,6 +408,36 @@ const deleteCartItem = (id) => {
   cart.value = cart.value.filter((item) => item.product_fk != id)
   localStorage.setItem('cart', JSON.stringify(cart.value))
   emitter.emit('cart-updated', cart.value)
+}
+
+const checkBookingTimeAndContinue = () => {
+  // Kiểm tra khung giờ đặt vé cho tất cả sản phẩm trong giỏ hàng
+  const currentTime = new Date()
+  const currentHour = currentTime.getHours()
+  const currentMinute = currentTime.getMinutes()
+  const currentTimeString = `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}`
+  
+  // Kiểm tra từng sản phẩm trong giỏ hàng
+  for (const item of cart.value) {
+    const product = props.products.find(p => p.id === item.product_fk)
+    
+    // Nếu sản phẩm có giới hạn khung giờ đặt vé
+    if (product && product.booking_time_start && product.booking_time_end) {
+      // So sánh thời gian hiện tại với khung giờ cho phép
+      if (currentTimeString < product.booking_time_start || currentTimeString > product.booking_time_end) {
+        // Hiển thị thông báo lỗi
+        Swal.fire({
+          icon: 'error',
+          title: t('booking_time_error'),
+          html: `${t('booking_time_error_message')} <br><strong>${product.translations.find(t => t.language.code === locale.toUpperCase())?.name || product.translations[0].name}</strong><br>${t('booking_time_allowed')}: ${product.booking_time_start} - ${product.booking_time_end}`
+        })
+        return // Dừng lại, không chuyển đến bước tiếp theo
+      }
+    }
+  }
+  
+  // Nếu tất cả sản phẩm đều hợp lệ, chuyển đến bước 3
+  router.visit('/dat-ve/buoc3')
 }
 
 function formatDateToYYYYMMDD(date = new Date()) {
