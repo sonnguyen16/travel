@@ -8,7 +8,7 @@ class Product extends Model
 {
     protected $table = 'products';
 	public $timestamps = true;
-	protected $fillable = ['id', 'slug', 'active', 'location_id', 'price', 'price_child'];
+	protected $fillable = ['id', 'slug', 'active', 'location_id', 'price', 'price_child', 'booking_time_start', 'booking_time_end'];
 
 	public function user() {
 		return $this->belongsTo('App\Models\User', 'user_id');

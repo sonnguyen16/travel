@@ -432,6 +432,27 @@ const addToCart = (id) => {
     })
     return
   }
+  
+  // Kiểm tra khung giờ đặt vé
+  const product = props.products.find(p => p.id === id)
+  if (product.booking_time_start && product.booking_time_end) {
+    const currentTime = new Date()
+    const hours = currentTime.getHours().toString().padStart(2, '0')
+    const minutes = currentTime.getMinutes().toString().padStart(2, '0')
+    const currentTimeString = `${hours}:${minutes}`
+    
+    if (currentTimeString < product.booking_time_start || currentTimeString > product.booking_time_end) {
+      Swal.fire({
+        icon: 'warning',
+        title: t('notify'),
+        text: `Vé này chỉ có thể đặt trong khung giờ từ ${product.booking_time_start} đến ${product.booking_time_end}`,
+        customClass: {
+          confirmButton: 'bg-green-600 text-white'
+        }
+      })
+      return
+    }
+  }
 
   const form = forms.value.find((form) => form.product_fk == id)
   let cart = JSON.parse(localStorage.getItem('cart')) || []
@@ -475,6 +496,27 @@ const buyNow = (id) => {
       }
     })
     return
+  }
+  
+  // Kiểm tra khung giờ đặt vé
+  const product = props.products.find(p => p.id === id)
+  if (product.booking_time_start && product.booking_time_end) {
+    const currentTime = new Date()
+    const hours = currentTime.getHours().toString().padStart(2, '0')
+    const minutes = currentTime.getMinutes().toString().padStart(2, '0')
+    const currentTimeString = `${hours}:${minutes}`
+    
+    if (currentTimeString < product.booking_time_start || currentTimeString > product.booking_time_end) {
+      Swal.fire({
+        icon: 'warning',
+        title: t('notify'),
+        text: `Vé này chỉ có thể đặt trong khung giờ từ ${product.booking_time_start} đến ${product.booking_time_end}`,
+        customClass: {
+          confirmButton: 'bg-green-600 text-white'
+        }
+      })
+      return
+    }
   }
 
   const form = forms.value.find((form) => form.product_fk == id)

@@ -72,6 +72,58 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Thời gian bắt đầu đặt vé</label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <select name="booking_time_start_hour" id="booking_time_start_hour" class="form-control">
+                                                <option value="">-- Giờ --</option>
+                                                @for ($i = 0; $i < 24; $i++)
+                                                    <option value="{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }} giờ</option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select name="booking_time_start_minute" id="booking_time_start_minute" class="form-control">
+                                                <option value="">-- Phút --</option>
+                                                @for ($i = 0; $i < 60; $i+=5)
+                                                    <option value="{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }} phút</option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="booking_time_start" id="booking_time_start">
+                                    <small class="text-muted">Để trống nếu không giới hạn thời gian đặt vé</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Thời gian kết thúc đặt vé</label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <select name="booking_time_end_hour" id="booking_time_end_hour" class="form-control">
+                                                <option value="">-- Giờ --</option>
+                                                @for ($i = 0; $i < 24; $i++)
+                                                    <option value="{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }} giờ</option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select name="booking_time_end_minute" id="booking_time_end_minute" class="form-control">
+                                                <option value="">-- Phút --</option>
+                                                @for ($i = 0; $i < 60; $i+=5)
+                                                    <option value="{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }} phút</option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="booking_time_end" id="booking_time_end">
+                                    <small class="text-muted">Để trống nếu không giới hạn thời gian đặt vé</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Hình ảnh</label>

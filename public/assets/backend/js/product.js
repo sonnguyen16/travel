@@ -20,6 +20,12 @@ $('#productModal').on('hidden.bs.modal', function () {
     $('#price').val('');
     $('#price_child').val('');
     $('#location_id').val('4');
+    $('#booking_time_start').val('');
+    $('#booking_time_end').val('');
+    $('#booking_time_start_hour').val('');
+    $('#booking_time_start_minute').val('');
+    $('#booking_time_end_hour').val('');
+    $('#booking_time_end_minute').val('');
     $('#active').iCheck('uncheck');
     $('#image').hide();
     $('#div-toggle').show();
@@ -30,6 +36,30 @@ $('#productModal').on('hidden.bs.modal', function () {
     $('#picture').val('');
     $('#pictures').empty();
     $('#language_id').val('1')
+});
+
+// Xử lý dropdown giờ và phút cho thời gian bắt đầu
+$('#booking_time_start_hour, #booking_time_start_minute').on('change', function() {
+    var hour = $('#booking_time_start_hour').val();
+    var minute = $('#booking_time_start_minute').val();
+    
+    if (hour && minute) {
+        $('#booking_time_start').val(hour + ':' + minute);
+    } else {
+        $('#booking_time_start').val('');
+    }
+});
+
+// Xử lý dropdown giờ và phút cho thời gian kết thúc
+$('#booking_time_end_hour, #booking_time_end_minute').on('change', function() {
+    var hour = $('#booking_time_end_hour').val();
+    var minute = $('#booking_time_end_minute').val();
+    
+    if (hour && minute) {
+        $('#booking_time_end').val(hour + ':' + minute);
+    } else {
+        $('#booking_time_end').val('');
+    }
 });
 function getProduct(langId, langCode) {
     $('#langModal').on('hidden.bs.modal', function () {
@@ -55,6 +85,26 @@ function getProduct(langId, langCode) {
 
             $('#price').val(data.product.price ?? '');
             $('#price_child').val(data.product.price_child ?? '');
+            $('#booking_time_start').val(data.product.booking_time_start ?? '');
+            $('#booking_time_end').val(data.product.booking_time_end ?? '');
+            
+            // Xử lý hiển thị giờ và phút từ giá trị thời gian bắt đầu
+            if (data.product.booking_time_start) {
+                var startTimeParts = data.product.booking_time_start.split(':');
+                if (startTimeParts.length >= 2) {
+                    $('#booking_time_start_hour').val(startTimeParts[0]);
+                    $('#booking_time_start_minute').val(startTimeParts[1]);
+                }
+            }
+            
+            // Xử lý hiển thị giờ và phút từ giá trị thời gian kết thúc
+            if (data.product.booking_time_end) {
+                var endTimeParts = data.product.booking_time_end.split(':');
+                if (endTimeParts.length >= 2) {
+                    $('#booking_time_end_hour').val(endTimeParts[0]);
+                    $('#booking_time_end_minute').val(endTimeParts[1]);
+                }
+            }
 
             if (data.product.location_id) {
                 $('#location_id').val(data.product.location_id);

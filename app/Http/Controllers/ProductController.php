@@ -72,6 +72,8 @@ class ProductController extends Controller
             'price' => $request->price,
             'price_child' => $request->price_child,
             'location_id' => $request->location_id,
+            'booking_time_start' => $request->booking_time_start,
+            'booking_time_end' => $request->booking_time_end,
             'active' => $request->active ? 1 : 0
         ];
 
