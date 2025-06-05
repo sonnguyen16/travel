@@ -173,5 +173,10 @@
   "no_promo": "No promotions available",
   "view_now": "View Now",
   "book_ticket": "Book Ticket",
-  "contact_us": "Contact Us"
+  "contact_us": "Contact Us",
+  "booking_time_error": "Booking time outside",
+  "booking_time_error_message": "You cannot book this product at this time.",
+  "booking_time_allowed": "Booking time allowed",
+  "booking_time_note": "Please note the ticket usage time in the ticket",
+  "booking_time_note_title": "Booking time note"
 }

@@ -172,5 +172,10 @@
   "no_promo": "프로모션 없음",
   "view_now": "지금 보기",
   "book_ticket": "티켓 예약",
-  "contact_us": "연락하다"
+  "contact_us": "연락하다",
+  "booking_time_error": "예약 시간 외",
+  "booking_time_error_message": "이 제품은 이 시간에 예약할 수 없습니다.",
+  "booking_time_allowed": "예약 가능 시간",
+  "booking_time_note": "티켓에 명시된 유효 사용 시간을 꼭 확인하세요.",
+  "booking_time_note_title": "티켓 관련 참고 사항"
 }

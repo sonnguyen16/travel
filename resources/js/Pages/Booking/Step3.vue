@@ -184,7 +184,7 @@
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { useForm, router } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
-import { computed, defineProps, onMounted, ref } from 'vue'
+import { defineProps, onMounted, ref } from 'vue'
 import axios from 'axios'
 
 const props = defineProps({
@@ -259,32 +259,43 @@ const confirmPayment = () => {
     return
   }
 
-  axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-  axios.defaults.headers.common['Content-Type'] = 'application/json'
-  axios
-    .post(route('confirm'), {
-      name: form.name,
-      phone: form.phone,
-      email: form.email,
-      total: form.total,
-      payment_method: form.payment_method,
-      order_details: form.order_details
-    })
-    .then((response) => {
-      localStorage.removeItem('cart')
-      const order_id = response.data.order_id
-      location.href = route('vnpay.payment', { order_id: order_id, amount: form.total })
-    })
-    .catch((error) => {
-      Swal.fire({
-        icon: 'warning',
-        title: t('notify'),
-        text: t('order_fail'),
-        customClass: {
-          confirmButton: 'bg-green-600 text-white'
-        }
-      })
-    })
+  Swal.fire({
+    icon: 'info',
+    title: t('booking_time_note_title'),
+    html: `<p>${t('booking_time_note')}</p>`,
+    customClass: {
+      confirmButton: 'bg-green-600 text-white'
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+      axios.defaults.headers.common['Content-Type'] = 'application/json'
+      axios
+        .post(route('confirm'), {
+          name: form.name,
+          phone: form.phone,
+          email: form.email,
+          total: form.total,
+          payment_method: form.payment_method,
+          order_details: form.order_details
+        })
+        .then((response) => {
+          localStorage.removeItem('cart')
+          const order_id = response.data.order_id
+          location.href = route('vnpay.payment', { order_id: order_id, amount: form.total })
+        })
+        .catch((error) => {
+          Swal.fire({
+            icon: 'warning',
+            title: t('notify'),
+            text: t('order_fail'),
+            customClass: {
+              confirmButton: 'bg-green-600 text-white'
+            }
+          })
+        })
+    }
+  })
 }
 
 onMounted(async () => {

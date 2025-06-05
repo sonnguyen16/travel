@@ -218,15 +218,19 @@
             <h3 class="font-bold">
               {{
                 props.ticketNotesPage && props.ticketNotesPage.translations
-                ? (props.ticketNotesPage.translations.find(t => t.language.code === locale.toUpperCase())?.name || props.ticketNotesPage.translations[0]?.name)
-                : $t(`notes_title`)
+                  ? props.ticketNotesPage.translations.find((t) => t.language.code === locale.toUpperCase())?.name ||
+                    props.ticketNotesPage.translations[0]?.name
+                  : $t(`notes_title`)
               }}
             </h3>
-            <div class="note-content" v-if="props.ticketNotesPage && props.ticketNotesPage.translations" v-html="
-              props.ticketNotesPage.translations.find(t => t.language.code === locale.toUpperCase())?.content ||
-              props.ticketNotesPage.translations[0]?.content
-            ">
-            </div>
+            <div
+              class="note-content"
+              v-if="props.ticketNotesPage && props.ticketNotesPage.translations"
+              v-html="
+                props.ticketNotesPage.translations.find((t) => t.language.code === locale.toUpperCase())?.content ||
+                props.ticketNotesPage.translations[0]?.content
+              "
+            ></div>
             <div v-else>
               <p v-for="(_, index) in 6" :key="index" class="mb-0">
                 <i class="fas fa-check text-green-600 me-2"></i> {{ $t(`notes.${index}`) }}
@@ -298,6 +302,7 @@ const props = defineProps({
 })
 
 let Swal = null
+const { t, locale } = useI18n()
 
 const forms = ref([])
 const expandedProducts = ref([])
@@ -421,31 +426,26 @@ const addToCart = (id) => {
     return
   }
 
-  if (forms.value.find((form) => form.product_fk == id).date < formatDateToYYYYMMDD()) {
-    Swal.fire({
-      icon: 'warning',
-      title: t('notify'),
-      text: t('please_select_future_date'),
-      customClass: {
-        confirmButton: 'bg-green-600 text-white'
-      }
-    })
-    return
-  }
-  
-  // Kiểm tra khung giờ đặt vé
-  const product = props.products.find(p => p.id === id)
-  if (product.booking_time_start && product.booking_time_end) {
+  const selectedDate = forms.value.find((form) => form.product_fk == id).date
+  const currentDate = formatDateToYYYYMMDD()
+
+  // Chỉ kiểm tra khung giờ nếu ngày đặt là ngày hiện tại
+  const product = props.products.find((p) => p.id === id)
+  if (product.booking_time_start && product.booking_time_end && selectedDate === currentDate) {
     const currentTime = new Date()
     const hours = currentTime.getHours().toString().padStart(2, '0')
     const minutes = currentTime.getMinutes().toString().padStart(2, '0')
     const currentTimeString = `${hours}:${minutes}`
-    
+
     if (currentTimeString < product.booking_time_start || currentTimeString > product.booking_time_end) {
       Swal.fire({
         icon: 'warning',
-        title: t('notify'),
-        text: `Vé này chỉ có thể đặt trong khung giờ từ ${product.booking_time_start} đến ${product.booking_time_end}`,
+        title: t('booking_time_error'),
+        html:
+          `<h5 style="">${t('booking_time_error_message')} ${
+            product.translations.find((item) => item.language.code === locale.value.toUpperCase())?.name ||
+            product.translations[0].name
+          }</h5>` + `<br>${t('booking_time_allowed')}: ${product.booking_time_start} - ${product.booking_time_end}`,
         customClass: {
           confirmButton: 'bg-green-600 text-white'
         }
@@ -497,20 +497,26 @@ const buyNow = (id) => {
     })
     return
   }
-  
-  // Kiểm tra khung giờ đặt vé
-  const product = props.products.find(p => p.id === id)
-  if (product.booking_time_start && product.booking_time_end) {
+
+  const selectedDate = forms.value.find((form) => form.product_fk == id).date
+  const currentDate = formatDateToYYYYMMDD()
+
+  // Chỉ kiểm tra khung giờ nếu ngày đặt là ngày hiện tại
+  const product = props.products.find((p) => p.id === id)
+  if (product.booking_time_start && product.booking_time_end && selectedDate === currentDate) {
     const currentTime = new Date()
     const hours = currentTime.getHours().toString().padStart(2, '0')
     const minutes = currentTime.getMinutes().toString().padStart(2, '0')
     const currentTimeString = `${hours}:${minutes}`
-    
+
     if (currentTimeString < product.booking_time_start || currentTimeString > product.booking_time_end) {
       Swal.fire({
         icon: 'warning',
-        title: t('notify'),
-        text: `Vé này chỉ có thể đặt trong khung giờ từ ${product.booking_time_start} đến ${product.booking_time_end}`,
+        html:
+          `<h5>${t('booking_time_error_message')} ${
+            product.translations.find((item) => item.language.code === locale.value.toUpperCase())?.name ||
+            product.translations[0].name
+          }</h5>` + `<br>${t('booking_time_allowed')}: ${product.booking_time_start} - ${product.booking_time_end}`,
         customClass: {
           confirmButton: 'bg-green-600 text-white'
         }
@@ -546,8 +552,6 @@ function formatDateToYYYYMMDD(date = new Date()) {
   return `${year}-${month}-${day}`
 }
 
-const { t, locale } = useI18n()
-
 // Thêm mảng thứ tự mong muốn
 const productOrder = [
   'VÉ THAM QUAN THÁC DATANLA',
@@ -572,15 +576,15 @@ const sortedProducts = computed(() => {
   const unusedProducts = [...props.products] // Sản phẩm chưa được sắp xếp
 
   // Lặp qua từng sản phẩm trong productOrder
-  productOrder.forEach(orderName => {
+  productOrder.forEach((orderName) => {
     // Tìm các sản phẩm trùng với tên trong productOrder
     for (let i = 0; i < unusedProducts.length; i++) {
       const product = unusedProducts[i]
       if (!product) continue
 
       // Lấy tên sản phẩm
-      const translation = product.translations.find(t => t.language && t.language.code === locale.value.toUpperCase())
-      const productName = translation ? translation.name : (product.translations[0] ? product.translations[0].name : '')
+      const translation = product.translations.find((t) => t.language && t.language.code === locale.value.toUpperCase())
+      const productName = translation ? translation.name : product.translations[0] ? product.translations[0].name : ''
 
       // So sánh không phân biệt hoa thường và khoảng trắng
       if (productName.toLowerCase().trim() === orderName.toLowerCase().trim()) {
@@ -591,7 +595,7 @@ const sortedProducts = computed(() => {
   })
 
   // Bước 2: Tìm các sản phẩm không nằm trong productOrder
-  const remainingProducts = unusedProducts.filter(p => p !== null)
+  const remainingProducts = unusedProducts.filter((p) => p !== null)
 
   // Bước 3: Tìm vị trí cuối cùng của mỗi location_id trong mảng đã sắp xếp
   const lastIndexByLocation = {}
@@ -607,11 +611,12 @@ const sortedProducts = computed(() => {
   // Bước 4: Chèn các sản phẩm còn lại vào sau sản phẩm cuối cùng có cùng location_id
   const insertedProducts = []
 
-  remainingProducts.forEach(product => {
+  remainingProducts.forEach((product) => {
     const locationId = product.location_id
-    const insertIndex = lastIndexByLocation[locationId] !== undefined
-      ? lastIndexByLocation[locationId] + 1 + insertedProducts.filter(p => p.location_id === locationId).length
-      : result.length
+    const insertIndex =
+      lastIndexByLocation[locationId] !== undefined
+        ? lastIndexByLocation[locationId] + 1 + insertedProducts.filter((p) => p.location_id === locationId).length
+        : result.length
 
     result.splice(insertIndex, 0, product)
     insertedProducts.push(product)
@@ -620,8 +625,8 @@ const sortedProducts = computed(() => {
   return result
 })
 </script>
-<style >
+<style>
 .note-content ul li {
-    list-style: circle;
+  list-style: circle;
 }
 </style>

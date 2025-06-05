@@ -82,7 +82,10 @@
             <div class="mt-2">
               <div class="">
                 <div
-                  v-if="products.find((p) => p.id == c.product_fk)?.location.slug != 'datanla-adventures' && c.price_child > 0"
+                  v-if="
+                    products.find((p) => p.id == c.product_fk)?.location.slug != 'datanla-adventures' &&
+                    c.price_child > 0
+                  "
                   class="grid md:grid-cols-6 grid-cols-3"
                 >
                   <div class="flex items-center">
@@ -99,7 +102,7 @@
                   </div>
                   <div class="flex items-center md:justify-around justify-center md:col-span-3 col-span-1">
                     <p class="mb-0 text-gray-500 md:inline hidden w-1/2 text-end">
-                      {{ c.price_child.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{ 
+                      {{ c.price_child.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{
                         $t('price_per_person')
                       }}
                     </p>
@@ -123,7 +126,7 @@
                   </div>
                   <div class="flex items-center md:justify-around justify-center md:col-span-3 col-span-1">
                     <p class="mb-0 text-gray-500 md:inline hidden w-1/2 text-end">
-                      {{ c.price_adult.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{ 
+                      {{ c.price_adult.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + 'đ' }}/{{
                         $t('price_per_person')
                       }}
                     </p>
@@ -416,26 +419,33 @@ const checkBookingTimeAndContinue = () => {
   const currentHour = currentTime.getHours()
   const currentMinute = currentTime.getMinutes()
   const currentTimeString = `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}`
-  
+
   // Kiểm tra từng sản phẩm trong giỏ hàng
   for (const item of cart.value) {
-    const product = props.products.find(p => p.id === item.product_fk)
-    
+    const product = props.products.find((p) => p.id === item.product_fk)
+
     // Nếu sản phẩm có giới hạn khung giờ đặt vé
-    if (product && product.booking_time_start && product.booking_time_end) {
+    if (product && product.booking_time_start && product.booking_time_end && item.date == formatDateToYYYYMMDD()) {
       // So sánh thời gian hiện tại với khung giờ cho phép
       if (currentTimeString < product.booking_time_start || currentTimeString > product.booking_time_end) {
         // Hiển thị thông báo lỗi
         Swal.fire({
           icon: 'error',
           title: t('booking_time_error'),
-          html: `${t('booking_time_error_message')} <br><strong>${product.translations.find(t => t.language.code === locale.toUpperCase())?.name || product.translations[0].name}</strong><br>${t('booking_time_allowed')}: ${product.booking_time_start} - ${product.booking_time_end}`
+          html:
+            `<h5>${t('booking_time_error_message')} ${
+              product.translations.find((item) => item.language.code === locale.value.toUpperCase())?.name ||
+              product.translations[0].name
+            }</h5>` + `<br>${t('booking_time_allowed')}: ${product.booking_time_start} - ${product.booking_time_end}`,
+          customClass: {
+            confirmButton: 'bg-green-600 text-white'
+          }
         })
         return // Dừng lại, không chuyển đến bước tiếp theo
       }
     }
   }
-  
+
   // Nếu tất cả sản phẩm đều hợp lệ, chuyển đến bước 3
   router.visit('/dat-ve/buoc3')
 }

@@ -176,5 +176,7 @@
   "contact_us": "Liên hệ",
   "booking_time_error": "Ngoài khung giờ đặt vé",
   "booking_time_error_message": "Bạn không thể đặt vé vào thời điểm này cho sản phẩm:",
-  "booking_time_allowed": "Khung giờ cho phép đặt vé"
+  "booking_time_allowed": "Khung giờ cho phép đặt vé",
+  "booking_time_note": "Quý khách vui lòng chú ý thời gian sử dụng hợp lệ đã được ghi trong vé",
+  "booking_time_note_title": "Lưu ý về vé"
 }
