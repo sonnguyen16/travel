@@ -136,6 +136,15 @@
                         </label>
                     </div>
                     <div class="form-group">
+                        <label style="margin-top: 15px">
+                            <input name="is_maintenance" id="is_maintenance" type="checkbox" class="flat-red"> Bảo trì
+                        </label>
+                    </div>
+                    <div class="form-group" id="maintenance-message-group" style="display: none;">
+                        <label>Tin nhắn bảo trì</label>
+                        <textarea name="maintenance_message" id="maintenance_message" class="form-control" rows="3" placeholder="Nhập thông báo bảo trì..."></textarea>
+                    </div>
+                    <div class="form-group">
                         <label for="description">Mô tả</label>
                         <textarea id="description" name="description"></textarea>
                     </div>

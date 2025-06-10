@@ -74,7 +74,8 @@ class ProductController extends Controller
             'location_id' => $request->location_id,
             'booking_time_start' => $request->booking_time_start,
             'booking_time_end' => $request->booking_time_end,
-            'active' => $request->active ? 1 : 0
+            'active' => $request->active ? 1 : 0,
+            'is_maintenance' => $request->is_maintenance ? 1 : 0
         ];
 
         if($request->language_id == 1){
@@ -130,6 +131,7 @@ class ProductController extends Controller
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
                 'content' => $request->input('content'),
+                'maintenance_message' => $request->input('maintenance_message')
             ]
         );
 

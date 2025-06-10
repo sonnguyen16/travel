@@ -429,8 +429,25 @@ const addToCart = (id) => {
   const selectedDate = forms.value.find((form) => form.product_fk == id).date
   const currentDate = formatDateToYYYYMMDD()
 
-  // Chỉ kiểm tra khung giờ nếu ngày đặt là ngày hiện tại
+  // Lấy thông tin sản phẩm
   const product = props.products.find((p) => p.id === id)
+
+  // Kiểm tra trạng thái bảo trì của sản phẩm
+  if (product.is_maintenance == 1) {
+    Swal.fire({
+      icon: 'warning',
+      title: t('maintenance'),
+      html:
+        product.translations.find((t) => t.language.code === locale.value.toUpperCase())?.maintenance_message ||
+        t('product_under_maintenance'),
+      customClass: {
+        confirmButton: 'bg-green-600 text-white'
+      }
+    })
+    return
+  }
+
+  // Chỉ kiểm tra khung giờ nếu ngày đặt là ngày hiện tại
   if (product.booking_time_start && product.booking_time_end && selectedDate === currentDate) {
     const currentTime = new Date()
     const hours = currentTime.getHours().toString().padStart(2, '0')
@@ -501,8 +518,23 @@ const buyNow = (id) => {
   const selectedDate = forms.value.find((form) => form.product_fk == id).date
   const currentDate = formatDateToYYYYMMDD()
 
-  // Chỉ kiểm tra khung giờ nếu ngày đặt là ngày hiện tại
+  // Lấy thông tin sản phẩm
   const product = props.products.find((p) => p.id === id)
+
+  // Kiểm tra trạng thái bảo trì của sản phẩm
+  if (product.is_maintenance == 1) {
+    Swal.fire({
+      icon: 'warning',
+      title: t('maintenance'),
+      html: product.maintenance_message || t('product_under_maintenance'),
+      customClass: {
+        confirmButton: 'bg-green-600 text-white'
+      }
+    })
+    return
+  }
+
+  // Chỉ kiểm tra khung giờ nếu ngày đặt là ngày hiện tại
   if (product.booking_time_start && product.booking_time_end && selectedDate === currentDate) {
     const currentTime = new Date()
     const hours = currentTime.getHours().toString().padStart(2, '0')

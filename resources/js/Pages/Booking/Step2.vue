@@ -424,6 +424,21 @@ const checkBookingTimeAndContinue = () => {
   for (const item of cart.value) {
     const product = props.products.find((p) => p.id === item.product_fk)
 
+    // Kiểm tra trạng thái bảo trì của sản phẩm
+    if (product && product.is_maintenance == 1) {
+      Swal.fire({
+        icon: 'warning',
+        title: t('maintenance'),
+        html:
+          product.translations.find((t) => t.language.code === locale.value.toUpperCase())?.maintenance_message ||
+          t('product_under_maintenance'),
+        customClass: {
+          confirmButton: 'bg-green-600 text-white'
+        }
+      })
+      return // Dừng lại, không chuyển đến bước tiếp theo
+    }
+
     // Nếu sản phẩm có giới hạn khung giờ đặt vé
     if (product && product.booking_time_start && product.booking_time_end && item.date == formatDateToYYYYMMDD()) {
       // So sánh thời gian hiện tại với khung giờ cho phép

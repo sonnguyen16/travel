@@ -27,6 +27,9 @@ $('#productModal').on('hidden.bs.modal', function () {
     $('#booking_time_end_hour').val('');
     $('#booking_time_end_minute').val('');
     $('#active').iCheck('uncheck');
+    $('#is_maintenance').iCheck('uncheck');
+    $('#maintenance_message').val('');
+    $('#maintenance-message-group').hide();
     $('#image').hide();
     $('#div-toggle').show();
     CKEDITOR.instances['description'].setData('');
@@ -60,6 +63,16 @@ $('#booking_time_end_hour, #booking_time_end_minute').on('change', function() {
     } else {
         $('#booking_time_end').val('');
     }
+});
+
+// Xử lý hiển thị/ẩn ô tin nhắn bảo trì
+$('#is_maintenance').on('ifChecked', function() {
+    $('#maintenance-message-group').show();
+});
+
+$('#is_maintenance').on('ifUnchecked', function() {
+    $('#maintenance-message-group').hide();
+    $('#maintenance_message').val('');
 });
 function getProduct(langId, langCode) {
     $('#langModal').on('hidden.bs.modal', function () {
@@ -120,6 +133,15 @@ function getProduct(langId, langCode) {
                 $('#active').iCheck('check');
             } else {
                 $('#active').iCheck('uncheck');
+            }
+            
+            if (data.product.is_maintenance == 1) {
+                $('#is_maintenance').iCheck('check');
+                $('#maintenance-message-group').show();
+                $('#maintenance_message').val(data.translation ? data.translation.maintenance_message : '');
+            } else {
+                $('#is_maintenance').iCheck('uncheck');
+                $('#maintenance-message-group').hide();
             }
 
             CKEDITOR.instances['description'].setData(data.translation ? data.translation.description : '');

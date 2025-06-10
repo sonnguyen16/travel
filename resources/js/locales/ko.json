@@ -177,5 +177,7 @@
   "booking_time_error_message": "이 제품은 이 시간에 예약할 수 없습니다.",
   "booking_time_allowed": "예약 가능 시간",
   "booking_time_note": "티켓에 명시된 유효 사용 시간을 꼭 확인하세요.",
-  "booking_time_note_title": "티켓 관련 참고 사항"
+  "booking_time_note_title": "티켓 관련 참고 사항",
+  "product_under_maintenance": "제품 점검중입니다",
+  "maintenance": "점검"
 }
