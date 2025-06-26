@@ -34,6 +34,7 @@
         </div>
         <div id="about2" class="col-lg-6">
           <div
+            class="text-justify mt-[60px] font-normal"
             v-if="props.homePage1 && props.homePage1.translations"
             v-html="
               props.homePage1.translations.find((t) => t.language.code === locale.toUpperCase())?.content ||
