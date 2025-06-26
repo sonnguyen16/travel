@@ -95,18 +95,6 @@
                 <input v-model="form.payment_method" type="radio" id="vnpay" name="payment" value="vnpay" />
                 <label for="vnpay" class="ms-2">VNPAY</label>
               </div>
-              <div class="flex items-center mt-3">
-                <input v-model="form.payment_method" type="radio" id="momo" name="payment" value="momo" />
-                <label for="momo" class="ms-2">Momo</label>
-              </div>
-              <div class="flex items-center mt-3">
-                <input v-model="form.payment_method" type="radio" id="visa" name="payment" value="visa" />
-                <label for="visa" class="ms-2">Visa</label>
-              </div>
-              <div class="flex items-center mt-3">
-                <input v-model="form.payment_method" type="radio" id="atm" name="payment" value="atm" />
-                <label for="atm" class="ms-2">ATM</label>
-              </div>
               <p class="mt-3">
                 {{ $t('payment_note') }}
               </p>
