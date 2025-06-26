@@ -25,9 +25,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Vite::prefetch(concurrency: 3);
         $languages = Language::where('active', 1)->get();
-        // if (str_contains(Config::get('app.url'), 'https://')) {
-        //     URL::forceScheme('https');
-        // }
+        if (str_contains(Config::get('app.url'), 'https://')) {
+            URL::forceScheme('https');
+        }
         ini_set('upload_max_filesize', '128M');
         ini_set('post_max_size', '130M');
         ini_set('memory_limit', '256M');
