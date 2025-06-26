@@ -6,7 +6,7 @@ import vi from './locales/vi.json';
 import ko from './locales/ko.json';
 
 // Lấy ngôn ngữ từ localStorage nếu có, nếu không thì dùng 'vi' làm mặc định
-const savedLocale = localStorage.getItem('user-locale') || 'vi';
+const savedLocale = typeof window !== 'undefined' ? localStorage.getItem('user-locale') || 'vi' : 'vi';
 
 // Tạo cấu hình i18n
 const i18n = createI18n({
