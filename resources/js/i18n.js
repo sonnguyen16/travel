@@ -5,10 +5,13 @@ import en from './locales/en.json';
 import vi from './locales/vi.json';
 import ko from './locales/ko.json';
 
+// Lấy ngôn ngữ từ localStorage nếu có, nếu không thì dùng 'vi' làm mặc định
+const savedLocale = localStorage.getItem('user-locale') || 'vi';
+
 // Tạo cấu hình i18n
 const i18n = createI18n({
     legacy: false, // Sử dụng Composition API
-    locale: 'vi', // Ngôn ngữ mặc định
+    locale: savedLocale, // Sử dụng ngôn ngữ đã lưu hoặc mặc định
     fallbackLocale: 'en', // Sử dụng tiếng Anh nếu không có bản dịch
     messages: {
         en,

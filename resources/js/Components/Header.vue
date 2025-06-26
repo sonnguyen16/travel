@@ -365,6 +365,12 @@ onMounted(() => {
   cart.value = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
   emitter.on('cart-updated', updateCart)
 
+  // Đồng bộ ngôn ngữ từ localStorage
+  const savedLocale = localStorage.getItem('user-locale')
+  if (savedLocale) {
+    locale.value = savedLocale
+  }
+
   if (location.pathname == '/') {
     document.getElementById('header').style.height = `92vh`
 
@@ -426,6 +432,8 @@ const closeDropdown = () => {
 
 const changeLanguage = (code) => {
   locale.value = code.toString().toLowerCase()
+  // Lưu ngôn ngữ đã chọn vào localStorage
+  localStorage.setItem('user-locale', code.toString().toLowerCase())
   closeDropdown()
 }
 

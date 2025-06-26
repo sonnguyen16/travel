@@ -33,7 +33,7 @@ class UserHomeController extends Controller
                 $menuImages[$slug] = null;
             }
         }
-        
+
         // Lấy trang có nội dung tiêu đề trang chủ
         $homePage = \App\Models\Page::query()
             ->whereHas('translations', function($query) {
@@ -42,7 +42,14 @@ class UserHomeController extends Controller
             ->with('translations.language')
             ->first();
 
-        return Inertia::render('Home', compact('menus', 'menuImages', 'homePage'));
+        $homePage1 = \App\Models\Page::query()
+            ->whereHas('translations', function($query) {
+                $query->where('name', 'like', '%mô tả trang chủ%');
+            })
+            ->with('translations.language')
+            ->first();
+
+        return Inertia::render('Home', compact('menus', 'menuImages', 'homePage', 'homePage1'));
     }
 
     public function about()
