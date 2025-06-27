@@ -365,10 +365,31 @@ onMounted(() => {
   cart.value = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
   emitter.on('cart-updated', updateCart)
 
-  // Đồng bộ ngôn ngữ từ localStorage
-  const savedLocale = localStorage.getItem('user-locale')
-  if (savedLocale) {
-    locale.value = savedLocale
+  // Hàm để lấy giá trị cookie
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`
+    const parts = value.split(`; ${name}=`)
+    if (parts.length === 2) return parts.pop().split(';').shift()
+    return null
+  }
+
+  // Đồng bộ ngôn ngữ từ cookie hoặc localStorage
+  const cookieLocale = getCookie('user-locale')
+  const localStorageLocale = localStorage.getItem('user-locale')
+
+  // Ưu tiên cookie trước (hoạt động với SSR)
+  if (cookieLocale) {
+    locale.value = cookieLocale
+    // Đồng bộ lại localStorage nếu cần
+    if (localStorageLocale !== cookieLocale) {
+      localStorage.setItem('user-locale', cookieLocale)
+    }
+  } else if (localStorageLocale) {
+    locale.value = localStorageLocale
+    // Tạo cookie từ giá trị localStorage
+    const expiryDate = new Date()
+    expiryDate.setDate(expiryDate.getDate() + 30)
+    document.cookie = `user-locale=${localStorageLocale}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`
   }
 
   if (location.pathname == '/') {
@@ -431,9 +452,20 @@ const closeDropdown = () => {
 }
 
 const changeLanguage = (code) => {
-  locale.value = code.toString().toLowerCase()
-  // Lưu ngôn ngữ đã chọn vào localStorage
-  localStorage.setItem('user-locale', code.toString().toLowerCase())
+  const langCode = code.toString().toLowerCase()
+  locale.value = langCode
+
+  // Lưu ngôn ngữ vào localStorage
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('user-locale', langCode)
+  }
+
+  // Lưu ngôn ngữ vào cookie (hoạt động với SSR)
+  // Hạn sử dụng 30 ngày
+  const expiryDate = new Date()
+  expiryDate.setDate(expiryDate.getDate() + 30)
+  document.cookie = `user-locale=${langCode}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`
+
   closeDropdown()
 }
 
