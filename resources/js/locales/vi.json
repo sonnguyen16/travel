@@ -180,5 +180,10 @@
   "booking_time_note": "Quý khách vui lòng chú ý thời gian sử dụng hợp lệ đã được ghi trong vé",
   "booking_time_note_title": "Lưu ý về vé",
   "product_under_maintenance": "Sản phẩm đang được bảo trì",
-  "maintenance": "Bảo trì"
+  "maintenance": "Bảo trì",
+  "enter_password": "Nhập mật khẩu",
+  "post_requires_password": "Bài viết này yêu cầu mật khẩu để xem.",
+  "password": "Mật khẩu",
+  "incorrect_password": "Mật khẩu không chính xác",
+  "cancel": "Hủy"
 }

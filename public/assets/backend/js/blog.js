@@ -67,6 +67,7 @@ $('#blogModal').on('show.bs.modal', function () {
 $('#blogModal').on('hidden.bs.modal', function () {
     $('#id').val('');
     $('#name').val('');
+    $('#password').val('');
     $('#menu_id').val('2');
     $('#news_id').val('');
     $('#address').val('');
@@ -98,6 +99,7 @@ function getBlog(langId, langCode) {
             $('#id').val(data.blog.id);
             $('#language_id').val(langId);
             $('#name').val(data.translation?.name ?? '');
+            $('#password').val(data.blog.password ?? '');
             $('#menu_id').val(data.blog.menu_id);
             setTimeout(() => {
                 $("#news_id").val(data.blog.news_id).trigger("change");
@@ -189,25 +191,25 @@ $(document).on('click', '.btn-delete-image', function (e) {
     }
 });
 
-$('#picture').on('change', function(event) {
+$('#picture').on('change', function (event) {
     var file = event.target.files[0];
     if (file) {
         var reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             $('#image').attr('src', e.target.result);
             $('#image').show();
         };
         reader.readAsDataURL(file);
     } else {
-        if (imageFromDb != ''){
+        if (imageFromDb != '') {
             $('#image').attr('src', imageFromDb).show();
-        }else{
+        } else {
             $('#image').attr('src', imageFromDb).hide();
         }
     }
 });
 
-$('#picturesInput').on('change', function(event) {
+$('#picturesInput').on('change', function (event) {
     var files = event.target.files;
     var picturesDiv = $('#pictures');
 
@@ -221,7 +223,7 @@ $('#picturesInput').on('change', function(event) {
         var file = files[i];
         var reader = new FileReader();
 
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             var imageHtml = `
                 <div class="col-md-2 new-image" style="flex: 0 0 auto; position: relative; margin-bottom: 10px;">
                     <img style="width: 100px; height: 80px; background-size: contain; display: block;" src="${e.target.result}" alt="Selected Image">

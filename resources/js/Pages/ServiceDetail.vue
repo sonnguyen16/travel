@@ -243,6 +243,7 @@ import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import { useI18n } from 'vue-i18n'
 import { router, Head } from '@inertiajs/vue3'
 import { updateNavigationButtons, cleanHTML } from '@/Assets/common.js'
+import { initializeLocale } from '@/utils/locale.js'
 
 const props = defineProps({
   blog: Object,
@@ -250,6 +251,17 @@ const props = defineProps({
 })
 
 const { t, locale } = useI18n()
+
+// Khởi tạo ngôn ngữ từ cookie/localStorage ngay khi component được tạo
+const initLocale = () => {
+  initializeLocale(locale)
+}
+
+// Khởi tạo ngôn ngữ ngay lập tức
+if (typeof window !== 'undefined') {
+  initLocale()
+}
+
 const mounted = ref(false)
 const activeIndex = ref(0)
 const blogs_related_computed = computed(() => {
@@ -258,6 +270,9 @@ const blogs_related_computed = computed(() => {
 })
 
 onMounted(() => {
+  // Đảm bảo ngôn ngữ được đồng bộ
+  initLocale()
+
   mounted.value = true
   document.querySelectorAll('button[data-target]').forEach((button) => {
     button.addEventListener('click', () => {

@@ -180,5 +180,10 @@
   "booking_time_note": "Please note the ticket usage time in the ticket",
   "booking_time_note_title": "Booking time note",
   "product_under_maintenance": "Product under maintenance",
-  "maintenance": "Maintenance"
+  "maintenance": "Maintenance",
+  "enter_password": "Enter Password",
+  "post_requires_password": "This post requires a password to view.",
+  "password": "Password",
+  "incorrect_password": "Incorrect password",
+  "cancel": "Cancel"
 }

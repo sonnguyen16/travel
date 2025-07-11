@@ -42,6 +42,7 @@ class UserNewsController extends Controller
             $query->where('slug', 'tin-tuc');
         })
         ->with('translations.language', 'image_fe', 'news_category')
+        ->select('id', 'menu_id', 'news_id', 'location_id', 'active', 'view', 'slug', 'password', 'created_at', 'updated_at')
         ->orderBy('created_at', 'desc')
         ->limit(3)
         ->get();
@@ -52,7 +53,8 @@ class UserNewsController extends Controller
         })
         ->whereNotIn('id', $hot_blogs->pluck('id'))
         ->where('active', 1)
-        ->with('translations.language', 'image_fe', 'news_category');
+        ->with('translations.language', 'image_fe', 'news_category')
+        ->select('id', 'menu_id', 'news_id', 'location_id', 'active', 'view', 'slug', 'password', 'created_at', 'updated_at');
 
         $category = Menu::query()
             ->where('menu_fk', '!=', null)
@@ -103,7 +105,8 @@ class UserNewsController extends Controller
         $blogs = Blog::query()
         ->where('news_id', $menu->id)
         ->where('active', 1)
-        ->with('translations.language', 'image_fe', 'menu.menu');
+        ->with('translations.language', 'image_fe', 'menu.menu')
+        ->select('id', 'menu_id', 'news_id', 'location_id', 'active', 'view', 'slug', 'password', 'created_at', 'updated_at');
 
         if($request->has('search')) {
             $blogs = $blogs->whereHas('translations', function ($query) use ($request) {
@@ -134,8 +137,41 @@ class UserNewsController extends Controller
             'menu.blogs.image_fe',
             'news_category.translations.language',
             'activities.translations.language')
+            ->select('id', 'menu_id', 'news_id', 'location_id', 'active', 'view', 'slug', 'password', 'created_at', 'updated_at')
             ->first();
 
+        // Nếu bài viết không tồn tại
+        if (!$blog) {
+            abort(404);
+        }
+
+        // Kiểm tra nếu bài viết có mật khẩu và đang được truy cập trực tiếp
+        if ($blog->password && !empty(trim($blog->password))) {
+            // Kiểm tra xem có phải từ trang danh sách không (có thể thông qua session hoặc parameter)
+            $password_verified = session('blog_password_verified_' . $blog->id, false);
+
+            if (!$password_verified) {
+                // Chưa xác thực mật khẩu, hiển thị trang yêu cầu mật khẩu
+                return Inertia::render('NewsDetail', [
+                    'blog' => $blog,
+                    'requires_password' => true
+                ]);
+            }
+        }
+
         return Inertia::render('NewsDetail', compact('blog'));
+    }
+
+    public function verifyPassword(Request $request)
+    {
+        $blog = Blog::query()
+            ->where('id', $request->blog_id)
+            ->first();
+        if($blog->password === $request->password) {
+            session(['blog_password_verified_' . $blog->id => true]);
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
+        }
     }
 }

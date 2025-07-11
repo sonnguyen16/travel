@@ -4,10 +4,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><strong><i class="fa fa-exclamation-triangle" style="color: red;"></i> Xác nhận xóa</strong></h4>
+                <h4 class="modal-title"><strong><i class="fa fa-exclamation-triangle" style="color: red;"></i> Xác nhận
+                        xóa</strong></h4>
             </div>
             <div class="modal-body">
-                <p>Bạn có thật sự muốn xóa bài viết này và các bản dịch liên quan (bao gồm hoạt động nổi bật nếu có) ?</p>
+                <p>Bạn có thật sự muốn xóa bài viết này và các bản dịch liên quan (bao gồm hoạt động nổi bật nếu có) ?
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
@@ -24,13 +26,15 @@
                 <h4 class="modal-title">Tùy chọn</h4>
             </div>
             <div class="modal-body">
-                <button id="gotoActivity" class="btn btn-success btn-sm" style="margin-right: 5px; margin-bottom: 10px;">
+                <button id="gotoActivity" class="btn btn-success btn-sm"
+                    style="margin-right: 5px; margin-bottom: 10px;">
                     Hoạt động nổi bật
                 </button>
                 @foreach ($langs as $lang)
-                    <button type="button" class="btn btn-default btn-sm" style="margin-right: 5px; margin-bottom: 10px; " onclick="getBlog({{ $lang->id }}, '{{ $lang->code }}')">
-                        {{ $lang->name . ' (' . $lang->code . ')' }}
-                    </button>
+                <button type="button" class="btn btn-default btn-sm" style="margin-right: 5px; margin-bottom: 10px; "
+                    onclick="getBlog({{ $lang->id }}, '{{ $lang->code }}')">
+                    {{ $lang->name . ' (' . $lang->code . ')' }}
+                </button>
                 @endforeach
             </div>
         </div>
@@ -39,7 +43,8 @@
 <div id="blogModal" class="modal fade" role="dialog" aria-labelledby="blogModalLabel">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="{{ route('backend.dashboard.blog.store', request()->query()) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('backend.dashboard.blog.store', request()->query()) }}" method="post"
+                enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <input type="text" id="id" name="id" hidden>
@@ -49,7 +54,15 @@
                             <label>Tiêu đề <span style="color: red">*</span></label>
                             <label id="lang_code">VI</label>
                         </div>
-                        <input name="name" id="name" type="text" class="form-control" placeholder="Nhập tiêu đề ..." required>
+                        <input name="name" id="name" type="text" class="form-control" placeholder="Nhập tiêu đề ..."
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu bài viết</label>
+                        <input name="password" id="password" type="password" class="form-control"
+                            placeholder="Để trống nếu không cần mật khẩu">
+                        <small class="text-muted">Nếu để trống, bài viết sẽ công khai. Nếu có mật khẩu, người đọc phải
+                            nhập mật khẩu để xem nội dung (Chỉ áp dụng với tin tức)</small>
                     </div>
                     <div id="div-toggle">
                         <div class="row">
@@ -65,7 +78,7 @@
                                     <label>Loại danh mục <span style="color: red">*</span></label>
                                     <select name="menu_id" id="menu_id" class="form-control" required>
                                         @foreach($menus as $item)
-                                            <option value="{{ $item->id }}">{{ $item->translation->name }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->translation->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -76,7 +89,7 @@
                                     <select name="news_id" id="news_id" class="form-control" required>
                                         <option value="">Chọn loại</option>
                                         @foreach(\App\Models\Menu::where('menu_fk', 2)->get() as $item)
-                                            <option value="{{ $item->id }}">{{ $item->translation->name }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->translation->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -86,7 +99,7 @@
                                     <select name="location_id" id="location_id" class="form-control" required>
                                         <option value="">Chọn địa điểm</option>
                                         @foreach(\App\Models\Location::all() as $item)
-                                            <option value="{{ $item->id }}">{{ $item->translation->name }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->translation->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -94,7 +107,7 @@
                         </div>
                         <div class="form-group">
                             <label>Hình ảnh khác</label>
-                            <input type="file" name="pictures[]" class="form-control" id="picturesInput" multiple >
+                            <input type="file" name="pictures[]" class="form-control" id="picturesInput" multiple>
                         </div>
                         <div class="row" style="display: flex; flex-wrap: wrap;" id="pictures"></div>
                         <div class="form-group">
@@ -107,7 +120,8 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Địa điểm</label>
-                                <input type="text" name="address" id="address" class="form-control" placeholder="Mô tả địa điểm...">
+                                <input type="text" name="address" id="address" class="form-control"
+                                    placeholder="Mô tả địa điểm...">
                             </div>
                         </div>
                     </div>

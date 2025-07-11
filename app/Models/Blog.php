@@ -8,7 +8,7 @@ class Blog extends Model
 {
 
 	protected $table = 'blogs';
-	protected $fillable = ['id', 'menu_id','news_id', 'location_id', 'active', 'view', 'slug'];
+	protected $fillable = ['id', 'menu_id','news_id', 'location_id', 'active', 'view', 'slug', 'password'];
 	public $timestamps = true;
 
 	public function user() {

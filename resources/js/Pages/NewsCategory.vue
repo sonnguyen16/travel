@@ -39,10 +39,7 @@
         <div class="col-md-8">
           <div class="row">
             <template v-if="blogs.data.length > 0" v-for="blog in blogs.data">
-              <div
-                @click.prevent="router.visit(`/tin-tuc/${blog.menu.menu[0]?.slug}/${blog.slug}`)"
-                class="col-md-6 mb-4 hover:cursor-pointer"
-              >
+              <div @click.prevent="navigateToBlog(blog)" class="col-md-6 mb-4 hover:cursor-pointer">
                 <div class="img-container w-full">
                   <img
                     :src="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture"
@@ -167,6 +164,32 @@
       </div>
     </div>
   </MainLayout>
+
+  <!-- Modal nhập mật khẩu -->
+  <div v-if="showPasswordModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-96 max-w-90vw">
+      <h3 class="text-lg font-semibold mb-4">{{ $t('enter_password') }}</h3>
+      <p class="text-gray-600 mb-4">{{ $t('post_requires_password') }}</p>
+      <input
+        v-model="passwordInput"
+        type="password"
+        :placeholder="$t('password')"
+        class="w-full border border-gray-300 rounded px-3 py-2 mb-4"
+        @keyup.enter="checkPassword"
+      />
+      <div v-if="passwordError" class="text-red-500 text-sm mb-4">
+        {{ $t('incorrect_password') }}
+      </div>
+      <div class="flex justify-end gap-3">
+        <button @click="closePasswordModal" class="px-4 py-2 text-gray-600 hover:text-gray-800">
+          {{ $t('cancel') }}
+        </button>
+        <button @click="checkPassword" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+          {{ $t('confirm') }}
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
@@ -175,6 +198,8 @@ import { router, Head } from '@inertiajs/vue3'
 import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { BLOG_MEDIA_ENDPOINT, RECRUITMENT_MEDIA_ENDPOINT } from '@/Constants/endpoint'
+import { initializeLocale } from '@/utils/locale.js'
+import axios from 'axios'
 
 const props = defineProps({
   blogs: Object,
@@ -184,8 +209,24 @@ const props = defineProps({
   recruitment: Object
 })
 const { t, locale } = useI18n()
+
+// Khởi tạo ngôn ngữ
+const initLocale = () => {
+  initializeLocale(locale)
+}
+
+if (typeof window !== 'undefined') {
+  initLocale()
+}
+
 const mounted = ref(false)
 const search = ref('')
+
+// State cho modal mật khẩu
+const showPasswordModal = ref(false)
+const passwordInput = ref('')
+const passwordError = ref(false)
+const selectedBlog = ref(null)
 
 const searchNews = () => {
   router.visit(`/tin-tuc/${props.menu.slug}?search=${search.value}`, {
@@ -194,6 +235,9 @@ const searchNews = () => {
 }
 
 onMounted(async () => {
+  // Đồng bộ ngôn ngữ
+  initLocale()
+
   const paragraphs = document.querySelectorAll('.text-description p')
 
   paragraphs.forEach((p) => {
@@ -218,6 +262,73 @@ const changePage = (page) => {
   router.visit(route('news.category', { page: page }), {
     preserveState: true
   })
+}
+
+// Hàm kiểm tra và điều hướng blog
+const navigateToBlog = (blog) => {
+  // Kiểm tra xem blog có mật khẩu không
+  if (blog.password && blog.password.trim() !== '') {
+    selectedBlog.value = blog
+    showPasswordModal.value = true
+    passwordInput.value = ''
+    passwordError.value = false
+  } else {
+    // Nếu không có mật khẩu, điều hướng trực tiếp
+    if (blog.menu?.menu?.[0]?.slug) {
+      router.visit(`/tin-tuc/${blog.menu.menu[0].slug}/${blog.slug}`)
+    } else {
+      router.visit(`/tin-tuc/${blog.slug}`)
+    }
+  }
+}
+
+// Hàm kiểm tra mật khẩu
+const checkPassword = async () => {
+  if (!selectedBlog.value) {
+    passwordError.value = true
+    return
+  }
+
+  try {
+    passwordError.value = false
+
+    const response = await axios.post(
+      '/news/verify-password',
+      {
+        blog_id: selectedBlog.value.id,
+        password: passwordInput.value
+      },
+      {
+        headers: {
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+      }
+    )
+
+    if (response.data.success) {
+      // Mật khẩu đúng, điều hướng
+      if (selectedBlog.value.menu?.menu?.[0]?.slug) {
+        router.visit(`/tin-tuc/${selectedBlog.value.menu.menu[0].slug}/${selectedBlog.value.slug}`)
+      } else {
+        router.visit(`/tin-tuc/${selectedBlog.value.slug}`)
+      }
+      closePasswordModal()
+    } else {
+      // Mật khẩu sai
+      passwordError.value = true
+    }
+  } catch (error) {
+    console.error('Lỗi kiểm tra mật khẩu:', error)
+    passwordError.value = true
+  }
+}
+
+// Hàm đóng modal
+const closePasswordModal = () => {
+  showPasswordModal.value = false
+  passwordInput.value = ''
+  passwordError.value = false
+  selectedBlog.value = null
 }
 </script>
 <style scoped>

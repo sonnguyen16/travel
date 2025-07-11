@@ -63,7 +63,7 @@
             }}
           </span>
         </div>
-        <div class="row">
+        <div v-if="showContent" class="row">
           <div class="col-lg-8">
             <h2 class="text-start mb-3">
               {{
@@ -120,26 +120,124 @@
       </div>
     </div>
   </MainLayout>
+
+  <!-- Modal nhập mật khẩu -->
+  <div v-if="showPasswordModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-6 w-96 max-w-90vw">
+      <h3 class="text-lg font-semibold mb-4">{{ $t('enter_password') }}</h3>
+      <p class="text-gray-600 mb-4">{{ $t('post_requires_password') }}</p>
+      <input
+        v-model="passwordInput"
+        type="password"
+        :placeholder="$t('password')"
+        class="w-full border border-gray-300 rounded px-3 py-2 mb-4"
+        @keyup.enter="checkPassword"
+      />
+      <div v-if="passwordError" class="text-red-500 text-sm mb-4">
+        {{ $t('incorrect_password') }}
+      </div>
+      <div class="flex justify-end gap-3">
+        <button @click="goBack" class="px-4 py-2 text-gray-600 hover:text-gray-800">
+          {{ $t('cancel') }}
+        </button>
+        <button @click="checkPassword" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+          {{ $t('confirm') }}
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
 <script setup>
 import { BLOG_MEDIA_ENDPOINT } from '@/Constants/endpoint'
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { Head, router } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
-import { defineProps, onMounted } from 'vue'
+import { defineProps, onMounted, ref } from 'vue'
 import { cleanHTML } from '@/Assets/common'
+import { initializeLocale } from '@/utils/locale.js'
 
 const { t, locale } = useI18n()
+
+// Khởi tạo ngôn ngữ
+const initLocale = () => {
+  initializeLocale(locale)
+}
+
+if (typeof window !== 'undefined') {
+  initLocale()
+}
+
 const props = defineProps({
-  blog: Object
+  blog: Object,
+  requires_password: Boolean,
+  password_error: Boolean
 })
 
+// State cho modal mật khẩu
+const showPasswordModal = ref(false)
+const passwordInput = ref('')
+const passwordError = ref(false)
+const showContent = ref(false)
+
 onMounted(() => {
+  // Đồng bộ ngôn ngữ
+  initLocale()
+
+  // Kiểm tra nếu blog có mật khẩu hoặc requires_password từ backend
+  if (props.requires_password) {
+    showPasswordModal.value = true
+    showContent.value = false
+    // Kiểm tra nếu có lỗi mật khẩu từ backend
+    if (props.password_error) {
+      passwordError.value = true
+    }
+  } else {
+    showContent.value = true
+  }
+
   const img = document.querySelectorAll('.ql-editor img')
   img.forEach((el) => {
     el.classList.add('img-fluid')
     el.style.height = 'auto'
   })
 })
+
+// Hàm kiểm tra mật khẩu
+const checkPassword = async () => {
+  try {
+    passwordError.value = false
+
+    const response = await axios.post(
+      '/news/verify-password',
+      {
+        blog_id: props.blog.id,
+        password: passwordInput.value
+      },
+      {
+        headers: {
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+      }
+    )
+
+    if (response.data.success) {
+      // Mật khẩu đúng
+      showPasswordModal.value = false
+      showContent.value = true
+      passwordError.value = false
+    } else {
+      // Mật khẩu sai
+      passwordError.value = true
+    }
+  } catch (error) {
+    console.error('Lỗi kiểm tra mật khẩu:', error)
+    passwordError.value = true
+  }
+}
+
+// Hàm quay lại
+const goBack = () => {
+  window.history.back()
+}
 </script>
 <style scoped></style>

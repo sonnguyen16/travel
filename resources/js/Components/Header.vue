@@ -304,6 +304,7 @@ import { Link, useForm, usePage } from '@inertiajs/vue3'
 import { router } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
 import emitter from '@/mitt'
+import { initializeLocale, changeLocale } from '@/utils/locale.js'
 // Import Swiper
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
@@ -319,6 +320,16 @@ const { t, locale } = useI18n()
 const quantity = computed(() =>
   cart.value.reduce((acc, item) => acc + parseInt(item.num_child) + parseInt(item.num_adult), 0)
 )
+
+// Khởi tạo ngôn ngữ từ cookie/localStorage ngay khi component được tạo
+const initLocale = () => {
+  initializeLocale(locale)
+}
+
+// Khởi tạo ngôn ngữ ngay lập tức
+if (typeof window !== 'undefined') {
+  initLocale()
+}
 
 let cart = ref([])
 const props = defineProps({
@@ -365,32 +376,8 @@ onMounted(() => {
   cart.value = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
   emitter.on('cart-updated', updateCart)
 
-  // Hàm để lấy giá trị cookie
-  const getCookie = (name) => {
-    const value = `; ${document.cookie}`
-    const parts = value.split(`; ${name}=`)
-    if (parts.length === 2) return parts.pop().split(';').shift()
-    return null
-  }
-
-  // Đồng bộ ngôn ngữ từ cookie hoặc localStorage
-  const cookieLocale = getCookie('user-locale')
-  const localStorageLocale = localStorage.getItem('user-locale')
-
-  // Ưu tiên cookie trước (hoạt động với SSR)
-  if (cookieLocale) {
-    locale.value = cookieLocale
-    // Đồng bộ lại localStorage nếu cần
-    if (localStorageLocale !== cookieLocale) {
-      localStorage.setItem('user-locale', cookieLocale)
-    }
-  } else if (localStorageLocale) {
-    locale.value = localStorageLocale
-    // Tạo cookie từ giá trị localStorage
-    const expiryDate = new Date()
-    expiryDate.setDate(expiryDate.getDate() + 30)
-    document.cookie = `user-locale=${localStorageLocale}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`
-  }
+  // Đảm bảo ngôn ngữ được đồng bộ (dự phòng)
+  initLocale()
 
   if (location.pathname == '/') {
     document.getElementById('header').style.height = `92vh`
@@ -452,20 +439,7 @@ const closeDropdown = () => {
 }
 
 const changeLanguage = (code) => {
-  const langCode = code.toString().toLowerCase()
-  locale.value = langCode
-
-  // Lưu ngôn ngữ vào localStorage
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('user-locale', langCode)
-  }
-
-  // Lưu ngôn ngữ vào cookie (hoạt động với SSR)
-  // Hạn sử dụng 30 ngày
-  const expiryDate = new Date()
-  expiryDate.setDate(expiryDate.getDate() + 30)
-  document.cookie = `user-locale=${langCode}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`
-
+  changeLocale(locale, code)
   closeDropdown()
 }
 

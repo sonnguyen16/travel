@@ -28,7 +28,7 @@ class BlogController extends Controller
 
         if ($request->has('search') && $request->search) {
             $search = $request->search;
-    
+
             $query->whereHas('translations', function ($q) use ($search) {
                 $q->where('name', 'like', '%' . $search . '%')
                     ->orWhere('description', 'like', '%' . $search . '%')
@@ -53,9 +53,9 @@ class BlogController extends Controller
 
 		$blogs->each(function ($blog) {
             $languageIds = Translation::where('record_id', $blog->id)->where('record_type', 'Blog')->pluck('language_id');
-    
+
             $languageCodes = Language::whereIn('id', $languageIds)->orderby('id', 'asc')->pluck('code');
-        
+
             $blog->language_codes = $languageCodes;
         });
 
@@ -98,6 +98,7 @@ class BlogController extends Controller
             'news_id' => null,
             'location_id' => null,
             'active' => $request->active ? 1 : 0,
+            'password' => $request->password,
         ];
 
         if($request->language_id == 1){
@@ -162,7 +163,7 @@ class BlogController extends Controller
             ],
             [
                 'name' => $request->input('name'),
-                'description' => $request->input('description'),    
+                'description' => $request->input('description'),
                 'content' => $request->input('content'),
                 'address' => $request->input('address')
             ]
@@ -180,7 +181,7 @@ class BlogController extends Controller
             unlink($path);
         }
         $image->delete();
-        
+
         //xóa activity liên quan
         $activities = Activity::where('blog_id', $request->id);
         $activities->each(function ($activity) {

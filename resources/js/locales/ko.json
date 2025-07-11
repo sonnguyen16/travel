@@ -179,5 +179,10 @@
   "booking_time_note": "티켓에 명시된 유효 사용 시간을 꼭 확인하세요.",
   "booking_time_note_title": "티켓 관련 참고 사항",
   "product_under_maintenance": "제품 점검중입니다",
-  "maintenance": "점검"
+  "maintenance": "점검",
+  "enter_password": "비밀번호 입력",
+  "post_requires_password": "이 게시물을 보려면 비밀번호가 필요합니다.",
+  "password": "비밀번호",
+  "incorrect_password": "잘못된 비밀번호",
+  "cancel": "취소"
 }

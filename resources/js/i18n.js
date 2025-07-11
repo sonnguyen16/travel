@@ -14,6 +14,14 @@ function getCookie(name) {
     return null;
 }
 
+// Hàm để set cookie
+function setCookie(name, value, days = 30) {
+    if (typeof document === 'undefined') return;
+    const expiryDate = new Date();
+    expiryDate.setDate(expiryDate.getDate() + days);
+    document.cookie = `${name}=${value}; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`;
+}
+
 // Ưu tiên lấy từ cookie (hoạt động với SSR), sau đó mới dùng localStorage
 const getUserLocale = () => {
     // Kiểm tra môi trường
@@ -23,13 +31,19 @@ const getUserLocale = () => {
 
     // Ưu tiên lấy từ cookie
     const cookieLocale = getCookie('user-locale');
-    if (cookieLocale) {
+    if (cookieLocale && ['vi', 'en', 'ko'].includes(cookieLocale)) {
         return cookieLocale;
     }
 
     // Nếu không có cookie, thử lấy từ localStorage
     const localStorageLocale = localStorage.getItem('user-locale');
-    return localStorageLocale || 'vi';
+    if (localStorageLocale && ['vi', 'en', 'ko'].includes(localStorageLocale)) {
+        // Đồng bộ cookie với localStorage
+        setCookie('user-locale', localStorageLocale);
+        return localStorageLocale;
+    }
+
+    return 'vi';
 };
 
 // Tạo cấu hình i18n
@@ -44,4 +58,6 @@ const i18n = createI18n({
     },
 });
 
+// Export các hàm utility
+export { getCookie, setCookie };
 export default i18n;

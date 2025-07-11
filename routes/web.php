@@ -136,6 +136,7 @@ Route::get('/faq', [UserPageController::class, 'faq'])->name('faq.show');
 
 Route::get('/tin-tuc', [UserNewsController::class, 'index'])->name('news');
 Route::get('/tin-tuc/{category_slug?}', [UserNewsController::class, 'category'])->name('news.category');
+Route::post('/news/verify-password', [UserNewsController::class, 'verifyPassword'])->name('news.verify.password');
 Route::get('/tin-tuc/{category_slug?}/{title?}', [UserNewsController::class, 'show'])->name('news.show');
 
 Route::get('/tuyen-dung', [UserRecruitmentController::class, 'index'])->name('recruitment');
