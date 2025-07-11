@@ -193,7 +193,12 @@
                   <!-- Sử dụng sortedLocations thay vì locations -->
                   <template v-for="location in sortedLocations" :key="location.id">
                     <option v-if="location.active == 1" class="font-normal" :value="location.id">
-                      {{ location.translations.find((t) => t.language.code === locale.toUpperCase())?.name }}
+                      {{
+                        isClient
+                          ? location.translations.find((t) => t.language.code === locale.toUpperCase())?.name ||
+                            location.translations[0].name
+                          : location.translations[0].name
+                      }}
                     </option>
                   </template>
                 </select>
@@ -299,7 +304,7 @@
   </div>
 </template>
 <script setup>
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue'
 import { Link, useForm, usePage } from '@inertiajs/vue3'
 import { router } from '@inertiajs/vue3'
 import { useI18n } from 'vue-i18n'
@@ -312,6 +317,7 @@ import 'swiper/css/bundle'
 const showMenu = ref(false)
 const isFixed = ref(false)
 const isDropdownOpen = ref(false)
+const isClient = ref(false)
 const page = usePage()
 const languages = computed(() => page.props.languages)
 const locations = computed(() => page.props.locations)
@@ -372,12 +378,16 @@ const decreaseChild = () => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
   cart.value = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
   emitter.on('cart-updated', updateCart)
 
   // Đảm bảo ngôn ngữ được đồng bộ (dự phòng)
   initLocale()
+
+  // Đánh dấu là client-side
+  isClient.value = true
+  await nextTick()
 
   if (location.pathname == '/') {
     document.getElementById('header').style.height = `92vh`
@@ -423,6 +433,20 @@ onMounted(() => {
 
 onUnmounted(() => {
   emitter.off('cart-updated', updateCart)
+})
+
+// Watch để force re-render khi ngôn ngữ thay đổi trong Header
+watch(locale, async () => {
+  if (isClient.value) {
+    await nextTick()
+    // Force re-render dropdown select options
+    const selectElement = document.querySelector('select[v-model="form.select"]')
+    if (selectElement) {
+      selectElement.style.display = 'none'
+      selectElement.offsetHeight // trigger reflow
+      selectElement.style.display = ''
+    }
+  }
 })
 
 const updateCart = (data) => {
@@ -474,15 +498,18 @@ const openZaloChat = () => {
 // Thêm mảng thứ tự mong muốn
 const locationOrder = ['khu du lịch datanla', 'datanla adventures', 'khu du lịch langbiang', 'khu du lịch cáp treo']
 
-// Tạo computed property để sắp xếp locations
+// Tạo computed property để sắp xếp locations với SSR support
 const sortedLocations = computed(() => {
   if (!locations.value) return []
 
   return [...locations.value].sort((a, b) => {
-    const nameA =
-      a.translations.find((t) => t.language.code === locale.value.toUpperCase())?.name || a.translations[0].name
-    const nameB =
-      b.translations.find((t) => t.language.code === locale.value.toUpperCase())?.name || b.translations[0].name
+    // Trong SSR, sử dụng translation đầu tiên để tránh lỗi
+    const nameA = isClient.value
+      ? a.translations.find((t) => t.language.code === locale.value.toUpperCase())?.name || a.translations[0].name
+      : a.translations[0].name
+    const nameB = isClient.value
+      ? b.translations.find((t) => t.language.code === locale.value.toUpperCase())?.name || b.translations[0].name
+      : b.translations[0].name
 
     const indexA = locationOrder.indexOf(nameA.toLowerCase())
     const indexB = locationOrder.indexOf(nameB.toLowerCase())

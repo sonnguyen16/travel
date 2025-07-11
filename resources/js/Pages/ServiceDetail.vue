@@ -1,32 +1,9 @@
 <template>
   <Head>
-    <title>
-      {{ blog?.translations?.find((t) => t.language.code == locale.toUpperCase())?.name || blog.translations[0].name }}
-    </title>
-    <meta
-      name="description"
-      :content="
-        cleanHTML(
-          blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
-            blog.translations[0].description
-        )
-      "
-    />
-    <meta
-      property="og:title"
-      :content="
-        blog.translations.find((t) => t.language.code == locale.toUpperCase())?.name || blog.translations[0].name
-      "
-    />
-    <meta
-      property="og:description"
-      :content="
-        cleanHTML(
-          blog.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
-            blog.translations[0].description
-        )
-      "
-    />
+    <title>{{ currentBlogName }}</title>
+    <meta name="description" :content="cleanHTML(currentBlogDescription)" />
+    <meta property="og:title" :content="currentBlogName" />
+    <meta property="og:description" :content="cleanHTML(currentBlogDescription)" />
     <meta property="og:image" :content="BLOG_MEDIA_ENDPOINT + blog.image_fe?.picture" />
   </Head>
   <MainLayout>
@@ -45,26 +22,11 @@
             </div>
             <div class="col-lg-6 lg:pe-5 lg:pt-3">
               <h3 class="font-semibold mt-md-0 mt-3">
-                {{
-                  blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
-                  blog?.translations[0].name
-                }}
+                {{ currentBlogName }}
               </h3>
-              <div
-                class="text-justify"
-                v-html="
-                  blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
-                  blog?.translations[0].description
-                "
-              ></div>
+              <div class="text-justify" data-vue-html="description" v-html="currentBlogDescription"></div>
             </div>
-            <div
-              class="text-justify mt-4"
-              v-html="
-                blog?.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
-                blog?.translations[0].content
-              "
-            ></div>
+            <div class="text-justify mt-4" data-vue-html="content" v-html="currentBlogContent"></div>
           </div>
         </div>
       </div>
@@ -74,17 +36,14 @@
           {{ t('service_detail.activities') }}
         </h2>
         <div class="space-y-0 divide-y divide-gray-300">
-          <div v-for="(product, index) in blog?.activities" :key="index" class="border-none">
+          <div v-for="(product, index) in activitiesWithLocale" :key="index" class="border-none">
             <button
               :class="[index == 0 ? 'rounded-t-xl' : '', index == blog.activities.length - 1 ? 'rounded-b-xl' : '']"
               class="activity-button w-full flex justify-between items-center px-4 py-3 border-green-600 border hover:bg-gray-200 font-semibold"
               :data-target="`collapse${index + 1}`"
             >
               <span class="text-white text-start">
-                {{
-                  product.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
-                  product.translations[0].name
-                }}
+                {{ product.currentName }}
               </span>
               <div class="flex items-center gap-3">
                 <a
@@ -102,13 +61,7 @@
               :id="`collapse${index + 1}`"
               class="hidden p-4 overflow-hidden transition-all duration-500 collapse-content"
             >
-              <div
-                class="ql-editor"
-                v-html="
-                  product.translations.find((t) => t.language.code == locale.toUpperCase())?.content ||
-                  product.translations[0].content
-                "
-              ></div>
+              <div class="ql-editor" data-vue-html="activity" v-html="product.currentContent"></div>
               <div class="text-center mt-4">
                 <a
                   v-if="!product.booking"
@@ -119,14 +72,7 @@
                 </a>
                 <a
                   v-else
-                  @click.prevent="
-                    router.visit(
-                      `/dat-ve/buoc1?ticket_name=${encodeURIComponent(
-                        product.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
-                          product.translations[0].name
-                      )}`
-                    )
-                  "
+                  @click.prevent="router.visit(`/dat-ve/buoc1?ticket_name=${encodeURIComponent(product.currentName)}`)"
                   style="background-color: #3e7b27"
                   class="px-6 py-[12px] text-white rounded-lg hover:bg-green-700 transition-colors text-lg text-decoration-none cursor-pointer"
                 >
@@ -171,7 +117,7 @@
         <div class="swiper swiper-2">
           <div class="swiper-wrapper pb-4">
             <!-- Slide 1 -->
-            <template v-if="mounted" v-for="blog_related in blogs_related_computed">
+            <template v-if="mounted" v-for="blog_related in relatedBlogsWithLocale">
               <div
                 v-if="
                   blog_related.id != blog.id &&
@@ -194,29 +140,21 @@
                   </div>
                   <div class="p-3 card-content">
                     <h3 class="text-xl font-semibold line-clamp-1 card-title mb-2">
-                      {{
-                        blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.name ||
-                        blog_related.translations[0].name
-                      }}
+                      {{ blog_related.currentName }}
                     </h3>
                     <p
                       class="cursor-pointer card-address mt-1 mb-3"
                       @click.stop="viewLocation(blog_related)"
-                      v-if="blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address"
+                      v-if="blog_related.currentAddress"
                     >
                       <i class="fas fa-map-marker-alt text-green-600 me-2 text-lg"></i>
-                      {{
-                        blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.address ||
-                        blog_related.translations[0].address
-                      }}
+                      {{ blog_related.currentAddress }}
                     </p>
                     <div class="card-description-container">
                       <div
                         class="card-description"
-                        v-html="
-                          blog_related.translations.find((t) => t.language.code == locale.toUpperCase())?.description ||
-                          blog_related.translations[0].description
-                        "
+                        data-vue-html="related"
+                        v-html="blog_related.currentDescription"
                       ></div>
                       <div class="fade-out-effect"></div>
                     </div>
@@ -235,7 +173,7 @@
 </template>
 <script setup>
 import MainLayout from '@/Layouts/MainLayout.vue'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, nextTick, watch } from 'vue'
 import Swiper from 'swiper/bundle'
 import 'swiper/css/bundle'
 import 'swiper/css/effect-coverflow'
@@ -264,14 +202,86 @@ if (typeof window !== 'undefined') {
 
 const mounted = ref(false)
 const activeIndex = ref(0)
+const isClient = ref(false)
+
+// Computed properties cho content đa ngôn ngữ
+const currentBlogName = computed(() => {
+  if (!isClient.value) return props.blog?.translations?.[0]?.name || ''
+  return (
+    props.blog?.translations?.find((t) => t.language.code == locale.value.toUpperCase())?.name ||
+    props.blog?.translations?.[0]?.name ||
+    ''
+  )
+})
+
+const currentBlogDescription = computed(() => {
+  if (!isClient.value) return props.blog?.translations?.[0]?.description || ''
+  return (
+    props.blog?.translations?.find((t) => t.language.code == locale.value.toUpperCase())?.description ||
+    props.blog?.translations?.[0]?.description ||
+    ''
+  )
+})
+
+const currentBlogContent = computed(() => {
+  if (!isClient.value) return props.blog?.translations?.[0]?.content || ''
+  return (
+    props.blog?.translations?.find((t) => t.language.code == locale.value.toUpperCase())?.content ||
+    props.blog?.translations?.[0]?.content ||
+    ''
+  )
+})
+
+// Computed cho activities với ngôn ngữ
+const activitiesWithLocale = computed(() => {
+  if (!props.blog?.activities) return []
+  return props.blog.activities.map((product) => ({
+    ...product,
+    currentName: isClient.value
+      ? product.translations.find((t) => t.language.code == locale.value.toUpperCase())?.name ||
+        product.translations[0].name
+      : product.translations[0].name,
+    currentContent: isClient.value
+      ? product.translations.find((t) => t.language.code == locale.value.toUpperCase())?.content ||
+        product.translations[0].content
+      : product.translations[0].content
+  }))
+})
+
+// Computed cho related blogs với ngôn ngữ
+const relatedBlogsWithLocale = computed(() => {
+  const blogs = props.blog.menu.slug === 'hoat-dong' ? props.blog.menu.blogs : props.blogs_related
+  if (!blogs) return []
+  return blogs.map((blog) => ({
+    ...blog,
+    currentName: isClient.value
+      ? blog.translations.find((t) => t.language.code == locale.value.toUpperCase())?.name || blog.translations[0].name
+      : blog.translations[0].name,
+    currentAddress: isClient.value
+      ? blog.translations.find((t) => t.language.code == locale.value.toUpperCase())?.address ||
+        blog.translations[0].address
+      : blog.translations[0].address,
+    currentDescription: isClient.value
+      ? blog.translations.find((t) => t.language.code == locale.value.toUpperCase())?.description ||
+        blog.translations[0].description
+      : blog.translations[0].description
+  }))
+})
+
 const blogs_related_computed = computed(() => {
   if (props.blog.menu.slug === 'hoat-dong') return props.blog.menu.blogs
   return props.blogs_related
 })
 
-onMounted(() => {
+onMounted(async () => {
   // Đảm bảo ngôn ngữ được đồng bộ
   initLocale()
+
+  // Đánh dấu là client-side để reactive content hoạt động
+  isClient.value = true
+
+  // Chờ DOM update sau khi chuyển sang client-side
+  await nextTick()
 
   mounted.value = true
   document.querySelectorAll('button[data-target]').forEach((button) => {
@@ -369,16 +379,27 @@ onMounted(() => {
   })
 })
 
+// Watch để force re-render khi ngôn ngữ thay đổi
+watch(locale, async () => {
+  if (isClient.value) {
+    await nextTick()
+    // Force re-render các thẻ v-html bằng cách trigger DOM update
+    const htmlElements = document.querySelectorAll('[data-vue-html]')
+    htmlElements.forEach((el) => {
+      el.style.display = 'none'
+      el.offsetHeight // trigger reflow
+      el.style.display = ''
+    })
+  }
+})
+
 const viewLocation = (blog_related) => {
   if (blog_related.location_id) router.visit(`/diem-den/${blog_related.location?.slug}`)
 }
 
 // Hàm kiểm tra xem hoạt động có phải là "cồng chiêng tây nguyên" hay không
 const isGongActivity = (product) => {
-  const productName =
-    product.translations.find((t) => t.language.code == locale.value.toUpperCase())?.name ||
-    product.translations[0].name ||
-    ''
+  const productName = product.currentName || ''
   return productName.toLowerCase().includes('cồng chiêng tây nguyên')
 }
 
