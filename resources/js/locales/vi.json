@@ -185,5 +185,7 @@
   "post_requires_password": "Bài viết này yêu cầu mật khẩu để xem.",
   "password": "Mật khẩu",
   "incorrect_password": "Mật khẩu không chính xác",
-  "cancel": "Hủy"
+  "cancel": "Hủy",
+  "address_content": "1 Lê Đại Hành, Phường 1, Thành phố Đà Lạt, Lâm Đồng",
+  "license_place_content": "Sở kế hoạch đầu tư tỉnh Lâm Đồng"
 }

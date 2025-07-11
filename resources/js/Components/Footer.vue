@@ -40,9 +40,7 @@
             </div>
             <div class="flex gap-4 mt-3">
               <i class="fas fa-map text-2xl text-white"></i>
-              <p class="text-white text-[16px]">
-                {{ $t('address') }}: 1 Lê Đại Hành, Phường 1, Thành phố Đà Lạt, Lâm Đồng
-              </p>
+              <p class="text-white text-[16px]">{{ $t('address') }}: {{ $t('address_content') }}</p>
             </div>
           </div>
         </div>
@@ -117,7 +115,7 @@
               <a href="#">{{ $t('license_date') }}: 16/6/2000</a>
             </li>
             <li>
-              <a href="#">{{ $t('license_place') }}: Sở kế hoạch đầu tư tỉnh Lâm Đồng</a>
+              <a href="#">{{ $t('license_place') }}: {{ $t('license_place_content') }}</a>
             </li>
             <li>
               <a href="#">{{ new Date().getFullYear() + ' ' + $t('reserved') }}</a>
