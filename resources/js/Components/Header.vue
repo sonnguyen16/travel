@@ -33,7 +33,7 @@
               aria-expanded="true"
               aria-haspopup="true"
             >
-              <img :src="`/images/${locale.toUpperCase()}.png`" class="mr-3 w-8" :alt="`${locale.toUpperCase()}`" />
+              <img :src="currentFlag" :key="locale" class="mr-3 w-8" :alt="locale.toUpperCase()" />
               <svg
                 class="h-5 w-5"
                 xmlns="http://www.w3.org/2000/svg"
@@ -83,19 +83,7 @@
         <div :class="[isFixed ? 'container' : '', 'd-flex justify-between align-items-center flex-wrap']">
           <div class="d-flex align-items-center lg:w-auto w-full justify-between gap-3">
             <a @click.prevent="router.visit('/')" class="" href="#">
-              <img
-                :src="
-                  isFixed
-                    ? locale === 'vi'
-                      ? '/images/logo1.png'
-                      : '/images/logoeng1.png'
-                    : locale === 'vi'
-                    ? '/images/logo.png'
-                    : '/images/logoeng.png'
-                "
-                :class="[isFixed ? 'w-[200px] my-3' : 'w-[300px]']"
-                alt="logo"
-              />
+              <img :src="currentLogo" :key="locale" :class="[isFixed ? 'w-[200px] my-3' : 'w-[300px]']" alt="logo" />
             </a>
             <button
               @click.prevent="showMenu = !showMenu"
@@ -327,6 +315,21 @@ const quantity = computed(() =>
   cart.value.reduce((acc, item) => acc + parseInt(item.num_child) + parseInt(item.num_adult), 0)
 )
 
+// Computed properties cho icon và logo với SSR support
+const currentFlag = computed(() => {
+  const lang = isClient.value ? locale.value.toUpperCase() : 'VI'
+  return `/images/${lang}.png`
+})
+
+const currentLogo = computed(() => {
+  const lang = isClient.value ? locale.value : 'vi'
+  if (isFixed.value) {
+    return lang === 'vi' ? '/images/logo1.png' : '/images/logoeng1.png'
+  } else {
+    return lang === 'vi' ? '/images/logo.png' : '/images/logoeng.png'
+  }
+})
+
 // Khởi tạo ngôn ngữ từ cookie/localStorage ngay khi component được tạo
 const initLocale = () => {
   initializeLocale(locale)
@@ -439,6 +442,7 @@ onUnmounted(() => {
 watch(locale, async () => {
   if (isClient.value) {
     await nextTick()
+
     // Force re-render dropdown select options
     const selectElement = document.querySelector('select[v-model="form.select"]')
     if (selectElement) {
