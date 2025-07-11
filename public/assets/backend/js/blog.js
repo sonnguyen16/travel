@@ -235,3 +235,17 @@ $('#picturesInput').on('change', function (event) {
         reader.readAsDataURL(file);
     }
 });
+
+// Chức năng hiển thị/ẩn mật khẩu
+$('#togglePassword').on('click', function() {
+    var passwordField = $('#password');
+    var passwordIcon = $('#passwordIcon');
+
+    if (passwordField.attr('type') === 'password') {
+        passwordField.attr('type', 'text');
+        passwordIcon.removeClass('fa-eye').addClass('fa-eye-slash');
+    } else {
+        passwordField.attr('type', 'password');
+        passwordIcon.removeClass('fa-eye-slash').addClass('fa-eye');
+    }
+});

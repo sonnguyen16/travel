@@ -59,8 +59,14 @@
                     </div>
                     <div class="form-group">
                         <label>Mật khẩu bài viết</label>
-                        <input name="password" id="password" type="password" class="form-control"
-                            placeholder="Để trống nếu không cần mật khẩu">
+                        <div class="input-group">
+                            <input name="password" id="password" type="password" class="form-control"
+                                placeholder="Để trống nếu không cần mật khẩu">
+                            <span class="input-group-addon" id="togglePassword"
+                                style="cursor: pointer; padding: 4px 12px">
+                                <i class="fa fa-eye" id="passwordIcon"></i>
+                            </span>
+                        </div>
                         <small class="text-muted">Nếu để trống, bài viết sẽ công khai. Nếu có mật khẩu, người đọc phải
                             nhập mật khẩu để xem nội dung (Chỉ áp dụng với tin tức)</small>
                     </div>
