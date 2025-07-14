@@ -38,6 +38,7 @@ class UserNewsController extends Controller
 
         $hot_blogs = Blog::query()
         ->where('active', 1)
+        ->where('password', null)
         ->whereHas('menu', function ($query) {
             $query->where('slug', 'tin-tuc');
         })
@@ -53,6 +54,7 @@ class UserNewsController extends Controller
         })
         ->whereNotIn('id', $hot_blogs->pluck('id'))
         ->where('active', 1)
+        ->where('password', null)
         ->with('translations.language', 'image_fe', 'news_category')
         ->select('id', 'menu_id', 'news_id', 'location_id', 'active', 'view', 'slug', 'password', 'created_at', 'updated_at');
 
@@ -105,7 +107,7 @@ class UserNewsController extends Controller
         $blogs = Blog::query()
         ->where('news_id', $menu->id)
         ->where('active', 1)
-        ->with('translations.language', 'image_fe', 'menu.menu')
+        ->with('translations.language', 'image_fe', 'news_category')
         ->select('id', 'menu_id', 'news_id', 'location_id', 'active', 'view', 'slug', 'password', 'created_at', 'updated_at');
 
         if($request->has('search')) {

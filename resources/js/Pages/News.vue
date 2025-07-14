@@ -21,7 +21,7 @@
             <img
               :src="BLOG_MEDIA_ENDPOINT + hot_blogs[0].image_fe?.picture"
               alt="home1"
-              class="w-full object-cover rounded-lg h-full hover:cursor-pointer"
+              class="w-full object-cover rounded-lg max-h-[580px] hover:cursor-pointer"
             />
             <div class="overlay slide-content px-3">
               <h3 class="line-clamp-4 text-[24px] text-white">

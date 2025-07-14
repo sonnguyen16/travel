@@ -273,9 +273,10 @@ const navigateToBlog = (blog) => {
     passwordInput.value = ''
     passwordError.value = false
   } else {
+
     // Nếu không có mật khẩu, điều hướng trực tiếp
-    if (blog.menu?.menu?.[0]?.slug) {
-      router.visit(`/tin-tuc/${blog.menu.menu[0].slug}/${blog.slug}`)
+    if (blog.news_category?.slug) {
+      router.visit(`/tin-tuc/${blog.news_category.slug}/${blog.slug}`)
     } else {
       router.visit(`/tin-tuc/${blog.slug}`)
     }
