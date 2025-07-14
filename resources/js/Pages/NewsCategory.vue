@@ -306,10 +306,10 @@ const checkPassword = async () => {
 
     if (response.data.success) {
       // Mật khẩu đúng, điều hướng
-      if (blog.news_category?.slug) {
-        router.visit(`/tin-tuc/${blog.news_category.slug}/${blog.slug}`)
+      if (selectedBlog.value.news_category?.slug) {
+        router.visit(`/tin-tuc/${selectedBlog.value.news_category.slug}/${selectedBlog.value.slug}`)
       } else {
-        router.visit(`/tin-tuc/${blog.slug}`)
+        router.visit(`/tin-tuc/${selectedBlog.value.slug}`)
       }
       closePasswordModal()
     } else {
