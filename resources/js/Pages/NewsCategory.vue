@@ -273,7 +273,6 @@ const navigateToBlog = (blog) => {
     passwordInput.value = ''
     passwordError.value = false
   } else {
-
     // Nếu không có mật khẩu, điều hướng trực tiếp
     if (blog.news_category?.slug) {
       router.visit(`/tin-tuc/${blog.news_category.slug}/${blog.slug}`)
@@ -308,10 +307,10 @@ const checkPassword = async () => {
 
     if (response.data.success) {
       // Mật khẩu đúng, điều hướng
-      if (selectedBlog.value.menu?.menu?.[0]?.slug) {
-        router.visit(`/tin-tuc/${selectedBlog.value.menu.menu[0].slug}/${selectedBlog.value.slug}`)
+      if (blog.news_category?.slug) {
+        router.visit(`/tin-tuc/${blog.news_category.slug}/${blog.slug}`)
       } else {
-        router.visit(`/tin-tuc/${selectedBlog.value.slug}`)
+        router.visit(`/tin-tuc/${blog.slug}`)
       }
       closePasswordModal()
     } else {
