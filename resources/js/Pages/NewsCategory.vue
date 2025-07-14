@@ -270,7 +270,6 @@ const navigateToBlog = (blog) => {
   if (blog.password && blog.password.trim() !== '') {
     selectedBlog.value = blog
     showPasswordModal.value = true
-    passwordInput.value = ''
     passwordError.value = false
   } else {
     // Nếu không có mật khẩu, điều hướng trực tiếp
