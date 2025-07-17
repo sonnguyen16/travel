@@ -10,7 +10,7 @@ import i18n from './i18n.js';
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
-    title: (title) => `Travel`,
+    title: (title) => appName,
     resolve: (name) =>
         resolvePageComponent(
             `./Pages/${name}.vue`,
